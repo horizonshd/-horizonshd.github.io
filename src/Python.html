@@ -1,0 +1,328 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Python &mdash; Cheatsheet 1.0.0 文档</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="Windows Terminal" href="WindowsTerminal.html" />
+    <link rel="prev" title="SSH" href="SSH.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Cheatsheet
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="reStructuresText.html">reStructuresText</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sphinx.html">sphinx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Encoding.html">Charset and Encoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Graphviz.html">Graphviz - Graph Visualization Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="git.html">git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CMake.html">CMake</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C%2B%2B.html">C++</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DTD.html">DTD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="XSD.html">XSD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="WSDL.html">WSDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dotnet.html">dotnet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cmd.html">cmd</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SSH.html">SSH</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Python</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">基础技能</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pip">常用 pip 命令</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#virtualenv">VirtualEnv 使用</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="WindowsTerminal.html">Windows Terminal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manim.html">manim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NSIS.html">nullsoft scriptable install system 3.0.4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Algorithm.html">Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Vocabulary.html">Vocabulary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ECFDeploy.html">ECF AutoDeploy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lua.html">Lua</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LaTeX.html">LaTeX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Ubuntu.html">Ubuntu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MEF.html">MEF in .NET Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="EMail.html">Relative Concepts of EMail</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Cheatsheet</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Python</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/src/Python.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="python">
+<h1>Python<a class="headerlink" href="#python" title="永久链接至标题">¶</a></h1>
+<div class="section" id="id1">
+<h2>基础技能<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<ol class="arabic">
+<li><p>设置环境变量（可同时安装 2.x 和 3.x 两个版本的 Python）</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>\<span class="n">Python27</span>
+<span class="o">...</span>\<span class="n">Python27</span>\<span class="n">Scripts</span>
+<span class="o">...</span>\<span class="n">Python37</span>
+<span class="o">...</span>\<span class="n">Python37</span>\<span class="n">Scripts</span>
+</pre></div>
+</div>
+</li>
+<li><p>如何指定使用哪个版本的 Python ?</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>安装 Python3 (&gt;=3.3) 时，会同时安装一个启动器 Py.exe，默认在 C:\\Windows\ 路径下。
+
+    该启动器允许我们指定使用 Python2 还是 Python3 来运行代码：
+
+        py -2 test.py
+        py -3 test.py
+
+    或者直接在源代码文件中指定要使用的 Python 版本：
+
+        #! python2
+        #! python3
+
+        运行代码：
+        py test.py
+</pre></div>
+</div>
+</li>
+<li><p>存在多个 Python 版本时，如何正确使用 pip ?</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>同样使用启动器 py.exe 来指定 Python 版本：
+
+    py -2 -m pip install &lt;package_name&gt;
+    py -3 -m pip install &lt;package_name&gt;
+
+    说明： -m pip 表示运行 pip 模块
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="pip">
+<h2>常用 pip 命令<a class="headerlink" href="#pip" title="永久链接至标题">¶</a></h2>
+<ol class="arabic">
+<li><p>python -m pip install –upgrade pip   # 更新 pip</p></li>
+<li><p>pip install &lt;packagename&gt;</p></li>
+<li><p>pip install -i &lt;index_url&gt; &lt;package_name&gt;    # 使用镜像安装，或如后面修改全局配置文件</p></li>
+<li><p>pip install –upgrade &lt;package_name&gt;    # 更新指定的包</p></li>
+<li><p>pip uninstall &lt;packagename&gt;</p></li>
+<li><p>pip list</p></li>
+<li><p>pip freeze     # 显示所有依赖</p></li>
+<li><p>pip freeze &gt; requirement.txt    # 生成 requirement.txt 文件</p></li>
+<li><p>pip install -r requirement.txt  # 根据 requirement.txt 生成相同的环境</p></li>
+<li><p>修改或创建配置文件（ linux 在 <cite>~/.pip/pip.conf</cite>，windows 在 <cite>%HOMEPATH%pippip.ini</cite>）</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="k">global</span><span class="p">]</span>
+<span class="n">index</span><span class="o">-</span><span class="n">url</span> <span class="o">=</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">pypi</span><span class="o">.</span><span class="n">tuna</span><span class="o">.</span><span class="n">tsinghua</span><span class="o">.</span><span class="n">edu</span><span class="o">.</span><span class="n">cn</span><span class="o">/</span><span class="n">simple</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="virtualenv">
+<h2>VirtualEnv 使用<a class="headerlink" href="#virtualenv" title="永久链接至标题">¶</a></h2>
+<ol class="arabic">
+<li><p>安装</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">virtualenv</span>
+</pre></div>
+</div>
+</li>
+<li><p>创建虚拟环境</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">virtualenv</span> <span class="o">&lt;</span><span class="n">work_folder_name</span><span class="o">&gt;</span>
+<span class="n">virtualenv</span> <span class="o">&lt;</span><span class="n">work_folder_name</span><span class="o">&gt;</span> <span class="o">-</span><span class="n">p</span> <span class="o">&lt;</span><span class="n">PYTHON_EXE</span><span class="o">&gt;</span> <span class="c1"># 指定在虚拟环境中使用的 python 解释器，如 `-p python3.5`</span>
+</pre></div>
+</div>
+</li>
+<li><p>激活虚拟环境</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">&lt;</span><span class="n">work_folder_name</span><span class="o">&gt;</span>
+<span class="n">Scripts</span>\<span class="n">activate</span>
+</pre></div>
+</div>
+</li>
+<li><p>关闭虚拟环境</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Scripts</span>\<span class="n">deactivate</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="WindowsTerminal.html" class="btn btn-neutral float-right" title="Windows Terminal" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="SSH.html" class="btn btn-neutral float-left" title="SSH" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; 版权所有 2021, horizonshd.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

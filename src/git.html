@@ -1,0 +1,623 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>git &mdash; Cheatsheet 1.0.0 文档</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="CMake" href="CMake.html" />
+    <link rel="prev" title="Graphviz - Graph Visualization Software" href="Graphviz.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Cheatsheet
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="reStructuresText.html">reStructuresText</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sphinx.html">sphinx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Encoding.html">Charset and Encoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Graphviz.html">Graphviz - Graph Visualization Software</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">git</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">基础命令</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#git-add">git add</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#git-status">git status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#git-diff">git diff</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#git-commit">git commit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#git-notes">git notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#git-restore">git restore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#git-reset">git reset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#git-rm">git rm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#git-mv">git mv</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">本地操作</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#level-1">Level 1</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#commit">提交（commit）</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#branch">分支（branch）</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#merge">合并（merge）</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rebase">变基（rebase）</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#level-2">Level 2</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#head">分离HEAD</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">相对引用#1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">相对引用#2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">撤销修改</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#level-3">Level 3</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cherry-pick">遴选（cherry-pick）</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7">交互式变基</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#level-4">Level 4</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#level-5">Level 5</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">联机操作</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id9">Level 1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">Level 2</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id11">了解更多</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#workspace-stage-or-index-repositore-remote">工作区（Workspace）、暂存区（Stage or Index）、版本库（Repositore）和远程仓库（Remote）</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#add">add 操作</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id13">commit 操作</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="CMake.html">CMake</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C%2B%2B.html">C++</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DTD.html">DTD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="XSD.html">XSD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="WSDL.html">WSDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dotnet.html">dotnet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cmd.html">cmd</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SSH.html">SSH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Python.html">Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="WindowsTerminal.html">Windows Terminal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manim.html">manim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NSIS.html">nullsoft scriptable install system 3.0.4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Algorithm.html">Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Vocabulary.html">Vocabulary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ECFDeploy.html">ECF AutoDeploy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lua.html">Lua</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LaTeX.html">LaTeX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Ubuntu.html">Ubuntu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MEF.html">MEF in .NET Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="EMail.html">Relative Concepts of EMail</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Cheatsheet</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>git</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/src/git.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="git">
+<h1>git<a class="headerlink" href="#git" title="永久链接至标题">¶</a></h1>
+<div class="section" id="id2">
+<h2><a class="reference external" href="https://git-scm.com/docs">基础命令</a><a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<div class="section" id="git-add">
+<h3>git add<a class="headerlink" href="#git-add" title="永久链接至标题">¶</a></h3>
+<dl class="option-list">
+<dt><kbd><span class="option">-a</span>, <span class="option">--all</span></kbd></dt>
+<dd><p>整个工作区所有变化（添加、删除、修改）都将被暂存</p>
+</dd>
+<dt><kbd><span class="option">-u</span>, <span class="option">--update</span></kbd></dt>
+<dd><p>整个工作区中的删除、修改（不包含添加）将被暂存</p>
+</dd>
+</dl>
+<p>-.                  当前文件夹及其子文件夹下的所有变化都将被暂存（gitversion:2.x）</p>
+<p><a class="reference external" href="https://stackoverflow.com/questions/572549/difference-between-git-add-a-and-git-add?rq=1">Difference between “git add -A” and “git add .”</a></p>
+</div>
+<div class="section" id="git-status">
+<h3>git status<a class="headerlink" href="#git-status" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="git-diff">
+<h3>git diff<a class="headerlink" href="#git-diff" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="git-commit">
+<h3>git commit<a class="headerlink" href="#git-commit" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="git-notes">
+<h3>git notes<a class="headerlink" href="#git-notes" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="git-restore">
+<h3>git restore<a class="headerlink" href="#git-restore" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="git-reset">
+<h3>git reset<a class="headerlink" href="#git-reset" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="git-rm">
+<h3>git rm<a class="headerlink" href="#git-rm" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="git-mv">
+<h3>git mv<a class="headerlink" href="#git-mv" title="永久链接至标题">¶</a></h3>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>本地操作<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<div class="section" id="level-1">
+<h3>Level 1<a class="headerlink" href="#level-1" title="永久链接至标题">¶</a></h3>
+<div class="section" id="commit">
+<h4>提交（commit）<a class="headerlink" href="#commit" title="永久链接至标题">¶</a></h4>
+<p>git commit [&lt;options&gt;] [–] &lt;pathdpec&gt;…</p>
+<dl class="option-list">
+<dt><kbd><span class="option">-q</span>, <span class="option">--quit</span></kbd></dt>
+<dd><p>阻止提交摘要信息</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="branch">
+<h4>分支（branch）<a class="headerlink" href="#branch" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="merge">
+<h4>合并（merge）<a class="headerlink" href="#merge" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="rebase">
+<h4>变基（rebase）<a class="headerlink" href="#rebase" title="永久链接至标题">¶</a></h4>
+</div>
+</div>
+<div class="section" id="level-2">
+<h3>Level 2<a class="headerlink" href="#level-2" title="永久链接至标题">¶</a></h3>
+<div class="section" id="head">
+<h4>分离HEAD<a class="headerlink" href="#head" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id4">
+<h4>相对引用#1<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id5">
+<h4>相对引用#2<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id6">
+<h4>撤销修改<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h4>
+</div>
+</div>
+<div class="section" id="level-3">
+<h3>Level 3<a class="headerlink" href="#level-3" title="永久链接至标题">¶</a></h3>
+<div class="section" id="cherry-pick">
+<h4>遴选（cherry-pick）<a class="headerlink" href="#cherry-pick" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id7">
+<h4>交互式变基<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h4>
+</div>
+</div>
+<div class="section" id="level-4">
+<h3>Level 4<a class="headerlink" href="#level-4" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="level-5">
+<h3>Level 5<a class="headerlink" href="#level-5" title="永久链接至标题">¶</a></h3>
+</div>
+</div>
+<div class="section" id="id8">
+<h2>联机操作<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id9">
+<h3>Level 1<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="id10">
+<h3>Level 2<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h3>
+</div>
+</div>
+<div class="section" id="id11">
+<h2>了解更多<a class="headerlink" href="#id11" title="永久链接至标题">¶</a></h2>
+<div class="section" id="workspace-stage-or-index-repositore-remote">
+<h3>工作区（Workspace）、暂存区（Stage or Index）、版本库（Repositore）和远程仓库（Remote）<a class="headerlink" href="#workspace-stage-or-index-repositore-remote" title="永久链接至标题">¶</a></h3>
+<p>官方提供了一份 <a class="reference external" href="https://ndpsoftware.com/git-cheatsheet.html">Cheat Sheet</a> 可以做参考。</p>
+<p>通过 <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span> <span class="pre">MyProject</span></code> 命令创建一个本地 <cite>git</cite> 仓库 <cite>MyProject</cite>，这将会在当
+前目录下创建一个名为 <cite>MyProject</cite> 的文件夹。此时 <cite>MyProject</cite> 文件夹内仅包含一个
+<cite>.git</cite> 文件夹，其中的文件结构是这样的：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>│  config
+│  description
+│  HEAD
+│
+├─hooks
+│      applypatch-msg.sample
+│      commit-msg.sample
+│      fsmonitor-watchman.sample
+│      post-update.sample
+│      pre-applypatch.sample
+│      pre-commit.sample
+│      pre-merge-commit.sample
+│      pre-push.sample
+│      pre-rebase.sample
+│      pre-receive.sample
+│      prepare-commit-msg.sample
+│      push-to-checkout.sample
+│      update.sample
+│
+├─info
+│      exclude
+│
+├─objects
+│  ├─info
+│  └─pack
+└─refs
+    ├─heads
+    └─tags
+</pre></div>
+</div>
+<p>这里面：</p>
+<ul class="simple">
+<li><p><cite>config</cite> 文件包含项目特有的配置选项；</p></li>
+<li><p><cite>description</cite> 文件仅提供 GitWeb 使用，我们无需关心；</p></li>
+<li><p><cite>hooks</cite> 目录包含客户端会服务端的钩子脚本；</p></li>
+<li><p><cite>info</cite> 目录包含一个全局性排除（global exclude）文件，用以放置那些不希望被记录在 <cite>.gitignore</cite> 文件中的忽略模式；</p></li>
+<li><p><cite>HEAD</cite> 文件指向被检出的分支；</p></li>
+<li><p><cite>objects</cite> 目录存储所有数据的内容；</p></li>
+<li><p><cite>refs</cite> 目录存储指向数据（分支、远程仓库和标签等）的提交对象的指针；</p></li>
+<li><p>（尚待创建的） <cite>index</cite> 文件保存暂存区信息。</p></li>
+</ul>
+<div class="section" id="add">
+<h4>add 操作<a class="headerlink" href="#add" title="永久链接至标题">¶</a></h4>
+<p>新建两个文件并添加到 <cite>git</cite> :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd MyProject/
+$ echo &quot;111&quot; &gt; a.txt
+$ echo &quot;111&quot; &gt; b.txt
+$ git add -A
+</pre></div>
+</div>
+<p>此时 <cite>.git</cite> 文件夹下的文件结构为：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>│  config
+│  description
+│  HEAD
+│  index
+│
+├─hooks
+│      applypatch-msg.sample
+│      commit-msg.sample
+│      fsmonitor-watchman.sample
+│      post-update.sample
+│      pre-applypatch.sample
+│      pre-commit.sample
+│      pre-merge-commit.sample
+│      pre-push.sample
+│      pre-rebase.sample
+│      pre-receive.sample
+│      prepare-commit-msg.sample
+│      push-to-checkout.sample
+│      update.sample
+│
+├─info
+│      exclude
+│
+├─objects
+│  ├─58
+│  │      c9bdf9d017fcd178dc8c073cbfcbb7ff240d6c
+│  │
+│  ├─c2
+│  │      00906efd24ec5e783bee7f23b5d7c941b0c12c
+│  │
+│  ├─info
+│  └─pack
+└─refs
+    ├─heads
+    └─tags
+</pre></div>
+</div>
+<p>可以发现多了一个 <cite>index</cite> 文件，在 <cite>objects</cite> 文件夹下多了 <cite>58</cite> 和 <cite>c2</cite> 两个子文件
+夹，且在这两个子文件夹下各自都有一个文件:</p>
+<blockquote>
+<div><ul>
+<li><p>可以使用 <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">ls-files</span> <span class="pre">-s</span></code> 命令查看 <cite>index</cite> 文件中保存的数据：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git ls-files -s
+100644 58c9bdf9d017fcd178dc8c073cbfcbb7ff240d6c 0       a.txt
+100644 c200906efd24ec5e783bee7f23b5d7c941b0c12c 0       b.txt
+</pre></div>
+</div>
+</li>
+<li><p>可以使用命令 <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">cat-file</span></code> 来查看这两个文件的信息，参数 <code class="docutils literal notranslate"><span class="pre">-t</span></code> 查看文件
+的类型，参数 <code class="docutils literal notranslate"><span class="pre">-p</span></code> 查看文件的内容：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git cat-file -t 58c9c9bdf9d017fcd178dc8c073cbfcbb7ff240d6c
+bold
+$ git cat-file -p 58c9c9bdf9d017fcd178dc8c073cbfcbb7ff240d6c
+111
+$ git cat-file -t c200906efd24ec5e783bee7f23b5d7c941b0c12c
+bold
+$ git cat-file -p c200906efd24ec5e783bee7f23b5d7c941b0c12c
+222
+</pre></div>
+</div>
+</li>
+</ul>
+</div></blockquote>
+<p>注意这里的 <code class="docutils literal notranslate"><span class="pre">58c9c9bdf9d017fcd178dc8c073cbfcbb7ff240d6c</span></code> 和 <code class="docutils literal notranslate"><span class="pre">c200906efd24ec5e783bee7f23b5d7c941b0c12c</span></code>
+是两个 <cite>object</cite> 。通过 <code class="docutils literal notranslate"><span class="pre">cat-file</span></code> 的帮助信息可以了解到 <cite>object</cite> 有四种类型：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><cite>blod</cite></p></li>
+<li><p><cite>tree</cite></p></li>
+<li><p><cite>commit</cite></p></li>
+<li><p><cite>tag</cite></p></li>
+</ul>
+</div></blockquote>
+<p>可以浏览 <a class="reference external" href="https://git-scm.com/book/zh/v2/Git-%E5%86%85%E9%83%A8%E5%8E%9F%E7%90%86-Git-%E5%AF%B9%E8%B1%A1">Git 对象</a> 了解更多关于 <cite>object</cite> 的信息。</p>
+</div>
+<div class="section" id="id13">
+<h4>commit 操作<a class="headerlink" href="#id13" title="永久链接至标题">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git commit -m &quot;init&quot;
+</pre></div>
+</div>
+<p>此时 <cite>.git</cite> 文件夹下的文件结构为：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>│  COMMIT_EDITMSG
+│  config
+│  description
+│  HEAD
+│  index
+│
+├─hooks
+│      applypatch-msg.sample
+│      commit-msg.sample
+│      fsmonitor-watchman.sample
+│      post-update.sample
+│      pre-applypatch.sample
+│      pre-commit.sample
+│      pre-merge-commit.sample
+│      pre-push.sample
+│      pre-rebase.sample
+│      pre-receive.sample
+│      prepare-commit-msg.sample
+│      push-to-checkout.sample
+│      update.sample
+│
+├─info
+│      exclude
+│
+├─logs
+│  │  HEAD
+│  │
+│  └─refs
+│      └─heads
+│              master
+│
+├─objects
+│  ├─4c
+│  │      aaa1a9ae0b274fba9e3675f9ef071616e5b209
+│  │
+│  ├─58
+│  │      c9bdf9d017fcd178dc8c073cbfcbb7ff240d6c
+│  │
+│  ├─a4
+│  │      f84bf9229b73b8dfab44be9a959fe059cdc666
+│  │
+│  ├─c2
+│  │      00906efd24ec5e783bee7f23b5d7c941b0c12c
+│  │
+│  ├─info
+│  └─pack
+└─refs
+    ├─heads
+    │      master
+    │
+    └─tags
+</pre></div>
+</div>
+<p>相比于 <cite>commit</cite> 前新增了一个 <cite>COMMIT_EDITMSG</cite> 文件、两个 <cite>object</cite> – <cite>4caa…</cite>
+和 <cite>a4f8…</cite> 。使用 <code class="docutils literal notranslate"><span class="pre">cat-file</span></code> 命令查看各自的对象类型和内容：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git cat-file -t 4caa
+tree
+$ git cat-file -p 4caa
+100644 blob 58c9bdf9d017fcd178dc8c073cbfcbb7ff240d6c    a.txt
+100644 blob c200906efd24ec5e783bee7f23b5d7c941b0c12c    b.txt
+$ git cat-file -t a4f8
+commit
+$ git cat-file -p a4f8
+tree 4caaa1a9ae0b274fba9e3675f9ef071616e5b209
+author horizonshd &lt;horizonshd@outlook.com&gt; 1618994910 +0800
+committer horizonshd &lt;horizonshd@outlook.com&gt; 1618994910 +0800
+
+init
+</pre></div>
+</div>
+<p>可以发现 <cite>4caa…</cite> 这个对象的类型是 <cite>tree</cite> ,包含 <cite>58c9…(a.txt)</cite> 和 <cite>c200…(b.txt)</cite>
+两个叶子节点；而 <cite>a4f8…</cite> 这个对象的类型是 <cite>commit</cite> ，其中包含了提交者的信息和
+提交信息以及指向的 <cite>tree</cite> 对象信息。（注：<cite>commit</cite> 对象中还可能会包含上一次提交
+的 Hash 值信息，这里为首次提交所以没有该信息）</p>
+<p>另外 <cite>refs/heads</cite> 目录下多了一个 <cite>master</cite> 文件，其中的内容为：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cat .git/refs/heads/master
+a4f84bf9229b73b8dfab44be9a959fe059cdc666
+$ cat .git/HEAD
+ref: refs/heads/master
+</pre></div>
+</div>
+<p>可以发现这个 <cite>master</cite> 文件中存储的数据指向了最近一次提交产生的 <cite>commit</cite> 对象，<cite>HEAD</cite>
+文件中存储的数据指向了当前被检出的分支。</p>
+<p>再查看一下此时 <cite>index</cite> 文件中的内容：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git ls-files -s
+100644 58c9bdf9d017fcd178dc8c073cbfcbb7ff240d6c 0       a.txt
+100644 c200906efd24ec5e783bee7f23b5d7c941b0c12c 0       b.txt
+</pre></div>
+</div>
+<p>可以发现和 <cite>commit</cite> 之前的数据是一样的。</p>
+<p>另外新增了 <cite>logs</cite> 目录。</p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="CMake.html" class="btn btn-neutral float-right" title="CMake" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="Graphviz.html" class="btn btn-neutral float-left" title="Graphviz - Graph Visualization Software" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; 版权所有 2021, horizonshd.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

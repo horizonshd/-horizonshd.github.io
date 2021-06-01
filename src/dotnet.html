@@ -1,0 +1,446 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>dotnet &mdash; Cheatsheet 1.0.0 文档</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="cmd" href="cmd.html" />
+    <link rel="prev" title="WSDL" href="WSDL.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Cheatsheet
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="reStructuresText.html">reStructuresText</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sphinx.html">sphinx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Encoding.html">Charset and Encoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Graphviz.html">Graphviz - Graph Visualization Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="git.html">git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CMake.html">CMake</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C%2B%2B.html">C++</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DTD.html">DTD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="XSD.html">XSD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="WSDL.html">WSDL</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">dotnet</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">基础</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#appdomain">AppDomain</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#idisposable">IDisposable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#weakreference">WeakReference</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#weakeventmanager-iweakeventlistener">WeakEventManager IWeakEventListener</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reflection">Reflection</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#typedescriptor">TypeDescriptor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#emit">Emit</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#expresstion-tree">Expresstion Tree</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">精选框架</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#caliburn-micro">Caliburn.Micro</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#prism">Prism</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dapper">Dapper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#automapper">AutoMapper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ilmerge">ILMerge</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mono-cecil">Mono.Cecil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#infralution-localization-wpf">Infralution.Localization.Wpf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fluentvalidation">FluentValidation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#easynetq">EasyNetQ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#log4net">log4net</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moq">Moq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fody">Fody</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#propertychanged">PropertyChanged</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#penet">PeNet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#powerargs">PowerArgs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sevenzipsharp">SevenZipSharp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sharpziplib">SharpZipLib</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#zipdiff">zipdiff</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">进阶</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id4">什么是 AppDomain ？</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cmd.html">cmd</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SSH.html">SSH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Python.html">Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="WindowsTerminal.html">Windows Terminal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manim.html">manim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NSIS.html">nullsoft scriptable install system 3.0.4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Algorithm.html">Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Vocabulary.html">Vocabulary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ECFDeploy.html">ECF AutoDeploy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lua.html">Lua</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LaTeX.html">LaTeX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Ubuntu.html">Ubuntu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MEF.html">MEF in .NET Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="EMail.html">Relative Concepts of EMail</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Cheatsheet</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>dotnet</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/src/dotnet.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="dotnet">
+<h1>dotnet<a class="headerlink" href="#dotnet" title="永久链接至标题">¶</a></h1>
+<div class="section" id="id1">
+<h2>基础<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<div class="section" id="appdomain">
+<h3>AppDomain<a class="headerlink" href="#appdomain" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="idisposable">
+<h3>IDisposable<a class="headerlink" href="#idisposable" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="weakreference">
+<h3>WeakReference<a class="headerlink" href="#weakreference" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="weakeventmanager-iweakeventlistener">
+<h3>WeakEventManager IWeakEventListener<a class="headerlink" href="#weakeventmanager-iweakeventlistener" title="永久链接至标题">¶</a></h3>
+<p>WeakEventManager&lt;TEventSource, TEventArgs&gt; 这个泛型类继承并实现了抽象类
+WeakEventManager，使用起来也比较简单，是个不错的选择，只是其实现过程中会有
+一点反射的使用，对性能有一点点影响。</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Windows</span><span class="p">;</span>
+
+<span class="k">namespace</span> <span class="nn">Sandbox</span>
+<span class="p">{</span>
+    <span class="k">internal</span> <span class="k">class</span> <span class="nc">Program</span>
+    <span class="p">{</span>
+        <span class="k">private</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">Main</span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="kt">var</span> <span class="n">publisher</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Publisher</span><span class="p">();</span>
+            <span class="kt">var</span> <span class="n">subcriber1</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Subcriber</span><span class="p">(</span><span class="s">&quot;A&quot;</span><span class="p">);</span>
+            <span class="kt">var</span> <span class="n">subcriber2</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Subcriber</span><span class="p">(</span><span class="s">&quot;B&quot;</span><span class="p">);</span>
+            <span class="kt">var</span> <span class="n">subcriber3</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Subcriber</span><span class="p">(</span><span class="s">&quot;C&quot;</span><span class="p">);</span>
+            <span class="n">WeakEventManager</span><span class="p">&lt;</span><span class="n">Publisher</span><span class="p">,</span> <span class="n">ValueChangedEventArgs</span><span class="p">&gt;.</span><span class="n">AddHandler</span><span class="p">(</span><span class="n">publisher</span><span class="p">,</span> <span class="s">&quot;ValueChanged&quot;</span><span class="p">,</span> <span class="n">subcriber1</span><span class="p">.</span><span class="n">OnValueChanged</span><span class="p">);</span>
+            <span class="n">WeakEventManager</span><span class="p">&lt;</span><span class="n">Publisher</span><span class="p">,</span> <span class="n">ValueChangedEventArgs</span><span class="p">&gt;.</span><span class="n">AddHandler</span><span class="p">(</span><span class="n">publisher</span><span class="p">,</span> <span class="s">&quot;ValueChanged&quot;</span><span class="p">,</span> <span class="n">subcriber2</span><span class="p">.</span><span class="n">OnValueChanged</span><span class="p">);</span>
+            <span class="n">WeakEventManager</span><span class="p">&lt;</span><span class="n">Publisher</span><span class="p">,</span> <span class="n">ValueChangedEventArgs</span><span class="p">&gt;.</span><span class="n">AddHandler</span><span class="p">(</span><span class="n">publisher</span><span class="p">,</span> <span class="s">&quot;ValueChanged&quot;</span><span class="p">,</span> <span class="n">subcriber3</span><span class="p">.</span><span class="n">OnValueChanged</span><span class="p">);</span>
+            <span class="n">publisher</span><span class="p">.</span><span class="n">ChangeValue</span><span class="p">(</span><span class="kt">string</span><span class="p">.</span><span class="n">Format</span><span class="p">(</span><span class="s">&quot;{0:FFFFFFF}&quot;</span><span class="p">,</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span><span class="p">));</span>
+
+            <span class="n">Console</span><span class="p">.</span><span class="n">ReadKey</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="cp">#region 发布者</span>
+
+    <span class="k">public</span> <span class="k">delegate</span> <span class="k">void</span> <span class="nf">ValueChangedHanlder</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">ValueChangedEventArgs</span> <span class="n">e</span><span class="p">);</span>
+
+    <span class="k">public</span> <span class="k">class</span> <span class="nc">Publisher</span>
+    <span class="p">{</span>
+        <span class="k">public</span> <span class="k">event</span> <span class="n">ValueChangedHanlder</span> <span class="n">ValueChanged</span><span class="p">;</span>
+
+        <span class="k">public</span> <span class="k">void</span> <span class="nf">ChangeValue</span><span class="p">(</span><span class="kt">object</span> <span class="n">newValue</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">ValueChanged</span><span class="p">?.</span><span class="n">Invoke</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="k">new</span> <span class="n">ValueChangedEventArgs</span> <span class="p">{</span> <span class="n">NewValue</span> <span class="p">=</span> <span class="n">newValue</span> <span class="p">});</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="cp">#endregion</span>
+
+    <span class="k">public</span> <span class="k">class</span> <span class="nc">ValueChangedEventArgs</span> <span class="p">:</span> <span class="n">EventArgs</span>
+    <span class="p">{</span>
+        <span class="k">public</span> <span class="kt">object</span> <span class="n">NewValue</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="cp">#region 订阅者</span>
+
+    <span class="k">public</span> <span class="k">class</span> <span class="nc">Subcriber</span>
+    <span class="p">{</span>
+        <span class="k">private</span> <span class="kt">string</span> <span class="n">_name</span> <span class="p">=</span> <span class="kt">string</span><span class="p">.</span><span class="n">Empty</span><span class="p">;</span>
+
+        <span class="k">public</span> <span class="nf">Subcriber</span><span class="p">(</span><span class="kt">string</span> <span class="n">name</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">_name</span> <span class="p">=</span> <span class="n">name</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">public</span> <span class="k">void</span> <span class="nf">OnValueChanged</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">ValueChangedEventArgs</span> <span class="n">e</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="kt">string</span><span class="p">.</span><span class="n">Format</span><span class="p">(</span><span class="s">&quot;[Subcriber - {0}] 值已改变，新值: {1}&quot;</span><span class="p">,</span> <span class="n">_name</span><span class="p">,</span> <span class="n">e</span><span class="p">.</span><span class="n">NewValue</span><span class="p">));</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="cp">#endregion</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="reflection">
+<h3>Reflection<a class="headerlink" href="#reflection" title="永久链接至标题">¶</a></h3>
+<p>相关的几个名称空间：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>System.Reflection.Emit</p></li>
+<li></li>
+</ul>
+</div></blockquote>
+<p>关键类：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>AppDomain</p></li>
+<li><p>Activator</p></li>
+</ul>
+</div></blockquote>
+<div class="section" id="typedescriptor">
+<h4>TypeDescriptor<a class="headerlink" href="#typedescriptor" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="emit">
+<h4>Emit<a class="headerlink" href="#emit" title="永久链接至标题">¶</a></h4>
+</div>
+</div>
+<div class="section" id="expresstion-tree">
+<h3>Expresstion Tree<a class="headerlink" href="#expresstion-tree" title="永久链接至标题">¶</a></h3>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>精选框架<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<div class="section" id="caliburn-micro">
+<h3>Caliburn.Micro<a class="headerlink" href="#caliburn-micro" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="prism">
+<h3>Prism<a class="headerlink" href="#prism" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="dapper">
+<h3>Dapper<a class="headerlink" href="#dapper" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="automapper">
+<h3>AutoMapper<a class="headerlink" href="#automapper" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="ilmerge">
+<h3>ILMerge<a class="headerlink" href="#ilmerge" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="mono-cecil">
+<h3>Mono.Cecil<a class="headerlink" href="#mono-cecil" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="infralution-localization-wpf">
+<h3>Infralution.Localization.Wpf<a class="headerlink" href="#infralution-localization-wpf" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="fluentvalidation">
+<h3>FluentValidation<a class="headerlink" href="#fluentvalidation" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="easynetq">
+<h3>EasyNetQ<a class="headerlink" href="#easynetq" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="log4net">
+<h3>log4net<a class="headerlink" href="#log4net" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="moq">
+<h3>Moq<a class="headerlink" href="#moq" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="fody">
+<h3>Fody<a class="headerlink" href="#fody" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="propertychanged">
+<h3>PropertyChanged<a class="headerlink" href="#propertychanged" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="penet">
+<h3>PeNet<a class="headerlink" href="#penet" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="powerargs">
+<h3>PowerArgs<a class="headerlink" href="#powerargs" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="sevenzipsharp">
+<h3>SevenZipSharp<a class="headerlink" href="#sevenzipsharp" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="sharpziplib">
+<h3>SharpZipLib<a class="headerlink" href="#sharpziplib" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="zipdiff">
+<h3>zipdiff<a class="headerlink" href="#zipdiff" title="永久链接至标题">¶</a></h3>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>进阶<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id4">
+<h3>什么是 AppDomain ？<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h3>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="cmd.html" class="btn btn-neutral float-right" title="cmd" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="WSDL.html" class="btn btn-neutral float-left" title="WSDL" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; 版权所有 2021, horizonshd.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,631 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>nullsoft scriptable install system 3.0.4 &mdash; Cheatsheet 1.0.0 文档</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="Algorithm" href="Algorithm.html" />
+    <link rel="prev" title="manim" href="manim.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Cheatsheet
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="reStructuresText.html">reStructuresText</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sphinx.html">sphinx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Encoding.html">Charset and Encoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Graphviz.html">Graphviz - Graph Visualization Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="git.html">git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CMake.html">CMake</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C%2B%2B.html">C++</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DTD.html">DTD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="XSD.html">XSD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="WSDL.html">WSDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dotnet.html">dotnet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cmd.html">cmd</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SSH.html">SSH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Python.html">Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="WindowsTerminal.html">Windows Terminal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manim.html">manim</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">nullsoft scriptable install system 3.0.4</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">第二章 基础</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">2.1 介绍</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">2.2 脚本</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">2.3 脚本文件的结构</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#installer-attributes">2.3.1 Installer Attributes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pages">2.3.2 Pages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sections">2.3.3 Sections</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#functions">2.3.4 Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">2.3.5 编写脚本的一些技巧</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id9">2.3.6 脚本执行</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id12">2.3.7 编译器命令</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#complier">2.4 Complier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mordern-ui">2.5 Mordern UI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#plugins">2.6 Plugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#more">2.7 More</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id14">第三章 命令行的使用</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#makensis-usage">3.1 MakeNSIS Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#installer-usage">3.2 Installer Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id15">第四章 脚本参考</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id16">4.1 脚本文件格式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id17">4.2 变量</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id18">4.3 标签</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id19">4.4 相对跳转</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id20">4.5 页面</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id21">4.6 Sections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id22">4.7 函数</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id23">4.8 安装程序特性</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id24">4.9 指令</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id25">4.10 多语言</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id26">4.11 插件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id27">4.12 静默安装或卸载</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id28">第五章 编译时命令</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id29">5.1 编译器使用命令</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id30">5.2 预定义</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id31">5.3 读取环境变量</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id32">5.4 条件编译</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Algorithm.html">Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Vocabulary.html">Vocabulary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ECFDeploy.html">ECF AutoDeploy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lua.html">Lua</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LaTeX.html">LaTeX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Ubuntu.html">Ubuntu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MEF.html">MEF in .NET Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="EMail.html">Relative Concepts of EMail</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Cheatsheet</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>nullsoft scriptable install system 3.0.4</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/src/NSIS.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="nullsoft-scriptable-install-system-3-0-4">
+<h1>nullsoft scriptable install system 3.0.4<a class="headerlink" href="#nullsoft-scriptable-install-system-3-0-4" title="永久链接至标题">¶</a></h1>
+<div class="section" id="id1">
+<h2>第二章 基础<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id2">
+<h3>2.1 介绍<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="id3">
+<h3>2.2 脚本<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h3>
+<ul class="simple">
+<li><p>普通脚本文件的扩展名是 <cite>.nsi</cite>，头文件的扩展名是 <cite>.nsh</cite>；</p></li>
+<li><p>可使用 <cite>!include</cite> 在脚本文件中引入头文件，对于在 NSIS 安装目录下的头文件
+可以直接通过文件名引用，如：<cite>!include Sections.nsh</cite></p></li>
+</ul>
+</div>
+<div class="section" id="id4">
+<h3>2.3 脚本文件的结构<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h3>
+<p>一个 NSIS 脚本文件通常由 <cite>Installer Attributes</cite>, <cite>Pages</cite> 和 <cite>Sections/Functions</cite>
+组成。另外也可以使用编译器命令来配置编译时的行为。例如，<code class="docutils literal notranslate"><span class="pre">OutFile</span></code> 指令用于
+告诉 NSIS 将编译后的 Installer 文件放在什么地方。</p>
+<div class="section" id="installer-attributes">
+<h4>2.3.1 Installer Attributes<a class="headerlink" href="#installer-attributes" title="永久链接至标题">¶</a></h4>
+<p><cite>Installer Attributes</cite> 决定了 Installer 的行为和外观。比较基础常用的指令是
+<code class="docutils literal notranslate"><span class="pre">Name</span></code> 和 <code class="docutils literal notranslate"><span class="pre">InstallDir</span></code>。</p>
+</div>
+<div class="section" id="pages">
+<h4>2.3.2 Pages<a class="headerlink" href="#pages" title="永久链接至标题">¶</a></h4>
+<p>一个 <cite>non-silent installer</cite> 包含一系列的向导页面让用户配置安装过程，可以使
+用 <code class="docutils literal notranslate"><span class="pre">Page</span></code> 或高级的 <code class="docutils literal notranslate"><span class="pre">PageEx</span></code> 命令来展示指定的页面。</p>
+<div class="highlight-nsis notranslate"><div class="highlight"><pre><span></span><span class="k">Page</span> license
+<span class="k">Page</span> components
+<span class="k">Page</span> directory
+<span class="k">Page</span> instfiles
+<span class="k">UninstPage</span> uninstConfirm
+<span class="k">UninstPage</span> instfiles
+</pre></div>
+</div>
+</div>
+<div class="section" id="sections">
+<h4>2.3.3 Sections<a class="headerlink" href="#sections" title="永久链接至标题">¶</a></h4>
+<p>在安装过程中的组件页面中的每一项关联一段代码，在脚本文件中称为 <cite>Section</cite> ，
+Section 的名字就是组件页面显示的名字，若组件被选中，则脚本中对应的代码将执行。</p>
+<p>卸载程序也可以有多个 <cite>Sections</cite>, 对用的 <cite>Section</cite> 以 <cite>un.</cite> 为前缀命名。</p>
+<div class="highlight-nsis notranslate"><div class="highlight"><pre><span></span><span class="k">Section</span> <span class="s2">&quot;Installer Section</span><span class="s">&quot;</span>
+<span class="k">SectionEnd</span>
+
+<span class="k">Section</span> <span class="s2">&quot;un.Uninstaller Section</span><span class="s">&quot;</span>
+<span class="k">SectionEnd</span>
+</pre></div>
+</div>
+<p>可以在 <cite>Section</cite> 中执行的指令和 <cite>Installer Attributes</cite> 指令非常不同，它们
+是在用户的笔记本中被执行。</p>
+<p>最基础的指令是 <cite>SetOutPath</cite> 用于告诉安装程序将文件提取到哪里以及从哪里提取文件。</p>
+<div class="highlight-nsis notranslate"><div class="highlight"><pre><span></span><span class="k">Section</span> <span class="s2">&quot;My Program</span><span class="s">&quot;</span>
+  <span class="k">SetOutPath</span> <span class="vg">$INSTDIR</span>
+  <span class="k">File</span> <span class="s2">&quot;My Program.exe</span><span class="s">&quot;</span>
+  <span class="k">File</span> <span class="s2">&quot;Readme.txt</span><span class="s">&quot;</span>
+<span class="k">SectionEnd</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="functions">
+<h4>2.3.4 Functions<a class="headerlink" href="#functions" title="永久链接至标题">¶</a></h4>
+<p>和 <cite>Section</cite> 一样，函数可以包含脚本代码。函数和 <cite>Section</cite> 的区别是它们被调
+用的方式。共有 <cite>用户函数</cite> 和 <cite>回调函数</cite> 两种函数。</p>
+</div>
+<div class="section" id="id5">
+<h4>2.3.5 编写脚本的一些技巧<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h4>
+<div class="section" id="id6">
+<h5>2.3.5.1 代码逻辑结构<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h5>
+<p>代码中的条件分支语句和循环分支语句可以使用 <cite>StrCmp</cite> , <cite>IntCmp</cite> , <cite>IfErrors</cite> ，
+<cite>Goto</cite> 等指令来是实现。但是，<cite>LogicalLib</cite> 提供了一些非常简单的宏来完成这些
+复杂的代码结构。这些宏的具体释义在 <cite>LogicalLib.nsh</cite> 头文件中。</p>
+<p>在不使用 <cite>LogicalLib</cite> 的情况下，检查一个变量的代码如下：</p>
+<blockquote>
+<div><div class="highlight-nsis notranslate"><div class="highlight"><pre><span></span><span class="k">StrCmp</span> <span class="bp">$0</span> <span class="s1">&#39;some value&#39;</span> 0 <span class="o">+</span>3
+  <span class="k">MessageBox</span> <span class="no">MB_OK</span> <span class="s1">&#39;$$0 is some value&#39;</span>
+  <span class="k">Goto</span> done
+<span class="k">StrCmp</span> <span class="bp">$0</span> <span class="s1">&#39;some other value&#39;</span> 0 <span class="o">+</span>3
+  <span class="k">MessageBox</span> <span class="no">MB_OK</span> <span class="s1">&#39;$$0 is some other value&#39;</span>
+  <span class="k">Goto</span> done
+<span class="c"># else</span>
+  <span class="k">MessageBox</span> <span class="no">MB_OK</span> <span class="s1">&#39;$$0 is &quot;$0&quot;&#39;</span>
+<span class="nl">done</span><span class="p">:</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>使用 <cite>LogicalLib</cite> 后的代码如下：</p>
+<blockquote>
+<div><div class="highlight-nsis notranslate"><div class="highlight"><pre><span></span><span class="kp">${If}</span> <span class="bp">$0</span> <span class="o">==</span> <span class="s1">&#39;some value&#39;</span>
+  <span class="k">MessageBox</span> <span class="no">MB_OK</span> <span class="s1">&#39;$$0 is some value&#39;</span>
+<span class="kp">${ElseIf}</span> <span class="bp">$0</span> <span class="o">==</span> <span class="s1">&#39;some other value&#39;</span>
+  <span class="k">MessageBox</span> <span class="no">MB_OK</span> <span class="s1">&#39;$$0 is some other value&#39;</span>
+<span class="kp">${Else}</span>
+  <span class="k">MessageBox</span> <span class="no">MB_OK</span> <span class="s1">&#39;$$0 is &quot;$0&quot;&#39;</span>
+<span class="kp">${EndIf}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>或者使用Switch宏：</p>
+<blockquote>
+<div><div class="highlight-nsis notranslate"><div class="highlight"><pre><span></span><span class="kp">${Switch}</span> <span class="bp">$0</span>
+  <span class="kp">${Case}</span> <span class="s1">&#39;some value&#39;</span>
+    <span class="k">MessageBox</span> <span class="no">MB_OK</span> <span class="s1">&#39;$$0 is some value&#39;</span>
+    <span class="kp">${Break}</span>
+  <span class="kp">${Case}</span> <span class="s1">&#39;some other value&#39;</span>
+    <span class="k">MessageBox</span> <span class="no">MB_OK</span> <span class="s1">&#39;$$0 is some other value&#39;</span>
+    <span class="kp">${Break}</span>
+  <span class="kp">${Default}</span>
+    <span class="k">MessageBox</span> <span class="no">MB_OK</span> <span class="s1">&#39;$$0 is &quot;$0&quot;&#39;</span>
+    <span class="kp">${Break}</span>
+<span class="kp">${EndSwitch}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>多个条件也支持，如：</p>
+<blockquote>
+<div><div class="highlight-nsis notranslate"><div class="highlight"><pre><span></span><span class="kp">${If}</span> <span class="bp">$0</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span>
+<span class="kp">${AndIf}</span> <span class="bp">$1</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span>
+  <span class="k">MessageBox</span> <span class="no">MB_OK</span><span class="o">|</span><span class="no">MB_ICONSTOP</span> <span class="s1">&#39;both are empty!&#39;</span>
+<span class="kp">${EndIf}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>另外也支持 <cite>while</cite> , <cite>do</cite> , <cite>for</cite> 等循环命令：</p>
+<blockquote>
+<div><div class="highlight-nsis notranslate"><div class="highlight"><pre><span></span><span class="k">StrCpy</span> <span class="bp">$R1</span> 0
+<span class="kp">${While}</span> <span class="bp">$R1</span> <span class="o">&lt;</span> 5
+  <span class="k">IntOp</span> <span class="bp">$R1</span> <span class="bp">$R1</span> <span class="o">+</span> 1
+  <span class="k">DetailPrint</span> <span class="bp">$R1</span>
+<span class="kp">${EndWhile}</span>
+</pre></div>
+</div>
+<div class="highlight-nsis notranslate"><div class="highlight"><pre><span></span><span class="kp">${For}</span> <span class="bp">$R1</span> 1 5
+  <span class="k">DetailPrint</span> <span class="bp">$R1</span>
+<span class="kp">${Next}</span>
+</pre></div>
+</div>
+<div class="highlight-nsis notranslate"><div class="highlight"><pre><span></span><span class="k">StrCpy</span> <span class="bp">$R1</span> 0
+<span class="kp">${Do}</span>
+  <span class="k">IntOp</span> <span class="bp">$R1</span> <span class="bp">$R1</span> <span class="o">+</span> 1
+  <span class="k">DetailPrint</span> <span class="bp">$R1</span>
+<span class="kp">${LoopUntil}</span> <span class="bp">$R1</span> <span class="o">&gt;=</span> 5
+</pre></div>
+</div>
+</div></blockquote>
+<p>使用 <cite>LogicalLib</cite> 需要在脚本上方添加 <cite>!include LogicLib.nsh</cite> 。</p>
+</div>
+<div class="section" id="id7">
+<h5>2.3.5.2 变量<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h5>
+<p>使用 <cite>Var &lt;variableName&gt;</cite> 命令声明变量，通过 <cite>$&lt;variableName&gt;</cite> 访问变量，
+变量是全局的，并且可以在 <cite>Sections</cite> 和 <cite>Function</cite> 中使用。</p>
+<p>另外，提供一个栈结构可用于临时数据的存储，通过 <cite>Push</cite> 和 <cite>Pop</cite> 命令可以访问
+这个栈结构。提供了20个寄存器变量（像 <cite>$0</cite> 和 <cite>$R0</cite> ），这些静态变量不需要声
+明也不需要担心任何的命名冲突。</p>
+<div class="highlight-nsis notranslate"><div class="highlight"><pre><span></span><span class="k">Function</span> bla
+
+  <span class="k">Push</span> <span class="bp">$R0</span>
+  <span class="k">Push</span> <span class="bp">$R1</span>
+
+    ...code...
+
+  <span class="k">Pop</span> <span class="bp">$R1</span>
+  <span class="k">Pop</span> <span class="bp">$R0</span>
+
+<span class="k">FunctionEnd</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id8">
+<h5>2.3.5.3 调试<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h5>
+<p>可以使用 <cite>MessageBoxes</cite> 或者 <cite>DetailPrint</cite> 来显示变量的值，当然也可以选择
+使用 <cite>DumpState</cite> 插件来显示所有变量的简单展示。</p>
+</div>
+</div>
+<div class="section" id="id9">
+<h4>2.3.6 脚本执行<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h4>
+<p>当用户运行安装程序或卸载程序时，页面按照它们在脚本中定义的顺序进行展示。当进
+行到 <cite>instfilles</cite> 页面时，关联到被勾选的组件的 <cite>Sectiuon</cite> 将会 <strong>按照它们
+在脚本中定义的顺序依次被执行</strong> 。如果 <cite>Components</cite> 页面没有被展示，则默认
+所有 <cite>Component</cite> 关联的 <cite>Section</cite> 对应的代码都将被执行。</p>
+<p>除了在 <cite>Section</cite> 中定义的代码外，回调函数中也可以编写代码。如果编写了相关的
+回调函数，它们可能在所有 <cite>Section</cite> 中的代码之前被执行，比如 <a href="#id10"><span class="problematic" id="id11">`</span></a>.onInit`回调
+函数。另外也有一组和页面相关的回调函数。</p>
+</div>
+<div class="section" id="id12">
+<h4>2.3.7 编译器命令<a class="headerlink" href="#id12" title="永久链接至标题">¶</a></h4>
+<p>编译器命令在编译时得到执行。它们可以用于</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>条件编译</p></li>
+<li><p>引入头文件</p></li>
+<li><p>运行程序</p></li>
+<li><p>改变当前的工作目录</p></li>
+</ul>
+</div></blockquote>
+<p>等等。</p>
+<div class="section" id="define">
+<h5>2.3.7.1 define<a class="headerlink" href="#define" title="永久链接至标题">¶</a></h5>
+<p>最常用的命令是定义（ <cite>defines</cite> ），定义是编译时的常量，比如可以在脚本中通过
+<cite>define</cite> 定义产品的版本号:</p>
+<blockquote>
+<div><div class="highlight-nsis notranslate"><div class="highlight"><pre><span></span><span class="cp">!define</span> VERSION <span class="s2">&quot;1.0.3</span><span class="s">&quot;</span>
+<span class="k">Name</span> <span class="s2">&quot;My Program ${VERSION}</span><span class="s">&quot;</span>
+<span class="k">OutFile</span> <span class="s2">&quot;My Program Installer - ${VERSION}.exe</span><span class="s">&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="macro">
+<h5>2.3.7.2 macro<a class="headerlink" href="#macro" title="永久链接至标题">¶</a></h5>
+<p>另一个比较常用的是宏（ <cite>macros</cite> ）。使用宏可以在编译的时候插入（展开？）代码。
+通过使用宏可以写出一份更通用的代码，并且只需做很小的调整就可以将其用于不同的
+地方：</p>
+<blockquote>
+<div><div class="highlight-nsis notranslate"><div class="highlight"><pre><span></span><span class="cp">!macro</span> MyFunc UN
+<span class="k">Function</span> <span class="kp">${UN}</span>MyFunc
+  <span class="k">Call</span> <span class="kp">${UN}</span>DoRegStuff
+  <span class="k">ReadRegStr</span> <span class="bp">$0</span> <span class="no">HKLM</span> Software<span class="p">\</span>MyProgram key
+  <span class="k">DetailPrint</span> <span class="bp">$0</span>
+<span class="k">FunctionEnd</span>
+<span class="cp">!macroend</span>
+
+<span class="cp">!insertmacro</span> MyFunc <span class="s2">&quot;</span><span class="s">&quot;</span>
+<span class="cp">!insertmacro</span> MyFunc <span class="s2">&quot;un.</span><span class="s">&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>上面的例子避免了在安装和卸载程序中写大量重复的代码。两个 <cite>!insertmacro</cite> 插
+入了两个函数，一个是用于安装程序的 <cite>MyFunc</cite>，另一个是用于卸载程序的 <cite>un.MyFunc</cite> ，
+它们都实现类似的功能。</p>
+</div>
+</div>
+</div>
+<div class="section" id="complier">
+<h3>2.4 Complier<a class="headerlink" href="#complier" title="永久链接至标题">¶</a></h3>
+<p>编写好脚本文件后，就可以使用 <cite>NSIS</cite> 编译器 <cite>MakeNSIS.exe</cite> 编译脚本生成安装
+程序。 <cite>MakeNSISW</cite> 是 <cite>MakeNSIS</cite> 的 <cite>GUI</cite> 版本。</p>
+<p><cite>NSIS</cite> 编译器会检查脚本并显示警告或错误。如果产生错误，编译过程将会中断并以
+带代码行号的文本显示错误。</p>
+<p><cite>NSIS</cite> 支持不同的压缩方式：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><cite>ZLIB</cite> 是默认的压缩方法，快速且使用很少的内存；</p></li>
+<li><p><cite>LZMA</cite> 适用于需要通过网络分发更小的安装程序的场景；</p></li>
+<li><p><cite>BZIP2</cite> 的压缩效果通常比 <cite>ZLIB</cite> 好，但不及 <cite>LZMA</cite> ，但其占用内存更
+少，编译更快。</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="mordern-ui">
+<h3>2.5 Mordern UI<a class="headerlink" href="#mordern-ui" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="plugins">
+<h3>2.6 Plugins<a class="headerlink" href="#plugins" title="永久链接至标题">¶</a></h3>
+<p><cite>NSIS</cite> 支持插件，可以在脚本中调用插件。插件是通过 <cite>C</cite> 、<cite>C++</cite> 、<cite>Delphi</cite>
+或者其它编程语言编写的。一次插件的调用形如：</p>
+<blockquote>
+<div><div class="highlight-nsis notranslate"><div class="highlight"><pre><span></span><span class="kn">DLLName</span><span class="p">::</span><span class="nf">FunctionName</span> <span class="s2">&quot;parameter number 1</span><span class="s">&quot;</span> <span class="s2">&quot;parameter number 2</span><span class="s">&quot;</span> <span class="s2">&quot;parameter number 3</span><span class="s">&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>不同的插件对参数有着各自的要求，比如：</p>
+<blockquote>
+<div><div class="highlight-nsis notranslate"><div class="highlight"><pre><span></span><span class="kn">nsExec</span><span class="p">::</span><span class="nf">ExecToLog</span> <span class="s1">&#39;&quot;${NSISDIR}\makensis.exe&quot; /CMDHELP&#39;</span>
+<span class="k">Pop</span> <span class="bp">$0</span> <span class="c">; Process exit code or &quot;error&quot;</span>
+<span class="kn">InstallOptions</span><span class="p">::</span><span class="nf">dialog</span> <span class="s2">&quot;</span><span class="nb">$PLUGINSDIR</span><span class="s2">\test.ini</span><span class="s">&quot;</span>
+<span class="k">Pop</span> <span class="bp">$0</span> <span class="c">; success/back/cancel/error</span>
+<span class="kn">NSISdl</span><span class="p">::</span><span class="nf">download</span> <span class="nl">http</span><span class="p">:</span>/<span class="na">/download</span>.nullsoft.com<span class="na">/winamp/client/winamp291_lite</span>.exe <span class="bp">$R0</span>
+<span class="k">Pop</span> <span class="bp">$0</span> <span class="c">; &quot;success&quot; or a error code</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><cite>NSIS</cite> 发现的插件在编译器输出的顶部列出（详细级别4）。 <cite>NSIS</cite> 在 <cite>NSIS</cite> 目
+录下的 <cite>Plugins</cite> 文件夹中搜索插件，并列出其所有可用函数。也可以使用 <cite>！addplugindir</cite>
+告诉 <cite>NSIS</cite> 在其他目录中搜索。</p>
+<p><cite>NSIS</cite> 发行版已经包含许多插件。 <cite>InstallOptions</cite> 是一个流行的插件，可让您
+结合 <cite>NSIS</cite> 的 <cite>Page</cite> 命令（请参阅 <a class="reference internal" href="#id20"><span class="std std-ref">4.5 页面</span></a> ）来创建自定义页面。 <cite>Startmenu</cite>
+插件提供了一个页面，允许用户选择 <cite>Start Menu</cite> 文件夹。 有许多用于不同目的的
+插件，请在 <cite>Docs</cite> 文件夹中查看帮助文件和示例。 您可以 <a class="reference external" href="http://nsis.sf.net/">在线</a> 找到其他插件。</p>
+<p>您也可以自己创建一个插件。 <cite>C</cite> / <cite>C ++</cite> 和 <cite>Delphi</cite> 头文件已经可用，有关如
+何执行此操作，请参见示例插件。随附插件的源代码也可以在源代码包中找到。</p>
+</div>
+<div class="section" id="more">
+<h3>2.7 More<a class="headerlink" href="#more" title="永久链接至标题">¶</a></h3>
+</div>
+</div>
+<div class="section" id="id14">
+<h2>第三章 命令行的使用<a class="headerlink" href="#id14" title="永久链接至标题">¶</a></h2>
+<div class="section" id="makensis-usage">
+<h3>3.1 MakeNSIS Usage<a class="headerlink" href="#makensis-usage" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="installer-usage">
+<h3>3.2 Installer Usage<a class="headerlink" href="#installer-usage" title="永久链接至标题">¶</a></h3>
+</div>
+</div>
+<div class="section" id="id15">
+<h2>第四章 脚本参考<a class="headerlink" href="#id15" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id16">
+<h3>4.1 脚本文件格式<a class="headerlink" href="#id16" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="id17">
+<h3>4.2 变量<a class="headerlink" href="#id17" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="id18">
+<h3>4.3 标签<a class="headerlink" href="#id18" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="id19">
+<h3>4.4 相对跳转<a class="headerlink" href="#id19" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="id20">
+<h3>4.5 页面<a class="headerlink" href="#id20" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="id21">
+<h3>4.6 Sections<a class="headerlink" href="#id21" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="id22">
+<h3>4.7 函数<a class="headerlink" href="#id22" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="id23">
+<h3>4.8 安装程序特性<a class="headerlink" href="#id23" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="id24">
+<h3>4.9 指令<a class="headerlink" href="#id24" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="id25">
+<h3>4.10 多语言<a class="headerlink" href="#id25" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="id26">
+<h3>4.11 插件<a class="headerlink" href="#id26" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="id27">
+<h3>4.12 静默安装或卸载<a class="headerlink" href="#id27" title="永久链接至标题">¶</a></h3>
+</div>
+</div>
+<div class="section" id="id28">
+<h2>第五章 编译时命令<a class="headerlink" href="#id28" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id29">
+<h3>5.1 编译器使用命令<a class="headerlink" href="#id29" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="id30">
+<h3>5.2 预定义<a class="headerlink" href="#id30" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="id31">
+<h3>5.3 读取环境变量<a class="headerlink" href="#id31" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="id32">
+<h3>5.4 条件编译<a class="headerlink" href="#id32" title="永久链接至标题">¶</a></h3>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="Algorithm.html" class="btn btn-neutral float-right" title="Algorithm" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="manim.html" class="btn btn-neutral float-left" title="manim" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; 版权所有 2021, horizonshd.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

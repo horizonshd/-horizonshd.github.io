@@ -1,0 +1,378 @@
+========================================
+nullsoft scriptable install system 3.0.4
+========================================
+
+第二章 基础
+===========
+
+2.1 介绍
+---------
+
+2.2 脚本
+---------
+
+-   普通脚本文件的扩展名是 `.nsi`，头文件的扩展名是 `.nsh`；
+-   可使用 `!include` 在脚本文件中引入头文件，对于在 NSIS 安装目录下的头文件
+    可以直接通过文件名引用，如：`!include Sections.nsh`
+
+2.3 脚本文件的结构
+------------------
+
+一个 NSIS 脚本文件通常由 `Installer Attributes`, `Pages` 和 `Sections/Functions` 
+组成。另外也可以使用编译器命令来配置编译时的行为。例如，``OutFile`` 指令用于
+告诉 NSIS 将编译后的 Installer 文件放在什么地方。
+
+2.3.1 Installer Attributes
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+`Installer Attributes` 决定了 Installer 的行为和外观。比较基础常用的指令是
+``Name`` 和 ``InstallDir``。
+
+2.3.2 Pages
+~~~~~~~~~~~~
+
+一个 `non-silent installer` 包含一系列的向导页面让用户配置安装过程，可以使
+用 ``Page`` 或高级的 ``PageEx`` 命令来展示指定的页面。
+
+.. code-block:: nsis
+
+    Page license
+    Page components
+    Page directory
+    Page instfiles
+    UninstPage uninstConfirm
+    UninstPage instfiles
+
+2.3.3 Sections
+~~~~~~~~~~~~~~~
+
+在安装过程中的组件页面中的每一项关联一段代码，在脚本文件中称为 `Section` ，
+Section 的名字就是组件页面显示的名字，若组件被选中，则脚本中对应的代码将执行。
+
+卸载程序也可以有多个 `Sections`, 对用的 `Section` 以 `un.` 为前缀命名。
+
+.. code-block:: nsis
+
+    Section "Installer Section"
+    SectionEnd
+
+    Section "un.Uninstaller Section"
+    SectionEnd
+
+可以在 `Section` 中执行的指令和 `Installer Attributes` 指令非常不同，它们
+是在用户的笔记本中被执行。
+
+最基础的指令是 `SetOutPath` 用于告诉安装程序将文件提取到哪里以及从哪里提取文件。
+
+.. code-block:: nsis
+
+    Section "My Program"
+      SetOutPath $INSTDIR
+      File "My Program.exe"
+      File "Readme.txt"
+    SectionEnd
+
+2.3.4 Functions
+~~~~~~~~~~~~~~~~
+
+和 `Section` 一样，函数可以包含脚本代码。函数和 `Section` 的区别是它们被调
+用的方式。共有 `用户函数` 和 `回调函数` 两种函数。
+
+2.3.5 编写脚本的一些技巧
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+2.3.5.1 代码逻辑结构
+*********************
+
+代码中的条件分支语句和循环分支语句可以使用 `StrCmp` , `IntCmp` , `IfErrors` ，
+`Goto` 等指令来是实现。但是，`LogicalLib` 提供了一些非常简单的宏来完成这些
+复杂的代码结构。这些宏的具体释义在 `LogicalLib.nsh` 头文件中。
+
+在不使用 `LogicalLib` 的情况下，检查一个变量的代码如下：
+
+    .. code-block:: nsis
+
+        StrCmp $0 'some value' 0 +3
+          MessageBox MB_OK '$$0 is some value'
+          Goto done
+        StrCmp $0 'some other value' 0 +3
+          MessageBox MB_OK '$$0 is some other value'
+          Goto done
+        # else
+          MessageBox MB_OK '$$0 is "$0"'
+        done:
+
+使用 `LogicalLib` 后的代码如下：
+
+    .. code-block:: nsis
+
+        ${If} $0 == 'some value'
+          MessageBox MB_OK '$$0 is some value'
+        ${ElseIf} $0 == 'some other value'
+          MessageBox MB_OK '$$0 is some other value'
+        ${Else}
+          MessageBox MB_OK '$$0 is "$0"'
+        ${EndIf}
+
+或者使用Switch宏：
+
+    .. code-block:: nsis
+
+        ${Switch} $0
+          ${Case} 'some value'
+            MessageBox MB_OK '$$0 is some value'
+            ${Break}
+          ${Case} 'some other value'
+            MessageBox MB_OK '$$0 is some other value'
+            ${Break}
+          ${Default}
+            MessageBox MB_OK '$$0 is "$0"'
+            ${Break}
+        ${EndSwitch}
+
+多个条件也支持，如：
+
+    .. code-block:: nsis
+        
+        ${If} $0 == ''
+        ${AndIf} $1 == ''
+          MessageBox MB_OK|MB_ICONSTOP 'both are empty!'
+        ${EndIf}
+
+另外也支持 `while` , `do` , `for` 等循环命令：
+
+    .. code-block:: nsis
+
+        StrCpy $R1 0
+        ${While} $R1 < 5
+          IntOp $R1 $R1 + 1
+          DetailPrint $R1
+        ${EndWhile}
+
+    .. code-block:: nsis
+
+        ${For} $R1 1 5
+          DetailPrint $R1
+        ${Next}
+
+    .. code-block:: nsis
+
+        StrCpy $R1 0
+        ${Do}
+          IntOp $R1 $R1 + 1
+          DetailPrint $R1
+        ${LoopUntil} $R1 >= 5
+
+使用 `LogicalLib` 需要在脚本上方添加 `!include LogicLib.nsh` 。
+
+2.3.5.2 变量
+**************
+
+使用 `Var <variableName>` 命令声明变量，通过 `$<variableName>` 访问变量，
+变量是全局的，并且可以在 `Sections` 和 `Function` 中使用。
+
+另外，提供一个栈结构可用于临时数据的存储，通过 `Push` 和 `Pop` 命令可以访问
+这个栈结构。提供了20个寄存器变量（像 `$0` 和 `$R0` ），这些静态变量不需要声
+明也不需要担心任何的命名冲突。
+
+.. code-block:: nsis
+
+    Function bla
+
+      Push $R0
+      Push $R1
+
+        ...code...
+
+      Pop $R1
+      Pop $R0
+
+    FunctionEnd
+
+2.3.5.3 调试
+**************
+
+可以使用 `MessageBoxes` 或者 `DetailPrint` 来显示变量的值，当然也可以选择
+使用 `DumpState` 插件来显示所有变量的简单展示。
+
+2.3.6 脚本执行
+~~~~~~~~~~~~~~~
+
+当用户运行安装程序或卸载程序时，页面按照它们在脚本中定义的顺序进行展示。当进
+行到 `instfilles` 页面时，关联到被勾选的组件的 `Sectiuon` 将会 **按照它们
+在脚本中定义的顺序依次被执行** 。如果 `Components` 页面没有被展示，则默认
+所有 `Component` 关联的 `Section` 对应的代码都将被执行。
+
+除了在 `Section` 中定义的代码外，回调函数中也可以编写代码。如果编写了相关的
+回调函数，它们可能在所有 `Section` 中的代码之前被执行，比如 `.onInit`回调
+函数。另外也有一组和页面相关的回调函数。
+
+2.3.7 编译器命令
+~~~~~~~~~~~~~~~~
+
+编译器命令在编译时得到执行。它们可以用于
+
+    -   条件编译
+    -   引入头文件
+    -   运行程序
+    -   改变当前的工作目录
+
+等等。
+
+2.3.7.1 define
+*****************
+
+最常用的命令是定义（ `defines` ），定义是编译时的常量，比如可以在脚本中通过
+`define` 定义产品的版本号:
+
+    .. code-block:: nsis
+
+        !define VERSION "1.0.3"
+        Name "My Program ${VERSION}"
+        OutFile "My Program Installer - ${VERSION}.exe"
+
+2.3.7.2 macro
+******************
+
+另一个比较常用的是宏（ `macros` ）。使用宏可以在编译的时候插入（展开？）代码。
+通过使用宏可以写出一份更通用的代码，并且只需做很小的调整就可以将其用于不同的
+地方：
+
+    .. code-block:: nsis
+    
+        !macro MyFunc UN
+        Function ${UN}MyFunc
+          Call ${UN}DoRegStuff
+          ReadRegStr $0 HKLM Software\MyProgram key
+          DetailPrint $0
+        FunctionEnd
+        !macroend
+
+        !insertmacro MyFunc ""
+        !insertmacro MyFunc "un."
+
+上面的例子避免了在安装和卸载程序中写大量重复的代码。两个 `!insertmacro` 插
+入了两个函数，一个是用于安装程序的 `MyFunc`，另一个是用于卸载程序的 `un.MyFunc` ，
+它们都实现类似的功能。
+
+2.4 Complier
+--------------
+
+编写好脚本文件后，就可以使用 `NSIS` 编译器 `MakeNSIS.exe` 编译脚本生成安装
+程序。 `MakeNSISW` 是 `MakeNSIS` 的 `GUI` 版本。
+
+`NSIS` 编译器会检查脚本并显示警告或错误。如果产生错误，编译过程将会中断并以
+带代码行号的文本显示错误。
+
+`NSIS` 支持不同的压缩方式：
+
+    -   `ZLIB` 是默认的压缩方法，快速且使用很少的内存；
+    -   `LZMA` 适用于需要通过网络分发更小的安装程序的场景；
+    -   `BZIP2` 的压缩效果通常比 `ZLIB` 好，但不及 `LZMA` ，但其占用内存更
+        少，编译更快。
+
+2.5 Mordern UI
+------------------
+
+2.6 Plugins
+------------
+
+`NSIS` 支持插件，可以在脚本中调用插件。插件是通过 `C` 、`C++` 、`Delphi` 
+或者其它编程语言编写的。一次插件的调用形如：
+
+    .. code-block:: nsis
+
+        DLLName::FunctionName "parameter number 1" "parameter number 2" "parameter number 3"
+
+不同的插件对参数有着各自的要求，比如：
+
+    .. code-block:: nsis
+
+        nsExec::ExecToLog '"${NSISDIR}\makensis.exe" /CMDHELP'
+        Pop $0 ; Process exit code or "error"
+        InstallOptions::dialog "$PLUGINSDIR\test.ini"
+        Pop $0 ; success/back/cancel/error
+        NSISdl::download http://download.nullsoft.com/winamp/client/winamp291_lite.exe $R0
+        Pop $0 ; "success" or a error code
+
+`NSIS` 发现的插件在编译器输出的顶部列出（详细级别4）。 `NSIS` 在 `NSIS` 目
+录下的 `Plugins` 文件夹中搜索插件，并列出其所有可用函数。也可以使用 `！addplugindir` 
+告诉 `NSIS` 在其他目录中搜索。
+
+`NSIS` 发行版已经包含许多插件。 `InstallOptions` 是一个流行的插件，可让您
+结合 `NSIS` 的 `Page` 命令（请参阅 :ref:`src/NSIS:4.5 页面` ）来创建自定义页面。 `Startmenu` 
+插件提供了一个页面，允许用户选择 `Start Menu` 文件夹。 有许多用于不同目的的
+插件，请在 `Docs` 文件夹中查看帮助文件和示例。 您可以 `在线 <http://nsis.sf.net/>`_ 找到其他插件。
+
+您也可以自己创建一个插件。 `C` / `C ++` 和 `Delphi` 头文件已经可用，有关如
+何执行此操作，请参见示例插件。随附插件的源代码也可以在源代码包中找到。
+
+2.7 More
+---------
+
+
+第三章 命令行的使用
+===================
+
+
+3.1 MakeNSIS Usage
+-------------------
+
+3.2 Installer Usage
+---------------------
+
+
+
+第四章 脚本参考
+===============
+
+4.1 脚本文件格式
+-----------------
+
+4.2 变量
+---------
+
+4.3 标签
+---------
+
+4.4 相对跳转
+------------
+
+4.5 页面
+--------
+
+4.6 Sections
+-------------
+
+4.7 函数
+---------
+
+4.8 安装程序特性
+----------------
+
+4.9 指令
+---------
+
+4.10 多语言
+-----------
+
+4.11 插件
+------------
+
+4.12 静默安装或卸载
+--------------------
+
+第五章 编译时命令
+=================
+
+5.1 编译器使用命令
+------------------
+
+5.2 预定义
+-----------
+
+5.3 读取环境变量
+-----------------
+
+5.4 条件编译
+-------------

@@ -1,0 +1,719 @@
+===================================================================================================================================
+`MEF in .NET Framework <https://docs.microsoft.com/en-us/dotnet/framework/mef/attributed-programming-model-overview-mef>`_
+===================================================================================================================================
+
+导入导出基础
+=============
+
+``Import`` 特性可以修饰 `字段`、`属性` 或者 `构造函数的参数` ；
+``Export`` 特性可以修饰 `类`、`字段`、`属性` 或者 `方法` 。
+
+MEF 中使用的契约包括 `ContractName` 和 `ContractType`，只有当 `Import` 
+和 `Export` 的这两个契约条件都满足时，MEF 引擎才会进行正确的匹配。这两个契约
+条件在代码中都可以是显示或者隐式的，如以下代码：
+
+    .. code-block:: csharp
+        :linenos:
+        
+        public class MyClass
+        {
+            [Import]
+            public IMyAddin MyAddin { get; set; }
+        }
+
+在这个 `Import` 中， 这个 `Import` 特性既没有附加 `ContractType` ，也没有
+附加 `ContractName` 参数。因此，这两者都将从被修饰的属性中推断出来。在本例
+中，`ContractType` 将是 `IMyAddin`，`ContractName` 将是由 `ContractType` 
+创建的唯一字符串。(换句话说，这个 `ContractName` 将只匹配那个 `ContractName` 
+也是从 `IMyAddin` 类型推断出来的 `Export`。)
+
+下面的这个 `Export` 将会匹配上前面的 `Export`:
+
+    .. code-block:: csharp
+        :linenos:
+        
+        [Export(typeof(IMyAddin))]
+        public class MyLogger : IMyAddin { }
+    
+在这个 `Export` 中，`ContractType` 是 `IMyAddin`，因为它被指定为 `Export` 
+特性的一个参数。被导出的类型必须与 `ContractType` 相同，从 `ContractType` 
+派生，或者如果 `ContractType` 是接口，则实现 `ContractType` 。在这个 `Export` 
+中，实际类型 `MyLogger` 实现了接口 `IMyAddin` 。 `ContractName` 是由 `ContractType` 
+推导出来的，这意味着这个 `Export` 将与之前的 `Import` 相匹配。
+
+.. note::
+
+    `Export` 和 `Import` 通常应在 `public` 类或成员上声明。 其他声明也是支
+    持的，但是导出或导入 `private` 成员，`protected` 成员或 `internal` 成
+    员会破坏部件的隔离模型，因此不建议这样做。 
+
+`ContractType` 必须完全匹配 `Import` 和 `Export` 才算匹配，考虑以下的导出：
+
+    .. code-block:: csharp
+        :linenos:
+        
+        [Export] //WILL NOT match the previous import!
+        public class MyLogger : IMyAddin { }
+
+在此导出中，`ContractType` 为 `MyLogger` 而不是 `IMyAddin`。 即使 `MyLogger` 
+实现了 `IMyAddin`，因此可以将其强制转换为 `IMyAddin` 对象，但由于 `ContractType` 
+不同，此导出将与以前的导入不匹配。
+
+通常，没有必要指定 `ContractName` ，并且大多数契约应根据 `ContractType` 
+和 `metadata` 进行定义。但是，在某些情况下，直接指定 `ContractName` 很重要。
+最常见的情况是，当一个类导出几个拥有同一类型的值（例如基元）时。 `ContractName` 
+可以指定为 `Import` 或 `Export` 特性的第一个参数。以下代码展示具有指定的 `ContractName` 
+为 `MajorRevision` 的导入和导出:
+ 
+    .. code-block:: csharp
+        :linenos:
+
+        public class MyClass
+        {
+            [Import("MajorRevision")]
+            public int MajorRevision { get; set; }
+        }
+
+        public class MyExportClass
+        {
+            [Export("MajorRevision")] //This one will match.
+            public int MajorRevision = 4;
+
+            [Export("MinorRevision")]
+            public int MinorRevision = 16;
+        }
+
+如果没有指定 `ContractType` ，仍将根据 `Export` 和 `Import` 的类型推断。
+但是，即使明确指定了 `ContractName` ，`ContractType` 也必须完全匹配，`Export` 
+和 `Import` 才算匹配。例如，如果 `MajorRevision` 字段是一个字符串，则推断
+出的 `ContractType` 将不匹配，尽管 `ContractName` 相同，但 `Export` 的契
+约与 `Import` 的契约将不匹配。
+
+导入导出一个方法
+================
+
+方法导出必须为其指定 `ContractType` 或 `ContractName`，因为无法推断出该类
+型。指定的类型可以是自定义委托，也可以是泛型，例如 `Func` 。下列类导出名为 `DoSomething` 的方法:
+
+    .. code-block:: csharp
+        :linenos:
+
+        public class MyAddin
+        {
+            //Explicitly specifying a generic type.
+            [Export(typeof(Func<int, string>))]
+            public string DoSomething(int TheParam);
+        }
+
+在这个类中， `DoSomething` 方法采用一个 `int` 参数并返回一个字符串。为了匹
+配此导出，导入部分必须声明适当的成员。下面这个类导入 `DoSomething` 方法：
+
+    .. code-block:: csharp
+        :linenos:
+
+        public class MyClass
+        {
+            [Import] //Contract name must match!
+            public Func<int, string> DoSomething { get; set; }
+        }
+
+
+导入的类型
+============
+
+MEF 支持多种类型的导入，包括 `动态(dynamic)` ， `延迟(lazy)` ， `前提性(prerequisite)` 和 `可选(optional)` 。
+
+动态导入
+----------
+
+在某些情况下，导入类可能希望匹配具有特定 `ContracrName` 的任何类型的 `Export` 。
+在这种情况下，该类可以声明动态导入。 以下导入与 `ContractName` 为 `TheString` 
+的所有导出匹配：
+
+    .. code-block:: csharp
+        :linenos:
+        :emphasize-lines: 4
+
+        public class MyClass
+        {
+            [Import("TheString")]
+            public dynamic MyAddin { get; set; }
+        }
+
+当 `ContractType` 是从 `dynamic` 关键字推断出时，它将与任何 `ContractType` 
+匹配。在这种情况下，导入应始终指定要匹配的 `ContractName` 。（如果未指定契约
+名称，则该导入将被视为不匹配任何导出。）以下两个导出都将与先前的导入匹配：
+
+    .. code-block:: csharp
+        :linenos:
+
+        [Export("TheString", typeof(IMyAddin))]
+        public class MyLogger : IMyAddin { }
+
+        [Export("TheString")]
+        public class MyToolbar { }
+
+显然，导入类必须做好准备以处理任意类型的对象。
+
+延迟导入
+----------
+
+在某些情况下，导入类可能需要对导入对象的间接引用，以使该对象不会立即实例化。
+在这种情况下，该类可以通过使用 `Lazy <T>` 的 `ContractType` 来声明延迟导入。
+以下导入属性声明了一个延迟导入：
+
+    .. code-block:: csharp
+        :linenos:
+        :emphasize-lines: 4
+        
+        public class MyClass
+        {
+            [Import]
+            public Lazy<IMyAddin> MyAddin { get; set; }
+        }
+
+从 MEF 组合引擎的角度来看，`Lazy<T>` 的 `ContractType` 被认为与 `T` 的 `ContractType` 
+相同，因此前面的导入将与下面的导出相匹配:
+
+    .. code-block:: csharp
+        :linenos:
+
+        [Export(typeof(IMyAddin))]
+        public class MyLogger : IMyAddin { }
+
+`ContractType` 和 `ContractName` 可以在延迟导入的导入特性中指定，如前面 :ref:`src/MEF:导入导出基础` 部分所述。
+
+前提性导入
+-------------
+
+导出的 MEF 部件（ Part ） 通常由合成引擎创建，以响应直接请求或需要填充匹配的
+导入。默认情况下，在创建零件时，合成引擎会使用无参数的构造函数。如果要让引擎
+使用不同的构造函数，可以用 `ImportingConstructor` 特性进行标记。
+
+每个部件只能有一个构造函数供合成引擎使用。没有提供无参数的构造函数、没有 `ImportingConstructor` 
+特性，或者提供多个 `ImportingConstructor` 特性，都会产生错误。
+
+要填充一个标有 `ImportingConstructor` 特性的构造函数的参数，这些参数都会自
+动声明为 `import` 。这是一种方便的方式，可以声明在部件初始化过程中使用的导入。
+下面的类使用 `ImportingConstructor` 来声明导入:
+
+    .. code-block:: csharp
+        :linenos:
+        :emphasize-lines: 13
+        
+        public class MyClass
+        {
+            private IMyAddin _theAddin;
+
+            //Parameterless constructor will NOT be
+            //used because the ImportingConstructor
+            //attribute is present.
+            public MyClass() { }
+
+            //This constructor will be used.
+            //An import with contract type IMyAddin is
+            //declared automatically.
+            [ImportingConstructor]
+            public MyClass(IMyAddin MyAddin)
+            {
+                _theAddin = MyAddin;
+            }
+        }
+
+默认情况下， `ImportingConstructor` 特性对所有的参数导入都使用推断的 `ContractType` 
+和 `ContractName`。可以通过使用 `Import` 特性修饰参数来覆盖这一点，这样就可
+以显式地定义 `ContractType` 和 `ContractName` 。下面的代码演示了一个使用这
+种语法来导入派生类而不是父类的构造函数:
+
+    .. code-block:: csharp
+        :linenos:
+        :emphasize-lines: 2
+
+        [ImportingConstructor]
+        public MyClass([Import(typeof(IMySubAddin))]IMyAddin MyAddin)
+        {
+            _theAddin = MyAddin;
+        }
+
+特别是，您应谨慎使用集合参数。例如，如果您在参数类型为 `IEnumerable <int>` 
+的构造函数上指定 `ImportingConstructor` ，则该导入将匹配 `IEnumerable <int>` 
+类型的单个导出，而不是一组 `int` 类型的导出。要匹配一组类型为 `int` 的导出，
+您必须使用 `ImportMany` 特性修饰该参数。 
+
+由 `ImportingConstructor` 特性声明为导入的参数也标记为 **前提性导入**。MEF 
+通常允许导入导出形成一个循环。例如，循环是对象A导入对象B，而对象B又导入了对象A。
+在通常情况下，循环不是问题，合成容器通常构造两个对象。 
+
+如果部件的构造函数需要导入的值，则该对象无法参与循环。如果对象A要求在构造对象
+B之前先构造对象B，并且对象B导入对象A，则该循环将无法解析，并且将发生合成错误。
+因此，在构造函数参数上声明的导入是 **前提性导入**，必须先填充所有这些内容，
+然后才能使用需要它们的对象的任何导出。 
+
+可选导入
+----------
+
+导入特性指定了部件发挥作用的要求。如果不能满足导入要求，则该部件的组成将失败，
+该部件将不可用。您可以通过使用 `AllowDefault` 特性指定导入是可选的。在这种情
+况下，即使导入不匹配任何可用的导出，合成也会成功，并且导入的属性将被设置为其
+属性类型的默认值（对象属性为 `null` ，布尔函数为 `false` ，数字属性为 `0` ）。
+下面的类使用了一个可选的导入:
+
+    .. code-block:: csharp
+        :linenos:
+        :emphasize-lines: 3
+        
+        public class MyClass
+        {
+            [Import(AllowDefault = true)]
+            public Plugin thePlugin { get; set; }
+
+            //If no matching export is available,
+            //thePlugin will be set to null.
+        }
+
+多对象导入
+------------
+
+只有当导入特性与一个且仅与一个导出匹配时，才会成功合成。其他情况将产生合成错
+误。要导入多个与同一合同匹配的导出，请使用 `ImportMany` 特性。用此特性标记的
+导入总是可选的（可选导入）。例如，如果没有匹配的出口，合成不会失败。下面的类
+可以导入任意数量的 `IMyAddin` 类型的导出：
+
+    .. code-block:: csharp
+        :linenos:
+        :emphasize-lines: 3
+
+        public class MyClass
+        {
+            [ImportMany]
+            public IEnumerable<IMyAddin> MyAddin { get; set; }
+        }
+
+可以使用普通的 `IEnumerable <T>` 语法和方法访问导入的数组。也可以改用普通数
+组（ `IMyAddin []` ）。与 `Lazy <T>` 语法结合使用时，此模式可能非常重要。
+例如，通过使用 `ImportMany` ， `IEnumerable <T>` 和 `Lazy <T>` ，您可以
+导入对任意数量对象的间接引用，而仅实例化那些必需的对象。下面的类显示了这种模式:
+
+    .. code-block:: csharp
+        :linenos:
+        :emphasize-lines: 4
+
+        public class MyClass
+        {
+            [ImportMany]
+            public IEnumerable<Lazy<IMyAddin>> MyAddin { get; set; }
+        }
+
+避免被发现
+============
+
+在某些情况下，您可能希望防止部件作为目录的一部分被发现。例如，该部件可能是准
+备作为从其派生出子类的基类。有两种方法可以完成此操作:
+
+    1.  可以在部件类上使用 `abstract` 关键字。尽管抽象类可以将继承的导出提供
+        给从其派生的类，但它们从不提供导出。 
+
+    2.  如果无法使该类抽象，则可以使用 `PartNotDiscoverable` 特性对其进行
+        修饰。被改特性修饰的部件不会包含在任何目录中。下面的示例演示了这些模式。
+        目录将发现 `DataOne` 。 由于 `DataTwo` 是抽象的，因此不会被发现。
+        由于 `DataThree` 使用 `PartNotDiscoverable` 特性，因此不会被发现。
+
+            .. code-block:: csharp
+                :linenos:
+                :emphasize-lines: 9,15
+
+        
+                [Export]
+                public class DataOne
+                {
+                    //This part will be discovered
+                    //as normal by the catalog.
+                }
+
+                [Export]
+                public abstract class DataTwo
+                {
+                    //This part will not be discovered
+                    //by the catalog.
+                }
+
+                [PartNotDiscoverable]
+                [Export]
+                public class DataThree
+                {
+                    //This part will also not be discovered
+                    //by the catalog.
+                }
+
+
+元数据和元数据视图
+===================
+
+导出可以提供有关自身的其他信息，称为 **元数据** 。元数据可用于将导出对象的属
+性传达到导入部件。导入部件可以使用此数据来决定使用哪个导出，或者收集有关导出
+的信息，而无需构造它。出于这个原因，导入必须使用延迟导入才能使用元数据。 
+
+要使用元数据，通常需要声明一个称为 **元数据视图** 的接口，该接口声明将提供哪
+些元数据。元数据视图界面必须 **仅具有属性** ，并且这些属性 **必须具有get访问器** 。
+以下接口是一个元数据视图的示例：
+
+    .. code-block:: csharp
+        :linenos:
+                
+        public interface IPluginMetadata
+        {
+            string Name { get; }
+
+            [DefaultValue(1)]
+            int Version { get; }
+        }
+
+也可以将通用集合 `IDictionary <string，object>` 用作元数据视图，但这没有类
+型检查的好处，应避免使用。 
+
+通常，在元数据视图中命名的所有属性 **都是必需的** ，任何不提供这些属性的导出
+都不会被视为匹配项。 `DefaultValue` 特性指定属性是可选的。如果不包括该属性，
+则将为其分配默认值，该默认值将被指定为 `DefaultValue` 的参数。以下是用元数
+据修饰的两个不同的类。这两个类都将与先前的元数据视图匹配：
+
+    .. code-block:: csharp
+        :linenos:
+        :emphasize-lines: 2,3
+
+        [Export(typeof(IPlugin)),
+            ExportMetadata("Name", "Logger"),
+            ExportMetadata("Version", 4)]
+        public class Logger : IPlugin
+        {
+        }
+
+        [Export(typeof(IPlugin)),
+            ExportMetadata("Name", "Disk Writer")]
+            //Version is not required because of the DefaultValue
+        public class DWriter : IPlugin
+        {
+        }
+
+元数据通过使用 `ExportMetadata` 属性在 `Export` 特性之后表达。每条元数据都
+由名称/值对组成。元数据的名称部分必须与元数据视图中相应属性的名称相匹配，而值
+将被分配给该属性。
+
+如果有的话，是由导入者指定将使用什么元数据视图。带元数据的导入是以延迟导入的
+方式声明的，元数据接口是 `Lazy<T,T>` 的第二个类型参数。下面的类导入了前面带
+元数据的部分:
+
+    .. code-block:: csharp
+        :linenos:
+        :emphasize-lines: 4
+        
+        public class Addin
+        {
+            [Import]
+            public Lazy<IPlugin, IPluginMetadata> plugin;
+        }
+
+在许多情况下，您将希望将元数据与 `ImportMany` 特性结合在一起，以便解析可用的
+导入并仅选择和实例化一个导入，或过滤一个集合以匹配特定条件。下列类仅实例化具有
+`Name` 值 `Logger` 的 `IPlugin` 对象:
+
+    .. code-block:: csharp
+        :linenos:
+        :emphasize-lines: 3,4
+
+        public class User
+        {
+            [ImportMany]
+            public IEnumerable<Lazy<IPlugin, IPluginMetadata>> plugins;
+
+            public IPlugin InstantiateLogger()
+            {
+                IPlugin logger = null;
+
+                foreach (Lazy<IPlugin, IPluginMetadata> plugin in plugins)
+                {
+                    if (plugin.Metadata.Name == "Logger")
+                        logger = plugin.Value;
+                }
+                return logger;
+            }
+        }
+
+导入和导出的继承
+==================
+
+如果一个类从一个部件继承，那么这个类也可以成为一个部件。导入总是被子类继承。
+因此，一个部件的子类将始终是一个部件，与它的父类具有相同的导入。
+
+通过使用 `Export` 特性声明的 `Export` 不被子类继承。然而，一个部件可以通过
+使用 `InheritedExport` 特性来导出自己。部件的子类将继承并提供相同的导出，包
+括 `ContractName` 和 `ContractType` 。与 `Export` 特性不同，`InheritedExport` 
+只能在 **类级** 应用，而不能在 **成员级** 应用。因此， **成员级的导出永远不能被继承** 。
+
+下面四个类演示了导入和导出继承的原理。 `NumTwo` 继承自 `NumOne` ，所以 `NumTwo` 
+会导入 `IMyData` 。普通的导出是不能继承的，所以 `NumTwo` 不会导出任何东西。
+`NumFour` 继承自 `NumThree` 。因为 `NumThree` 使用了 `InheritedExport`，
+所以 `NumFour` 有一个 `ContractType` 为 `NumThree` 的导出。成员级的导出永
+远不会被继承，所以 `IMyData` 不会被导出:
+
+    .. code-block:: csharp
+        :linenos:
+        :emphasize-lines: 15
+
+        [Export]
+        public class NumOne
+        {
+            [Import]
+            public IMyData MyData { get; set; }
+        }
+
+        public class NumTwo : NumOne
+        {
+            //Imports are always inherited, so NumTwo will
+            //import IMyData.
+
+            //Ordinary exports are not inherited, so
+            //NumTwo will NOT export anything. As a result it
+            //will not be discovered by the catalog!
+        }
+
+        [InheritedExport]
+        public class NumThree
+        {
+            [Export]
+            Public IMyData MyData { get; set; }
+
+            //This part provides two exports, one of
+            //contract type NumThree, and one of
+            //contract type IMyData.
+        }
+
+        public class NumFour : NumThree
+        {
+            //Because NumThree used InheritedExport,
+            //this part has one export with contract
+            //type NumThree.
+
+            //Member-level exports are never inherited,
+            //so IMyData is not exported.
+        }
+
+如果有与 `InheritedExport` 特性相关联的元数据，该元数据也将被继承。(更多信息，
+请参阅前面的 :ref:`src/MEF:元数据和元数据视图` 一节)。继承的元数据不能被子类
+修改。然而，通过用相同的 `ContractName` 和 `ContractType` ，但用新的元数据
+重新声明 `InheritedExport` 特性，子类可以用新的元数据替换继承的元数据。下面
+的类演示了这个原理。 `MegaLogger` 部件继承自 `Logger` ，并包含 `InheritedExport` 
+属性。由于 `MegaLogger` 重新声明了名为 `Status` 的新元数据，所以它没有继承 
+`Logger` 的 `Name` 和 `Version` 元数据：
+
+    .. code-block:: csharp
+        :linenos:
+        :emphasize-lines: 1,2,3,17,18,19
+
+        [InheritedExport(typeof(IPlugin)),
+            ExportMetadata("Name", "Logger"),
+            ExportMetadata("Version", 4)]
+        public class Logger : IPlugin
+        {
+            //Exports with contract type IPlugin and
+            //metadata "Name" and "Version".
+        }
+
+        public class SuperLogger : Logger
+        {
+            //Exports with contract type IPlugin and
+            //metadata "Name" and "Version", exactly the same
+            //as the Logger class.
+        }
+
+        [InheritedExport(typeof(IPlugin)),
+            ExportMetadata("Status", "Green")]
+        public class MegaLogger : Logger        {
+            //Exports with contract type IPlugin and
+            //metadata "Status" only. Re-declaring
+            //the attribute replaces all metadata.
+        }
+
+重新声明 `InheritedExport` 特性以覆盖元数据时，请确保 `ContractType` 相同。
+（在前面的示例中，是 `IPlugin` 类型）如果它们不同，则不是覆盖，第二个属性将
+从部件创建第二个独立的导出。通常，这意味着您必须在重写 `InheritedExport` 特
+性时显式指定合同类型，如上例所示。 
+
+由于不能直接实例化接口，因此通常不能用 `Export` 或 `Import` 特性修饰它们。
+但是，可以在接口级别用 `InheritedExport` 特性修饰接口，并且任何实现类都将
+继承导出以及任何关联的元数据。 但是，接口本身将不能作为一个部件使用。
+
+自定义导出特性
+===============
+
+基本的导出属性 `Export` 和 `InheritedExport` 可以扩展为包括元数据作为属性。
+对于将相似的元数据应用于许多部件，或创建元数据属性的继承树，此技术很有用。定
+制属性可以指定 `ContractType` ， `ContractName` 或任何其他元数据。为了定义
+自定义属性，必须使用 `MetadataAttribute` 特性修饰从 `ExportAttribute` 
+（或 `InheritedExportAttribute` ）继承的类。下列类定义了一个自定义特性：
+
+    .. code-block:: csharp
+        :linenos:
+        :emphasize-lines: 1,3
+
+        [MetadataAttribute]
+        [AttributeUsage(AttributeTargets.Class, AllowMultiple=false)]
+        public class MyAttribute : ExportAttribute
+        {
+            public MyAttribute(string myMetadata)
+                : base(typeof(IMyAddin))
+            {
+                MyMetadata = myMetadata;
+            }
+
+            public string MyMetadata { get; private set; }
+        }
+
+此类定义了一个名为 `MyAttribute` 的自定义特性，其 `ContractType` 为 `IMyAddin` 
+以及一些名为 `MyMetadata` 的元数据。 **标记为 `MetadataAttribute` 特性的类中的所有属性均视为在自定义属性中定义的元数据** 。
+以下两个声明是等效的：
+
+    .. code-block:: csharp
+        :linenos:
+        :emphasize-lines: 1,2
+        
+        [Export(typeof(IMyAddin)),
+            ExportMetadata("MyMetadata", "theData")]
+        public MyAddin myAddin { get; set; }
+
+    .. code-block:: csharp
+        :linenos:
+        :emphasize-lines: 1
+        
+        [MyAttribute("theData")]
+        public MyAddin myAddin { get; set; }
+
+在第一个声明中， `ContractType` 和元数据是明确定义的。在第二种声明中， `ContractType` 
+和元数据隐含在自定义特性中。特别是在大量相同的元数据必须应用于许多部件的情况下
+（例如，作者或版权信息），使用自定义特性可以节省大量的时间和重复。此外，可以
+创建自定义特性的继承树，以允许变化。
+
+要在自定义特性中创建可选的元数据，可以使用 `DefaultValue` 特性。当此特性应用
+于自定义特性类中的一个属性时，它指定修饰的属性是可选的，不必由导出器提供。
+如果没有提供该属性的值，它将被分配其属性类型的默认值（通常是 `null` 、 `false` 或 `0` ）。
+
+创建策略（Creation Policies）
+==============================
+
+当一个部件指定一个导入并进行合成时，合成容器会试图找到一个匹配的导出。如果它
+成功地匹配了导入与导出，则导入成员被设置为导出对象的实例。这个实例的来源由导
+出部件的创建策略控制。
+
+两种可能的创建策略是 ``共享（Shared）`` 和  ``非共享（non-shared）`` 。创建
+策略为共享的部件将在容器中具有该合同的部件的每个导入之间共享。当合成引擎发现
+一个匹配并必须设置导入属性时，只有当一个零件的新副本还不存在时，它才会实例化
+一个新的副本；否则，它将提供现有的副本。这意味着许多对象可能有对同一部件的引
+用。这样的部件不应该依赖可能从许多地方改变的内部状态。这种策略适用于静态部件、
+提供服务的部件以及消耗大量内存或其他资源的部件。
+
+具有非共享创建策略的部件将在每次为其一个导出找到匹配的导入时创建。因此，容器
+中每找到一个与其导出契约之一相匹配的导入，就会实例化一个新副本。这些副本的内
+部状态将不会被共享。这个策略适用于每个导入都需要自己的内部状态的部件。
+
+导入和导出都可以从 ``共享（Shared）`` 、 ``非共享（NonShared）`` 或 ``任何值（Any）`` 
+中指定部件的创建策略。导入和导出的默认值都是 ``Any`` 。指定 ``Shared`` 或 ``NonShared`` 
+的导出将只匹配指定相同值或指定 ``Any`` 的导入。同样，指定为 ``Shared`` 或 ``NonShared`` 
+的导入将只匹配指定为相同的导出，或指定为 ``Any`` 的导入。创建策略不兼容的导
+入和导出不被视为匹配，就像 `ContractName` 或 `ContractType` 不匹配的导入和
+导出一样。如果导入和导出都指定了 ``Any``，或者没有指定创建策略而默认为 ``Any`` ，
+则创建策略将默认为 ``Shared`` 。
+
+    .. code-block:: csharp
+        :linenos:
+        :emphasize-lines: 18,27,46,57
+        
+        [Export]
+        public class PartOne
+        {
+            //The default creation policy for an export is Any.
+        }
+
+        public class PartTwo
+        {
+            [Import]
+            public PartOne partOne { get; set; }
+
+            //The default creation policy for an import is Any.
+            //If both policies are Any, the part will be shared.
+        }
+
+        public class PartThree
+        {
+            [Import(RequiredCreationPolicy = CreationPolicy.Shared)]
+            public PartOne partOne { get; set; }
+
+            //The Shared creation policy is explicitly specified.
+            //PartTwo and PartThree will receive references to the
+            //SAME copy of PartOne.
+        }
+
+        [Export]
+        [PartCreationPolicy(CreationPolicy.NonShared)]
+        public class PartFour
+        {
+            //The NonShared creation policy is explicitly specified.
+        }
+
+        public class PartFive
+        {
+            [Import]
+            public PartFour partFour { get; set; }
+
+            //The default creation policy for an import is Any.
+            //Since the export's creation policy was explicitly
+            //defined, the creation policy for this property will
+            //be non-shared.
+        }
+
+        public class PartSix
+        {
+            [Import(RequiredCreationPolicy = CreationPolicy.NonShared)]
+            public PartFour partFour { get; set; }
+
+            //Both import and export specify matching creation
+            //policies.  PartFive and PartSix will each receive
+            //SEPARATE copies of PartFour, each with its own
+            //internal state.
+        }
+
+        public class PartSeven
+        {
+            [Import(RequiredCreationPolicy = CreationPolicy.Shared)]
+            public PartFour partFour { get; set; }
+
+            //A creation policy mismatch.  Because there is no
+            //exported PartFour with a creation policy of Shared,
+            //this import does not match anything and will not be
+            //filled.
+        }
+
+生命周期和销毁
+================
+
+由于部件托管在组成容器中，它们的生命周期可能比普通对象更复杂。零件可以实现两
+个重要的生命周期相关接口。 `IDisposable` 和 `IPartImportsSatisfiedNotification` 。
+
+需要在关闭时执行工作或需要释放资源的部件应该实现 `IDisposable` ，就像通常的
+.NET 框架对象一样。但是，由于容器创建并维护对部件的引用，因此只有拥有部件的
+容器才应该对其调用 `Dispose` 方法。容器本身实现了 `IDisposable` ，作为它在
+`Dispose` 中清理的一部分，它将对它拥有的所有部件调用 `Dispose` 。出于这个原
+因，当组成容器和它所拥有的任何部件不再需要时，你应该总是对它调用 `Dispose` 。
+
+对于寿命较长的组成容器，创建策略为非共享的部件的内存消耗会成为一个问题。这些
+非共享部件可以被多次创建，并且在容器本身被 `Dispose` 之前不会被 `Dispose` 。
+为了处理这个问题，容器提供了 `ReleaseExport` 方法。在一个非共享的导出上调用
+这个方法，就会将该导出从组成容器中删除，并将其 `Dispose` 。仅由被移除的导出
+使用的部件，以及以此类推的树，也被移除和 `Dispose`。通过这种方式，可以在不 `Dispose` 
+组成容器本身的情况下回收资源。
+
+`IPartImportsSatisfiedNotification` 包含一个名为 `OnImportsSatisfied` 的
+方法。当合成已经完成，并且部件的导入已经准备好使用时，合成容器就会对任何实现
+该接口的部件调用这个方法。部件是由组成引擎创建的，用来填充其他部件的导入。
+在部件的导入被 `Dispose` 之前，您不能执行任何依赖于或操作部件构造函数中的导
+入值的初始化，除非这些值已经通过使用 `ImportingConstructor` 属性被指定为 *前提性导入* 。
+这通常是首选方法，但在某些情况下，构造函数注入可能不可用。在这些情况下，可以在
+`OnImportsSatisfied` 中进行初始化，并且部件应该实现 `IPartImportsSatisfiedNotification` 。

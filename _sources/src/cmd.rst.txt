@@ -1,0 +1,50 @@
+===
+cmd
+===
+
+
+
+1. set [变量名] # 查看环境变量的值，无参数时查看所有环境变量的值
+2. set <变量名>=[新值] # 修改环境变量的值，新值可以留空；追加内容 set <变量名>=%变量名%;变量内容
+3. 
+
+.. warning::
+    所有的在 cmd 命令行下对环境变量的修改只对当前窗口有效，不是永久性的修改。也
+    就是说当关闭此 cmd 命令行窗口后，将不再起作用。
+
+变量
+====
+
+- **%AllUsersProfile%**：
+- **%AppData%**：
+- **%Cd%**：
+- **%CmdCmdLine%**：
+- **%CmdExtVersion%**：
+- **%CommonProgramFiles%**：
+- **%ComputerName%**：
+- **%ComSpec%**：
+- **%Date%**：
+- **%ErrorLevel%**：
+- **%HomeDrive%**：
+- **%HomePath%**：
+- **%HomeShare%**：
+- **%LogonSever%**：
+- **%Number_Of_Processors%**：
+- **%Os%**：
+- **%Path%**：
+- **%PathExt%**：
+- **%Processor_Architecture%**：
+- **%Processor_Identfier%**：
+- **%Processor_Level%**：
+- **%Processor_Revision%**：
+- **%ProgramFiles%**：
+- **%Prompt%**：
+- **%Random%**：
+- **%SystemDrive%**：
+- **%SystemRoot%**：
+- **%Temp%**：
+- **%Time%**：
+- **%UserDomain%**：
+- **%UserName%**：
+- **%UserProfile%**：
+- **%WinDir%**：

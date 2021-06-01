@@ -1,0 +1,77 @@
+======
+Python
+======
+
+基础技能
+========
+
+1. 设置环境变量（可同时安装 2.x 和 3.x 两个版本的 Python） ::
+
+        ...\Python27
+        ...\Python27\Scripts
+        ...\Python37
+        ...\Python37\Scripts
+
+2. 如何指定使用哪个版本的 Python ? ::
+
+        安装 Python3 (>=3.3) 时，会同时安装一个启动器 Py.exe，默认在 C:\\Windows\ 路径下。
+
+            该启动器允许我们指定使用 Python2 还是 Python3 来运行代码：
+
+                py -2 test.py
+                py -3 test.py
+
+            或者直接在源代码文件中指定要使用的 Python 版本：
+
+                #! python2
+                #! python3
+
+                运行代码：
+                py test.py
+
+3. 存在多个 Python 版本时，如何正确使用 pip ? ::
+
+        同样使用启动器 py.exe 来指定 Python 版本：
+
+            py -2 -m pip install <package_name>
+            py -3 -m pip install <package_name>
+
+            说明： -m pip 表示运行 pip 模块
+
+常用 pip 命令
+=============
+
+1.  python -m pip install --upgrade pip   # 更新 pip
+2.  pip install <packagename>
+3.  pip install -i <index_url> <package_name>    # 使用镜像安装，或如后面修改全局配置文件
+4.  pip install --upgrade <package_name>    # 更新指定的包
+5.  pip uninstall <packagename>
+6.  pip list
+7.  pip freeze     # 显示所有依赖
+8.  pip freeze > requirement.txt    # 生成 requirement.txt 文件
+9.  pip install -r requirement.txt  # 根据 requirement.txt 生成相同的环境
+10. 修改或创建配置文件（ linux 在 `~/.pip/pip.conf`，windows 在 `%HOMEPATH%\pip\pip.ini`） ::
+        
+        [global]
+        index-url = https://pypi.tuna.tsinghua.edu.cn/simple
+
+VirtualEnv 使用
+===============
+
+1. 安装 ::
+    
+        pip install virtualenv
+
+2. 创建虚拟环境 ::
+
+        virtualenv <work_folder_name>
+        virtualenv <work_folder_name> -p <PYTHON_EXE> # 指定在虚拟环境中使用的 python 解释器，如 `-p python3.5`
+
+3. 激活虚拟环境 ::
+
+        cd <work_folder_name>
+        Scripts\activate
+
+4. 关闭虚拟环境 ::
+
+        Scripts\deactivate

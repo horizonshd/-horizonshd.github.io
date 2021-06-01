@@ -1,0 +1,1166 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>MEF in .NET Framework &mdash; Cheatsheet 1.0.0 文档</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="Relative Concepts of EMail" href="EMail.html" />
+    <link rel="prev" title="Ubuntu" href="Ubuntu.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Cheatsheet
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="reStructuresText.html">reStructuresText</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sphinx.html">sphinx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Encoding.html">Charset and Encoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Graphviz.html">Graphviz - Graph Visualization Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="git.html">git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CMake.html">CMake</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C%2B%2B.html">C++</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DTD.html">DTD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="XSD.html">XSD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="WSDL.html">WSDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dotnet.html">dotnet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cmd.html">cmd</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SSH.html">SSH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Python.html">Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="WindowsTerminal.html">Windows Terminal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manim.html">manim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NSIS.html">nullsoft scriptable install system 3.0.4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Algorithm.html">Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Vocabulary.html">Vocabulary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ECFDeploy.html">ECF AutoDeploy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lua.html">Lua</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LaTeX.html">LaTeX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Ubuntu.html">Ubuntu</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">MEF in .NET Framework</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">导入导出基础</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">导入导出一个方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">导入的类型</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id5">动态导入</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">延迟导入</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">前提性导入</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">可选导入</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">多对象导入</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id10">避免被发现</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id11">元数据和元数据视图</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id12">导入和导出的继承</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id13">自定义导出特性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#creation-policies">创建策略（Creation Policies）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id14">生命周期和销毁</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="EMail.html">Relative Concepts of EMail</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Cheatsheet</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>MEF in .NET Framework</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/src/MEF.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1><a class="reference external" href="https://docs.microsoft.com/en-us/dotnet/framework/mef/attributed-programming-model-overview-mef">MEF in .NET Framework</a><a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<div class="section" id="id2">
+<h2>导入导出基础<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">Import</span></code> 特性可以修饰 <cite>字段</cite>、<cite>属性</cite> 或者 <cite>构造函数的参数</cite> ；
+<code class="docutils literal notranslate"><span class="pre">Export</span></code> 特性可以修饰 <cite>类</cite>、<cite>字段</cite>、<cite>属性</cite> 或者 <cite>方法</cite> 。</p>
+<p>MEF 中使用的契约包括 <cite>ContractName</cite> 和 <cite>ContractType</cite>，只有当 <cite>Import</cite>
+和 <cite>Export</cite> 的这两个契约条件都满足时，MEF 引擎才会进行正确的匹配。这两个契约
+条件在代码中都可以是显示或者隐式的，如以下代码：</p>
+<blockquote>
+<div><div class="highlight-csharp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">class</span> <span class="nc">MyClass</span>
+<span class="p">{</span>
+<span class="na">    [Import]</span>
+    <span class="k">public</span> <span class="n">IMyAddin</span> <span class="n">MyAddin</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>在这个 <cite>Import</cite> 中， 这个 <cite>Import</cite> 特性既没有附加 <cite>ContractType</cite> ，也没有
+附加 <cite>ContractName</cite> 参数。因此，这两者都将从被修饰的属性中推断出来。在本例
+中，<cite>ContractType</cite> 将是 <cite>IMyAddin</cite>，<cite>ContractName</cite> 将是由 <cite>ContractType</cite>
+创建的唯一字符串。(换句话说，这个 <cite>ContractName</cite> 将只匹配那个 <cite>ContractName</cite>
+也是从 <cite>IMyAddin</cite> 类型推断出来的 <cite>Export</cite>。)</p>
+<p>下面的这个 <cite>Export</cite> 将会匹配上前面的 <cite>Export</cite>:</p>
+<blockquote>
+<div><div class="highlight-csharp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="na">[Export(typeof(IMyAddin))]</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">MyLogger</span> <span class="p">:</span> <span class="n">IMyAddin</span> <span class="p">{</span> <span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>在这个 <cite>Export</cite> 中，<cite>ContractType</cite> 是 <cite>IMyAddin</cite>，因为它被指定为 <cite>Export</cite>
+特性的一个参数。被导出的类型必须与 <cite>ContractType</cite> 相同，从 <cite>ContractType</cite>
+派生，或者如果 <cite>ContractType</cite> 是接口，则实现 <cite>ContractType</cite> 。在这个 <cite>Export</cite>
+中，实际类型 <cite>MyLogger</cite> 实现了接口 <cite>IMyAddin</cite> 。 <cite>ContractName</cite> 是由 <cite>ContractType</cite>
+推导出来的，这意味着这个 <cite>Export</cite> 将与之前的 <cite>Import</cite> 相匹配。</p>
+<div class="admonition note">
+<p class="admonition-title">注解</p>
+<p><cite>Export</cite> 和 <cite>Import</cite> 通常应在 <cite>public</cite> 类或成员上声明。 其他声明也是支
+持的，但是导出或导入 <cite>private</cite> 成员，<cite>protected</cite> 成员或 <cite>internal</cite> 成
+员会破坏部件的隔离模型，因此不建议这样做。</p>
+</div>
+<p><cite>ContractType</cite> 必须完全匹配 <cite>Import</cite> 和 <cite>Export</cite> 才算匹配，考虑以下的导出：</p>
+<blockquote>
+<div><div class="highlight-csharp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="na">[Export]</span> <span class="c1">//WILL NOT match the previous import!</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">MyLogger</span> <span class="p">:</span> <span class="n">IMyAddin</span> <span class="p">{</span> <span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>在此导出中，<cite>ContractType</cite> 为 <cite>MyLogger</cite> 而不是 <cite>IMyAddin</cite>。 即使 <cite>MyLogger</cite>
+实现了 <cite>IMyAddin</cite>，因此可以将其强制转换为 <cite>IMyAddin</cite> 对象，但由于 <cite>ContractType</cite>
+不同，此导出将与以前的导入不匹配。</p>
+<p>通常，没有必要指定 <cite>ContractName</cite> ，并且大多数契约应根据 <cite>ContractType</cite>
+和 <cite>metadata</cite> 进行定义。但是，在某些情况下，直接指定 <cite>ContractName</cite> 很重要。
+最常见的情况是，当一个类导出几个拥有同一类型的值（例如基元）时。 <cite>ContractName</cite>
+可以指定为 <cite>Import</cite> 或 <cite>Export</cite> 特性的第一个参数。以下代码展示具有指定的 <cite>ContractName</cite>
+为 <cite>MajorRevision</cite> 的导入和导出:</p>
+<blockquote>
+<div><div class="highlight-csharp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">class</span> <span class="nc">MyClass</span>
+<span class="p">{</span>
+<span class="na">    [Import(&quot;MajorRevision&quot;)]</span>
+    <span class="k">public</span> <span class="kt">int</span> <span class="n">MajorRevision</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="k">class</span> <span class="nc">MyExportClass</span>
+<span class="p">{</span>
+<span class="na">    [Export(&quot;MajorRevision&quot;)]</span> <span class="c1">//This one will match.</span>
+    <span class="k">public</span> <span class="kt">int</span> <span class="n">MajorRevision</span> <span class="p">=</span> <span class="m">4</span><span class="p">;</span>
+
+<span class="na">    [Export(&quot;MinorRevision&quot;)]</span>
+    <span class="k">public</span> <span class="kt">int</span> <span class="n">MinorRevision</span> <span class="p">=</span> <span class="m">16</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>如果没有指定 <cite>ContractType</cite> ，仍将根据 <cite>Export</cite> 和 <cite>Import</cite> 的类型推断。
+但是，即使明确指定了 <cite>ContractName</cite> ，<cite>ContractType</cite> 也必须完全匹配，<cite>Export</cite>
+和 <cite>Import</cite> 才算匹配。例如，如果 <cite>MajorRevision</cite> 字段是一个字符串，则推断
+出的 <cite>ContractType</cite> 将不匹配，尽管 <cite>ContractName</cite> 相同，但 <cite>Export</cite> 的契
+约与 <cite>Import</cite> 的契约将不匹配。</p>
+</div>
+<div class="section" id="id3">
+<h2>导入导出一个方法<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<p>方法导出必须为其指定 <cite>ContractType</cite> 或 <cite>ContractName</cite>，因为无法推断出该类
+型。指定的类型可以是自定义委托，也可以是泛型，例如 <cite>Func</cite> 。下列类导出名为 <cite>DoSomething</cite> 的方法:</p>
+<blockquote>
+<div><div class="highlight-csharp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">class</span> <span class="nc">MyAddin</span>
+<span class="p">{</span>
+    <span class="c1">//Explicitly specifying a generic type.</span>
+<span class="na">    [Export(typeof(Func&lt;int, string&gt;))]</span>
+    <span class="k">public</span> <span class="kt">string</span> <span class="nf">DoSomething</span><span class="p">(</span><span class="kt">int</span> <span class="n">TheParam</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>在这个类中， <cite>DoSomething</cite> 方法采用一个 <cite>int</cite> 参数并返回一个字符串。为了匹
+配此导出，导入部分必须声明适当的成员。下面这个类导入 <cite>DoSomething</cite> 方法：</p>
+<blockquote>
+<div><div class="highlight-csharp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">class</span> <span class="nc">MyClass</span>
+<span class="p">{</span>
+<span class="na">    [Import]</span> <span class="c1">//Contract name must match!</span>
+    <span class="k">public</span> <span class="n">Func</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;</span> <span class="n">DoSomething</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+</div>
+<div class="section" id="id4">
+<h2>导入的类型<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<p>MEF 支持多种类型的导入，包括 <cite>动态(dynamic)</cite> ， <cite>延迟(lazy)</cite> ， <cite>前提性(prerequisite)</cite> 和 <cite>可选(optional)</cite> 。</p>
+<div class="section" id="id5">
+<h3>动态导入<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h3>
+<p>在某些情况下，导入类可能希望匹配具有特定 <cite>ContracrName</cite> 的任何类型的 <cite>Export</cite> 。
+在这种情况下，该类可以声明动态导入。 以下导入与 <cite>ContractName</cite> 为 <cite>TheString</cite>
+的所有导出匹配：</p>
+<blockquote>
+<div><div class="highlight-csharp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">class</span> <span class="nc">MyClass</span>
+<span class="p">{</span>
+<span class="na">    [Import(&quot;TheString&quot;)]</span>
+<span class="hll">    <span class="k">public</span> <span class="kt">dynamic</span> <span class="n">MyAddin</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span><span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>当 <cite>ContractType</cite> 是从 <cite>dynamic</cite> 关键字推断出时，它将与任何 <cite>ContractType</cite>
+匹配。在这种情况下，导入应始终指定要匹配的 <cite>ContractName</cite> 。（如果未指定契约
+名称，则该导入将被视为不匹配任何导出。）以下两个导出都将与先前的导入匹配：</p>
+<blockquote>
+<div><div class="highlight-csharp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="na">[Export(&quot;TheString&quot;, typeof(IMyAddin))]</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">MyLogger</span> <span class="p">:</span> <span class="n">IMyAddin</span> <span class="p">{</span> <span class="p">}</span>
+
+<span class="na">[Export(&quot;TheString&quot;)]</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">MyToolbar</span> <span class="p">{</span> <span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>显然，导入类必须做好准备以处理任意类型的对象。</p>
+</div>
+<div class="section" id="id6">
+<h3>延迟导入<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h3>
+<p>在某些情况下，导入类可能需要对导入对象的间接引用，以使该对象不会立即实例化。
+在这种情况下，该类可以通过使用 <cite>Lazy &lt;T&gt;</cite> 的 <cite>ContractType</cite> 来声明延迟导入。
+以下导入属性声明了一个延迟导入：</p>
+<blockquote>
+<div><div class="highlight-csharp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">class</span> <span class="nc">MyClass</span>
+<span class="p">{</span>
+<span class="na">    [Import]</span>
+<span class="hll">    <span class="k">public</span> <span class="n">Lazy</span><span class="p">&lt;</span><span class="n">IMyAddin</span><span class="p">&gt;</span> <span class="n">MyAddin</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span><span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>从 MEF 组合引擎的角度来看，<cite>Lazy&lt;T&gt;</cite> 的 <cite>ContractType</cite> 被认为与 <cite>T</cite> 的 <cite>ContractType</cite>
+相同，因此前面的导入将与下面的导出相匹配:</p>
+<blockquote>
+<div><div class="highlight-csharp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="na">[Export(typeof(IMyAddin))]</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">MyLogger</span> <span class="p">:</span> <span class="n">IMyAddin</span> <span class="p">{</span> <span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p><cite>ContractType</cite> 和 <cite>ContractName</cite> 可以在延迟导入的导入特性中指定，如前面 <a class="reference internal" href="#id2"><span class="std std-ref">导入导出基础</span></a> 部分所述。</p>
+</div>
+<div class="section" id="id7">
+<h3>前提性导入<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h3>
+<p>导出的 MEF 部件（ Part ） 通常由合成引擎创建，以响应直接请求或需要填充匹配的
+导入。默认情况下，在创建零件时，合成引擎会使用无参数的构造函数。如果要让引擎
+使用不同的构造函数，可以用 <cite>ImportingConstructor</cite> 特性进行标记。</p>
+<p>每个部件只能有一个构造函数供合成引擎使用。没有提供无参数的构造函数、没有 <cite>ImportingConstructor</cite>
+特性，或者提供多个 <cite>ImportingConstructor</cite> 特性，都会产生错误。</p>
+<p>要填充一个标有 <cite>ImportingConstructor</cite> 特性的构造函数的参数，这些参数都会自
+动声明为 <cite>import</cite> 。这是一种方便的方式，可以声明在部件初始化过程中使用的导入。
+下面的类使用 <cite>ImportingConstructor</cite> 来声明导入:</p>
+<blockquote>
+<div><div class="highlight-csharp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">class</span> <span class="nc">MyClass</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="n">IMyAddin</span> <span class="n">_theAddin</span><span class="p">;</span>
+
+    <span class="c1">//Parameterless constructor will NOT be</span>
+    <span class="c1">//used because the ImportingConstructor</span>
+    <span class="c1">//attribute is present.</span>
+    <span class="k">public</span> <span class="nf">MyClass</span><span class="p">()</span> <span class="p">{</span> <span class="p">}</span>
+
+    <span class="c1">//This constructor will be used.</span>
+    <span class="c1">//An import with contract type IMyAddin is</span>
+    <span class="c1">//declared automatically.</span>
+<span class="hll"><span class="na">    [ImportingConstructor]</span>
+</span>    <span class="k">public</span> <span class="nf">MyClass</span><span class="p">(</span><span class="n">IMyAddin</span> <span class="n">MyAddin</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">_theAddin</span> <span class="p">=</span> <span class="n">MyAddin</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>默认情况下， <cite>ImportingConstructor</cite> 特性对所有的参数导入都使用推断的 <cite>ContractType</cite>
+和 <cite>ContractName</cite>。可以通过使用 <cite>Import</cite> 特性修饰参数来覆盖这一点，这样就可
+以显式地定义 <cite>ContractType</cite> 和 <cite>ContractName</cite> 。下面的代码演示了一个使用这
+种语法来导入派生类而不是父类的构造函数:</p>
+<blockquote>
+<div><div class="highlight-csharp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="na">[ImportingConstructor]</span>
+<span class="hll"><span class="k">public</span> <span class="nf">MyClass</span><span class="p">([</span><span class="n">Import</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="n">IMySubAddin</span><span class="p">))]</span><span class="n">IMyAddin</span> <span class="n">MyAddin</span><span class="p">)</span>
+</span><span class="p">{</span>
+    <span class="n">_theAddin</span> <span class="p">=</span> <span class="n">MyAddin</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>特别是，您应谨慎使用集合参数。例如，如果您在参数类型为 <cite>IEnumerable &lt;int&gt;</cite>
+的构造函数上指定 <cite>ImportingConstructor</cite> ，则该导入将匹配 <cite>IEnumerable &lt;int&gt;</cite>
+类型的单个导出，而不是一组 <cite>int</cite> 类型的导出。要匹配一组类型为 <cite>int</cite> 的导出，
+您必须使用 <cite>ImportMany</cite> 特性修饰该参数。</p>
+<p>由 <cite>ImportingConstructor</cite> 特性声明为导入的参数也标记为 <strong>前提性导入</strong>。MEF
+通常允许导入导出形成一个循环。例如，循环是对象A导入对象B，而对象B又导入了对象A。
+在通常情况下，循环不是问题，合成容器通常构造两个对象。</p>
+<p>如果部件的构造函数需要导入的值，则该对象无法参与循环。如果对象A要求在构造对象
+B之前先构造对象B，并且对象B导入对象A，则该循环将无法解析，并且将发生合成错误。
+因此，在构造函数参数上声明的导入是 <strong>前提性导入</strong>，必须先填充所有这些内容，
+然后才能使用需要它们的对象的任何导出。</p>
+</div>
+<div class="section" id="id8">
+<h3>可选导入<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h3>
+<p>导入特性指定了部件发挥作用的要求。如果不能满足导入要求，则该部件的组成将失败，
+该部件将不可用。您可以通过使用 <cite>AllowDefault</cite> 特性指定导入是可选的。在这种情
+况下，即使导入不匹配任何可用的导出，合成也会成功，并且导入的属性将被设置为其
+属性类型的默认值（对象属性为 <cite>null</cite> ，布尔函数为 <cite>false</cite> ，数字属性为 <cite>0</cite> ）。
+下面的类使用了一个可选的导入:</p>
+<blockquote>
+<div><div class="highlight-csharp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">class</span> <span class="nc">MyClass</span>
+<span class="p">{</span>
+<span class="hll"><span class="na">    [Import(AllowDefault = true)]</span>
+</span>    <span class="k">public</span> <span class="n">Plugin</span> <span class="n">thePlugin</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="c1">//If no matching export is available,</span>
+    <span class="c1">//thePlugin will be set to null.</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+</div>
+<div class="section" id="id9">
+<h3>多对象导入<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h3>
+<p>只有当导入特性与一个且仅与一个导出匹配时，才会成功合成。其他情况将产生合成错
+误。要导入多个与同一合同匹配的导出，请使用 <cite>ImportMany</cite> 特性。用此特性标记的
+导入总是可选的（可选导入）。例如，如果没有匹配的出口，合成不会失败。下面的类
+可以导入任意数量的 <cite>IMyAddin</cite> 类型的导出：</p>
+<blockquote>
+<div><div class="highlight-csharp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">class</span> <span class="nc">MyClass</span>
+<span class="p">{</span>
+<span class="hll"><span class="na">    [ImportMany]</span>
+</span>    <span class="k">public</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">IMyAddin</span><span class="p">&gt;</span> <span class="n">MyAddin</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>可以使用普通的 <cite>IEnumerable &lt;T&gt;</cite> 语法和方法访问导入的数组。也可以改用普通数
+组（ <cite>IMyAddin []</cite> ）。与 <cite>Lazy &lt;T&gt;</cite> 语法结合使用时，此模式可能非常重要。
+例如，通过使用 <cite>ImportMany</cite> ， <cite>IEnumerable &lt;T&gt;</cite> 和 <cite>Lazy &lt;T&gt;</cite> ，您可以
+导入对任意数量对象的间接引用，而仅实例化那些必需的对象。下面的类显示了这种模式:</p>
+<blockquote>
+<div><div class="highlight-csharp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">class</span> <span class="nc">MyClass</span>
+<span class="p">{</span>
+<span class="na">    [ImportMany]</span>
+<span class="hll">    <span class="k">public</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">Lazy</span><span class="p">&lt;</span><span class="n">IMyAddin</span><span class="p">&gt;&gt;</span> <span class="n">MyAddin</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span><span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="id10">
+<h2>避免被发现<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h2>
+<p>在某些情况下，您可能希望防止部件作为目录的一部分被发现。例如，该部件可能是准
+备作为从其派生出子类的基类。有两种方法可以完成此操作:</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p>可以在部件类上使用 <cite>abstract</cite> 关键字。尽管抽象类可以将继承的导出提供
+给从其派生的类，但它们从不提供导出。</p></li>
+<li><p>如果无法使该类抽象，则可以使用 <cite>PartNotDiscoverable</cite> 特性对其进行
+修饰。被改特性修饰的部件不会包含在任何目录中。下面的示例演示了这些模式。
+目录将发现 <cite>DataOne</cite> 。 由于 <cite>DataTwo</cite> 是抽象的，因此不会被发现。
+由于 <cite>DataThree</cite> 使用 <cite>PartNotDiscoverable</cite> 特性，因此不会被发现。</p>
+<blockquote>
+<div><div class="highlight-csharp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="na">[Export]</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">DataOne</span>
+<span class="p">{</span>
+    <span class="c1">//This part will be discovered</span>
+    <span class="c1">//as normal by the catalog.</span>
+<span class="p">}</span>
+
+<span class="na">[Export]</span>
+<span class="hll"><span class="k">public</span> <span class="k">abstract</span> <span class="k">class</span> <span class="nc">DataTwo</span>
+</span><span class="p">{</span>
+    <span class="c1">//This part will not be discovered</span>
+    <span class="c1">//by the catalog.</span>
+<span class="p">}</span>
+
+<span class="hll"><span class="na">[PartNotDiscoverable]</span>
+</span><span class="na">[Export]</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">DataThree</span>
+<span class="p">{</span>
+    <span class="c1">//This part will also not be discovered</span>
+    <span class="c1">//by the catalog.</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+</li>
+</ol>
+</div></blockquote>
+</div>
+<div class="section" id="id11">
+<h2>元数据和元数据视图<a class="headerlink" href="#id11" title="永久链接至标题">¶</a></h2>
+<p>导出可以提供有关自身的其他信息，称为 <strong>元数据</strong> 。元数据可用于将导出对象的属
+性传达到导入部件。导入部件可以使用此数据来决定使用哪个导出，或者收集有关导出
+的信息，而无需构造它。出于这个原因，导入必须使用延迟导入才能使用元数据。</p>
+<p>要使用元数据，通常需要声明一个称为 <strong>元数据视图</strong> 的接口，该接口声明将提供哪
+些元数据。元数据视图界面必须 <strong>仅具有属性</strong> ，并且这些属性 <strong>必须具有get访问器</strong> 。
+以下接口是一个元数据视图的示例：</p>
+<blockquote>
+<div><div class="highlight-csharp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">interface</span> <span class="n">IPluginMetadata</span>
+<span class="p">{</span>
+    <span class="kt">string</span> <span class="n">Name</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="p">}</span>
+
+<span class="na">    [DefaultValue(1)]</span>
+    <span class="kt">int</span> <span class="n">Version</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>也可以将通用集合 <cite>IDictionary &lt;string，object&gt;</cite> 用作元数据视图，但这没有类
+型检查的好处，应避免使用。</p>
+<p>通常，在元数据视图中命名的所有属性 <strong>都是必需的</strong> ，任何不提供这些属性的导出
+都不会被视为匹配项。 <cite>DefaultValue</cite> 特性指定属性是可选的。如果不包括该属性，
+则将为其分配默认值，该默认值将被指定为 <cite>DefaultValue</cite> 的参数。以下是用元数
+据修饰的两个不同的类。这两个类都将与先前的元数据视图匹配：</p>
+<blockquote>
+<div><div class="highlight-csharp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="na">[Export(typeof(IPlugin)),</span>
+<span class="hll"><span class="na">    ExportMetadata(&quot;Name&quot;, &quot;Logger&quot;),</span>
+</span><span class="hll"><span class="na">    ExportMetadata(&quot;Version&quot;, 4)]</span>
+</span><span class="k">public</span> <span class="k">class</span> <span class="nc">Logger</span> <span class="p">:</span> <span class="n">IPlugin</span>
+<span class="p">{</span>
+<span class="p">}</span>
+
+<span class="na">[Export(typeof(IPlugin)),</span>
+<span class="na">    ExportMetadata(&quot;Name&quot;, &quot;Disk Writer&quot;)]</span>
+    <span class="c1">//Version is not required because of the DefaultValue</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">DWriter</span> <span class="p">:</span> <span class="n">IPlugin</span>
+<span class="p">{</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>元数据通过使用 <cite>ExportMetadata</cite> 属性在 <cite>Export</cite> 特性之后表达。每条元数据都
+由名称/值对组成。元数据的名称部分必须与元数据视图中相应属性的名称相匹配，而值
+将被分配给该属性。</p>
+<p>如果有的话，是由导入者指定将使用什么元数据视图。带元数据的导入是以延迟导入的
+方式声明的，元数据接口是 <cite>Lazy&lt;T,T&gt;</cite> 的第二个类型参数。下面的类导入了前面带
+元数据的部分:</p>
+<blockquote>
+<div><div class="highlight-csharp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">class</span> <span class="nc">Addin</span>
+<span class="p">{</span>
+<span class="na">    [Import]</span>
+<span class="hll">    <span class="k">public</span> <span class="n">Lazy</span><span class="p">&lt;</span><span class="n">IPlugin</span><span class="p">,</span> <span class="n">IPluginMetadata</span><span class="p">&gt;</span> <span class="n">plugin</span><span class="p">;</span>
+</span><span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>在许多情况下，您将希望将元数据与 <cite>ImportMany</cite> 特性结合在一起，以便解析可用的
+导入并仅选择和实例化一个导入，或过滤一个集合以匹配特定条件。下列类仅实例化具有
+<cite>Name</cite> 值 <cite>Logger</cite> 的 <cite>IPlugin</cite> 对象:</p>
+<blockquote>
+<div><div class="highlight-csharp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">class</span> <span class="nc">User</span>
+<span class="p">{</span>
+<span class="hll"><span class="na">    [ImportMany]</span>
+</span><span class="hll">    <span class="k">public</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">Lazy</span><span class="p">&lt;</span><span class="n">IPlugin</span><span class="p">,</span> <span class="n">IPluginMetadata</span><span class="p">&gt;&gt;</span> <span class="n">plugins</span><span class="p">;</span>
+</span>
+    <span class="k">public</span> <span class="n">IPlugin</span> <span class="nf">InstantiateLogger</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">IPlugin</span> <span class="n">logger</span> <span class="p">=</span> <span class="k">null</span><span class="p">;</span>
+
+        <span class="k">foreach</span> <span class="p">(</span><span class="n">Lazy</span><span class="p">&lt;</span><span class="n">IPlugin</span><span class="p">,</span> <span class="n">IPluginMetadata</span><span class="p">&gt;</span> <span class="n">plugin</span> <span class="k">in</span> <span class="n">plugins</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">plugin</span><span class="p">.</span><span class="n">Metadata</span><span class="p">.</span><span class="n">Name</span> <span class="p">==</span> <span class="s">&quot;Logger&quot;</span><span class="p">)</span>
+                <span class="n">logger</span> <span class="p">=</span> <span class="n">plugin</span><span class="p">.</span><span class="n">Value</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">logger</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+</div>
+<div class="section" id="id12">
+<h2>导入和导出的继承<a class="headerlink" href="#id12" title="永久链接至标题">¶</a></h2>
+<p>如果一个类从一个部件继承，那么这个类也可以成为一个部件。导入总是被子类继承。
+因此，一个部件的子类将始终是一个部件，与它的父类具有相同的导入。</p>
+<p>通过使用 <cite>Export</cite> 特性声明的 <cite>Export</cite> 不被子类继承。然而，一个部件可以通过
+使用 <cite>InheritedExport</cite> 特性来导出自己。部件的子类将继承并提供相同的导出，包
+括 <cite>ContractName</cite> 和 <cite>ContractType</cite> 。与 <cite>Export</cite> 特性不同，<cite>InheritedExport</cite>
+只能在 <strong>类级</strong> 应用，而不能在 <strong>成员级</strong> 应用。因此， <strong>成员级的导出永远不能被继承</strong> 。</p>
+<p>下面四个类演示了导入和导出继承的原理。 <cite>NumTwo</cite> 继承自 <cite>NumOne</cite> ，所以 <cite>NumTwo</cite>
+会导入 <cite>IMyData</cite> 。普通的导出是不能继承的，所以 <cite>NumTwo</cite> 不会导出任何东西。
+<cite>NumFour</cite> 继承自 <cite>NumThree</cite> 。因为 <cite>NumThree</cite> 使用了 <cite>InheritedExport</cite>，
+所以 <cite>NumFour</cite> 有一个 <cite>ContractType</cite> 为 <cite>NumThree</cite> 的导出。成员级的导出永
+远不会被继承，所以 <cite>IMyData</cite> 不会被导出:</p>
+<blockquote>
+<div><div class="highlight-csharp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="na">[Export]</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">NumOne</span>
+<span class="p">{</span>
+<span class="na">    [Import]</span>
+    <span class="k">public</span> <span class="n">IMyData</span> <span class="n">MyData</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="k">class</span> <span class="nc">NumTwo</span> <span class="p">:</span> <span class="n">NumOne</span>
+<span class="p">{</span>
+    <span class="c1">//Imports are always inherited, so NumTwo will</span>
+    <span class="c1">//import IMyData.</span>
+
+    <span class="c1">//Ordinary exports are not inherited, so</span>
+    <span class="c1">//NumTwo will NOT export anything. As a result it</span>
+<span class="hll">    <span class="c1">//will not be discovered by the catalog!</span>
+</span><span class="p">}</span>
+
+<span class="na">[InheritedExport]</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">NumThree</span>
+<span class="p">{</span>
+<span class="na">    [Export]</span>
+    <span class="n">Public</span> <span class="n">IMyData</span> <span class="n">MyData</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="c1">//This part provides two exports, one of</span>
+    <span class="c1">//contract type NumThree, and one of</span>
+    <span class="c1">//contract type IMyData.</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="k">class</span> <span class="nc">NumFour</span> <span class="p">:</span> <span class="n">NumThree</span>
+<span class="p">{</span>
+    <span class="c1">//Because NumThree used InheritedExport,</span>
+    <span class="c1">//this part has one export with contract</span>
+    <span class="c1">//type NumThree.</span>
+
+    <span class="c1">//Member-level exports are never inherited,</span>
+    <span class="c1">//so IMyData is not exported.</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>如果有与 <cite>InheritedExport</cite> 特性相关联的元数据，该元数据也将被继承。(更多信息，
+请参阅前面的 <a class="reference internal" href="#id11"><span class="std std-ref">元数据和元数据视图</span></a> 一节)。继承的元数据不能被子类
+修改。然而，通过用相同的 <cite>ContractName</cite> 和 <cite>ContractType</cite> ，但用新的元数据
+重新声明 <cite>InheritedExport</cite> 特性，子类可以用新的元数据替换继承的元数据。下面
+的类演示了这个原理。 <cite>MegaLogger</cite> 部件继承自 <cite>Logger</cite> ，并包含 <cite>InheritedExport</cite>
+属性。由于 <cite>MegaLogger</cite> 重新声明了名为 <cite>Status</cite> 的新元数据，所以它没有继承
+<cite>Logger</cite> 的 <cite>Name</cite> 和 <cite>Version</cite> 元数据：</p>
+<blockquote>
+<div><div class="highlight-csharp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="hll"><span class="na">[InheritedExport(typeof(IPlugin)),</span>
+</span><span class="hll"><span class="na">    ExportMetadata(&quot;Name&quot;, &quot;Logger&quot;),</span>
+</span><span class="hll"><span class="na">    ExportMetadata(&quot;Version&quot;, 4)]</span>
+</span><span class="k">public</span> <span class="k">class</span> <span class="nc">Logger</span> <span class="p">:</span> <span class="n">IPlugin</span>
+<span class="p">{</span>
+    <span class="c1">//Exports with contract type IPlugin and</span>
+    <span class="c1">//metadata &quot;Name&quot; and &quot;Version&quot;.</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="k">class</span> <span class="nc">SuperLogger</span> <span class="p">:</span> <span class="n">Logger</span>
+<span class="p">{</span>
+    <span class="c1">//Exports with contract type IPlugin and</span>
+    <span class="c1">//metadata &quot;Name&quot; and &quot;Version&quot;, exactly the same</span>
+    <span class="c1">//as the Logger class.</span>
+<span class="p">}</span>
+
+<span class="hll"><span class="na">[InheritedExport(typeof(IPlugin)),</span>
+</span><span class="hll"><span class="na">    ExportMetadata(&quot;Status&quot;, &quot;Green&quot;)]</span>
+</span><span class="hll"><span class="k">public</span> <span class="k">class</span> <span class="nc">MegaLogger</span> <span class="p">:</span> <span class="n">Logger</span>        <span class="p">{</span>
+</span>    <span class="c1">//Exports with contract type IPlugin and</span>
+    <span class="c1">//metadata &quot;Status&quot; only. Re-declaring</span>
+    <span class="c1">//the attribute replaces all metadata.</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>重新声明 <cite>InheritedExport</cite> 特性以覆盖元数据时，请确保 <cite>ContractType</cite> 相同。
+（在前面的示例中，是 <cite>IPlugin</cite> 类型）如果它们不同，则不是覆盖，第二个属性将
+从部件创建第二个独立的导出。通常，这意味着您必须在重写 <cite>InheritedExport</cite> 特
+性时显式指定合同类型，如上例所示。</p>
+<p>由于不能直接实例化接口，因此通常不能用 <cite>Export</cite> 或 <cite>Import</cite> 特性修饰它们。
+但是，可以在接口级别用 <cite>InheritedExport</cite> 特性修饰接口，并且任何实现类都将
+继承导出以及任何关联的元数据。 但是，接口本身将不能作为一个部件使用。</p>
+</div>
+<div class="section" id="id13">
+<h2>自定义导出特性<a class="headerlink" href="#id13" title="永久链接至标题">¶</a></h2>
+<p>基本的导出属性 <cite>Export</cite> 和 <cite>InheritedExport</cite> 可以扩展为包括元数据作为属性。
+对于将相似的元数据应用于许多部件，或创建元数据属性的继承树，此技术很有用。定
+制属性可以指定 <cite>ContractType</cite> ， <cite>ContractName</cite> 或任何其他元数据。为了定义
+自定义属性，必须使用 <cite>MetadataAttribute</cite> 特性修饰从 <cite>ExportAttribute</cite>
+（或 <cite>InheritedExportAttribute</cite> ）继承的类。下列类定义了一个自定义特性：</p>
+<blockquote>
+<div><div class="highlight-csharp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="hll"><span class="na">[MetadataAttribute]</span>
+</span><span class="na">[AttributeUsage(AttributeTargets.Class, AllowMultiple=false)]</span>
+<span class="hll"><span class="k">public</span> <span class="k">class</span> <span class="nc">MyAttribute</span> <span class="p">:</span> <span class="n">ExportAttribute</span>
+</span><span class="p">{</span>
+    <span class="k">public</span> <span class="nf">MyAttribute</span><span class="p">(</span><span class="kt">string</span> <span class="n">myMetadata</span><span class="p">)</span>
+        <span class="p">:</span> <span class="k">base</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="n">IMyAddin</span><span class="p">))</span>
+    <span class="p">{</span>
+        <span class="n">MyMetadata</span> <span class="p">=</span> <span class="n">myMetadata</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="kt">string</span> <span class="n">MyMetadata</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">private</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>此类定义了一个名为 <cite>MyAttribute</cite> 的自定义特性，其 <cite>ContractType</cite> 为 <cite>IMyAddin</cite>
+以及一些名为 <cite>MyMetadata</cite> 的元数据。 <strong>标记为 `MetadataAttribute` 特性的类中的所有属性均视为在自定义属性中定义的元数据</strong> 。
+以下两个声明是等效的：</p>
+<blockquote>
+<div><div class="highlight-csharp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="hll"><span class="na">[Export(typeof(IMyAddin)),</span>
+</span><span class="hll"><span class="na">    ExportMetadata(&quot;MyMetadata&quot;, &quot;theData&quot;)]</span>
+</span><span class="k">public</span> <span class="n">MyAddin</span> <span class="n">myAddin</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<div class="highlight-csharp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="hll"><span class="na">[MyAttribute(&quot;theData&quot;)]</span>
+</span><span class="k">public</span> <span class="n">MyAddin</span> <span class="n">myAddin</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>在第一个声明中， <cite>ContractType</cite> 和元数据是明确定义的。在第二种声明中， <cite>ContractType</cite>
+和元数据隐含在自定义特性中。特别是在大量相同的元数据必须应用于许多部件的情况下
+（例如，作者或版权信息），使用自定义特性可以节省大量的时间和重复。此外，可以
+创建自定义特性的继承树，以允许变化。</p>
+<p>要在自定义特性中创建可选的元数据，可以使用 <cite>DefaultValue</cite> 特性。当此特性应用
+于自定义特性类中的一个属性时，它指定修饰的属性是可选的，不必由导出器提供。
+如果没有提供该属性的值，它将被分配其属性类型的默认值（通常是 <cite>null</cite> 、 <cite>false</cite> 或 <cite>0</cite> ）。</p>
+</div>
+<div class="section" id="creation-policies">
+<h2>创建策略（Creation Policies）<a class="headerlink" href="#creation-policies" title="永久链接至标题">¶</a></h2>
+<p>当一个部件指定一个导入并进行合成时，合成容器会试图找到一个匹配的导出。如果它
+成功地匹配了导入与导出，则导入成员被设置为导出对象的实例。这个实例的来源由导
+出部件的创建策略控制。</p>
+<p>两种可能的创建策略是 <code class="docutils literal notranslate"><span class="pre">共享（Shared）</span></code> 和  <code class="docutils literal notranslate"><span class="pre">非共享（non-shared）</span></code> 。创建
+策略为共享的部件将在容器中具有该合同的部件的每个导入之间共享。当合成引擎发现
+一个匹配并必须设置导入属性时，只有当一个零件的新副本还不存在时，它才会实例化
+一个新的副本；否则，它将提供现有的副本。这意味着许多对象可能有对同一部件的引
+用。这样的部件不应该依赖可能从许多地方改变的内部状态。这种策略适用于静态部件、
+提供服务的部件以及消耗大量内存或其他资源的部件。</p>
+<p>具有非共享创建策略的部件将在每次为其一个导出找到匹配的导入时创建。因此，容器
+中每找到一个与其导出契约之一相匹配的导入，就会实例化一个新副本。这些副本的内
+部状态将不会被共享。这个策略适用于每个导入都需要自己的内部状态的部件。</p>
+<p>导入和导出都可以从 <code class="docutils literal notranslate"><span class="pre">共享（Shared）</span></code> 、 <code class="docutils literal notranslate"><span class="pre">非共享（NonShared）</span></code> 或 <code class="docutils literal notranslate"><span class="pre">任何值（Any）</span></code>
+中指定部件的创建策略。导入和导出的默认值都是 <code class="docutils literal notranslate"><span class="pre">Any</span></code> 。指定 <code class="docutils literal notranslate"><span class="pre">Shared</span></code> 或 <code class="docutils literal notranslate"><span class="pre">NonShared</span></code>
+的导出将只匹配指定相同值或指定 <code class="docutils literal notranslate"><span class="pre">Any</span></code> 的导入。同样，指定为 <code class="docutils literal notranslate"><span class="pre">Shared</span></code> 或 <code class="docutils literal notranslate"><span class="pre">NonShared</span></code>
+的导入将只匹配指定为相同的导出，或指定为 <code class="docutils literal notranslate"><span class="pre">Any</span></code> 的导入。创建策略不兼容的导
+入和导出不被视为匹配，就像 <cite>ContractName</cite> 或 <cite>ContractType</cite> 不匹配的导入和
+导出一样。如果导入和导出都指定了 <code class="docutils literal notranslate"><span class="pre">Any</span></code>，或者没有指定创建策略而默认为 <code class="docutils literal notranslate"><span class="pre">Any</span></code> ，
+则创建策略将默认为 <code class="docutils literal notranslate"><span class="pre">Shared</span></code> 。</p>
+<blockquote>
+<div><div class="highlight-csharp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="na">[Export]</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">PartOne</span>
+<span class="p">{</span>
+    <span class="c1">//The default creation policy for an export is Any.</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="k">class</span> <span class="nc">PartTwo</span>
+<span class="p">{</span>
+<span class="na">    [Import]</span>
+    <span class="k">public</span> <span class="n">PartOne</span> <span class="n">partOne</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="c1">//The default creation policy for an import is Any.</span>
+    <span class="c1">//If both policies are Any, the part will be shared.</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="k">class</span> <span class="nc">PartThree</span>
+<span class="p">{</span>
+<span class="hll"><span class="na">    [Import(RequiredCreationPolicy = CreationPolicy.Shared)]</span>
+</span>    <span class="k">public</span> <span class="n">PartOne</span> <span class="n">partOne</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="c1">//The Shared creation policy is explicitly specified.</span>
+    <span class="c1">//PartTwo and PartThree will receive references to the</span>
+    <span class="c1">//SAME copy of PartOne.</span>
+<span class="p">}</span>
+
+<span class="na">[Export]</span>
+<span class="hll"><span class="na">[PartCreationPolicy(CreationPolicy.NonShared)]</span>
+</span><span class="k">public</span> <span class="k">class</span> <span class="nc">PartFour</span>
+<span class="p">{</span>
+    <span class="c1">//The NonShared creation policy is explicitly specified.</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="k">class</span> <span class="nc">PartFive</span>
+<span class="p">{</span>
+<span class="na">    [Import]</span>
+    <span class="k">public</span> <span class="n">PartFour</span> <span class="n">partFour</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="c1">//The default creation policy for an import is Any.</span>
+    <span class="c1">//Since the export&#39;s creation policy was explicitly</span>
+    <span class="c1">//defined, the creation policy for this property will</span>
+    <span class="c1">//be non-shared.</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="k">class</span> <span class="nc">PartSix</span>
+<span class="p">{</span>
+<span class="hll"><span class="na">    [Import(RequiredCreationPolicy = CreationPolicy.NonShared)]</span>
+</span>    <span class="k">public</span> <span class="n">PartFour</span> <span class="n">partFour</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="c1">//Both import and export specify matching creation</span>
+    <span class="c1">//policies.  PartFive and PartSix will each receive</span>
+    <span class="c1">//SEPARATE copies of PartFour, each with its own</span>
+    <span class="c1">//internal state.</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="k">class</span> <span class="nc">PartSeven</span>
+<span class="p">{</span>
+<span class="hll"><span class="na">    [Import(RequiredCreationPolicy = CreationPolicy.Shared)]</span>
+</span>    <span class="k">public</span> <span class="n">PartFour</span> <span class="n">partFour</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="c1">//A creation policy mismatch.  Because there is no</span>
+    <span class="c1">//exported PartFour with a creation policy of Shared,</span>
+    <span class="c1">//this import does not match anything and will not be</span>
+    <span class="c1">//filled.</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+</div>
+<div class="section" id="id14">
+<h2>生命周期和销毁<a class="headerlink" href="#id14" title="永久链接至标题">¶</a></h2>
+<p>由于部件托管在组成容器中，它们的生命周期可能比普通对象更复杂。零件可以实现两
+个重要的生命周期相关接口。 <cite>IDisposable</cite> 和 <cite>IPartImportsSatisfiedNotification</cite> 。</p>
+<p>需要在关闭时执行工作或需要释放资源的部件应该实现 <cite>IDisposable</cite> ，就像通常的
+.NET 框架对象一样。但是，由于容器创建并维护对部件的引用，因此只有拥有部件的
+容器才应该对其调用 <cite>Dispose</cite> 方法。容器本身实现了 <cite>IDisposable</cite> ，作为它在
+<cite>Dispose</cite> 中清理的一部分，它将对它拥有的所有部件调用 <cite>Dispose</cite> 。出于这个原
+因，当组成容器和它所拥有的任何部件不再需要时，你应该总是对它调用 <cite>Dispose</cite> 。</p>
+<p>对于寿命较长的组成容器，创建策略为非共享的部件的内存消耗会成为一个问题。这些
+非共享部件可以被多次创建，并且在容器本身被 <cite>Dispose</cite> 之前不会被 <cite>Dispose</cite> 。
+为了处理这个问题，容器提供了 <cite>ReleaseExport</cite> 方法。在一个非共享的导出上调用
+这个方法，就会将该导出从组成容器中删除，并将其 <cite>Dispose</cite> 。仅由被移除的导出
+使用的部件，以及以此类推的树，也被移除和 <cite>Dispose</cite>。通过这种方式，可以在不 <cite>Dispose</cite>
+组成容器本身的情况下回收资源。</p>
+<p><cite>IPartImportsSatisfiedNotification</cite> 包含一个名为 <cite>OnImportsSatisfied</cite> 的
+方法。当合成已经完成，并且部件的导入已经准备好使用时，合成容器就会对任何实现
+该接口的部件调用这个方法。部件是由组成引擎创建的，用来填充其他部件的导入。
+在部件的导入被 <cite>Dispose</cite> 之前，您不能执行任何依赖于或操作部件构造函数中的导
+入值的初始化，除非这些值已经通过使用 <cite>ImportingConstructor</cite> 属性被指定为 <em>前提性导入</em> 。
+这通常是首选方法，但在某些情况下，构造函数注入可能不可用。在这些情况下，可以在
+<cite>OnImportsSatisfied</cite> 中进行初始化，并且部件应该实现 <cite>IPartImportsSatisfiedNotification</cite> 。</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="EMail.html" class="btn btn-neutral float-right" title="Relative Concepts of EMail" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="Ubuntu.html" class="btn btn-neutral float-left" title="Ubuntu" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; 版权所有 2021, horizonshd.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

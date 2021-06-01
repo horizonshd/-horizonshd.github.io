@@ -1,0 +1,4904 @@
+====
+C++
+====
+
+`C++ Tutorial <http://www.cplusplus.com/doc/tutorial/>`_
+==========================================================
+
+
+The Cherno
+===========
+
+1. 在 Windows 系统中设置 C++ 开发环境
+---------------------------------------
+.. graphviz::
+    :caption: pipline
+    :align: center
+    
+    digraph example0{
+        bgcolor = "transparent"
+        rankdir = LR;
+
+        a->b;
+        c->a [dir = "back"];
+    }
+
+
+2. C++ 是如何工作的
+---------------------
+
+.. code-block:: c++
+    :linenos:
+    :caption: Main.cpp
+
+    #include<iostream>
+
+    int main()
+    {
+        std::cout << "Hello World!" << std::endl;
+        std::cin.get();
+    }
+    
+第1行代码中以 ``#`` 开头的是 `预处理语句` ,预处理语句将会在编译之前进行评估（be evaluated）。
+这里的 ``include`` 表示将 ``iostream`` 这个 `头文件` 中的内容拷贝到当前源
+代码文件中。
+
+第3行是 `mian` 函数，通常 `main` 函数是程序的入口（entry point）, ``int``
+表示该函数返回的类型是整型。 `main` 函数中如果没有显示使用 `return someIntValue;`
+编译器会假设为 `return 0;` ，只有 `main` 函数是这样的个例。
+
+每一个 `.cpp` 源文件都会被编译，头文件不会被编译，只能使用 ``include`` 预处
+理指令被包含到 `.cpp` 文件中进行编译。经过预处理后对每个 `.cpp` 文件进行 **单独** 
+地编译，每个 `.cpp` 文件编译后输出一个对应的 `.obj` 文件。最后通过链接器将
+这些 `.obj` 文件链接成一个 `.exe` 可执行文件。
+
+.. graphviz::
+    :caption: pipline
+    :align: center
+    
+    digraph example {
+        bgcolor = "transparent"
+        rankdir = LR;
+    
+        a1 [label="a1.cpp"];
+        a2 [label="a2.cpp"];
+        an [label="an.cpp"];
+        b1 [label="b1.obj"];
+        b2 [label="b2.obj"];
+        bn [label="bn.obj"];
+        c [label="output.exe"];
+        a1 -> b1;
+        a2 -> b2;
+        an -> bn;
+        b1 -> c;
+        b2 -> c;
+        bn -> c;
+    }
+    
+
+
+Visual Studio 中 ``Ctrl + F7`` 进行编译（compile）。
+
+下面看一下存在多个 `.cpp` 源文件时 C++ 是如何工作的：
+
+.. code-block:: c++
+    :linenos:
+    :caption: Log.cpp
+
+    #include<iostream>
+
+    void Log(const char* message)
+    {
+        std::cout << message << std::endl;
+    }
+
+.. code-block:: c++
+    :linenos:
+    :emphasize-lines: 3
+    :caption: Main.cpp
+    
+    #include<iostream>
+
+    void Log(const char* message);
+
+    int main()
+    {
+        Log("Hello World!");
+        std::cin.get();
+    }
+    
+在上面的代码中，如果移除 `Main.cpp` 中的第3行，build 整个解决方案将会出现以
+下错误： ::
+
+    error C3861: 'Log': identifier not found
+
+此时如果我们加上第3行代码，就算没有 `Log.cpp` 文件，单独编译 `Main.cpp` 文
+件也不会报错。这是因为这个第3行代码是一个 `声明` （表示某个 symbol 或 function 是
+存在的），告诉编译器存在一个这样签名的 `Log` 函数（像是一个承诺，而编译器总
+是选择相信我们）。
+
+当我们再次 build 整个解决方案时，编译阶段没有错误，然后链接器开始工作，主要
+就是 resolve symbol。如果在 `Log.cpp` 中没有 `Log` 函数的定义，将会出现以
+下链接错误： ::
+
+    1>Main.obj : error LNK2019: unresolved external symbol "void __cdecl Log(char const *)" (?Log@@YAXPBD@Z) referenced in function _main
+    1>C:\dev\CppTemp\Debug\Main.exe : fatal error LNK1120: 1 unresolved externals
+
+3. C++ 编译器是如何工作的
+---------------------------
+
+阶段：
+
+    1. 预处理
+        
+        evaluate 每条预处理指令；
+        
+        ==========================      ========================================
+        预处理指令                       说明
+        ==========================      ========================================
+        #include <iostream>             拷贝头文件中的内容到使用该指令的地方
+                                        
+                                        Visual Studio 中在 
+
+                                        Properties -> Configuration Properties -> C/C++ -> Preprocessor:
+
+                                        Preprocess to a File: No/Yes 
+
+                                        修改该选项为 Yes 可输出预处理后的文件
+        #define INTEGER int             将后续代码中出现的 INTEGER 替换为 int
+        #if #elif #else #endif          根据条件确定是否使用代码
+        ==========================      ========================================
+
+    2. 语法分析
+    3. 转换成机器语言指令
+
+编译后的 `.obj` 文件是二进制的机器码，没有可读性，为了可以简单查看编译后的内容，
+可以在 Visual Studio 中的 Properties -> Configuration Properties -> C/C++ -> Output Files:
+Assemler Output: Assembly-Only Listing (/FA) 这样设置。
+
+4. C++ 链接器是如何工作的
+---------------------------
+
+必须要有一个 entry point ，否则会产生一个链接错误。
+
+可以在 Visual Studio 中的 Properties -> Configuration Properties -> Linker -> Advanced:
+Entry Point: 这里修改程序的入口。
+
+**LINK-ERROR: 未解决的符号**
+
+-   代码一：
+
+    .. code-block:: c++
+        :linenos:
+        :caption: Log.cpp
+
+        #include<iostream>
+
+        void Log(const char* message)
+        {
+            std::cout << message << std::endl;
+        }
+
+    .. code-block:: c++
+        :linenos:
+        :caption: Main.cpp
+
+        #include<iostream>
+
+        void Log(const char* message);
+
+        int Multiply(int a,int b)
+        {
+            Log("Multiply");
+            return a * b;
+        }
+
+        int main()
+        {
+            std::cout << Multiply(5, 8) << std::endl;
+            std::cin.get();
+        }
+
+    输出： ::
+
+        Multiply
+        40
+
+-   代码二：
+
+    .. code-block:: c++
+        :linenos:
+        :caption: Log.cpp
+        :emphasize-lines: 3
+
+        #include<iostream>
+
+        void Logr(const char* message)
+        {
+            std::cout << message << std::endl;
+        }
+
+    .. code-block:: c++
+        :linenos:
+        :caption: Main.cpp
+
+        #include<iostream>
+
+        void Log(const char* message);
+
+        int Multiply(int a,int b)
+        {
+            Log("Multiply");
+            return a * b;
+        }
+
+        int main()
+        {
+            std::cout << Multiply(5, 8) << std::endl;
+            std::cin.get();
+        }
+
+    build 时将会出现以下错误信息： ::
+
+        1>Main.obj : error LNK2019: unresolved external symbol "void __cdecl Log(char const *)" (?Log@@YAXPBD@Z) referenced in function "int __cdecl Multiply(int,int)" (?Multiply@@YAHHH@Z)
+        1>C:\dev\C++\C++Temp\Debug\C++Temp.exe : fatal error LNK1120: 1 unresolved externals
+
+    错误产生是由于链接时链接器找不到与 `Main.cpp` 中 ``Log`` 函数声明那样匹配的定义。
+
+    此时如果注释掉 `Main.cpp` 中的：
+
+    .. code-block:: c++
+            :linenos:
+            :lineno-start: 7
+            :caption: Main.cpp
+
+            //Log("Multiply");
+    
+    这时再 build 将会通过，这是因为代码中没有调用 ``Log`` 函数，因此也就不会进行链接，
+    也就避免了链接错误的产生。
+
+-   代码三：
+
+    .. code-block:: c++
+        :linenos:
+        :caption: Log.cpp
+        :emphasize-lines: 3
+
+        #include<iostream>
+
+        void Logr(const char* message)
+        {
+            std::cout << message << std::endl;
+        }
+
+    .. code-block:: c++
+        :linenos:
+        :caption: Main.cpp
+        :emphasize-lines: 13
+
+        #include<iostream>
+
+        void Log(const char* message);
+
+        int Multiply(int a,int b)
+        {
+            Log("Multiply");
+            return a * b;
+        }
+
+        int main()
+        {
+            //std::cout << Multiply(5, 8) << std::endl;
+            std::cin.get();
+        }
+    
+    build 时会出现以下错误信息： ::
+
+        1>Main.obj : error LNK2019: unresolved external symbol "void __cdecl Log(char const *)" (?Log@@YAXPBD@Z) referenced in function "int __cdecl Multiply(int,int)" (?Multiply@@YAHHH@Z)
+        1>C:\dev\C++\C++Temp\Debug\C++Temp.exe : fatal error LNK1120: 1 unresolved externals
+    
+    这是由于链接器链接时找不到与 `Main.cpp` 中 ``Log`` 函数声明那样匹配的定义。在 `Main.cpp` 
+    中虽然没有直接（ Log("something") ）或间接（Multiply(someInt,someInt)）调用
+    该 ``Log`` 函数的地方，但是不能保证不会有其他的文件会调用 `Main.cpp` 中的 ``Multiply`` 函数，
+    因此链接器会对其进行链接操作，进而生产这个链接错误。
+
+    然而，如果我们告诉链接器 `Main.cpp` 中的这个 ``Multiply`` 不会被其他文件调用，
+    又由于在 ``Main.cpp`` 没有直接或间接对 ``Log`` 函数的使用，因此链接时不会对
+    其进行链接操作，也就不会导致这个链接错误的产生：
+
+    .. code-block:: c++
+        :linenos:
+        :lineno-start: 5
+        :caption: Main.cpp
+
+        static int Multiply(int a,int b)
+
+**LINK-ERROR: 已存在的符号**
+
+-   代码一：
+
+    .. code-block:: c++
+        :linenos:
+        :caption: Log.h
+
+        #pragma once
+
+        void Log(const char* message)
+        {
+            std::cout << message << std::endl;
+        }
+
+    .. code-block:: c++
+        :linenos:
+        :caption: Log.cpp
+        :emphasize-lines: 2
+
+        #include<iostream>
+        #include"Log.h"
+
+        void InitLog()
+        {
+            Log("Init");
+        }
+
+    .. code-block:: c++
+        :linenos:
+        :caption: Main.cpp
+        :emphasize-lines: 2
+
+        #include<iostream>
+        #include"Log.h"
+
+        int Multiply(int a, int b)
+        {
+            Log("Multiply");
+            return a * b;
+        }
+
+        int main()
+        {
+            std::cout << Multiply(5, 8) << std::endl;
+            std::cin.get();
+        }
+
+    build 时会出现以下错误信息： ::
+
+        1>Log.obj : error LNK2005: "void __cdecl Log(char const *)" (?Log@@YAXPBD@Z) already defined in Main.obj
+        1>C:\dev\C++\C++Temp\Debug\C++Temp.exe : fatal error LNK1169: one or more multiply defined symbols found
+
+    这是由于在 `Log.cpp` 和 `Main.cpp` 文件中都使用了 `#include"Log.h"` 这条预处
+    理指令，这会将 `Log.h` 中的内容复制到 `Log.cpp` 和 `Main.cpp` 中，即会存在两份
+    ``Log`` 函数的定义，因此会在链接时产生符号已存在的错误。
+
+    有以下3种解决方式：
+        
+        1.  `Log.h` 中的 ``Log`` 函数加上 ``static`` 关键字，表示仅在 include 的 .cpp 文件中自己可见
+        2.  `Log.h` 中的 ``Log`` 函数加上 ``inline`` 关键字，表示在调用的地方展开（类似宏展开）
+        3.  `Log.h` 中的 ``Log`` 函数移到 `Log.cpp` 中
+
+5. C++ 中的变量
+-----------------
+
+``sizeof``
+
+6. C++ 中的函数
+-----------------
+
+7. C++ 中的头文件
+-------------------
+
+``#pragma once`` 告诉预处理器仅包含一次头文件。
+
+``include`` 中的 ``<xxx.h>`` 和 ``xxx.h"``:
+如果 `xxx.h` 文件是在当前解决方案的 `include directories` 中的，则使用 ``<xx.h>`` （当然也可以使用 ``xxx.h`` ）;
+如果 `xxx.h` 和当前的文件存在相对路径，则使用 ``"xxx.h"`` 或者 ``../xxx.h`` 。
+
+8. 如何在 Visual Studio 中调试 C++ 程序
+-----------------------------------------
+
+9. C++ 中的条件和分支（ if语句 ）
+----------------------------------
+
+10. 关于 C++ 程序最好的 Visual  Studio 设置
+----------------------------------------------
+
+11. C++ 中的循环（for, while）
+--------------------------------
+
+
+12. C++ 中的流程控制（continue, break, return）
+------------------------------------------------
+
+13. C++ 中的指针
+------------------
+
+指针是一个数整数，一个存储内存地址的数字。
+在一个已存在的变量名前加 `&` 以获取变量的地址；在一个指针前面加 `*` 可以对指针解
+引用以获取指针指向的变量中的值。
+
+.. code-block:: c++
+    :linenos:
+    
+    #include<iostream>
+
+    int main()
+    {
+        int var = 8;
+        int* ptr = &var;
+        *ptr = 10;
+        std::cin.get();
+    }
+
+上面代码中创建的变量是在栈里的，下面的代码则是在堆上创建了一个数组：
+
+.. code-block:: c++
+    :linenos:
+    
+    #include<iostream>
+
+    int main()
+    {
+        char* buffer = new char[8];
+        memset(buffer, 0, 8);
+        delete[] buffer;
+        std::cin.get();
+    }
+
+除此之外，还可以有指向指针的指针：
+
+.. code-block:: c++
+    :linenos:
+    :emphasize-lines: 8
+
+    #include<iostream>
+
+    int main()
+    {
+        char* buffer = new char[8];
+        memset(buffer, 0, 8);
+
+        char** ptr = &buffer;
+        delete[] buffer;
+        std::cin.get();
+    }
+
+14. C++ 中的引用
+------------------
+
+引用不像指针那样可以设置一个为零的值，引用并不占据内存，必须进行初始化。引用只是
+为已有的变量创建一个别名，本质上只有一个变量。 
+
+.. code-block:: c++
+    :linenos:
+    :emphasize-lines: 6,7,8
+
+    #include<iostream>
+
+    int main()
+    {
+        int a = 5;
+        int& ref = a;
+        ref = 2;
+        std::cout << a << std::endl; // a = 2
+        std::cin.get();
+    }
+
+引用是关于指针的一个语法糖，看一个在函数中修改变量值的例子：
+    
+    - 使用指针：
+    
+        .. code-block:: c++
+            :linenos:
+            :emphasize-lines: 3,4,5,6,11
+
+            #include<iostream>
+
+            void  Increment(int* value)
+            {
+                (*value)++;
+            }
+
+            int main()
+            {
+                int a = 5;
+                Increment(&a);
+                std::cout << a << std::endl; // a = 6
+                std::cin.get();
+            }
+
+    - 使用引用：
+
+        .. code-block:: c++
+            :linenos:
+            :emphasize-lines: 3,11
+
+            #include<iostream>
+
+            void  Increment(int& value)
+            {
+                value++;
+            }
+
+            int main()
+            {
+                int a = 5;
+                Increment(a);
+                std::cout << a << std::endl; // a = 6
+                std::cin.get();
+            }
+
+15. C++ 中的类
+----------------
+
+.. code-block:: c++
+    :linenos:
+
+    #include <iostream>
+
+    class Player
+    {
+    public:
+        int x, y;
+        int speed;
+
+        void Move(int xa, int ya)
+        {
+            x += xa * speed;
+            y += ya * speed;
+        }
+    };
+
+    int main()
+    {
+        Player player;
+        player.x = 5;
+        player.Move(1, -1);
+        std::cin.get();
+    }
+
+
+16. C++ 中类和结构体的比较
+----------------------------
+
+- 类中的成员变量的可见性默认是 `private` 而结构体中成员变量的可见性默认是 `public`；
+- 尽量不要在结构体中使用继承。
+
+17. 如何写一个 C++ 的类
+--------------------------
+
+.. code-block:: c++
+    :linenos:
+    
+    #include <iostream>
+
+    class Log
+    {
+    public:
+        const int ErrorLevel = 0;
+        const int WarningLevel = 1;
+        const int InfoLevel = 2;
+
+    private:
+        int m_LogLevel = 0;
+
+    public:
+        void SetLevel(int level)
+        {
+            m_LogLevel = level;
+        }
+
+        void Error(const char* message)
+        {
+            if (m_LogLevel >= ErrorLevel)
+                std::cout << "[ERROR]: " << message << std::endl;
+        }
+        void Warning(const char* message)
+        {
+            if (m_LogLevel >= WarningLevel)
+                std::cout << "[WARNING]: " << message << std::endl;
+        }
+        void Info(const char* message)
+        {
+            if (m_LogLevel >= InfoLevel)
+                std::cout << "[INFO]: " << message << std::endl;
+        }
+    };
+
+    int main()
+    {
+        Log log;
+        log.SetLevel(log.ErrorLevel);
+        log.Error("Hello!");
+        log.Warning("Hello!");
+        log.Info("Hello!");
+        std::cin.get();
+    }
+
+18. C++ 中的 Static
+----------------------
+
+C++ 中的 `static` 主要有两种不同的使用场景：
+
+    - 在类或结构体内部使用 `static` ;
+    - 在类或结构体外部使用 `static` ;
+
+下面展示一些类或结构体外部使用 `static` 的代码片段：
+
+- 场景一
+
+  .. code-block:: c++
+        :linenos:
+        :caption: Static.cpp
+        :emphasize-lines: 1
+
+        int s_Variable = 5;
+      
+  .. code-block:: c++
+        :linenos:
+        :caption: Sandbox.cpp
+        :emphasize-lines: 3
+
+        #include <iostream>
+
+        int s_Variable = 10;
+
+        int main()
+        {
+          std::cout << s_Variable << std::endl;
+          std::cin.get();
+        }
+     
+  将会出现编译错误： ::
+    
+    1>Static.obj : error LNK2005: "int s_Variable" (?s_Variable@@3HA) already defined in Sandbox.obj
+    1>C:\dev\CppTemp\Debug\Sandbox.exe : fatal error LNK1169: one or more multiply defined symbols found
+    
+  由于这里（一个编译单元 -- translation unit）有两个同名的全局变量 `s_Variable` 。
+     
+- 场景二：
+
+  .. code-block:: c++
+        :linenos:
+        :caption: Static.cpp
+        :emphasize-lines: 1
+
+        static int s_Variable = 5;
+      
+  .. code-block:: c++
+        :linenos:
+        :caption: Sandbox.cpp
+        :emphasize-lines: 3
+
+        #include <iostream>
+
+        int s_Variable = 10;
+
+        int main()
+        {
+          std::cout << s_Variable << std::endl; // output will be 10
+          std::cin.get();
+        }
+      
+  在 `static.cpp` 中定义的 ``s_Variable`` 由于有 ``static`` 修饰，其作用
+  类似于使其修饰的变量仅在当前 `.cpp` 文件中可见，因此没有出现场景一中链接错
+  误。若在头文件中像这样定义 ``static`` 修饰的变量，在每一个使用该头文件的 `.cpp` 
+  文件中都会各自定义一个 ``static`` 变量，这是因为引用头文件本质是将其代码进
+  行复制。
+
+- 场景三：
+
+  .. code-block:: c++
+        :linenos:
+        :caption: Static.cpp
+        :emphasize-lines: 1
+
+        int s_Variable = 5;
+      
+  .. code-block:: c++
+        :linenos:
+        :caption: Sandbox.cpp
+        :emphasize-lines: 3
+
+        #include <iostream>
+
+        extern int s_Variable;
+
+        int main()
+        {
+          std::cout << s_Variable << std::endl; // output will be 5
+          std::cin.get();
+        }
+      
+  在 `static.cpp` 中定义的 ``s_Variable`` 没有 ``static`` 修饰，因此该定义
+  对于 `Sandbox.cpp` 是可见的。
+
+19. C++ 类和结构体中的 static
+--------------------------------------
+
+.. code-block:: c++
+    :linenos:
+
+    #include<iostream>
+
+    struct  Entity
+    {
+        int x, y;
+        void Print()
+        {
+            std::cout << x << " , " << y << std::endl;
+        }
+    };
+
+    int main()
+    {
+        Entity entity;
+        entity.x = 2;
+        entity.y = 3;
+        Entity  entity1 = { 5,8 };
+
+        entity.Print();  // output will be "2 , 3"
+        entity1.Print(); // output will be "5 , 8"
+        std::cin.get();
+    }
+
+将成员变量 ``x`` 和 ``y`` 加上 ``static`` 修饰：
+ 
+.. code-block:: c++
+    :linenos:
+    :emphasize-lines: 5,17
+
+    #include<iostream>
+
+    struct  Entity
+    {
+        static int x, y;
+        void Print()
+        {
+            std::cout << x << " , " << y << std::endl;
+        }
+    };
+
+    int main()
+    {
+        Entity entity;
+        entity.x = 2;
+        entity.y = 3;
+        Entity  entity1 = { 5,8 };
+
+        entity.Print();
+        entity1.Print();
+        std::cin.get();
+    }
+
+由于此时 ``x`` 和 ``y`` 不是实例中的成员，因此编译时将出现以下错误： ::
+
+    1>C:\dev\CppTemp\Debug\Sandbox.exe(17,25): error C2078: too many initializers
+
+继续调整如下：
+
+.. code-block:: c++
+    :linenos:
+    :emphasize-lines: 5,15,16,19,20,22,23
+
+    #include<iostream>
+
+    struct  Entity
+    {
+        static int x, y;
+        void Print()
+        {
+            std::cout << x << " , " << y << std::endl;
+        }
+    };
+
+    int main()
+    {
+        Entity entity;
+        entity.x = 2;
+        entity.y = 3;
+
+        Entity entity1;
+        entity1.x = 5;
+        entity1.y = 8;
+
+        entity.Print();
+        entity1.Print();
+        std::cin.get();
+    }
+
+编译时出现以下错误： ::
+
+    1>Sandbox.obj : error LNK2001: unresolved external symbol "public: static int Entity::x" (?x@Entity@@2HA)
+    1>Sandbox.obj : error LNK2001: unresolved external symbol "public: static int Entity::y" (?y@Entity@@2HA)
+    1>C:\dev\CppTemp\Debug\Sandbox.exe : fatal error LNK1120: 2 unresolved externals
+
+继续调整如下：
+
+.. code-block:: c++
+    :linenos:
+    :emphasize-lines: 12,13,25,26
+
+    #include<iostream>
+
+    struct  Entity
+    {
+        static int x, y;
+        void Print()
+        {
+            std::cout << x << " , " << y << std::endl;
+        }
+    };
+
+    int Entity::x;
+    int Entity::y;
+
+    int main()
+    {
+        Entity entity;
+        entity.x = 2;
+        entity.y = 3;
+
+        Entity entity1;
+        entity1.x = 5;
+        entity1.y = 8;
+
+        entity.Print();     // output will be "5, 8"
+        entity1.Print();    // output will be "5, 8"
+        std::cin.get();
+    }
+
+上述代码等效于：
+
+.. code-block:: c++
+    :linenos:
+    :emphasize-lines: 18,19,22,23
+
+    #include<iostream>
+
+    struct  Entity
+    {
+        static int x, y;
+        void Print()
+        {
+            std::cout << x << " , " << y << std::endl;
+        }
+    };
+
+    int Entity::x;
+    int Entity::y;
+
+    int main()
+    {
+        Entity entity;
+        Entity::x = 2;
+        Entity::y = 3;
+
+        Entity entity1;
+        Entity::x = 5;
+        Entity::y = 8;
+
+        entity.Print();     // output will be "5, 8"
+        entity1.Print();    // output will be "5, 8"
+        std::cin.get();
+    }
+
+20. C++ 中的 Local Static
+----------------------------
+
+函数第一次被调用时，函数中的 static 变量将被创建一次，后续被调用时将不会再创建。
+
+.. code-block:: c++
+    :linenos:
+    :emphasize-lines: 5
+
+    #include<iostream>
+
+    void Function()
+    {
+        static int i = 0;
+        i++;
+        std::cout << i << std::endl;
+    }
+
+    int main()
+    {
+        Function();     // output will be "1"
+        Function();     // output will be "2"
+        Function();     // output will be "3"
+        Function();     // output will be "4"
+        Function();     // output will be "5"
+        std::cin.get();
+    }
+
+上面的代码等效于下面的代码，只是限制了变量 ``i`` 只能在函数 ``Function()`` 中访问：
+
+.. code-block:: c++
+    :linenos:
+    :emphasize-lines: 3
+
+    #include<iostream>
+
+    static int i = 0;
+    void Function()
+    {
+        i++;
+        std::cout << i << std::endl;
+    }
+
+    int main()
+    {
+        Function();     // output will be "1"
+        Function();     // output will be "2"
+        Function();     // output will be "3"
+        Function();     // output will be "4"
+        Function();     // output will be "5"
+        std::cin.get();
+    }
+
+通常的单例模式代码：
+
+.. code-block:: c++
+    :linenos:
+    :emphasize-lines: 5,6,9,10,11,12,18,22
+
+    #include<iostream>
+
+    class Singleton
+    {
+    private:
+        static Singleton* s_Instance;
+
+    public:
+        static Singleton& Get()
+        {
+            return *s_Instance;
+        }
+        void SomeFunc()
+        {
+        }
+    };
+
+    Singleton* Singleton::s_Instance = nullptr;
+
+    int main()
+    {
+        Singleton::Get().SomeFunc();
+        std::cin.get();
+    }
+
+使用本节中的 `Local Static` 后代码更简洁：
+
+.. code-block:: c++
+    :linenos:
+    :emphasize-lines: 6,7,8,9,10
+
+    #include<iostream>
+
+    class Singleton
+    {
+    public:
+        static Singleton& Get()
+        {
+            static Singleton instance;
+            return instance;
+        }
+        void SomeFunc()
+        {
+        }
+    };
+
+    int main()
+    {
+        Singleton::Get().SomeFunc();
+        std::cin.get();
+    }
+
+21. C++  中的枚举
+--------------------
+
+.. code-block:: c++
+    :linenos:
+    :emphasize-lines: 6,7,8,9,10,11,24,29,34,42
+    
+    #include <iostream>
+
+    class Log
+    {
+    public:
+        enum Level //  [ : [ unsigned ] char | int ]
+        {
+            LevelError = 0,
+            LevelWarning,
+            LevelInfo
+        };
+
+    private:
+        Level m_LogLevel = LevelInfo;
+
+    public:
+        void SetLevel(Level level)
+        {
+            m_LogLevel = level;
+        }
+
+        void Error(const char* message)
+        {
+            if (m_LogLevel >= LevelError)
+                std::cout << "[ERROR]: " << message << std::endl;
+        }
+        void Warning(const char* message)
+        {
+            if (m_LogLevel >= LevelWarning)
+                std::cout << "[WARNING]: " << message << std::endl;
+        }
+        void Info(const char* message)
+        {
+            if (m_LogLevel >= LevelInfo)
+                std::cout << "[INFO]: " << message << std::endl;
+        }
+    };
+
+    int main()
+    {
+        Log log;
+        log.SetLevel(Log::LevelError);
+        log.Error("Hello!");
+        log.Warning("Hello!");
+        log.Info("Hello!");
+        std::cin.get();
+    }
+    
+上面的代码中 `enum Level` 并不是一个名称空间，因此这样访问 ``Log::LevelError`` 
+而不是这样访问 ``Level::LevelError`` ;另外由于此处枚举的本质是整数，因
+此可以使用比较运算符 `m_LogLevel >= LevelError` 。
+
+22. C++ 中的构造函数
+----------------------
+
+构造函数是一个特殊的方法，在实例化对象的时候被调用。
+
+.. code-block:: c++
+    :linenos:
+    
+    #include <iostream>
+
+    class Entity
+    {
+    public:
+        float x, y;
+
+        void Print()
+        {
+            std::cout << x << " , " << y << std::endl;
+        }
+    };
+
+    int main()
+    {
+        Entity entity;
+        entity.Print();
+        std::cin.get();
+    }
+    
+上面的代码会得到类似以下的输出： ::
+    
+    -1.07374e+08 , -1.07374e+08
+
+.. code-block:: c++
+    :linenos:
+    :emphasize-lines: 17
+    
+    #include <iostream>
+
+    class Entity
+    {
+    public:
+        float x, y;
+
+        void Print()
+        {
+            std::cout << x << " , " << y << std::endl;
+        }
+    };
+
+    int main()
+    {
+        Entity entity;
+        std::cout << entity.x << " , " << entity.y << std::endl;
+        std::cin.get();
+    }
+
+上面的代码将会出现编译错误： ::
+
+    error C4700: uninitialized local variable 'entity' used
+    
+这是由于 C++ 类中基础类型的成员变量默认将不会被初始化为“零”，必须手动对其进
+行初始化，可以像下面代码中那样写一个构造函数来初始化：
+
+.. code-block:: c++
+    :linenos:
+    :emphasize-lines: 8,9,10,11,12
+    
+    #include <iostream>
+
+    class Entity
+    {
+    public:
+        float X, Y;
+
+        Entity()
+        {
+            X = 0.0f;
+            Y = 0.0f;
+        }
+
+        void Print()
+        {
+            std::cout << X << " , " << Y << std::endl;
+        }
+    };
+
+    int main()
+    {
+        Entity entity;
+        std::cout << entity.X << " , " << entity.Y << std::endl;  // 将会正确输出
+        entity.Print(); // 将会正确输出
+        std::cin.get();
+    }
+
+
+如果在 C++ 类中没有显示地通过代码创建构造函数，编译器将会实现一个默认的 `public` 
+的“空”构造函数：
+
+.. code-block:: c++
+    :linenos:
+    
+    Entity()
+    {
+    }
+    
+如果不希望编译器创建默认的构造函数，可以添加下面的代码：
+
+.. code-block:: c++
+    :linenos:
+    
+    Entity() = delete;
+
+另外，可以创建需要传递参数的构造函数：
+
+.. code-block:: c++
+    :linenos:
+    :emphasize-lines: 14,15,16,17,18,29,31
+    
+    #include <iostream>
+
+    class Entity
+    {
+    public:
+        float X, Y;
+
+        Entity()
+        {
+            X = 0.0f;
+            Y = 0.0f;
+        }
+
+        Entity(float x, float y)
+        {
+            X = x;
+            Y = y;
+        }
+
+        void Print()
+        {
+            std::cout << X << " , " << Y << std::endl;
+        }
+    };
+
+    int main()
+    {
+        Entity entity1;
+        Entity entity2(10, 5);
+        entity1.Print();    // 0 , 0
+        entity2.Print();    // 10 , 5
+        std::cin.get();
+    }
+
+23. C++ 中的析构函数
+----------------------
+
+当对象被销毁的时候析构函数将会被调用，通常在析构函数中释放在构造函数中分配在
+堆中的内存；当然也可以手动调用析构函数，但是很少这样做，注意析构函数会被多次调用。
+
+.. code-block:: c++
+    :linenos:
+    :emphasize-lines: 15,16,17,18,26,27,28,29,30,34
+
+    #include <iostream>
+
+    class Entity
+    {
+    public:
+        float X, Y;
+
+        Entity()
+        {
+            X = 0.0f;
+            Y = 0.0f;
+            std::cout << "Created Entity!" << std::endl;
+        }
+
+        ~Entity()
+        {
+            std::cout << "Destroyed Entity!" << std::endl;
+        }
+
+        void Print()
+        {
+            std::cout << X << " , " << Y << std::endl;
+        }
+    };
+
+    void Function()
+    {
+        Entity entity;
+        entity.Print();
+    }
+
+    int main()
+    {
+        Function();
+        std::cin.get();
+    }
+    
+输出为： ::
+
+    Created Entity!
+    0 , 0
+    Destroyed Entity!
+
+24. C++ 中的继承
+------------------
+
+.. code-block:: c++
+    :linenos:
+    :emphasize-lines: 15,33,34,36,37,38,39
+    
+    #include <iostream>
+
+    class Entity
+    {
+    public:
+        float X, Y;
+
+        void Move(float xa, float ya)
+        {
+            X += xa;
+            Y += ya;
+        }
+    };
+
+    class Player : public Entity
+    {
+    public:
+        const char* Name;
+
+        Player(const char* name)
+        {
+            Name = name;
+        }
+
+        void PrintName()
+        {
+            std::cout << Name << std::endl;
+        }
+    };
+
+    int main()
+    {
+        std::cout << sizeof(Entity) << std::endl; // output will be "8"
+        std::cout << sizeof(Player) << std::endl; // output will be "12"
+
+        Player player("playerA");
+        player.Move(5, 5);
+        player.X = 2;
+        player.PrintName();
+
+        std::cin.get();
+    }
+
+25. C++ 中的虚函数
+--------------------
+
+.. code-block:: c++
+    :linenos:
+    :emphasize-lines: 28,29,30,31,38,39
+
+    #include <iostream>
+    #include <string>
+
+    class Entity
+    {
+    public:
+        std::string GetName()
+        {
+            return "Entity";
+        }
+    };
+
+    class Player : public Entity
+    {
+    private:
+        std::string m_Name;
+    public:
+        Player(const std::string& name) :m_Name(name)
+        {
+        }
+
+        std::string GetName()
+        {
+            return m_Name;
+        }
+    };
+
+    void PrintName(Entity* entity)
+    {
+        std::cout << entity->GetName() << std::endl;
+    }
+
+    int main()
+    {
+        Entity* entity = new Entity();
+        Player* player = new Player("Cherno");
+
+        PrintName(entity);  // output will be "Entity"
+        PrintName(player);  // output will be "Entity"
+
+        delete entity;
+        delete player;
+
+        std::cin.get();
+    }
+    
+使用虚函数后（包含 V-Table），有两个额外花销，保存 V-Table 的空间和调用时查表:
+
+.. code-block:: c++
+    :linenos:
+    :emphasize-lines: 7,22,38,39
+    
+    #include <iostream>
+    #include <string>
+
+    class Entity
+    {
+    public:
+        virtual std::string GetName()
+        {
+            return "Entity";
+        }
+    };
+
+    class Player : public Entity
+    {
+    private:
+        std::string m_Name;
+    public:
+        Player(const std::string& name) :m_Name(name)
+        {
+        }
+
+        std::string GetName() override // C++ 11 中 override 可选，为了可读性，建议加上
+        {
+            return m_Name;
+        }
+    };
+
+    void PrintName(Entity* entity)
+    {
+        std::cout << entity->GetName() << std::endl;
+    }
+
+    int main()
+    {
+        Entity* entity = new Entity();
+        Player* player = new Player("Cherno");
+
+        PrintName(entity);  // output will be "Entity"
+        PrintName(player);  // output will be "Cherno"
+
+        delete entity;
+        delete player;
+
+        std::cin.get();
+    }
+
+26. C++ 中的接口（纯虚函数）
+-----------------------------
+
+C++ 中的包含纯虚函数的类就是“抽象类”，若所有方法都是纯虚函数，则是“接口”，包含未
+实现纯的虚函数的类不能进行实例化操作。
+
+.. code-block:: c++
+    :linenos:
+    :emphasize-lines: 7,13,22
+
+    #include <iostream>
+    #include <string>
+
+    class Printable
+    {
+    public:
+        virtual std::string GetClassName() = 0;
+    };
+
+    class Entity : public Printable
+    {
+    public:
+        std::string GetClassName() override // C++ 11 中 override 可选，为了可读性，建议加上
+        {
+            return "Entity";
+        }
+    };
+
+    class Player : public Entity
+    {
+    public:
+        std::string GetClassName() override // C++ 11 中 override 可选，为了可读性，建议加上
+        {
+            return "Player";
+        }
+    };
+
+    void Print(Printable* obj)
+    {
+        std::cout << obj->GetClassName() << std::endl;
+    }
+
+    int main()
+    {
+        Entity* entity = new Entity();
+        Player* player = new Player();
+
+        Print(entity);  // output will be "Entity"
+        Print(player);  // output will be "Player"
+
+        delete entity;
+        delete player;
+
+        std::cin.get();
+    }
+
+27. C++ 中的可见性（作用域）
+-----------------------------
+
+可见性是指类中的属性或者方法的可见性，C++ 中有三种可见性，分别是 ``public`` 、 ``protected`` 和 ``private``。
+类中的可见性默认是 ``private``, 结构体中的可见性默认是 ``public`` 。
+
+===========     ================================================================
+可见性             说明
+===========     ================================================================
+private         修饰后的成员只能在 **当前类** 或者 **友元** 中进行访问
+protected       修饰后的成员只能在 **当前类** 或者 **派生类** 中进行访问
+public          修饰后的成员在任何地方都可进行访问
+===========     ================================================================
+
+
+28. C++ 中的数组
+------------------
+
+.. code-block:: c++
+    :linenos:
+
+    #include<iostream>
+    
+    int main()
+    {
+        int example[5];
+        example[0] = 2;
+        example[4] = 4;
+        std::cout << example[0] << std::endl;   // 访问数组中元素
+        std::cout << example << std::endl;      // 数组的地址
+        std::cin.get();
+    }
+
+在上面的代码中数组名称就是一个指向整型（元素类型）的指针：
+
+.. code-block:: c++
+    :linenos:
+    :emphasize-lines: 6,13
+
+    #include<iostream>
+
+    int main()
+    {
+        int example[5];
+        int* ptr = example;
+        for (int i = 0; i < 5; i++)
+        {
+            example[i] = 2;
+        }
+        example[2] = 5;
+        std::cout << example[2] << std::endl;// 5
+        *(ptr + 2) = 6;
+        std::cout << example[2] << std::endl;// 6
+
+        std::cin.get();
+    }
+
+有时需要通过 `new` 关键字来创建数组，主要是考虑到数组对象的生命周期问题。如果需要
+在某个方法种创建并返回数组，则通常需使用 `new` 关键字来创建数组，同时必须在代码中
+调用 `delete` 来删除该数组，在此调用之前，该数组将会一直存在：
+
+.. code-block:: c++
+    :linenos:
+    :emphasize-lines: 5,11,17
+    
+    #include<iostream>
+
+    int main()
+    {
+        int example[5];                 // 存储在栈中
+        for (int i = 0; i < 5; i++)
+        {
+            example[i] = 2;
+        }
+
+        int* another = new int[5];      // 存储在堆中
+        for (int i = 0; i < 5; i++)
+        {
+            another[i] = 2;
+        }
+
+        delete[] another;
+        std::cin.get();
+    }
+
+C++ 中的数组无法直接获取其中包含的元素的数量：
+
+.. code-block:: c++
+    :linenos:
+    :emphasize-lines: 6,10
+
+    #include<iostream>
+
+    int main()
+    {
+        int a[5];
+        int count = sizeof(a) / sizeof(int); // 5
+        std::cout << count << std::endl;
+
+        int* b = new int[5];
+        count = sizeof(b) / sizeof(int); // 0
+        std::cout << count << std::endl;
+
+        std::cin.get();
+    }
+
+在 C++ 11 中可以通过以下代码获取数组中元素的数量，但是会有额外的开销：
+
+.. code-block:: c++
+    :linenos:
+    :emphasize-lines: 2,6,7
+
+    #include<iostream>
+    #include<array>
+
+    int main()
+    {
+        std::array<int, 5> c;
+        int count = c.size();
+        std::cout << count << std::endl; // 5
+
+        std::cin.get();
+    }
+
+
+29. C++ 中的 Stirng 是如何工作的
+----------------------------------
+
+- C 风格字符串：
+
+ **双引号** 的类型默认为 ``char*`` , 使用 **单引号** 的类型为 ``char``。
+ 
+ ``char* name = "Cherno";`` 这里使用了 C 风格的代码来表示字符串，虽然这里的 ``name`` 是
+ 一个指针类型，但不需要通过 ``delete name`` 来清理内存，记住仅在使用 new 关键字分
+ 配内存的时候才使用 ``delete`` 清理内存。 *内存中从指针开始到后面的第一个存储值为
+ 0的字节部分为字符串的内容。* 这也是下面代码中使用 ``std::cout`` 可以输出完整字符
+ 串的原因（name2、name3可是指针）。
+
+ .. code-block:: c++
+     :linenos:
+     :emphasize-lines: 8,9,11,2
+ 
+     #include <iostream>
+     
+     int main()
+     {
+         char name2[7] = { 'C','h','e','r','n','o','\0' };
+         char name3[7] = { 'C','h','e','r','n','o',0 };
+     
+         std::cout << sizeof(name2) << std::endl; // output will be "7"
+         std::cout << strlen(name3) << std::endl; // output will be "6"
+     
+         std::cout << name2 << std::endl; // output will be "Cherno"
+         std::cout << name3 << std::endl; // output will be "Cherno"
+     
+         std::cin.get();
+     }
+
+
+
+- C++ 风格字符串：
+
+  .. code-block:: c++
+      :linenos:
+      :emphasize-lines: 2,7,8
+  
+      #include <iostream>
+      #include <string>
+
+      int main()
+      {
+          std::string name = "Cherno";
+          std::cout << name.size() << std::endl;  // output will be "6"
+          std::cout << name << std::endl;         // output will be "Cherno"
+          std::cin.get();
+      }
+  
+  使用下面两种方式进行字符串的拼接：
+  
+      .. code-block:: c++
+          :linenos:
+
+          std::string name = "Cherno";
+          name += "another";
+
+      .. code-block:: c++
+          :linenos:
+
+          std::string name = std::string("Cherno") + "another";
+
+
+30. C++ 中的 Stirng 字面量
+----------------------------
+
+.. code-block:: c++
+    :linenos:
+    :emphasize-lines: 5,8,9
+
+    #include <iostream>
+
+    int main()
+    {
+        const char name[8] = "Che\0rno";        // \0 represents NUL
+        //const char name[] = "Che\0rno"        // same as above
+
+        std::cout << strlen(name) << std::endl;  // output will be "3"
+        std::cout << name << std::endl;          // output will be "Che"
+        std::cin.get();
+    }
+
+.. code-block:: c++
+    :linenos:
+    :emphasize-lines: 5,8,9
+
+    #include <iostream>
+
+    int main()
+    {
+        const char* name = "Cherno"; // or u8"Cherno"   // UTF-8,1 bytes per character
+        const wchar_t* name2 = L"Cherno";               // 1 or 2 or 4 byte(s) per character
+        const char16_t* name3 = u"Cherno";              // UTF-16,2 bytes per character
+        const char32_t* name4 = U"Cherno";              // UTF-32,4 bytes per character
+
+        std::string s_name = "Cherno";
+        std::wstring s_name2 = L"Cherno";
+        std::u16string s_name3 = u"Cherno";
+        std::u32string s_name4 = U"Cherno";
+
+        const char* paragraph = R"(Line1
+    Line2
+    Line3
+    Line4)";
+
+        const char* paragraph2 = "Line1\n"
+            "Line2\n"
+            "Line3\n"
+            "Line4\n";
+
+        std::cout << paragraph << std::endl;
+        std::cout << paragraph2 << std::endl;
+        std::cin.get();
+    }
+
+输出为： ::
+
+    Line1
+    Line2
+    Line3
+    Line4
+    Line1
+    Line2
+    Line3
+    Line4
+
+.. Warning::
+
+    字符串总是存储在只读的内存空间中。
+
+.. code-block:: c++
+    :linenos:
+    :emphasize-lines: 6,8
+
+    #include <iostream>
+
+    int main()
+    {
+        char name[] = "Cherno";
+        name[2] = 'a';
+
+        std::cout << name << std::endl; // output will be "Charno"
+        std::cin.get();
+    }
+
+31. C++ 中的常量
+------------------
+
+使用 `const` 修饰的变量表示其不希望在程序中被修改。
+
+- 基本使用场景：
+
+    .. code-block:: c++
+        :linenos:
+        :emphasize-lines: 5
+
+        #include<iostream>
+
+        int main()
+        {
+            const int MAX_AGE = 90;
+            int* a = new int;
+
+            a = (int*)&MAX_AGE;
+
+            std::cout << *a << std::endl;
+            std::cin.get();
+        }
+
+- 修饰类中的成员方法：
+  
+    表示方法不会对成员变量进行修改。
+
+    .. code-block:: c++
+        :linenos:
+        :emphasize-lines: 9,20,21,22,23,28 
+
+        #include<iostream>
+
+        class  Entity
+        {
+        private:
+            int m_X, m_Y;
+
+        public:
+            int GetX() const
+            {
+                return m_X;
+            }
+
+            void SetX(int x)
+            {
+                m_X = x;
+            }
+        };
+
+        void PrinEntity(const Entity& e)
+        {
+            std::cout << e.GetX() << std::endl;
+        }
+
+        int main()
+        {
+            Entity e;
+            PrinEntity(e);
+            std::cin.get();
+        }
+
+32. C++ 中的 Mutable 关键字
+-----------------------------
+
+`Mutable` 单词的意思为“可以修改的”，C++ 中主要又两个使用场景，分别是：
+
+    - Const 常量相关
+    - Lambda 表达式相关
+
+- 在常量上下文中的 mutable 使用：
+
+    .. code-block:: c++
+        :linenos:
+        :emphasize-lines: 6,8,10
+        
+        #include<iostream>
+
+        class  Entity
+        {
+        private:
+            std::string m_Name;
+        public:
+            const std::string& GetName() const
+            {
+                return m_Name;
+            }
+        };
+
+        int main()
+        {
+            const Entity e;
+            e.GetName();
+
+            std::cin.get();
+        }
+
+    使用 `mutable` 关键字修饰的类成员变量使其可以在 const 方法中被修改：
+
+        .. code-block:: c++
+            :linenos:
+            :emphasize-lines: 7,10,12
+
+            #include<iostream>
+
+            class  Entity
+            {
+            private:
+                std::string m_Name;
+                mutable int m_DebugCount = 0;
+
+            public:
+                const std::string& GetName() const
+                {
+                    m_DebugCount++;
+                    return m_Name;
+                }
+            };
+
+            int main()
+            {
+                const Entity e;
+                e.GetName();
+
+                std::cin.get();
+            }
+
+- 在 Lambda 上下文中使用 mutable:
+    
+    .. code-block:: c++
+        :linenos:
+        :emphasize-lines: 6,7,8,9,10,11
+
+        #include<iostream>
+
+        int main()
+        {
+            int x = 8;
+            auto f = [=]()
+            {
+                int y = x;
+                y++;
+                std::cout << y << std::endl;
+            };
+
+            f();
+
+            std::cin.get();
+        }
+    
+    `[=]` 表示在 Lambda 中对外部的局部变量以值拷贝的方式使用，`[&]` 表示以引用的
+    方式使用。使用 `mutable` 关键字修饰 Lambda 可以对上面的代码进行简化：
+
+        .. code-block:: c++
+            :linenos:
+            :emphasize-lines: 6,7,8,9
+
+            #include<iostream>
+
+            int main()
+            {
+                int x = 8;
+                auto f = [=]() mutable
+                {
+                    std::cout << x << std::endl;
+                };
+
+                f();
+                // x = 8 here
+
+                std::cin.get();
+            }
+    
+
+33. C++ 中的成员初始化列表（构造函数初始化器列表）
+----------------------------------------------------
+
+类成员初始化的几种方式：
+
+-   方式一（构造函数中初始化）
+
+    .. code-block:: c++
+        :linenos:
+        :emphasize-lines: 11,16
+
+        #include <iostream>
+
+        class Entity
+        {
+        private:
+            std::string m_Name;
+
+        public:
+            Entity()
+            {
+                m_Name = "Unknown";
+            }
+
+            Entity(const std::string& name)
+            {
+                m_Name = name;
+            }
+
+            const std::string& GetName() const { return m_Name; }
+        };
+
+        int main()
+        {
+            Entity entity;
+            Entity entity2("Cherno");
+
+            std::cout << entity.GetName() << std::endl;  // output will be "Unknown"
+            std::cout << entity2.GetName() << std::endl; // output will be "Cherno"
+            std::cin.get();
+        }
+
+-   方式二（成员初始化列表）
+
+    .. code-block:: c++
+        :linenos:
+        :emphasize-lines: 10,15
+
+        #include <iostream>
+
+        class Entity
+        {
+        private:
+            std::string m_Name;
+
+        public:
+            Entity()
+                : m_Name("Unknown")
+            {
+            }
+
+            Entity(const std::string& name)
+                : m_Name(name)
+            {
+            }
+
+            const std::string& GetName() const { return m_Name; }
+        };
+
+        int main()
+        {
+            Entity entity;
+            Entity entity2("Cherno");
+
+            std::cout << entity.GetName() << std::endl;  // output will be "Unknown"
+            std::cout << entity2.GetName() << std::endl; // output will be "Cherno"
+            std::cin.get();
+        }
+
+    当有多个成员变量的时候，注意成员初始化列表中的顺序需要与它们定义的顺序保持一
+    致，否则可能会导致某些编译器报错，这是因为类中成员变量初始化总是按照它们在类
+    中出现的先后顺序确定的。
+
+    .. code-block:: c++
+        :linenos:
+        :emphasize-lines: 4,5,9
+
+        class Entity
+        {
+        private:
+            std::string m_Name;
+            int m_Score;
+
+        public:
+            Entity()
+                : m_Name("Unknown"), m_Score(0)
+            {
+            }
+        };
+
+为什么需要成员初始化列表？
+
+    -   避免额外无意义的初始化
+        
+        .. code-block:: c++
+            :linenos:
+            :emphasize-lines: 8,10
+
+            class Entity
+            {
+            private:
+                std::string m_Name;
+                int m_Score;
+
+            public:
+                Entity()
+                    : m_Score(0) // without [ m_Name("Unknown") ] here
+                {
+                    m_Name = "Unknown";
+                }
+            };
+        
+        上面的代码中，我们没有在成员初始化列表中对 ``m_Name`` 成员进行初始化，而
+        是将其初始化代码添加到构造函数体内部。这会导致 ``m_Name`` 进行两次初始化。
+        第一次是默认的，第二次是在构造函数体中我们编码写的。
+    
+    -   演示代码
+
+        .. code-block:: c++
+            :linenos:
+            :emphasize-lines: 6,7,8,9,11,12,13,14,23,24,25,26
+
+            #include <iostream>
+
+            class  Example
+            {
+            public:
+                Example()
+                {
+                    std::cout << "Created Example !" << std::endl;
+                }
+
+                Example(int x)
+                {
+                    std::cout << "Created Example With " << x << "!" << std::endl;
+                }
+            };
+
+            class Entity
+            {
+            private:
+                Example m_Example;
+
+            public:
+                Entity()
+                {
+                    m_Example = Example(8);
+                }
+            };
+
+            int main()
+            {
+                Entity entity;
+                std::cin.get();
+            }
+
+        将会输出： ::
+
+            Created Example !
+            Created Example With 8!
+
+        如果我们使用成员初始化列表：
+
+        .. code-block:: c++
+            :linenos:
+            :emphasize-lines: 24
+
+            #include <iostream>
+
+            class  Example
+            {
+            public:
+                Example()
+                {
+                    std::cout << "Created Example !" << std::endl;
+                }
+
+                Example(int x)
+                {
+                    std::cout << "Created Example With " << x << "!" << std::endl;
+                }
+            };
+
+            class Entity
+            {
+            private:
+                Example m_Example;
+
+            public:
+                Entity()
+                    : m_Example(Example(8)) // or : m_Example(8)
+                {
+                }
+            };
+
+            int main()
+            {
+                Entity entity;
+                std::cin.get();
+            }
+
+        输出将会是： ::
+        
+            Created Example With 8!
+
+34. 三元运算符
+----------------
+
+略。
+
+35. C++ 中如何创建并初始化对象
+--------------------------------
+
+C++ 中对像的创建主要有两种，主要根据对象在内存中的创建的位置进行分类，栈中 和 堆中。
+栈中的对象的生命周期在离开其作用域后结束，而堆中的对象的生命周期将由编程人员决定。
+
+栈通常不会很大，因此如果需要创建大量的对象的时候，考虑在堆中创建。
+
+使用 ``new`` 关键字创建的对象在堆中，注意使用 ``delete`` 删除堆中分配的内存。
+
+.. code-block:: c++
+    :linenos:
+    :emphasize-lines: 17,18,20,22,23,25
+
+    #include <iostream>
+
+    class Entity
+    {
+    private:
+        std::string m_Name;
+
+    public:
+        Entity() : m_Name("Unknown") {}
+        Entity(const std::string& name) : m_Name(name) {}
+
+        const std::string& GetName() const { return m_Name; }
+    };
+
+    int main()
+    {
+        Entity entity1("Cherno");               // stack
+        Entity* entity2 = new Entity("Cherno"); // heap
+
+        std::cout << entity1.GetName() << std::endl;
+
+        std::cout << (*entity2).GetName() << std::endl;
+        std::cout << entity2->GetName() << std::endl;
+
+        delete entity2;
+
+        std::cin.get();
+    }
+
+
+36. C++ 中的 NEW 关键字
+-------------------------
+
+``new`` 关键字除了寻找恰当大小的内存以存储目标对象，还会进行构造函数的调用。
+
+.. code-block:: c++
+    :linenos:
+    :emphasize-lines: 17,18,19,21,22,23,25,26,27,28
+
+    #include <iostream>
+
+    class Entity
+    {
+    private:
+        std::string m_Name;
+
+    public:
+        Entity() : m_Name("Unknown") {}
+        Entity(const std::string& name) : m_Name(name) {}
+
+        const std::string& GetName() const { return m_Name; }
+    };
+
+    int main()
+    {
+        int a = 2;
+        int* b = new int;
+        int* c = new int[50];
+
+        Entity* entity1 = new Entity; // or new Entity();
+        Entity* entity2 = new Entity[50];
+        // Entity* entity2 = new(c) Entity[50]; // 指定在哪里创建对象
+
+        delete b;
+        delete[] c;
+        delete entity1;
+        delete[] entity2;
+
+        std::cin.get();
+    }
+
+
+37. C++ 中的隐式转换和 Explict 关键字
+---------------------------------------
+
+-   隐式类型转换
+
+    .. code-block:: c++
+        :linenos:
+        :emphasize-lines: 25,26,27,29,30,31,33,34,35
+
+        #include <iostream>
+
+        class Entity
+        {
+        private:
+            std::string m_Name;
+            int m_Age;
+
+        public:
+            Entity(int age)
+                : m_Name("Unknown"), m_Age(age) {}
+
+            Entity(const std::string& name)
+                : m_Name(name), m_Age(-1) {}
+
+            const std::string& GetName() const { return m_Name; }
+        };
+
+        void Print(const Entity& entity)
+        {
+        }
+
+        int main()
+        {
+            Entity a1("Cherno");
+            Entity a2 = Entity("Cherno");
+            Entity a3 = std::string("Cherno"); // only use "Cherno" is ok in tutorial video
+
+            Entity b2(22);
+            Entity b1 = Entity(22);
+            Entity b3 = 22;
+
+            Print(22);              // 如果存在 Print(int) 前面的函数，则会调用这个更匹配的
+            // Print("Cherno");     // 这会失败因为仅允许一次隐式类型转化
+            Print(std::string("Cherno"));
+
+            std::cin.get();
+        }
+
+-   explicit 关键字
+
+    .. code-block:: c++
+        :linenos:
+        :emphasize-lines: 9,20,22
+
+        #include <iostream>
+
+        class Entity
+        {
+        private:
+            int m_Age;
+
+        public:
+            explicit Entity(int age) : m_Age(age) {}
+        };
+
+        void Print(const Entity& entity)
+        {
+        }
+
+        int main()
+        {
+            Entity b2(22);
+            Entity b1 = Entity(22);
+            // Entity b3 = 22;  // this will be fail
+
+            // Print(22);       // this will be fail
+
+            std::cin.get();
+        }
+
+C++ 中只会进行一次隐式类型转换，不会进行多次隐式类型转换。
+
+38. C++ 中的操作符和操作符重载
+---------------------------------
+
+C++ 中的操作符仅仅是一个函数。
+
+.. code-block:: c++
+    :linenos:
+    :emphasize-lines: 10,11,12,13,15,16,17,18,20,21,22,23,25,26,27,28,30,31,32,33,36,37,38,39,40,48,50
+
+    #include <iostream>
+
+    struct  Vector2
+    {
+        float x, y;
+
+        Vector2(float x, float y)
+            :x(x), y(y) {}
+
+        Vector2 operator+(const Vector2& other) const
+        {
+            return Vector2(x + other.x, y + other.y);
+        }
+
+        Vector2 Add(const Vector2& other) const
+        {
+            return *this + other; // or return operator+(other);
+        }
+
+        Vector2 operator*(const Vector2& other) const
+        {
+            return Vector2(x * other.x, y * other.y);
+        }
+
+        bool operator==(const Vector2& other) const
+        {
+            return x == other.x && y == other.y;
+        }
+
+        bool operator!=(const Vector2& other) const
+        {
+            return !(*this == other);// or return !operator==(other);
+        }
+    };
+
+    std::ostream& operator<<(std::ostream& stream, const Vector2& other)
+    {
+        stream << other.x << ", " << other.y;
+        return stream;
+    }
+
+    int main()
+    {
+        Vector2 positon(4.0f, 4.0f);
+        Vector2 speed(0.5f, 1.5f);
+        Vector2 powerup(1.1f, 1.1f);
+
+        Vector2 result1 = positon + speed * powerup;
+
+        std::cout << result1 << std::endl;
+        std::cin.get();
+    }
+
+39. C++ 中的 this 关键字
+--------------------------
+
+.. code-block:: c++
+    :linenos:
+    :emphasize-lines: 8,9
+
+    class Entity
+    {
+    public:
+        int x, y;
+
+        Entity(int x, int y)
+        {
+            this->x = x;
+            this->y = y;
+        }
+    };
+
+40. C++ 中的对象生命周期
+--------------------------
+
+-   作用域（scope）
+    
+        -   函数作用域
+            
+            .. code-block:: c++
+                :linenos:
+                :emphasize-lines: 2,3,4
+                
+                if(condition)
+                {
+                    // code here
+                }
+        -   空作用域
+
+            .. code-block:: c++
+                :linenos:
+                :emphasize-lines: 1,3
+                
+                {
+                    // code here
+                }
+
+        -   类作用域
+
+            .. code-block:: c++
+                :linenos:
+                :emphasize-lines: 19,20,21
+                
+                #include<iostream>
+
+                class Entity
+                {
+                public:
+                    Entity()
+                    {
+                        std::cout << "Entity Created!" << std::endl;
+                    }
+
+                    ~Entity()
+                    {
+                        std::cout << "Entity Destoried!" << std::endl;
+                    }
+                };
+
+                int main()
+                {
+                    {
+                        Entity e;   // output will be "Entity Created!"
+                    }               // output will be "Entity Destoried!"
+
+                    std::cin.get();
+                }
+                
+            上面代码中的 ``e`` 对象是在 **栈** 空间中创建的，在其作用域结束时（第 
+            21 行）由于栈空间中其内存的释放，该对象被销毁，因此其析构函数被调用。
+
+
+            与上面的代码不同的是，下面代码中的 ``e`` 指针指向了分配在堆中的对象，
+            在其作用域结束时（第 21 行）由于栈空间中其内存的释放，该 **指针** 被
+            销毁， *但指针所指向的堆中的对象并没有被销毁* ，相反该堆中的对象在程序
+            终止后由操作系统将其销毁。
+
+            .. code-block:: c++
+                :linenos:
+                :emphasize-lines: 19,20,21
+
+                #include<iostream>
+
+                class Entity
+                {
+                public:
+                    Entity()
+                    {
+                        std::cout << "Entity Created!" << std::endl;
+                    }
+
+                    ~Entity()
+                    {
+                        std::cout << "Entity Destoried!" << std::endl;
+                    }
+                };
+
+                int main()
+                {
+                    {
+                        Entity* e = new Entity;   // output will be "Entity Created!"
+                    }
+
+                    std::cin.get();
+                }
+
+            注意事项：
+                
+                下面代码 ``int* CreateArray()`` 函数中，由于 ``array`` 数组是在栈
+                中创建的，因此在该函数的作用域结束后，该 ``array`` 数组对象将被销
+                毁，因此 ``main`` 函数中的指针 ``a`` 将不会获得一个有效的数组（该
+                指针指向的数组在 ``CreateArray`` 方法返回后就被销毁了，虽然该指针
+                还指向之前的那个地址）：
+
+                .. code-block:: c++
+                    :linenos:
+                    :emphasize-lines: 3,4,5,6,7,11
+
+                    #include<iostream>
+
+                    int* CreateArray()
+                    {
+                        int array[50];
+                        return array;
+                    }
+
+                    int main()
+                    {
+                        int* a = CreateArray();
+                        std::cin.get();
+                    }
+
+                可以在 ``int* CreateArray()`` 函数中在堆中创建数组对象，这样在该
+                函数的作用域结束后，堆中的数组对象并不会被销毁，这样就可以在 ``main`` 
+                函数中获得预期的数组对象：
+
+                .. code-block:: c++
+                    :linenos:
+                    :emphasize-lines: 5,6,7,11
+
+                    #include<iostream>
+
+                    int* CreateArray()
+                    {
+                        int* array = new int[50];
+                        return array;
+                    }
+
+                    int main()
+                    {
+                        int* a = CreateArray();
+                        std::cin.get();
+                    }
+            
+            利用作用域创建智能指针：
+
+                .. code-block:: c++
+                    :linenos:
+                    :emphasize-lines: 17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,39,40,41
+
+                    #include<iostream>
+
+                    class Entity
+                    {
+                    public:
+                        Entity()
+                        {
+                            std::cout << "Entity Created!" << std::endl;
+                        }
+
+                        ~Entity()
+                        {
+                            std::cout << "Entity Destoried!" << std::endl;
+                        }
+                    };
+
+                    class  ScopedPtr
+                    {
+                    private:
+                        Entity* m_Ptr;
+                    public:
+
+                        ScopedPtr(Entity* ptr)
+                            :m_Ptr(ptr)
+                        {
+                        }
+                        ~ScopedPtr()
+                        {
+                            delete m_Ptr;
+                        }
+                    };
+
+                    int main()
+                    {
+                        {
+                            Entity* e1 = new Entity;
+                        }
+
+                        {
+                            ScopedPtr e2 = new Entity;  // 隐式转换
+                        }
+                        std::cin.get();
+                    }
+
+                输出： ::
+
+                    Entity Created!
+                    Entity Created!
+                    Entity Destoried!
+            
+            Timer base on scope
+            
+            Mutex lock base on scope
+
+
+41. C++ 中的智能指针
+----------------------
+
+C++ 中的智能指针就是在使用 ``new`` 关键字分配内存后不需要你手动地去 ``delete`` 掉
+这部分内存。
+
+1.  unique pointer (a kind of socped pointer)
+
+    unique pinter 不能复制
+
+    .. code-block:: c++
+        :linenos:
+        :emphasize-lines: 2,23,25,27
+
+        #include<iostream>
+        #include<memory>
+
+        class Entity
+        {
+        public:
+            Entity()
+            {
+                std::cout << "Entity Created!" << std::endl;
+            }
+
+            ~Entity()
+            {
+                std::cout << "Entity Destoried!" << std::endl;
+            }
+
+            void Print() {};
+        };
+
+        int main()
+        {
+            {
+                std::unique_ptr<Entity> entity1 = std::make_unique<Entity>();   // or : std::unique_ptr<Entity> entity1(new Entity);
+
+                // std::unique_ptr<Entity> entity2 = entity1; // 这是不允许的
+
+                entity1->Print();
+            }
+            std::cin.get();
+        }
+
+    输出： ::
+
+        Entity Created!
+        Entity Created!
+        Entity Destoried!
+        Entity Destoried!
+
+2.  shared pointer(based on reference counting)
+
+    .. code-block:: c++
+        :linenos:
+        :emphasize-lines: 22,23,24,25,26,27,28,29
+
+        #include<iostream>
+        #include<memory>
+
+        class Entity
+        {
+        public:
+            Entity()
+            {
+                std::cout << "Entity Created!" << std::endl;
+            }
+
+            ~Entity()
+            {
+                std::cout << "Entity Destoried!" << std::endl;
+            }
+
+            void Print() {};
+        };
+
+        int main()
+        {
+            {
+                std::shared_ptr<Entity> entity1;
+                {
+                    std::shared_ptr<Entity> entity2 = std::make_shared<Entity>();   // or : std::shared_ptr<Entity> entity2 (new Entity);
+                                                                                    // 引用计数为一
+                    entity1 = entity2;      // 引用计数加一
+                }   //  entity2 的作用域结束，引用计数减一
+            }       //  entity1 的作用域结束，引用计数减一，对象被销毁
+            std::cin.get();
+        }
+
+    将 `shared_ptr` 拷贝给 `weak_ptr` ，不会增加 `shared_ptr` 的引用计数：
+
+    .. code-block:: c++
+        :linenos:
+        :emphasize-lines: 22,23,24,25,26,27,28,29
+
+        #include<iostream>
+        #include<memory>
+
+        class Entity
+        {
+        public:
+            Entity()
+            {
+                std::cout << "Entity Created!" << std::endl;
+            }
+
+            ~Entity()
+            {
+                std::cout << "Entity Destoried!" << std::endl;
+            }
+
+            void Print() {};
+        };
+
+        int main()
+        {
+            {
+                std::weak_ptr<Entity> entity1;
+                {
+                    std::shared_ptr<Entity> entity2 = std::make_shared<Entity>();   // or : std::shared_ptr<Entity> entity2 (new Entity);
+                                                                                    // 引用计数为一
+                    entity1 = entity2;      // 引用计数不变
+                }   //  entity2 的作用域结束，引用计数减一，对象被销毁
+            }       //  entity1 的作用域结束
+            std::cin.get();
+        }
+
+      
+
+42. Copying and Copy Constructors in C++
+------------------------------------------
+
+.. code-block:: c++
+    :linenos:
+    :emphasize-lines: 17,18,19,20,21,22,23,24
+
+    #include <iostream>
+
+    class String
+    {
+    private:
+        char* m_Buffer;
+        unsigned int m_Size;
+
+    public:
+        String(const char* string)
+        {
+            m_Size = strlen(string);
+            m_Buffer = new char[m_Size + 1];
+            memcpy(m_Buffer, string, m_Size + 1);
+        }
+
+        ~String()
+        {
+            delete[] m_Buffer;
+        }
+
+        friend std::ostream& operator<<(std::ostream& stream, const String& string);
+    };
+
+    std::ostream& operator<<(std::ostream& stream, const String& string)
+    {
+        stream << string.m_Buffer;
+        return stream;
+    }
+
+    int main()
+    {
+        String string = "Cherno";
+        std::cout << string << std::endl; // output will be "Cherno"
+        std::cin.get();
+    }
+
+我们进行一次复制操作：
+
+.. code-block:: c++
+    :linenos:
+    :emphasize-lines: 34
+
+    #include <iostream>
+
+    class String
+    {
+    private:
+        char* m_Buffer;
+        unsigned int m_Size;
+
+    public:
+        //String(const String& string) = delete; // use this to remove the default copy constructor
+        String(const char* string)
+        {
+            m_Size = strlen(string);
+            m_Buffer = new char[m_Size + 1];
+            memcpy(m_Buffer, string, m_Size + 1);
+        }
+
+        ~String()
+        {
+            delete[] m_Buffer;
+        }
+
+        friend std::ostream& operator<<(std::ostream& stream, const String& string);
+    };
+
+    std::ostream& operator<<(std::ostream& stream, const String& string)
+    {
+        stream << string.m_Buffer;
+        return stream;
+    }
+
+    int main()
+    {
+        String string = "Cherno";
+        String second = string;
+
+        std::cout << string << std::endl;
+        std::cout << second << std::endl;
+
+        std::cin.get();
+    }
+
+输出：::
+
+    Cherno
+    Cherno
+
+程序输出正确，然而当我们在命令行输出窗口中按下回车键，程序运行到 40 行时，程序将
+崩溃。这是由于 C++ 中默认的复制操作底层实现是将类中的所有成员进行简单的复制，也
+就是说在 ``string`` 和 ``second`` 对象中的成员 ``m_Buffer`` 和 ``m_Size`` 拥有相
+同的值，程序运行到最后时，对象将会调用其析构函数，导致同一个 ``m_Buffer`` 值作为
+参数被连续两次调用 `delete[]` ，这就是崩溃的原因。
+
+按如下调整可解决该问题：
+
+.. code-block:: c++
+    :linenos:
+    :emphasize-lines: 17,18,19,20,21,22,23,24
+
+    #include <iostream>
+
+    class String
+    {
+    private:
+        char* m_Buffer;
+        unsigned int m_Size;
+
+    public:
+        String(const char* string)
+        {
+            m_Size = strlen(string);
+            m_Buffer = new char[m_Size + 1];
+            memcpy(m_Buffer, string, m_Size + 1);
+        }
+
+        //String(const String& other) = delete; // use this to remove the default copy constructor
+        String(const String& other)
+            : m_Size(other.m_Size)
+        {
+            std::cout << "String Copied!" << std::endl;
+            m_Buffer = new char[m_Size + 1];
+            memcpy(m_Buffer, other.m_Buffer, m_Size + 1);
+        }
+
+        char& operator[](unsigned int index)
+        {
+            return m_Buffer[index];
+        }
+
+        ~String()
+        {
+            delete[] m_Buffer;
+        }
+
+        friend std::ostream& operator<<(std::ostream& stream, const String& string);
+    };
+
+    std::ostream& operator<<(std::ostream& stream, const String& string)
+    {
+        stream << string.m_Buffer;
+        return stream;
+    }
+
+    void PrintString(String string)
+    {
+        std::cout << string << std::endl;
+    }
+
+    int main()
+    {
+        String string = "Cherno";
+        String second = string;
+
+        PrintString(string);
+        PrintString(second);
+
+        std::cin.get();
+    }
+
+输出为： ::
+
+    String Copied!
+    String Copied!
+    Cherno
+    String Copied!
+    Cherno
+
+拷贝发生在 53，55，56 三处，其中 55，56 两行发生的拷贝可将 45 行代码调整如下解决：
+
+.. code-block:: c++
+    :linenos:
+    :emphasize-lines: 1
+
+    void PrintString(const String& string)
+
+
+43. C++ 中的箭头（->）操作符
+-----------------------------------
+
+-   基础使用
+
+    .. code-block:: c++
+        :linenos:
+        :emphasize-lines: 18,19,20
+
+        #include<iostream>
+
+        class Entity
+        {
+        public:
+
+            void Print()
+            {
+                std::cout << "Hello!" << std::endl;
+            };
+        };
+
+        int main()
+        {
+            Entity e;
+            e.Print();
+
+            Entity* ptr = &e;
+            ptr->Print();
+            (*ptr).Print();
+
+            Entity& entity = *ptr;
+            entity.Print();
+
+            std::cin.get();
+        }
+
+-   在 Scoped Pointer 中使用
+
+    .. code-block:: c++
+        :linenos:
+        :emphasize-lines: 27,28,29,30,39,40
+
+        #include<iostream>
+
+        class Entity
+        {
+        public:
+            void Print()
+            {
+                std::cout << "Hello!" << std::endl;
+            };
+        };
+
+        class  ScopedPtr
+        {
+        private:
+            Entity* m_Ptr;
+        public:
+
+            ScopedPtr(Entity* ptr)
+                :m_Ptr(ptr)
+            {
+            }
+            ~ScopedPtr()
+            {
+                delete m_Ptr;
+            }
+
+            Entity* operator->()
+            {
+                return m_Ptr;
+            }
+        };
+
+        int main()
+        {
+            Entity* e1 = new Entity;
+            e1->Print();
+            delete e1;
+
+            ScopedPtr e2 = new Entity;
+            e2->Print();
+
+            std::cin.get();
+        }
+
+-   获取成员在内存中的偏移
+
+    .. code-block:: c++
+        :linenos:
+        :emphasize-lines: 10
+
+        #include<iostream>
+
+        struct Vector3
+        {
+            float x, y, z;
+        };
+
+        int main()
+        {
+            int offset = (int)&(((Vector3*)nullptr)->y);
+            std::cout << offset << std::endl;   // output will be "4"
+
+            std::cin.get();
+        }
+
+44. C++ 中的动态数组
+----------------------
+
+``std::vector<Vertex> vertices;`` 还是 ``std::vector<Vertex*> vertices;`` ？
+
+第一种是在栈空间中创建数组，在内存中是连续的，因此遍历的效率会好一些。但是如果需
+要 resize 的话，就需要将整个数据拷贝到另一个更大的内存空间中，会有一定的开销。
+
+第二种是则是在堆空间中创建数组，在内存中通常不是连续的，因此遍历的效率会差一些。
+但是 resize 的时候会少一些拷贝的开销。
+
+.. code-block:: c++
+    :linenos:
+
+    #include<iostream>
+    #include<vector>
+
+    struct Vertex
+    {
+        float x, y, z;
+    };
+
+    std::ostream& operator<<(std::ostream& stream, const Vertex& vertex)
+    {
+        stream << vertex.x << ", " << vertex.y << ", " << vertex.z;
+        return stream;
+    }
+
+    int main()
+    {
+        std::vector<Vertex> vertices;
+
+        // 添加元素
+        vertices.push_back({ 1,2,3 });
+        vertices.push_back({ 4,5,6 });
+
+        // 遍历元素
+        for (int i = 0; i < vertices.size(); i++)
+        {
+            std::cout << vertices[i] << std::endl;
+        }
+
+        for (const Vertex& v : vertices)
+        {
+            std::cout << v << std::endl;
+        }
+
+        // 移除元素
+        vertices.erase(vertices.begin() + 1);
+
+        // 清除
+        vertices.clear();
+
+        std::cin.get();
+    }
+
+std::vector 更像是是 array list
+
+45. C++ 中的 std-vector 使用优化
+--------------------------------
+
+使用 ``std::vector`` 向里面 ``push_back`` 元素时，如果 vector 的 capcity 无法完
+成此次添加的操作，则需要分配一个更大的内存空间以将新添加的元素容纳进来，并把原来
+内存空间中的数据拷贝到新分配的空间中。在使用 ``std::vector`` 过程中，如何避免这
+种元素数据的拷贝？
+
+.. code-block:: c++
+    :linenos:
+    :emphasize-lines: 13,14,15,16,17,24,25,26
+
+    #include<iostream>
+    #include<vector>
+
+    struct Vertex
+    {
+        float x, y, z;
+
+        Vertex(float x, float y, float z)
+            :x(x), y(y), z(z)
+        {
+        }
+
+        Vertex(const Vertex& vertex)
+            :x(vertex.x), y(vertex.y), z(vertex.z)
+        {
+            std::cout << "Copied!" << std::endl;
+        }
+    };
+
+    int main()
+    {
+        std::vector<Vertex> vertices;
+
+        vertices.push_back(Vertex(1, 2, 3));
+        vertices.push_back(Vertex(4, 5, 6));
+        vertices.push_back(Vertex(7, 8, 9));
+
+        std::cin.get();
+    }
+
+输出： ::
+
+    Copied!
+    Copied!
+    Copied!
+    Copied!
+    Copied!
+    Copied!
+
+在上面的代码中，有两种类型的数据拷贝：
+    
+    1.  ``vertices.push_back(Vertex(1, 2, 3));`` 这里调用 `vector` 的 `push_back` 
+        时，``Vertex(1, 2, 3`` 会在 ``mian`` 方法所在的 `stack frame` 中进行构建，
+        然后在方法调用时拷贝到 `vector` 对象所在的 `stack frame` ；
+
+            可以通过调用 ``vertices.push_back`` 而不是 ``vertices.push_back`` 避
+            免这种类型的拷贝：
+
+            .. code-block:: c++
+                :linenos:
+                :lineno-start: 24
+                :emphasize-lines: 1,2,3
+
+                vertices.emplace_back(1, 2, 3);
+                vertices.emplace_back(4, 5, 6);
+                vertices.emplace_back(7, 8, 9);
+            
+            输出： ::
+
+                Copied!
+                Copied!
+                Copied!
+
+            ``emplace_back`` 方法中传递的是构建目标对象的参数列表，而不是已构建好
+            的对象本身。
+
+    2.  上面代码创建的 `vertices` 对象默认的 `capacity` 是 ``1`` ，因此添加第二个
+        元素的时候就需要把之前的元素拷贝到新分配的更大的内存空间中。
+
+            可以通过调用 ``vertices.reserve(3);`` 来告诉 vector 准备创建可容纳 3
+            个元素的的对象：
+
+            .. code-block:: c++
+                :linenos:
+                :lineno-start: 20
+                :emphasize-lines: 5,6,7,8
+
+                int main()
+                {
+                    std::vector<Vertex> vertices;
+
+                    vertices.reserve(3);
+                    vertices.emplace_back(1, 2, 3);
+                    vertices.emplace_back(4, 5, 6);
+                    vertices.emplace_back(7, 8, 9);
+
+                    std::cin.get();
+                }
+
+            这时将不会有任何输出，即避免了之前两种拷贝的发生。
+
+46. C++ 中库的使用（静态链接）
+--------------------------------
+
+includes: a bounch of header files.
+
+libraries: pre-compiled binaries, static or dynamic.
+
+静态链接效率通常会好一些。
+
+visual studio 中设置：
+
+    1.   include directories:
+
+        ``Project Properties -> Configuration Properties -> C/C++ -> General -> Adding include Directories``
+
+    2.  include directories:
+        
+        ``Project Properties -> Configuration Properties -> Linker -> General -> Additional Library Directories``
+        
+        ``Project Properties -> Configuration Properties -> Linker -> Input -> Additional Dependencies`` : ``glfw3.lib``
+
+        如果设置了第一项，第二项中只填入库文件的相对路径就行，否则需要在第二项中填入完整的库文件路径。
+        
+
+.. code-block:: c++
+    :linenos:
+    :emphasize-lines: 2,3,7
+
+    #include <iostream>
+    // #include <GLFE/glfw3.h>
+    extern "C" int glfwInit();
+
+    int main()
+    {
+        int a  = glfwInit();
+        std::cout << a << std::endl;
+
+        std::cin.get();
+    }
+
+
+47. C++ 中使用动态链接库
+--------------------------
+
+visual studio 中设置：
+
+    1.  include directories:
+
+        ``Project Properties -> Configuration Properties -> C/C++ -> General -> Adding include Directories``
+
+    2.  include directories:
+        
+        ``Project Properties -> Configuration Properties -> Linker -> General -> Additional Library Directories``
+        
+        ``Project Properties -> Configuration Properties -> Linker -> Input -> Additional Dependencies`` : ``glfw3dll.lib`` (注意保证 ``glfw3dll.lib`` 与 ``glfw3.dll`` 是同时编译的 )
+
+        如果设置了第一项，第二项中只填入库文件的相对路径就行，否则需要在第二项中填入完整的库文件路径。
+
+        **运行程序时，需要把 ``glfw3.dll`` 放到程序所在的路径下。**
+
+48. 创建和使用 C++ 库
+------------------------
+
+1.  Visual Studio 中创建一个空的 C++ 项目 ``Game`` ; 然后再添加一个空的 C++ 项目 ``Engine`` 。
+
+2.  在 ``Game`` 项目的 `Project Properties -> Configuration Properties -> General -> General Properties -> Configuration Type` 选项中设置为 ``Application (.exe)`` 。
+
+3.  在 ``Engine`` 项目的 `Project Properties -> Configuration Properties -> General -> General Properties -> Configuration Type` 选项中设置为 ``Static library (.lib)`` 。
+
+4.  在 ``Game`` 项目的 ``Project Properties -> Configuration Properties -> C/C++ -> General -> Adding include Directories`` 选项中添加 ``Engine`` 项目中头文件所在的路径。（为了编译通过）
+
+5.  在 ``Game`` 项目的引用中添加对 ``Engine`` 项目的引用。（为了链接通过）
+
+
+
+49. C++ 中如何处理多个返回值
+------------------------------
+
+``结构体`` ``以引用的方式传递待返回的数据到方法中`` ``std::tuple`` ``std::pair``
+
+50. C++ 中的模板
+------------------
+
+C++ 中的模板有些类似于 CSharp 中的泛型，模板在编译的时候被“展开”，而宏则是
+在此之前进行“展开”（简单的文本替换）。
+
+没有使用模板的代码：
+
+    .. code-block:: c++
+        :linenos:
+        
+        #include<iostream>
+
+        void Print(int value)
+        {
+            std::cout << value << std::endl;
+        }
+        void Print(float value)
+        {
+            std::cout << value << std::endl;
+        }
+        void Print(std::string value)
+        {
+            std::cout << value << std::endl;
+        }
+
+        int main()
+        {
+            Print(5);
+            Print("Hello");
+            Print(5.5f);
+            std::cin.get();
+        }
+        
+使用模板后的代码：
+
+    .. code-block:: c++
+        :linenos:
+        :emphasize-lines: 3,4,11,12,13
+        
+        #include<iostream>
+
+        template<typename T>    // or : template<class T>
+        void Print(T value)
+        {
+            std::cout << value << std::endl;
+        }
+
+        int main()
+        {
+            Print(5);           // or : Print<int>(5);
+            Print("Hello");     // or : Print<std::string>("Hello");
+            Print(5.5f);        // or : Print<float>(5.5f);
+            std::cin.get();
+        }
+
+编译时，编译器会根据代码的情况将模板生成相应的代码，然后进行编译。比如上面的
+代码中，编译器就会生成3个函数 ``void Print(int value)`` 、 ``void Print(float value)`` 和 ``void Print(std::string value)`` 。
+如果代码中没有任何调用模板的代码，则编译器不会生成相应的函数。当不需要编译器
+生成函数的时候，如果模板中的代码有错误，有些编译器是不会报错的。
+
+示例：
+
+    .. code-block:: c++
+        :linenos:
+        :emphasize-lines: 3,7,15
+        
+        #include<iostream>
+
+        template<typename T, int N>
+        class Array
+        {
+        private:
+            T m_Array[N];
+
+        public:
+            int GetSize() const { return N; };
+        };
+
+        int main()
+        {
+            Array<int, 5> array;
+            std::cout << array.GetSize() << std::endl;
+            std::cin.get();
+        }
+
+
+51. C++ 中的栈和堆
+--------------------
+
+52. C++ 中的宏
+----------------
+
+模板在编译的时候被“展开”，而宏则是在此之前进行“展开”（简单的文本替换）。
+
+-   示例代码一：
+
+    .. code-block:: c++
+        :linenos:
+        :emphasize-lines: 3,7
+
+        #include<iostream>
+
+        #define WAIT std::cin.get()
+
+        int main()
+        {
+            WAIT;
+        }
+
+-   示例代码二（带参数）：
+
+    .. code-block:: c++
+        :linenos:
+        :emphasize-lines: 3,7
+
+        #include<iostream>
+
+        #define Log(x) std::cout << x << std::endl
+
+        int main()
+        {
+            Log("Hello");
+            std::cin.get();
+        }
+
+-   示例代码三（条件编译）：
+
+    .. code-block:: c++
+        :linenos:
+        :emphasize-lines: 3,4,5,6,7
+
+        #include<iostream>
+
+        #ifdef DEBUG 
+        #define Log(x) std::cout << x << std::endl
+        #else
+        #define Log(x)
+        #endif
+
+        int main()
+        {
+            Log("Hello");
+            std::cin.get();
+        }
+
+-   示例代码四（条件编译）：
+
+    .. code-block:: c++
+        :linenos:
+        :emphasize-lines: 3,5
+
+        #include<iostream>
+
+        #define DEBUGLevel  1
+
+        #if DEBUGLevel == 1
+        #define Log(x) std::cout << x << std::endl
+        #else
+        #define Log(x)
+        #endif
+
+        int main()
+        {
+            Log("Hello");
+            std::cin.get();
+        }
+
+-   示例代码四（换行）：
+
+    .. code-block:: c++
+        :linenos:
+        :emphasize-lines: 3,4,5,6,8
+
+        #include<iostream>
+
+        #define MAIN int main() \
+        {\
+            std::cin.get(); \
+        }
+
+        MAIN
+        
+        
+53. C++ 中的 auto 关键字
+--------------------------
+
+54. C++ 中的静态数组
+----------------------
+
+55. C++ 中的函数指针
+------------------------
+
+-   函数指针的基本使用：
+
+        .. code-block:: c++
+            :linenos:
+            :emphasize-lines: 15,18,21,22,15,33,36,39,40,43
+
+            #include<iostream>
+
+            void Hello1()
+            {
+                std::cout << "Hello!" << std::endl;
+            }
+
+            void Hello2(const std::string& message)
+            {
+                std::cout << message << std::endl;
+            }
+
+            int main() {
+                // 11. auto
+                auto func11 = Hello1;
+
+                // 12. 指定类型
+                void(*func12)() = Hello1;
+
+                // 13. typedef 类似于 C# 中的 delegate
+                typedef void(*HelloFunc1)();
+                HelloFunc1 func13 = Hello1;
+
+                // 14. lambda
+                auto func14 = []() {std::cout << "Hello!" << std::endl; };
+
+                func11();
+                func12();
+                func13();
+                func14();
+
+                // 21. auto
+                auto func21 = Hello2;
+
+                // 22. 指定类型
+                void(*func22)(const std::string & message) = Hello2;
+
+                // 23. typedef 类似于 C# 中的 delegate
+                typedef void(*HelloFunc2)(const std::string& message);
+                HelloFunc2 func23 = Hello2;
+
+                // 24. lambda
+                auto func24 = [](const std::string& message) {std::cout << message << std::endl; };
+
+                func21("Hello!");
+                func22("Hello!");
+                func23("Hello!");
+                func24("Hello!");
+
+                std::cin.get();
+            }
+
+-   实际使用场景：
+
+        .. code-block:: c++
+            :linenos:
+            :emphasize-lines: 9,10,11,12,13,14,15,20
+            
+            #include<iostream>
+            #include<vector>
+
+            void print(int value)
+            {
+                std::cout << value << " ";
+            }
+
+            void HandleVector(const std::vector<int> data, void(*func)(int))
+            {
+                for (int item : data)
+                {
+                    func(item);
+                }
+            }
+            
+            int main()
+            {
+                std::vector<int> data = { 1,2,3,4,5,6,7,8 };
+                HandleVector(data, print);
+
+                std::cin.get();
+            }
+        
+        输出： ::
+        
+            1 2 3 4 5 6 7 8
+
+56. C++ 中的 Lambda 表达式
+-----------------------------
+
+Lambda 表达式主要是用于创建匿名函数，通常在 C++ 中使用函数指针的地方都可以
+使用 Lambda 表达式。
+
+比如上一节 :ref:`src/C++:55. C++ 中的函数指针` 中的示例代码可以做如下修改：
+
+    .. code-block:: c++
+        :linenos:
+        :emphasize-lines: 15
+        
+        #include<iostream>
+        #include<vector>
+
+        void HandleVector(const std::vector<int> data, void(*func)(int))
+        {
+            for (int item : data)
+            {
+                func(item);
+            }
+        }
+
+        int main()
+        {
+            std::vector<int> data = { 1,2,3,4,5,6,7,8 };
+            HandleVector(data, [](int value) {std::cout << value << " "; });
+
+            std::cin.get();
+        }
+
+    输出： ::
+    
+        1 2 3 4 5 6 7 8
+
+.. code-block:: c++
+    :linenos:
+    :emphasize-lines: 18,19,25,33
+        
+    #include<iostream>
+
+    void Print1(int value)
+    {
+        std::cout << "value outside labmda: " << value << " " << std::endl;
+    }
+
+    void Print2(int value)
+    {
+        std::cout << "value in labmda: " << value << " " << std::endl;
+    }
+
+    int main()
+    {
+        int a = 0;
+        int b = 0;
+
+        auto func1 = [=]() { Print2(a); };
+        auto func2 = [=]() mutable
+        {
+            a++;
+            Print2(a);
+        };
+
+        auto func3 = [a,&b]() mutable
+        {
+            a++;
+            b++;
+            Print2(a);
+            Print2(b);
+        };
+
+        auto func4 = [&]()
+        {
+            a++;
+            b++;
+            Print2(a);
+            Print2(b);
+        };
+
+        func1();
+        Print1(a);
+
+        func2();
+        Print1(a);
+
+        func3();
+        Print1(a);
+        Print1(b);
+
+        func4();
+        Print1(a);
+        Print1(b);
+
+        std::cin.get();
+    }
+
+输出： ::
+
+    value in labmda: 0
+    value outside labmda: 0
+    value in labmda: 1
+    value outside labmda: 0
+    value in labmda: 1
+    value in labmda: 1
+    value outside labmda: 0
+    value outside labmda: 1
+    value in labmda: 1
+    value in labmda: 2
+    value outside labmda: 1
+    value outside labmda: 2
+
+
+Labmda 表达式中的 ``[]`` 是 `captures` 表示如果在 Lambda 表达式内部如
+何访问外部的变量:
+
+    -   ``[=]`` :
+
+        Lambda 表达式内部全部都按值（by value）的方式访问外部变量;
+
+    -   ``[&]`` :
+
+        Lambda 表达式内部全部都按引用（by reference）的方式访问外部变量;
+
+    -   ``[a,&b]`` :
+
+        Lambda 表达式内部按值（by value）的方式访问外部变量 ``a`` ，按引用
+        （by reference）的方式访问外部变量 ``b`` 。
+
+关于上述代码中 `mutable` 的使用，可参考前面的章节 :ref:`src/C++:32. C++ 中的 Mutable 关键字` 。
+
+更多详细的信息可参考 `Lambda expressions (since C++11) <https://en.cppreference.com/w/cpp/language/lambda>`_ 。
+
+57. 为什么不使用 std 命名空间
+-------------------------------
+
+58. C++ 中的命名空间
+----------------------
+
+59. C++ 中的线程
+------------------
+
+
+60. C++ 中的计时（Timing）
+----------------------------
+
+.. code-block:: c++
+    :linenos:
+
+    #include<iostream>
+    #include<chrono>
+
+    struct  Timer
+    {
+        std::chrono::time_point<std::chrono::steady_clock> start, end;
+        std::chrono::duration<float> duration;
+        Timer()
+        {
+            start = std::chrono::high_resolution_clock::now();
+        }
+        ~Timer()
+        {
+            end = std::chrono::high_resolution_clock::now();
+            duration = end - start;
+            float ms = duration.count() * 1000.0f;
+            std::cout << "Timer took " << ms << "ms" << std::endl;
+        }
+    };
+
+.. code-block:: c++
+    :linenos:
+
+    #include<iostream>
+    #include<chrono>
+
+    struct  Timer
+    {
+    public:
+        Timer()
+        {
+            m_StartTimepoint = std::chrono::high_resolution_clock::now();
+        }
+        ~Timer()
+        {
+            Stop();
+        }
+
+        void Stop()
+        {
+            auto endTimepoint = std::chrono::high_resolution_clock::now();
+
+            auto start = std::chrono::time_point_cast<std::chrono::microseconds>(m_StartTimepoint).time_since_epoch().count();
+            auto end = std::chrono::time_point_cast<std::chrono::microseconds>(endTimepoint).time_since_epoch().count();
+            auto duration = end - start;
+
+            double ms = duration * 0.001;
+
+            std::cout << duration << "us (" << ms << "ms) \n";
+        }
+    private:
+        std::chrono::time_point<std::chrono::high_resolution_clock> m_StartTimepoint;
+    };
+
+61. C++ 中的多维数组
+----------------------
+
+62. C++ 中的排序
+------------------
+
+63. C++ 中的（Type Punning）
+-----------------------------
+
+将类型 `A` 的指针转换为类型 `B` 的指针，然后按照类型 `B` 来操作关联的内存。
+
+64. C++ 中的 Unions
+---------------------
+
+.. code-block:: c++
+    :linenos:
+    :emphasize-lines: 26,27,28,29,30,31,32,33
+    
+    #include<iostream>
+
+    struct Vector2
+    {
+        float x, y;
+    };
+
+    struct Vector4
+    {
+        float x, y, z, w;
+    };
+
+    std::ostream& operator<<(std::ostream& stream, const Vector2& other)
+    {
+        stream << other.x << ", " << other.y;
+        return stream;
+    }
+    std::ostream& operator<<(std::ostream& stream, const Vector4& value)
+    {
+        stream << value.x << ", " << value.y << ", " << value.z << ", " << value.w;
+        return stream;
+    }
+
+    struct MyUnion
+    {
+        union
+        {
+            Vector4 v4;
+            struct
+            {
+                Vector2 a, b;
+            };
+        };
+    };
+
+    int main() {
+        MyUnion data;
+        data.v4.x = 1.0f;
+        data.v4.y = 2.0f;
+        data.v4.z = 3.0f;
+        data.v4.w = 4.0f;
+
+        std::cout << data.v4 << std::endl;
+        std::cout << data.a << std::endl;
+        std::cout << data.b << std::endl;
+
+        return 0;
+    }
+
+输出： ::
+
+    1, 2, 3, 4
+    1, 2
+    3, 4
+
+65. C++ 中的虚构造函数
+------------------------
+
+.. code-block:: c++
+    :linenos:
+    :emphasize-lines: 36,37
+    
+    #include<iostream>
+
+    class  Base
+    {
+    public:
+        Base()
+        {
+            std::cout << "Base Constructed.\n";
+        }
+        ~Base()
+        {
+            std::cout << "Base Destructed.\n";
+        }
+    };
+
+    class  Derived : public Base
+    {
+    public:
+        Derived()
+        {
+            std::cout << "Derived Constructed.\n";
+        }
+        ~Derived()
+        {
+            std::cout << "Derived Destructed.\n";
+        }
+    };
+
+    int main() {
+        Base* base = new Base;
+        delete base;
+        std::cout << "--------------------------\n";
+        Derived* derived = new Derived;
+        delete derived;
+        std::cout << "--------------------------\n";
+        Base* poly = new Derived;
+        delete poly;
+
+        std::cin.get();
+    }
+
+输出： ::
+
+    Base Constructed.
+    Base Destructed.
+    --------------------------
+    Base Constructed.
+    Derived Constructed.
+    Derived Destructed.
+    Base Destructed.
+    --------------------------
+    Base Constructed.
+    Derived Constructed.
+    Base Destructed.
+
+可以看到 ``poly`` 变量在被销毁的时候并没有正确地调用 ``Derived::~Derived()`` 
+这个析构函数，这是因为 ``poly`` 被以指向 ``Base`` 类型地指针对待，在 ``delete poly;`` 
+调用的时候无法知道其是否具有派生类的析构函数。
+
+为了解决这个问题，将基类的析构函数设置为虚函数即可：
+
+.. code-block:: c++
+    :linenos:
+    :lineno-start: 10
+    :emphasize-lines: 1
+
+    
+    virtual ~Base()
+
+调整后的输出：::
+
+    Base Constructed.
+    Base Destructed.
+    --------------------------
+    Base Constructed.
+    Derived Constructed.
+    Derived Destructed.
+    Base Destructed.
+    --------------------------
+    Base Constructed.
+    Derived Constructed.
+    Derived Destructed.
+    Base Destructed.
+
+66. C++ 中的类型转换
+----------------------
+
+.. code-block:: c++
+    :linenos:
+    
+    #include<iostream>
+
+    int main() {
+        double value = 5.3;
+        std::cout << (int)value << std::endl;               // C style
+        std::cout << static_cast<int>(value) << std::endl;  // C++ style
+        std::cin.get();
+    }
+
+C++ style:
+
+    -   static_cast
+    -   dynamic_cast
+    -   const_cast
+    -   reinterpret_cast
+
+67. C++ 中的条件和动作断点
+------------------------------
+
+略。
+
+68. 现代 C++ 中的安全
+-----------------------
+
+69. C++ 中的预编译头文件
+--------------------------
+
+使用方式：
+
+1.  pch.h
+
+    在一个头文件中包含需要预编译的头文件信息。
+
+2.  pch.cpp
+
+    1.  在一个 `.cpp` 文件中 `include` 上一步中的头文件。
+
+        .. code-block:: c++
+            :caption: pch.cpp
+            :linenos:
+
+            #include"pch.h"
+
+    2.  在该文件的 Properties -> Configuration Properties -> C/C++ -> Precompiled Header -> Precompiled Header : `Create (/Yc)`
+
+3.  修改项目相关属性
+    
+    1.  在项目的 Properties -> Configuration Properties -> C/C++ -> Precompiled Header -> Precompiled Header : `Use (/Yu)`
+    2.  在项目的 Properties -> Configuration Properties -> C/C++ -> Precompiled Header -> Precompiled Header File : `pch.h`
+
+
+
+
+缺点：
+
+    -   使用预编译头文件的项目中不太好知道项目依赖于哪些库
+
+70. C++ 中的动态类型转换（Dynamic Casting）
+---------------------------------------------
+
+C++ 中的动态类型转换是在运行时发生的，因此会有一定的性能开销。动态类型转换通常是
+发生在类的继承树中，检查一个以基类类型命名的变量中存储的是否是某个子类的实例。
+
+    .. code-block:: c++
+        :linenos:
+        :emphasize-lines: 5,6,22,23
+
+        #include<iostream>
+
+        class Entity
+        {
+        public:
+            void virtual PrintName() {};
+        };
+
+        class Player :public Entity
+        {
+        };
+
+        class Enemy :public Entity
+        {
+        };
+
+        int main()
+        {
+            Player* player = new Player;
+            Enemy* enemy = new Enemy;
+
+            Player* p0 = dynamic_cast<Player*>(player);     // cast success. p0 will be some value
+            Player* p1 = dynamic_cast<Player*>(enemy);      // cast failed. p1 will be nullptr
+
+            std::cin.get();
+        }
+
+C++ 使用 RTTI(Run time type information) 来实现运行时的动态类型转换，有一定的开
+销，在 Visual Studio 中的项目的 Properties -> Configuration Properties -> C/C++ 
+-> Language -> Enable Run-Time Type Information 选项中可开启或禁用，禁用后编译的
+代码中的动态类型转换相关的代码会出现不可预知的行为。
+
+71. C++ 中的性能测试（如何测量性能）
+---------------------------------------
+
+注意在 `Debug` 和 `Release` 模式下存在编译后代码的差异。
+
+测试一：
+
+    .. code-block:: c++
+        :linenos:
+
+        #include<iostream>
+        #include<chrono>
+
+        struct  Timer
+        {
+        public:
+            Timer()
+            {
+                m_StartTimepoint = std::chrono::high_resolution_clock::now();
+            }
+            ~Timer()
+            {
+                Stop();
+            }
+
+            void Stop()
+            {
+                auto endTimepoint = std::chrono::high_resolution_clock::now();
+
+                auto start = std::chrono::time_point_cast<std::chrono::microseconds>(m_StartTimepoint).time_since_epoch().count();
+                auto end = std::chrono::time_point_cast<std::chrono::microseconds>(endTimepoint).time_since_epoch().count();
+                auto duration = end - start;
+
+                double ms = duration * 0.001;
+
+                std::cout << duration << "us (" << ms << "ms) \n";
+            }
+        private:
+            std::chrono::time_point<std::chrono::high_resolution_clock> m_StartTimepoint;
+        };
+
+        int main()
+        {
+            int value = 0;
+            {
+                Timer timer;
+                for (int i = 0; i < 1000000; i++)
+                    value += 2;
+            }
+            std::cout << value << std::endl;
+
+            __debugbreak();
+        }
+
+    输出（Debug）：::
+
+        8935us (8.935ms)
+        2000000
+
+    输出（Release）：::
+
+        1us (0.001ms)
+        2000000
+
+测试二：
+
+    .. code-block:: c++
+        :linenos:
+
+        #include<iostream>
+        #include<chrono>
+        #include<array>
+
+        struct  Timer
+        {
+        public:
+            Timer()
+            {
+                m_StartTimepoint = std::chrono::high_resolution_clock::now();
+            }
+            ~Timer()
+            {
+                Stop();
+            }
+
+            void Stop()
+            {
+                auto endTimepoint = std::chrono::high_resolution_clock::now();
+
+                auto start = std::chrono::time_point_cast<std::chrono::microseconds>(m_StartTimepoint).time_since_epoch().count();
+                auto end = std::chrono::time_point_cast<std::chrono::microseconds>(endTimepoint).time_since_epoch().count();
+                auto duration = end - start;
+
+                double ms = duration * 0.001;
+
+                std::cout << duration << "us (" << ms << "ms) \n";
+            }
+        private:
+            std::chrono::time_point<std::chrono::high_resolution_clock> m_StartTimepoint;
+        };
+
+        int main()
+        {
+            struct Vector2
+            {
+                float x, y;
+            };
+            std::cout << "Make Shared\n";
+            {
+                std::array<std::shared_ptr<Vector2>, 1000> ptrs;
+                Timer timer;
+                for (int i = 0; i < ptrs.size(); i++)
+                    ptrs[i] = std::make_shared<Vector2>();
+            }
+
+            std::cout << "New Shared\n";
+            {
+                std::array<std::shared_ptr<Vector2>, 1000> ptrs;
+                Timer timer;
+                for (int i = 0; i < ptrs.size(); i++)
+                    ptrs[i] = std::shared_ptr<Vector2>(new Vector2());
+            }
+
+            std::cout << "Make Unique\n";
+            {
+                std::array<std::unique_ptr<Vector2>, 1000> ptrs;
+                Timer timer;
+                for (int i = 0; i < ptrs.size(); i++)
+                    ptrs[i] = std::make_unique<Vector2>();
+            }
+
+            __debugbreak();
+        }
+
+    输出（Debug）：::
+
+        Make Shared
+        1142us (1.142ms)
+        New Shared
+        1476us (1.476ms)
+        Make Unique
+        990us (0.99ms)
+
+    输出（Release）：::
+
+        Make Shared
+        112us (0.112ms)
+        New Shared
+        292us (0.292ms)
+        Make Unique
+        89us (0.089ms)
+
+72. C++ 17 中的结构化绑定（Structured Bindings）
+--------------------------------------------------
+
+从 C++ 17 开始的一种可以让方法有多个返回值的方式，在 Visual Studio 中的项目
+的 Properties -> Configuration Properties -> C/C++ -> Language -> C++ Language Standard : ISO C++17 Standard (/std:c++17)
+
+-   使用 ``std::tuple`` 或者 ``std::pair`` :
+
+    .. code-block:: c++
+        :linenos:
+
+        #include<iostream>
+        #include<tuple>
+
+        std::tuple<std::string, int> CreatePerson() // 或者 std::pair<std::string, int> CreatePerson()
+        {
+            return { "Cherno",24 };
+        }
+        int main() {
+            // 方式一
+            auto person = CreatePerson();
+            std::string& name = std::get<0>(person);
+            int age = std::get<1>(person);
+            
+            // 方式二
+            std::string name2;
+            int age2;
+            std::tie(name2, age2) = CreatePerson();
+
+            return 0;
+        }
+
+-   使用 Structured Bindings :
+
+    .. code-block:: c++
+        :linenos:
+        :emphasize-lines: 9
+
+        #include<iostream>
+        #include<tuple>
+
+        std::tuple<std::string, int> CreatePerson()
+        {
+            return { "Cherno",24 };
+        }
+        int main() {
+            auto [name, age] = CreatePerson();
+            std::cout << name<<std::endl;
+            std::cout << age <<std::endl;
+            return 0;
+        }
+        
+
+73. C++ 17 中如何处理可选数据（Optional Data）
+-----------------------------------------------
+
+C++ 17 引入的 ``std::optional`` 类似于 C# 中的 ``Nullable`` 。
+
+-   常规处理方式：
+
+    .. code-block:: c++
+        :linenos:
+        :emphasize-lines: 4,12,15,16,19,20,21
+        
+        #include<iostream>
+        #include<fstream>
+
+        std::string ReadFileAsString(const std::string& filePath, bool& outSuccess)
+        {
+            std::ifstream stream(filePath);
+            if (stream)
+            {
+                std::string  result;
+                // read file
+                stream.close();
+                outSuccess = true;
+                return result;
+            }
+            outSuccess = false;
+            return std::string();
+        }
+        int main() {
+            bool fileOpendSuccessfully;
+            std::string data = ReadFileAsString("data.txt", fileOpendSuccessfully);
+            if (fileOpendSuccessfully)
+            {
+                std::cout << "File read successfully!\n";
+            }
+            else
+            {
+                std::cout << "File could not be opened!\n";
+            }
+            return 0;
+        }
+
+-   使用 ``std::optional`` ：
+
+    .. code-block:: c++
+        :linenos:
+        :emphasize-lines: 3,5,15,18,19,21,22,24
+        
+        #include<iostream>
+        #include<fstream>
+        #include<optional>
+
+        std::optional<std::string> ReadFileAsString(const std::string& filePath)
+        {
+            std::ifstream stream(filePath);
+            if (stream)
+            {
+                std::string  result;
+                // read file
+                stream.close();
+                return result;
+            }
+            return {};
+        }
+        int main() {
+            std::optional<std::string> data = ReadFileAsString("data.txt");
+            if (data.has_value())
+            {
+                std::string& content1 = data.value();
+                std::string& content2 = *data;
+
+                std::cout << "File read successfully!\n";
+            }
+            else
+            {
+                std::cout << "File could not be opened!\n";
+            }
+            return 0;
+        }
+
+74. C++ 17 中让一个变量拥有多种类型
+------------------------------------
+
+-   基本使用
+
+    .. code-block:: c++
+        :linenos:
+        :emphasize-lines: 2,5,7,8,10,11
+
+        #include<iostream>
+        #include<variant>
+
+        int main() {
+            std::variant<std::string, int> data;
+
+            data = "Cherno";
+            std::cout << std::get<std::string>(data) << "\n";
+
+            data = 2;
+            std::cout << std::get<int>(data) << "\n";
+
+            // std::cout << std::get<std::string>(data) << "\n"; // 这里会泡抛出异常
+
+            return 0;
+        }
+
+-   检查变量中存储的类型：
+
+    .. code-block:: c++
+        :linenos:
+        :emphasize-lines: 10,14
+        
+        #include<iostream>
+        #include<variant>
+
+        int main() {
+            std::variant<std::string, int> data;
+
+            data = "Cherno";
+            data = 2;
+
+            if (data.index() == 0)
+            {
+                std::cout << std::get<std::string>(data) << "\n";
+            }
+            else if (data.index() == 1)
+            {
+                std::cout << std::get<int>(data) << "\n";
+            }
+
+            return 0;
+        }
+
+    或者：
+
+    .. code-block:: c++
+        :linenos:
+        :emphasize-lines: 10,12,15,17
+
+        #include<iostream>
+        #include<variant>
+
+        int main() {
+            std::variant<std::string, int> data;
+
+            data = "Cherno";
+            data = 2;
+
+            if (auto value = std::get_if<std::string>(&data))
+            {
+                std::string& v = *value;
+                std::cout << v << "\n";
+            }
+            else if (auto value = std::get_if<int>(&data))
+            {
+                int& v = *value;
+                std::cout << v << "\n";
+            }
+
+            return 0;
+        }
+        
+-   检查变量中存储的类型：
+
+    .. code-block:: c++
+        :linenos:
+        :emphasize-lines: 7,8,9
+
+        #include<iostream>
+        #include<variant>
+
+        int main() {
+            std::variant<std::string, int> data;
+
+            std::cout << sizeof(int) << "\n";               // output will be 4
+            std::cout << sizeof(std::string) << "\n";       // output will be 28
+            std::cout << sizeof(data) << "\n";              // output will be 32
+
+            return 0;
+        }
+
+    `variant` 的底层实现有些像类中包含了多个成员变量，没有 ``unino`` 那样的
+    高效，但是更安全一些。
+
+-   其它使用场景
+
+    .. code-block:: c++
+        :linenos:
+        :emphasize-lines: 3,5,6,7,8,10
+        
+        #include<iostream>
+        #include<variant>
+        #include<optional>
+
+        enum  ErrorCode
+        {
+            None = 0, NorFound = 1, NoAccess = 2
+        };
+
+        std::variant<std::string, int> ReadFileAsString()
+        {
+            return {};
+        }
+
+75. C++ 17 How to store ANY data in C++
+---------------------------------------------
+
+浏览的 C++ 源码得知 ``std::any`` 类型的变量在当存储到其中的数据较小时，使用栈来
+存储；当数据较大时，使用堆来存储。作为比较 ``std::variant`` 则不会存在动态分配内
+存的情况，性能可能会好一些。
+
+-   常规使用
+
+    .. code-block:: c++
+        :linenos:
+        :emphasize-lines: 2,6,7,8,9,11,12
+
+        #include<iostream>
+        #include<any>
+
+        int main()
+        {
+            std::any data;
+            data = 2;
+            data = "Cherno"; //  const char*
+            data = std::string("Cherno");
+
+            std::string string = std::any_cast<std::string>(data); // pay attention to try catch
+            std::string& string2 = std::any_cast<std::string&>(data);
+            std::cin.get();
+        }
+
+-   其他
+
+    .. code-block:: c++
+        :linenos:
+        :emphasize-lines: 4,5,6,7,17,18
+
+        #include<iostream>
+        #include<any>
+
+        void* operator new(size_t size) // 兼容性不是很好
+        {
+            return malloc(size);
+        }
+
+        struct CustomClass
+        {
+            std::string s0, s1;
+        };
+
+        int main()
+        {
+            std::any data;
+            data = 2;               // use stack 
+            data = CustomClass();   // use heap with big poiner
+            std::cin.get();
+        }
+
+76. 如何让 C++ 运行更快（std-async）
+--------------------------------------
+
+.. code-block:: c++
+    :linenos:
+    :emphasize-lines: 2,4,6,10,15,24
+
+    #include<iostream>
+    #include<future>
+
+    std::vector<std::future<void>> m_Futures;
+
+    static std::mutex s_MeshMutex;
+
+    static void LoadMesh(std::string file)
+    {
+        std::lock_guard<std::mutex> lock(s_MeshMutex);
+    }
+
+    static void LoadMesh(std::string file)
+    {
+        std::lock_guard<std::mutex> lock(s_MeshMutex);
+        // other operations
+    }
+
+    int main()
+    {
+        std::vector<std::string> meshFilepaths;
+        for (const auto& file : meshFilepaths)
+        {
+            m_Futures.push_back(std::async(std::launch::async, LoadMesh, file));
+        }
+        std::cin.get();
+    }
+
+77. C++ 17 如何让 String 更快
+-------------------------------
+
+-   常规写法
+
+    .. code-block:: c++
+        :linenos:
+
+        #include<iostream>
+
+        static int s_Allocations = 0;
+        void* operator new(size_t size)
+        {
+            s_Allocations++;
+            std::cout << "Allocating " << size << " bytes\n";
+            return malloc(size);
+        }
+
+        void PrintName(const std::string& name)
+        {
+            std::cout << name << std::endl;
+        }
+
+        int main()
+        {
+            std::string name = "Yan Chernikov";
+
+            std::string firstName = name.substr(0, 3);
+            std::string lastName = name.substr(4, 9);
+
+            PrintName("Yan Chernikov");
+            PrintName(firstName);
+            PrintName(lastName);
+
+            std::cout << s_Allocations << " allocations " << std::endl;
+            std::cin.get();
+        }
+
+    输出: ::
+
+        Allocating 8 bytes
+        Allocating 8 bytes
+        Allocating 8 bytes
+        Allocating 8 bytes
+        Yan Chernikov
+        Yan
+        Chernikov
+        4 allocations
+
+    四次内存分配发生在第18，20，21和23这几行。
+
+-   使用 ``std::string_view``
+
+    .. code-block:: c++
+        :linenos:
+        :emphasize-lines: 11,20,21
+
+        #include<iostream>
+
+        static int s_Allocations = 0;
+        void* operator new(size_t size)
+        {
+            s_Allocations++;
+            std::cout << "Allocating " << size << " bytes\n";
+            return malloc(size);
+        }
+
+        void PrintName(std::string_view name)
+        {
+            std::cout << name << std::endl;
+        }
+
+        int main()
+        {
+            std::string name = "Yan Chernikov";
+
+            std::string_view firstName = std::string_view(name.c_str(), 4);
+            std::string_view lastName = std::string_view(name.c_str() + 4, 9);
+
+            PrintName("Yan Chernikov");
+            PrintName(firstName);
+            PrintName(lastName);
+
+            std::cout << s_Allocations << " allocations " << std::endl;
+            std::cin.get();
+        }
+
+    输出: ::
+
+        Allocating 8 bytes
+        Yan Chernikov
+        Yan
+        Chernikov
+        1 allocations
+
+    唯一的一次内存分配发生在第18行。
+
+-   继续优化
+
+    .. code-block:: c++
+        :linenos:
+        :emphasize-lines: 18,20,21
+
+        #include<iostream>
+
+        static int s_Allocations = 0;
+        void* operator new(size_t size)
+        {
+            s_Allocations++;
+            std::cout << "Allocating " << size << " bytes\n";
+            return malloc(size);
+        }
+
+        void PrintName(std::string_view name)
+        {
+            std::cout << name << std::endl;
+        }
+
+        int main()
+        {
+            const char* name = "Yan Chernikov";
+
+            std::string_view firstName = std::string_view(name, 4);
+            std::string_view lastName = std::string_view(name + 4, 9);
+
+            PrintName("Yan Chernikov");
+            PrintName(firstName);
+            PrintName(lastName);
+
+            std::cout << s_Allocations << " allocations " << std::endl;
+            std::cin.get();
+        }
+
+    输出: ::
+
+        Yan Chernikov
+        Yan
+        Chernikov
+        0 allocations
+
+78. C++ 中让性能测试可视化
+-------------------------------
+
+79. C++ 中的单例
+-------------------------------
+
+80. C++ 中对短字符串的优化
+-------------------------------
+
+81. C++ 中以最简单的方式对内存分配进行跟踪
+------------------------------------------
+
+82. C++ 的左值和右值
+------------------------------------------
+
+C++ 中的左值 ( `lvalue` ) 是指已经分配内存的对象；而右值（ `rvalue` ）是指
+尚未为其分配内存的对象。
+
+在类型名后面加一个 `&` 以声明左值类型，加两个 `&` 以声明右值类型，仅在函数的
+参数列表中可以使用这两种类型进行声明。
+
+.. code-block:: c++
+    :linenos:
+
+    #include<iostream>
+
+    void Print(std::string& first, std::string&& last)
+    {
+        // do something here
+    }
+
+83. C++ 中的持续集成
+------------------------------------------
+
+`jenkins <https://www.jenkins.io/>`_ `linode <https://www.linode.com/>`_
+
+84. C++ 中的静态分析
+------------------------------------------
+
+`PVS-Studio <https://pvs-studio.com/en/>`_
+
+85. C++ 中参数 evaluation 顺序
+------------------------------------------
+
+C++ 中没有规定参数被 evalueated 的顺序，但在 C++ 17 中规定了 ++i 在 i++ 之
+前被 evaluated。
+
+86. C++ 中的 Move 含义（semantics）
+------------------------------------------
+
+-   第一版代码
+
+    .. code-block:: c++
+        :linenos:
+        :emphasize-lines: 47,63
+
+        #include<iostream>
+        class String
+        {
+        private:
+            char* m_Data;
+            uint32_t m_Size;
+        public:
+            String() = default;
+
+            String(const char* string)
+            {
+                printf("Constructed!\n");
+                m_Size = strlen(string);
+                m_Data = new char[m_Size];
+
+                memcpy(m_Data, string, m_Size);
+            }
+
+            String(const String& copiedObject)
+            {
+                printf("Copied!\n");
+                m_Size = copiedObject.m_Size;
+                m_Data = new char[copiedObject.m_Size];
+                memcpy(m_Data, copiedObject.m_Data, m_Size);
+            }
+
+            ~String()
+            {
+                printf("Destroyed!\n");
+                delete m_Data;
+            }
+
+            void Print()
+            {
+                for (size_t i = 0; i < m_Size; ++i)
+                {
+                    printf("%c", m_Data[i]);
+                }
+                printf("\n");
+            }
+        };
+
+        class  Entity
+        {
+        public:
+            Entity(const String& name)
+                : m_Name(name)
+            {
+            }
+
+            void PrintName()
+            {
+                m_Name.Print();
+            }
+
+        private:
+            String m_Name;
+        };
+
+        int main()
+        {
+            {
+                Entity entity("Cherno");    // same as: Entity entity(String("Cherno"));
+                entity.PrintName();
+            }
+            std::cin.get();
+        }
+
+    输出： ::
+
+        Constructed!
+        Copied!
+        Destroyed!
+        Cherno
+        Destroyed!
+
+    -   `main` 函数中的代码 ``Entity entity("Cherno");`` 会调用 ``String::String(const char* string)`` 
+        构造函数将参数 `"Cherno"` 进行隐式类型转换；
+    -   然后在调用 ``Entity::Entity(const String& name): m_Name(name)`` 
+        构造函数时， ``m_Name(name)`` 会调用 ``String(const String& copiedObject)`` 
+        进行一次拷贝构造（copy construct）。
+
+-   第二版代码
+
+    .. code-block:: c++
+        :linenos:
+        :emphasize-lines: 27,28,29,30,31,32,33,34,35,61,62,63,64
+
+        #include<iostream>
+        class  String
+        {
+        private:
+            char* m_Data;
+            uint32_t m_Size;
+        public:
+            String() = default;
+
+            String(const char* string)
+            {
+                printf("Constructed!\n");
+                m_Size = strlen(string);
+                m_Data = new char[m_Size];
+
+                memcpy(m_Data, string, m_Size);
+            }
+
+            String(const String& copiedObject)
+            {
+                printf("Copied!\n");
+                m_Size = copiedObject.m_Size;
+                m_Data = new char[copiedObject.m_Size];
+                memcpy(m_Data, copiedObject.m_Data, m_Size);
+            }
+
+            String(String&& movedObject) noexcept
+            {
+                printf("Moved!\n");
+                m_Size = movedObject.m_Size;
+                m_Data = movedObject.m_Data;
+
+                movedObject.m_Size = 0;
+                movedObject.m_Data = nullptr;
+            }
+
+            ~String()
+            {
+                printf("Destroyed!\n");
+                delete m_Data;
+            }
+
+            void Print()
+            {
+                for (size_t i = 0; i < m_Size; ++i)
+                {
+                    printf("%c", m_Data[i]);
+                }
+                printf("\n");
+            }
+        };
+
+        class  Entity
+        {
+        public:
+            Entity(const String& name)
+                : m_Name(name)
+            {
+            }
+
+            Entity(String&& name)
+                : m_Name(std::move(name)) // same as: m_Name((String&&)name)
+            {
+            }
+
+            void PrintName()
+            {
+                m_Name.Print();
+            }
+
+        private:
+            String m_Name;
+        };
+
+        int main()
+        {
+            {
+                Entity entity("Cherno");    // same as: Entity entity(String("Cherno"));
+                entity.PrintName();
+            }
+            std::cin.get();
+        }
+
+    输出： ::
+
+        Constructed!
+        Moved!
+        Destroyed!
+        Cherno
+        Destroyed!
+
+    -   增加了 move constructor 的实现，相较第一版代码而言，移除了因拷贝构造
+        带来的内存分配。
+
+87. C++ 中的 Move 和 move assigment 操作符
+------------------------------------------
+
+88. C++ 中的设计数据结构
+------------------------------------------
+
+89. VECTOR DYNAMIC ARRAY - 设计数据结构
+------------------------------------------
+
+90. C++ 中的迭代器
+------------------------------------------
+
+91. 在 C++ 中写一个迭代器
+------------------------------------------
+
+92. 如何学习 C++
+------------------------------------------

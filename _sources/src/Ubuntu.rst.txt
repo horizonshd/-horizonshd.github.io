@@ -1,0 +1,47 @@
+======
+Ubuntu
+======
+
+基础使用
+--------
+
+
+- `Ubuntu` 包管理工具: `dpkg` / `apt`
+- `dpkg` 常用命令: 
+    
+    - 安装软件：`dpkg -i <packagename.deb>`
+    - 删除软件：`dpkg -r <packagename>`
+    - 查询软件包信息：`dpkg --info <packagename.deb>` `dpkg --status packagename`
+    - 查询软件所包含文件：`dpkg --listfiles <packagename>` `dpkg --contents <packagename.deb>`
+    - 查询文件归属：`dpkg --search <filename>`
+    - 查询已安装包：`dpkg -l`
+
+- `apt` 包管理器（二进制、源代码软件包）：
+    
+    - 安装软件：`apt-get install <package>`
+    - 删除软件：`apt-get remove purge <package>`
+    - 查询软件包信息：`apt-cache show <package>` （该命令通过链接服务器获取数据源信息，使用 `apt-get clean` 清除缓存）
+    - 查询软件包所包含文件：`apt-file list <package>`
+    - 查询文件归属：`apt-file search <filename>`
+    - 查询已安装包：`apt-cache pkgnames`
+
+- 已安装包数量：`sudo dpkg -l | wc -l`
+- `Ubuntu` 服务器地址中提供的包数量：`sudo apt-cache pkgnames | wc -l`
+- 升级软件：`sudo apt-get dist-upgrade`
+- `sudo apt-get update`
+- 自动移除没有依赖的软件：`sudo apt-get autoremove`
+- 删除软件升级的安装包：`sudo apt-get autoclean`
+- `/etc/apt/sources.list`
+- `su`：进入 root 用户
+- `sudo passwd`：改变 `root` 用户 `su` 的密码，拥有超级权限
+- `sudo -u root passwd`：在普通用户的情况下修改 `root` 用户密码
+- other: ::
+    
+    chmod 777 /etc/sudoers          （ `sudo` 的权限管理文件，默认是 `440` 不能编辑，改成 `777` 后可用程序打开）
+    chmod 440 /etc/sudoers          （改回去）
+    exit
+
+ 
+
+
+

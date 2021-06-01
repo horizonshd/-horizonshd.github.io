@@ -1,0 +1,491 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>ECF AutoDeploy &mdash; Cheatsheet 1.0.0 文档</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="Lua" href="Lua.html" />
+    <link rel="prev" title="Vocabulary" href="Vocabulary.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Cheatsheet
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="reStructuresText.html">reStructuresText</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sphinx.html">sphinx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Encoding.html">Charset and Encoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Graphviz.html">Graphviz - Graph Visualization Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="git.html">git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CMake.html">CMake</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C%2B%2B.html">C++</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DTD.html">DTD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="XSD.html">XSD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="WSDL.html">WSDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dotnet.html">dotnet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cmd.html">cmd</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SSH.html">SSH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Python.html">Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="WindowsTerminal.html">Windows Terminal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manim.html">manim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NSIS.html">nullsoft scriptable install system 3.0.4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Algorithm.html">Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Vocabulary.html">Vocabulary</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ECF AutoDeploy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">速览</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#station">1 Station 操作</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id4">1.1 从机部署</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">1.2 主机部署</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module">2 Module 操作</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id6">2.1 导入 Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">2.2 添加 Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">2.3 部署 Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">2.4 升级 Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">2.5 卸载 Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id11">2.6 编辑 Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id12">2.7 删除 Module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#instance">3 Instance 操作</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id13">3.1 添加 Instance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id14">3.2 部署 Instance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id15">3.3 卸载 Instance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id16">3.4 编辑 Instance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id17">3.5 删除 Instance</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#plugin">4 Plugin 操作</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id18">4.1 导入 Plugin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id19">4.2 添加 Plugin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id20">4.3 部署 Plugin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id21">4.4 升级 Plugin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id22">4.5 卸载 Plugin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id23">4.6 删除 Plugin</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#plugin-libs-module-libs">5 PLUGIN-LIBS / MODULE-LIBS 操作</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#plugin-libs">5.1 导入 PLUGIN-LIBS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id24">5.2 部署 PLUGIN-LIBS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id25">5.3 升级 PLUGIN-LIBS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id26">5.4 卸载 PLUGIN-LIBS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id27">5.5 删除 PLUGIN-LIBS</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#gui">6 GUI 操作</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id28">6.1 添加 GUI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id29">6.2 部署 GUI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id30">6.3 编辑 GUI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id31">6.4 卸载 GUI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id32">6.5 删除 GUI</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#file">7 File 操作</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id33">7.1 添加文件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id34">7.2 部署文件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id35">7.3 升级文件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id36">7.4 卸载文件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id37">7.5 删除文件</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#product">8 Product 操作</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id38">8.1 导入 Product</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id39">9 常数操作</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id40">9.3 导出常数</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Lua.html">Lua</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LaTeX.html">LaTeX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Ubuntu.html">Ubuntu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MEF.html">MEF in .NET Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="EMail.html">Relative Concepts of EMail</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Cheatsheet</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>ECF AutoDeploy</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/src/ECFDeploy.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="ecf-autodeploy">
+<h1>ECF AutoDeploy<a class="headerlink" href="#ecf-autodeploy" title="永久链接至标题">¶</a></h1>
+<div class="section" id="id1">
+<h2>速览<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 82%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>功能</p></th>
+<th class="head"><p>命令</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>常数管理 MCFC 文件导入</p></td>
+<td><p>ECFDeploy import constant -mc &lt;marking-code&gt; -ct MC/FC -f &lt;file&gt; -im Hard/Soft -u shenhd -c “test 2021-05-21”</p>
+<ul class="simple">
+<li><p>mc &lt;marking-code&gt;     markingcode</p></li>
+<li><p>ct &lt;config-type&gt;      MC / FC</p></li>
+<li><p>f &lt;file&gt;              待导入文件的绝对路径（<a href="#id2"><span class="problematic" id="id3">*</span></a>.xml）</p></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="station">
+<h2>1 Station 操作<a class="headerlink" href="#station" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id4">
+<h3>1.1 从机部署<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="id5">
+<h3>1.2 主机部署<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h3>
+</div>
+</div>
+<div class="section" id="module">
+<h2>2 Module 操作<a class="headerlink" href="#module" title="永久链接至标题">¶</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">警告</p>
+<p>需在 App 服务已已启动的情况下操作。</p>
+</div>
+<img alt="../_images/ImportPatchView.png" src="../_images/ImportPatchView.png" />
+<div class="section" id="id6">
+<h3>2.1 导入 Module<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h3>
+<p>ECFDeploy -import</p>
+<blockquote>
+<div><dl class="option-list">
+<dt><kbd><span class="option">-f <var>file</var></span></kbd></dt>
+<dd><p>import file</p>
+</dd>
+<dt><kbd><span class="option">-c</span></kbd></dt>
+<dd><p>specify module</p>
+</dd>
+<dt><kbd><span class="option">-s<var>c</var></span></kbd></dt>
+<dd><p>todo</p>
+</dd>
+<dt><kbd><span class="option">-u<var>p</var></span></kbd></dt>
+<dd><p>upgrade</p>
+</dd>
+</dl>
+</div></blockquote>
+</div>
+<div class="section" id="id7">
+<h3>2.2 添加 Module<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="id8">
+<h3>2.3 部署 Module<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="id9">
+<h3>2.4 升级 Module<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="id10">
+<h3>2.5 卸载 Module<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="id11">
+<h3>2.6 编辑 Module<a class="headerlink" href="#id11" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="id12">
+<h3>2.7 删除 Module<a class="headerlink" href="#id12" title="永久链接至标题">¶</a></h3>
+</div>
+</div>
+<div class="section" id="instance">
+<h2>3 Instance 操作<a class="headerlink" href="#instance" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id13">
+<h3>3.1 添加 Instance<a class="headerlink" href="#id13" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="id14">
+<h3>3.2 部署 Instance<a class="headerlink" href="#id14" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="id15">
+<h3>3.3 卸载 Instance<a class="headerlink" href="#id15" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="id16">
+<h3>3.4 编辑 Instance<a class="headerlink" href="#id16" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="id17">
+<h3>3.5 删除 Instance<a class="headerlink" href="#id17" title="永久链接至标题">¶</a></h3>
+</div>
+</div>
+<div class="section" id="plugin">
+<h2>4 Plugin 操作<a class="headerlink" href="#plugin" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id18">
+<h3>4.1 导入 Plugin<a class="headerlink" href="#id18" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="id19">
+<h3>4.2 添加 Plugin<a class="headerlink" href="#id19" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="id20">
+<h3>4.3 部署 Plugin<a class="headerlink" href="#id20" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="id21">
+<h3>4.4 升级 Plugin<a class="headerlink" href="#id21" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="id22">
+<h3>4.5 卸载 Plugin<a class="headerlink" href="#id22" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="id23">
+<h3>4.6 删除 Plugin<a class="headerlink" href="#id23" title="永久链接至标题">¶</a></h3>
+</div>
+</div>
+<div class="section" id="plugin-libs-module-libs">
+<h2>5 PLUGIN-LIBS / MODULE-LIBS 操作<a class="headerlink" href="#plugin-libs-module-libs" title="永久链接至标题">¶</a></h2>
+<div class="section" id="plugin-libs">
+<h3>5.1 导入 PLUGIN-LIBS<a class="headerlink" href="#plugin-libs" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="id24">
+<h3>5.2 部署 PLUGIN-LIBS<a class="headerlink" href="#id24" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="id25">
+<h3>5.3 升级 PLUGIN-LIBS<a class="headerlink" href="#id25" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="id26">
+<h3>5.4 卸载 PLUGIN-LIBS<a class="headerlink" href="#id26" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="id27">
+<h3>5.5 删除 PLUGIN-LIBS<a class="headerlink" href="#id27" title="永久链接至标题">¶</a></h3>
+</div>
+</div>
+<div class="section" id="gui">
+<h2>6 GUI 操作<a class="headerlink" href="#gui" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id28">
+<h3>6.1 添加 GUI<a class="headerlink" href="#id28" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="id29">
+<h3>6.2 部署 GUI<a class="headerlink" href="#id29" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="id30">
+<h3>6.3 编辑 GUI<a class="headerlink" href="#id30" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="id31">
+<h3>6.4 卸载 GUI<a class="headerlink" href="#id31" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="id32">
+<h3>6.5 删除 GUI<a class="headerlink" href="#id32" title="永久链接至标题">¶</a></h3>
+</div>
+</div>
+<div class="section" id="file">
+<h2>7 File 操作<a class="headerlink" href="#file" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id33">
+<h3>7.1 添加文件<a class="headerlink" href="#id33" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="id34">
+<h3>7.2 部署文件<a class="headerlink" href="#id34" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="id35">
+<h3>7.3 升级文件<a class="headerlink" href="#id35" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="id36">
+<h3>7.4 卸载文件<a class="headerlink" href="#id36" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="id37">
+<h3>7.5 删除文件<a class="headerlink" href="#id37" title="永久链接至标题">¶</a></h3>
+</div>
+</div>
+<div class="section" id="product">
+<h2>8 Product 操作<a class="headerlink" href="#product" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id38">
+<h3>8.1 导入 Product<a class="headerlink" href="#id38" title="永久链接至标题">¶</a></h3>
+</div>
+</div>
+<div class="section" id="id39">
+<h2>9 常数操作<a class="headerlink" href="#id39" title="永久链接至标题">¶</a></h2>
+<p>9.1 导入常数
+—- ——-</p>
+<p>9.2 应用常数
+—- ——-</p>
+<div class="section" id="id40">
+<h3>9.3 导出常数<a class="headerlink" href="#id40" title="永久链接至标题">¶</a></h3>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="Lua.html" class="btn btn-neutral float-right" title="Lua" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="Vocabulary.html" class="btn btn-neutral float-left" title="Vocabulary" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; 版权所有 2021, horizonshd.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

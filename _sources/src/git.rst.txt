@@ -1,0 +1,337 @@
+===
+git
+===
+
+`基础命令 <https://git-scm.com/docs>`_
+======================================
+
+git add
+-------
+
+-a, --all           整个工作区所有变化（添加、删除、修改）都将被暂存
+-u, --update        整个工作区中的删除、修改（不包含添加）将被暂存 
+-.                  当前文件夹及其子文件夹下的所有变化都将被暂存（gitversion:2.x）
+
+`Difference between “git add -A” and “git add .” <https://stackoverflow.com/questions/572549/difference-between-git-add-a-and-git-add?rq=1>`_
+
+git status
+----------
+
+git diff
+--------
+
+
+git commit
+----------
+
+git notes
+---------
+
+
+git restore
+-----------
+
+git reset
+---------
+
+git rm
+------
+
+git mv
+------
+
+
+本地操作
+========
+
+Level 1
+-------
+
+提交（commit）
+~~~~~~~~~~~~~~
+
+git commit [<options>] [--] <pathdpec>...
+
+-q, --quit          阻止提交摘要信息
+
+分支（branch）
+~~~~~~~~~~~~~~
+
+合并（merge）
+~~~~~~~~~~~~~
+
+变基（rebase）
+~~~~~~~~~~~~~~
+
+Level 2
+-------
+
+分离HEAD
+~~~~~~~~
+
+相对引用#1
+~~~~~~~~~~
+
+相对引用#2
+~~~~~~~~~~
+
+撤销修改
+~~~~~~~~
+
+Level 3
+-------
+
+遴选（cherry-pick）
+~~~~~~~~~~~~~~~~~~~
+
+交互式变基
+~~~~~~~~~~
+
+Level 4
+-------
+
+Level 5
+-------
+
+联机操作
+========
+
+Level 1
+-------
+
+Level 2
+-------
+
+了解更多
+========
+
+工作区（Workspace）、暂存区（Stage or Index）、版本库（Repositore）和远程仓库（Remote）
+---------------------------------------------------------------------------------------
+
+官方提供了一份 `Cheat Sheet <https://ndpsoftware.com/git-cheatsheet.html>`_ 可以做参考。
+
+通过 ``git init MyProject`` 命令创建一个本地 `git` 仓库 `MyProject`，这将会在当
+前目录下创建一个名为 `MyProject` 的文件夹。此时 `MyProject` 文件夹内仅包含一个 
+`.git` 文件夹，其中的文件结构是这样的： ::
+        
+    │  config
+    │  description
+    │  HEAD
+    │
+    ├─hooks
+    │      applypatch-msg.sample
+    │      commit-msg.sample
+    │      fsmonitor-watchman.sample
+    │      post-update.sample
+    │      pre-applypatch.sample
+    │      pre-commit.sample
+    │      pre-merge-commit.sample
+    │      pre-push.sample
+    │      pre-rebase.sample
+    │      pre-receive.sample
+    │      prepare-commit-msg.sample
+    │      push-to-checkout.sample
+    │      update.sample
+    │
+    ├─info
+    │      exclude
+    │
+    ├─objects
+    │  ├─info
+    │  └─pack
+    └─refs
+        ├─heads
+        └─tags
+        
+这里面：
+
+- `config` 文件包含项目特有的配置选项；
+- `description` 文件仅提供 GitWeb 使用，我们无需关心；
+- `hooks` 目录包含客户端会服务端的钩子脚本；
+- `info` 目录包含一个全局性排除（global exclude）文件，用以放置那些不希望被记录在 `.gitignore` 文件中的忽略模式；
+- `HEAD` 文件指向被检出的分支；
+- `objects` 目录存储所有数据的内容；
+- `refs` 目录存储指向数据（分支、远程仓库和标签等）的提交对象的指针；
+- （尚待创建的） `index` 文件保存暂存区信息。
+
+add 操作
+~~~~~~~~
+
+新建两个文件并添加到 `git` : ::
+
+    $ cd MyProject/
+    $ echo "111" > a.txt
+    $ echo "111" > b.txt
+    $ git add -A
+    
+此时 `.git` 文件夹下的文件结构为： ::
+
+    │  config
+    │  description
+    │  HEAD
+    │  index
+    │
+    ├─hooks
+    │      applypatch-msg.sample
+    │      commit-msg.sample
+    │      fsmonitor-watchman.sample
+    │      post-update.sample
+    │      pre-applypatch.sample
+    │      pre-commit.sample
+    │      pre-merge-commit.sample
+    │      pre-push.sample
+    │      pre-rebase.sample
+    │      pre-receive.sample
+    │      prepare-commit-msg.sample
+    │      push-to-checkout.sample
+    │      update.sample
+    │
+    ├─info
+    │      exclude
+    │
+    ├─objects
+    │  ├─58
+    │  │      c9bdf9d017fcd178dc8c073cbfcbb7ff240d6c
+    │  │
+    │  ├─c2
+    │  │      00906efd24ec5e783bee7f23b5d7c941b0c12c
+    │  │
+    │  ├─info
+    │  └─pack
+    └─refs
+        ├─heads
+        └─tags
+
+可以发现多了一个 `index` 文件，在 `objects` 文件夹下多了 `58` 和 `c2` 两个子文件
+夹，且在这两个子文件夹下各自都有一个文件:
+
+    - 可以使用 ``git ls-files -s`` 命令查看 `index` 文件中保存的数据： ::
+
+        $ git ls-files -s
+        100644 58c9bdf9d017fcd178dc8c073cbfcbb7ff240d6c 0       a.txt
+        100644 c200906efd24ec5e783bee7f23b5d7c941b0c12c 0       b.txt
+
+    - 可以使用命令 ``git cat-file`` 来查看这两个文件的信息，参数 ``-t`` 查看文件
+      的类型，参数 ``-p`` 查看文件的内容： ::
+
+        $ git cat-file -t 58c9c9bdf9d017fcd178dc8c073cbfcbb7ff240d6c
+        bold
+        $ git cat-file -p 58c9c9bdf9d017fcd178dc8c073cbfcbb7ff240d6c
+        111
+        $ git cat-file -t c200906efd24ec5e783bee7f23b5d7c941b0c12c
+        bold
+        $ git cat-file -p c200906efd24ec5e783bee7f23b5d7c941b0c12c
+        222
+    
+注意这里的 ``58c9c9bdf9d017fcd178dc8c073cbfcbb7ff240d6c`` 和 ``c200906efd24ec5e783bee7f23b5d7c941b0c12c``
+是两个 `object` 。通过 ``cat-file`` 的帮助信息可以了解到 `object` 有四种类型：
+
+    - `blod`
+    - `tree`
+    - `commit`
+    - `tag`
+     
+可以浏览 `Git 对象 <https://git-scm.com/book/zh/v2/Git-%E5%86%85%E9%83%A8%E5%8E%
+9F%E7%90%86-Git-%E5%AF%B9%E8%B1%A1>`_ 了解更多关于 `object` 的信息。
+     
+commit 操作
+~~~~~~~~~~~
+::
+
+    $ git commit -m "init"
+
+此时 `.git` 文件夹下的文件结构为： ::
+
+    │  COMMIT_EDITMSG
+    │  config
+    │  description
+    │  HEAD
+    │  index
+    │
+    ├─hooks
+    │      applypatch-msg.sample
+    │      commit-msg.sample
+    │      fsmonitor-watchman.sample
+    │      post-update.sample
+    │      pre-applypatch.sample
+    │      pre-commit.sample
+    │      pre-merge-commit.sample
+    │      pre-push.sample
+    │      pre-rebase.sample
+    │      pre-receive.sample
+    │      prepare-commit-msg.sample
+    │      push-to-checkout.sample
+    │      update.sample
+    │
+    ├─info
+    │      exclude
+    │
+    ├─logs
+    │  │  HEAD
+    │  │
+    │  └─refs
+    │      └─heads
+    │              master
+    │
+    ├─objects
+    │  ├─4c
+    │  │      aaa1a9ae0b274fba9e3675f9ef071616e5b209
+    │  │
+    │  ├─58
+    │  │      c9bdf9d017fcd178dc8c073cbfcbb7ff240d6c
+    │  │
+    │  ├─a4
+    │  │      f84bf9229b73b8dfab44be9a959fe059cdc666
+    │  │
+    │  ├─c2
+    │  │      00906efd24ec5e783bee7f23b5d7c941b0c12c
+    │  │
+    │  ├─info
+    │  └─pack
+    └─refs
+        ├─heads
+        │      master
+        │
+        └─tags
+
+相比于 `commit` 前新增了一个 `COMMIT_EDITMSG` 文件、两个 `object` -- `4caa...` 
+和 `a4f8...` 。使用 ``cat-file`` 命令查看各自的对象类型和内容： ::
+
+    $ git cat-file -t 4caa
+    tree
+    $ git cat-file -p 4caa
+    100644 blob 58c9bdf9d017fcd178dc8c073cbfcbb7ff240d6c    a.txt
+    100644 blob c200906efd24ec5e783bee7f23b5d7c941b0c12c    b.txt
+    $ git cat-file -t a4f8
+    commit
+    $ git cat-file -p a4f8
+    tree 4caaa1a9ae0b274fba9e3675f9ef071616e5b209
+    author horizonshd <horizonshd@outlook.com> 1618994910 +0800
+    committer horizonshd <horizonshd@outlook.com> 1618994910 +0800
+
+    init
+
+可以发现 `4caa...` 这个对象的类型是 `tree` ,包含 `58c9...(a.txt)` 和 `c200...(b.txt)` 
+两个叶子节点；而 `a4f8...` 这个对象的类型是 `commit` ，其中包含了提交者的信息和
+提交信息以及指向的 `tree` 对象信息。（注：`commit` 对象中还可能会包含上一次提交
+的 Hash 值信息，这里为首次提交所以没有该信息）
+
+另外 `refs/heads` 目录下多了一个 `master` 文件，其中的内容为： ::
+
+    $ cat .git/refs/heads/master
+    a4f84bf9229b73b8dfab44be9a959fe059cdc666
+    $ cat .git/HEAD
+    ref: refs/heads/master
+    
+可以发现这个 `master` 文件中存储的数据指向了最近一次提交产生的 `commit` 对象，`HEAD` 
+文件中存储的数据指向了当前被检出的分支。
+
+再查看一下此时 `index` 文件中的内容： ::
+
+        $ git ls-files -s
+        100644 58c9bdf9d017fcd178dc8c073cbfcbb7ff240d6c 0       a.txt
+        100644 c200906efd24ec5e783bee7f23b5d7c941b0c12c 0       b.txt
+
+可以发现和 `commit` 之前的数据是一样的。
+
+另外新增了 `logs` 目录。
