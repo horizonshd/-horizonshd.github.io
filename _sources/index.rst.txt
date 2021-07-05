@@ -17,6 +17,8 @@ Welcome to Cheatsheet's documentation!
    src/git
    src/CMake
    src/C++
+   src/OpenGL
+   src/GameEngine
    src/DTD
    src/XSD
    src/WSDL
@@ -35,6 +37,8 @@ Welcome to Cheatsheet's documentation!
    src/Ubuntu
    src/MEF
    src/EMail
+   src/FFmpeg
+   src/OpenSourceProjects
 
 
 
