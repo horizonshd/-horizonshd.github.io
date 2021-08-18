@@ -13,7 +13,10 @@
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" />
 
   
   
@@ -30,6 +33,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -69,7 +73,7 @@
           
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="在文档中搜索" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -86,7 +90,7 @@
               
             
             
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="reStructuresText.html">reStructuresText</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sphinx.html">sphinx</a></li>
@@ -95,6 +99,8 @@
 <li class="toctree-l1"><a class="reference internal" href="git.html">git</a></li>
 <li class="toctree-l1"><a class="reference internal" href="CMake.html">CMake</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C%2B%2B.html">C++</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ImageProcessing.html">Image Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OpenCV.html">OpenCV</a></li>
 <li class="toctree-l1"><a class="reference internal" href="OpenGL.html">OpenGL</a></li>
 <li class="toctree-l1"><a class="reference internal" href="GameEngine.html">GameEngine</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DTD.html">DTD</a></li>
@@ -189,7 +195,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/src/MEF.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/src/MEF.rst.txt" rel="nofollow"> 查看页面源码</a>
           
         
       </li>
@@ -212,17 +218,13 @@
 和 <cite>Export</cite> 的这两个契约条件都满足时，MEF 引擎才会进行正确的匹配。这两个契约
 条件在代码中都可以是显示或者隐式的，如以下代码：</p>
 <blockquote>
-<div><div class="highlight-csharp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">class</span> <span class="nc">MyClass</span>
-<span class="p">{</span>
-<span class="na">    [Import]</span>
-    <span class="k">public</span> <span class="n">IMyAddin</span> <span class="n">MyAddin</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
-<span class="p">}</span>
+<div><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">public</span> <span class="k">class</span> <span class="nc">MyClass</span>
+<span class="linenos">2</span><span class="p">{</span>
+<span class="linenos">3</span><span class="na">    [Import]</span>
+<span class="linenos">4</span>    <span class="k">public</span> <span class="n">IMyAddin</span> <span class="n">MyAddin</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+<span class="linenos">5</span><span class="p">}</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div></blockquote>
 <p>在这个 <cite>Import</cite> 中， 这个 <cite>Import</cite> 特性既没有附加 <cite>ContractType</cite> ，也没有
 附加 <cite>ContractName</cite> 参数。因此，这两者都将从被修饰的属性中推断出来。在本例
@@ -231,11 +233,10 @@
 也是从 <cite>IMyAddin</cite> 类型推断出来的 <cite>Export</cite>。)</p>
 <p>下面的这个 <cite>Export</cite> 将会匹配上前面的 <cite>Export</cite>:</p>
 <blockquote>
-<div><div class="highlight-csharp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="na">[Export(typeof(IMyAddin))]</span>
-<span class="k">public</span> <span class="k">class</span> <span class="nc">MyLogger</span> <span class="p">:</span> <span class="n">IMyAddin</span> <span class="p">{</span> <span class="p">}</span>
+<div><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="na">[Export(typeof(IMyAddin))]</span>
+<span class="linenos">2</span><span class="k">public</span> <span class="k">class</span> <span class="nc">MyLogger</span> <span class="p">:</span> <span class="n">IMyAddin</span> <span class="p">{</span> <span class="p">}</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div></blockquote>
 <p>在这个 <cite>Export</cite> 中，<cite>ContractType</cite> 是 <cite>IMyAddin</cite>，因为它被指定为 <cite>Export</cite>
 特性的一个参数。被导出的类型必须与 <cite>ContractType</cite> 相同，从 <cite>ContractType</cite>
@@ -250,11 +251,10 @@
 </div>
 <p><cite>ContractType</cite> 必须完全匹配 <cite>Import</cite> 和 <cite>Export</cite> 才算匹配，考虑以下的导出：</p>
 <blockquote>
-<div><div class="highlight-csharp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="na">[Export]</span> <span class="c1">//WILL NOT match the previous import!</span>
-<span class="k">public</span> <span class="k">class</span> <span class="nc">MyLogger</span> <span class="p">:</span> <span class="n">IMyAddin</span> <span class="p">{</span> <span class="p">}</span>
+<div><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="na">[Export]</span> <span class="c1">//WILL NOT match the previous import!</span>
+<span class="linenos">2</span><span class="k">public</span> <span class="k">class</span> <span class="nc">MyLogger</span> <span class="p">:</span> <span class="n">IMyAddin</span> <span class="p">{</span> <span class="p">}</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div></blockquote>
 <p>在此导出中，<cite>ContractType</cite> 为 <cite>MyLogger</cite> 而不是 <cite>IMyAddin</cite>。 即使 <cite>MyLogger</cite>
 实现了 <cite>IMyAddin</cite>，因此可以将其强制转换为 <cite>IMyAddin</cite> 对象，但由于 <cite>ContractType</cite>
@@ -265,35 +265,22 @@
 可以指定为 <cite>Import</cite> 或 <cite>Export</cite> 特性的第一个参数。以下代码展示具有指定的 <cite>ContractName</cite>
 为 <cite>MajorRevision</cite> 的导入和导出:</p>
 <blockquote>
-<div><div class="highlight-csharp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">class</span> <span class="nc">MyClass</span>
-<span class="p">{</span>
-<span class="na">    [Import(&quot;MajorRevision&quot;)]</span>
-    <span class="k">public</span> <span class="kt">int</span> <span class="n">MajorRevision</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="k">public</span> <span class="k">class</span> <span class="nc">MyExportClass</span>
-<span class="p">{</span>
-<span class="na">    [Export(&quot;MajorRevision&quot;)]</span> <span class="c1">//This one will match.</span>
-    <span class="k">public</span> <span class="kt">int</span> <span class="n">MajorRevision</span> <span class="p">=</span> <span class="m">4</span><span class="p">;</span>
-
-<span class="na">    [Export(&quot;MinorRevision&quot;)]</span>
-    <span class="k">public</span> <span class="kt">int</span> <span class="n">MinorRevision</span> <span class="p">=</span> <span class="m">16</span><span class="p">;</span>
-<span class="p">}</span>
+<div><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">public</span> <span class="k">class</span> <span class="nc">MyClass</span>
+<span class="linenos"> 2</span><span class="p">{</span>
+<span class="linenos"> 3</span><span class="na">    [Import(&quot;MajorRevision&quot;)]</span>
+<span class="linenos"> 4</span>    <span class="k">public</span> <span class="kt">int</span> <span class="n">MajorRevision</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+<span class="linenos"> 5</span><span class="p">}</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="k">public</span> <span class="k">class</span> <span class="nc">MyExportClass</span>
+<span class="linenos"> 8</span><span class="p">{</span>
+<span class="linenos"> 9</span><span class="na">    [Export(&quot;MajorRevision&quot;)]</span> <span class="c1">//This one will match.</span>
+<span class="linenos">10</span>    <span class="k">public</span> <span class="kt">int</span> <span class="n">MajorRevision</span> <span class="p">=</span> <span class="m">4</span><span class="p">;</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span><span class="na">    [Export(&quot;MinorRevision&quot;)]</span>
+<span class="linenos">13</span>    <span class="k">public</span> <span class="kt">int</span> <span class="n">MinorRevision</span> <span class="p">=</span> <span class="m">16</span><span class="p">;</span>
+<span class="linenos">14</span><span class="p">}</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div></blockquote>
 <p>如果没有指定 <cite>ContractType</cite> ，仍将根据 <cite>Export</cite> 和 <cite>Import</cite> 的类型推断。
 但是，即使明确指定了 <cite>ContractName</cite> ，<cite>ContractType</cite> 也必须完全匹配，<cite>Export</cite>
@@ -306,34 +293,25 @@
 <p>方法导出必须为其指定 <cite>ContractType</cite> 或 <cite>ContractName</cite>，因为无法推断出该类
 型。指定的类型可以是自定义委托，也可以是泛型，例如 <cite>Func</cite> 。下列类导出名为 <cite>DoSomething</cite> 的方法:</p>
 <blockquote>
-<div><div class="highlight-csharp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span>
-<span class="normal">6</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">class</span> <span class="nc">MyAddin</span>
-<span class="p">{</span>
-    <span class="c1">//Explicitly specifying a generic type.</span>
-<span class="na">    [Export(typeof(Func&lt;int, string&gt;))]</span>
-    <span class="k">public</span> <span class="kt">string</span> <span class="nf">DoSomething</span><span class="p">(</span><span class="kt">int</span> <span class="n">TheParam</span><span class="p">);</span>
-<span class="p">}</span>
+<div><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">public</span> <span class="k">class</span> <span class="nc">MyAddin</span>
+<span class="linenos">2</span><span class="p">{</span>
+<span class="linenos">3</span>    <span class="c1">//Explicitly specifying a generic type.</span>
+<span class="linenos">4</span><span class="na">    [Export(typeof(Func&lt;int, string&gt;))]</span>
+<span class="linenos">5</span>    <span class="k">public</span> <span class="kt">string</span> <span class="nf">DoSomething</span><span class="p">(</span><span class="kt">int</span> <span class="n">TheParam</span><span class="p">);</span>
+<span class="linenos">6</span><span class="p">}</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div></blockquote>
 <p>在这个类中， <cite>DoSomething</cite> 方法采用一个 <cite>int</cite> 参数并返回一个字符串。为了匹
 配此导出，导入部分必须声明适当的成员。下面这个类导入 <cite>DoSomething</cite> 方法：</p>
 <blockquote>
-<div><div class="highlight-csharp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">class</span> <span class="nc">MyClass</span>
-<span class="p">{</span>
-<span class="na">    [Import]</span> <span class="c1">//Contract name must match!</span>
-    <span class="k">public</span> <span class="n">Func</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;</span> <span class="n">DoSomething</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
-<span class="p">}</span>
+<div><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">public</span> <span class="k">class</span> <span class="nc">MyClass</span>
+<span class="linenos">2</span><span class="p">{</span>
+<span class="linenos">3</span><span class="na">    [Import]</span> <span class="c1">//Contract name must match!</span>
+<span class="linenos">4</span>    <span class="k">public</span> <span class="n">Func</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;</span> <span class="n">DoSomething</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+<span class="linenos">5</span><span class="p">}</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div></blockquote>
 </div>
 <div class="section" id="id4">
@@ -345,33 +323,25 @@
 在这种情况下，该类可以声明动态导入。 以下导入与 <cite>ContractName</cite> 为 <cite>TheString</cite>
 的所有导出匹配：</p>
 <blockquote>
-<div><div class="highlight-csharp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">class</span> <span class="nc">MyClass</span>
-<span class="p">{</span>
-<span class="na">    [Import(&quot;TheString&quot;)]</span>
-<span class="hll">    <span class="k">public</span> <span class="kt">dynamic</span> <span class="n">MyAddin</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
-</span><span class="p">}</span>
+<div><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">public</span> <span class="k">class</span> <span class="nc">MyClass</span>
+<span class="linenos">2</span><span class="p">{</span>
+<span class="linenos">3</span><span class="na">    [Import(&quot;TheString&quot;)]</span>
+<span class="hll"><span class="linenos">4</span>    <span class="k">public</span> <span class="kt">dynamic</span> <span class="n">MyAddin</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span><span class="linenos">5</span><span class="p">}</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div></blockquote>
 <p>当 <cite>ContractType</cite> 是从 <cite>dynamic</cite> 关键字推断出时，它将与任何 <cite>ContractType</cite>
 匹配。在这种情况下，导入应始终指定要匹配的 <cite>ContractName</cite> 。（如果未指定契约
 名称，则该导入将被视为不匹配任何导出。）以下两个导出都将与先前的导入匹配：</p>
 <blockquote>
-<div><div class="highlight-csharp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="na">[Export(&quot;TheString&quot;, typeof(IMyAddin))]</span>
-<span class="k">public</span> <span class="k">class</span> <span class="nc">MyLogger</span> <span class="p">:</span> <span class="n">IMyAddin</span> <span class="p">{</span> <span class="p">}</span>
-
-<span class="na">[Export(&quot;TheString&quot;)]</span>
-<span class="k">public</span> <span class="k">class</span> <span class="nc">MyToolbar</span> <span class="p">{</span> <span class="p">}</span>
+<div><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="na">[Export(&quot;TheString&quot;, typeof(IMyAddin))]</span>
+<span class="linenos">2</span><span class="k">public</span> <span class="k">class</span> <span class="nc">MyLogger</span> <span class="p">:</span> <span class="n">IMyAddin</span> <span class="p">{</span> <span class="p">}</span>
+<span class="linenos">3</span>
+<span class="linenos">4</span><span class="na">[Export(&quot;TheString&quot;)]</span>
+<span class="linenos">5</span><span class="k">public</span> <span class="k">class</span> <span class="nc">MyToolbar</span> <span class="p">{</span> <span class="p">}</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div></blockquote>
 <p>显然，导入类必须做好准备以处理任意类型的对象。</p>
 </div>
@@ -381,26 +351,21 @@
 在这种情况下，该类可以通过使用 <cite>Lazy &lt;T&gt;</cite> 的 <cite>ContractType</cite> 来声明延迟导入。
 以下导入属性声明了一个延迟导入：</p>
 <blockquote>
-<div><div class="highlight-csharp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">class</span> <span class="nc">MyClass</span>
-<span class="p">{</span>
-<span class="na">    [Import]</span>
-<span class="hll">    <span class="k">public</span> <span class="n">Lazy</span><span class="p">&lt;</span><span class="n">IMyAddin</span><span class="p">&gt;</span> <span class="n">MyAddin</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
-</span><span class="p">}</span>
+<div><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">public</span> <span class="k">class</span> <span class="nc">MyClass</span>
+<span class="linenos">2</span><span class="p">{</span>
+<span class="linenos">3</span><span class="na">    [Import]</span>
+<span class="hll"><span class="linenos">4</span>    <span class="k">public</span> <span class="n">Lazy</span><span class="p">&lt;</span><span class="n">IMyAddin</span><span class="p">&gt;</span> <span class="n">MyAddin</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span><span class="linenos">5</span><span class="p">}</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div></blockquote>
 <p>从 MEF 组合引擎的角度来看，<cite>Lazy&lt;T&gt;</cite> 的 <cite>ContractType</cite> 被认为与 <cite>T</cite> 的 <cite>ContractType</cite>
 相同，因此前面的导入将与下面的导出相匹配:</p>
 <blockquote>
-<div><div class="highlight-csharp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="na">[Export(typeof(IMyAddin))]</span>
-<span class="k">public</span> <span class="k">class</span> <span class="nc">MyLogger</span> <span class="p">:</span> <span class="n">IMyAddin</span> <span class="p">{</span> <span class="p">}</span>
+<div><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="na">[Export(typeof(IMyAddin))]</span>
+<span class="linenos">2</span><span class="k">public</span> <span class="k">class</span> <span class="nc">MyLogger</span> <span class="p">:</span> <span class="n">IMyAddin</span> <span class="p">{</span> <span class="p">}</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div></blockquote>
 <p><cite>ContractType</cite> 和 <cite>ContractName</cite> 可以在延迟导入的导入特性中指定，如前面 <a class="reference internal" href="#id2"><span class="std std-ref">导入导出基础</span></a> 部分所述。</p>
 </div>
@@ -415,60 +380,39 @@
 动声明为 <cite>import</cite> 。这是一种方便的方式，可以声明在部件初始化过程中使用的导入。
 下面的类使用 <cite>ImportingConstructor</cite> 来声明导入:</p>
 <blockquote>
-<div><div class="highlight-csharp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">class</span> <span class="nc">MyClass</span>
-<span class="p">{</span>
-    <span class="k">private</span> <span class="n">IMyAddin</span> <span class="n">_theAddin</span><span class="p">;</span>
-
-    <span class="c1">//Parameterless constructor will NOT be</span>
-    <span class="c1">//used because the ImportingConstructor</span>
-    <span class="c1">//attribute is present.</span>
-    <span class="k">public</span> <span class="nf">MyClass</span><span class="p">()</span> <span class="p">{</span> <span class="p">}</span>
-
-    <span class="c1">//This constructor will be used.</span>
-    <span class="c1">//An import with contract type IMyAddin is</span>
-    <span class="c1">//declared automatically.</span>
-<span class="hll"><span class="na">    [ImportingConstructor]</span>
-</span>    <span class="k">public</span> <span class="nf">MyClass</span><span class="p">(</span><span class="n">IMyAddin</span> <span class="n">MyAddin</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="n">_theAddin</span> <span class="p">=</span> <span class="n">MyAddin</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<div><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">public</span> <span class="k">class</span> <span class="nc">MyClass</span>
+<span class="linenos"> 2</span><span class="p">{</span>
+<span class="linenos"> 3</span>    <span class="k">private</span> <span class="n">IMyAddin</span> <span class="n">_theAddin</span><span class="p">;</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span>    <span class="c1">//Parameterless constructor will NOT be</span>
+<span class="linenos"> 6</span>    <span class="c1">//used because the ImportingConstructor</span>
+<span class="linenos"> 7</span>    <span class="c1">//attribute is present.</span>
+<span class="linenos"> 8</span>    <span class="k">public</span> <span class="nf">MyClass</span><span class="p">()</span> <span class="p">{</span> <span class="p">}</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span>    <span class="c1">//This constructor will be used.</span>
+<span class="linenos">11</span>    <span class="c1">//An import with contract type IMyAddin is</span>
+<span class="linenos">12</span>    <span class="c1">//declared automatically.</span>
+<span class="hll"><span class="linenos">13</span><span class="na">    [ImportingConstructor]</span>
+</span><span class="linenos">14</span>    <span class="k">public</span> <span class="nf">MyClass</span><span class="p">(</span><span class="n">IMyAddin</span> <span class="n">MyAddin</span><span class="p">)</span>
+<span class="linenos">15</span>    <span class="p">{</span>
+<span class="linenos">16</span>        <span class="n">_theAddin</span> <span class="p">=</span> <span class="n">MyAddin</span><span class="p">;</span>
+<span class="linenos">17</span>    <span class="p">}</span>
+<span class="linenos">18</span><span class="p">}</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div></blockquote>
 <p>默认情况下， <cite>ImportingConstructor</cite> 特性对所有的参数导入都使用推断的 <cite>ContractType</cite>
 和 <cite>ContractName</cite>。可以通过使用 <cite>Import</cite> 特性修饰参数来覆盖这一点，这样就可
 以显式地定义 <cite>ContractType</cite> 和 <cite>ContractName</cite> 。下面的代码演示了一个使用这
 种语法来导入派生类而不是父类的构造函数:</p>
 <blockquote>
-<div><div class="highlight-csharp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="na">[ImportingConstructor]</span>
-<span class="hll"><span class="k">public</span> <span class="nf">MyClass</span><span class="p">([</span><span class="n">Import</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="n">IMySubAddin</span><span class="p">))]</span><span class="n">IMyAddin</span> <span class="n">MyAddin</span><span class="p">)</span>
-</span><span class="p">{</span>
-    <span class="n">_theAddin</span> <span class="p">=</span> <span class="n">MyAddin</span><span class="p">;</span>
-<span class="p">}</span>
+<div><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="na">[ImportingConstructor]</span>
+<span class="hll"><span class="linenos">2</span><span class="k">public</span> <span class="nf">MyClass</span><span class="p">([</span><span class="n">Import</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="n">IMySubAddin</span><span class="p">))]</span><span class="n">IMyAddin</span> <span class="n">MyAddin</span><span class="p">)</span>
+</span><span class="linenos">3</span><span class="p">{</span>
+<span class="linenos">4</span>    <span class="n">_theAddin</span> <span class="p">=</span> <span class="n">MyAddin</span><span class="p">;</span>
+<span class="linenos">5</span><span class="p">}</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div></blockquote>
 <p>特别是，您应谨慎使用集合参数。例如，如果您在参数类型为 <cite>IEnumerable &lt;int&gt;</cite>
 的构造函数上指定 <cite>ImportingConstructor</cite> ，则该导入将匹配 <cite>IEnumerable &lt;int&gt;</cite>
@@ -490,23 +434,16 @@ B之前先构造对象B，并且对象B导入对象A，则该循环将无法解�
 属性类型的默认值（对象属性为 <cite>null</cite> ，布尔函数为 <cite>false</cite> ，数字属性为 <cite>0</cite> ）。
 下面的类使用了一个可选的导入:</p>
 <blockquote>
-<div><div class="highlight-csharp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span>
-<span class="normal">6</span>
-<span class="normal">7</span>
-<span class="normal">8</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">class</span> <span class="nc">MyClass</span>
-<span class="p">{</span>
-<span class="hll"><span class="na">    [Import(AllowDefault = true)]</span>
-</span>    <span class="k">public</span> <span class="n">Plugin</span> <span class="n">thePlugin</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
-
-    <span class="c1">//If no matching export is available,</span>
-    <span class="c1">//thePlugin will be set to null.</span>
-<span class="p">}</span>
+<div><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">public</span> <span class="k">class</span> <span class="nc">MyClass</span>
+<span class="linenos">2</span><span class="p">{</span>
+<span class="hll"><span class="linenos">3</span><span class="na">    [Import(AllowDefault = true)]</span>
+</span><span class="linenos">4</span>    <span class="k">public</span> <span class="n">Plugin</span> <span class="n">thePlugin</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+<span class="linenos">5</span>
+<span class="linenos">6</span>    <span class="c1">//If no matching export is available,</span>
+<span class="linenos">7</span>    <span class="c1">//thePlugin will be set to null.</span>
+<span class="linenos">8</span><span class="p">}</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div></blockquote>
 </div>
 <div class="section" id="id9">
@@ -516,34 +453,26 @@ B之前先构造对象B，并且对象B导入对象A，则该循环将无法解�
 导入总是可选的（可选导入）。例如，如果没有匹配的出口，合成不会失败。下面的类
 可以导入任意数量的 <cite>IMyAddin</cite> 类型的导出：</p>
 <blockquote>
-<div><div class="highlight-csharp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">class</span> <span class="nc">MyClass</span>
-<span class="p">{</span>
-<span class="hll"><span class="na">    [ImportMany]</span>
-</span>    <span class="k">public</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">IMyAddin</span><span class="p">&gt;</span> <span class="n">MyAddin</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
-<span class="p">}</span>
+<div><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">public</span> <span class="k">class</span> <span class="nc">MyClass</span>
+<span class="linenos">2</span><span class="p">{</span>
+<span class="hll"><span class="linenos">3</span><span class="na">    [ImportMany]</span>
+</span><span class="linenos">4</span>    <span class="k">public</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">IMyAddin</span><span class="p">&gt;</span> <span class="n">MyAddin</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+<span class="linenos">5</span><span class="p">}</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div></blockquote>
 <p>可以使用普通的 <cite>IEnumerable &lt;T&gt;</cite> 语法和方法访问导入的数组。也可以改用普通数
 组（ <cite>IMyAddin []</cite> ）。与 <cite>Lazy &lt;T&gt;</cite> 语法结合使用时，此模式可能非常重要。
 例如，通过使用 <cite>ImportMany</cite> ， <cite>IEnumerable &lt;T&gt;</cite> 和 <cite>Lazy &lt;T&gt;</cite> ，您可以
 导入对任意数量对象的间接引用，而仅实例化那些必需的对象。下面的类显示了这种模式:</p>
 <blockquote>
-<div><div class="highlight-csharp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">class</span> <span class="nc">MyClass</span>
-<span class="p">{</span>
-<span class="na">    [ImportMany]</span>
-<span class="hll">    <span class="k">public</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">Lazy</span><span class="p">&lt;</span><span class="n">IMyAddin</span><span class="p">&gt;&gt;</span> <span class="n">MyAddin</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
-</span><span class="p">}</span>
+<div><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">public</span> <span class="k">class</span> <span class="nc">MyClass</span>
+<span class="linenos">2</span><span class="p">{</span>
+<span class="linenos">3</span><span class="na">    [ImportMany]</span>
+<span class="hll"><span class="linenos">4</span>    <span class="k">public</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">Lazy</span><span class="p">&lt;</span><span class="n">IMyAddin</span><span class="p">&gt;&gt;</span> <span class="n">MyAddin</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span><span class="linenos">5</span><span class="p">}</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div></blockquote>
 </div>
 </div>
@@ -560,49 +489,29 @@ B之前先构造对象B，并且对象B导入对象A，则该循环将无法解�
 目录将发现 <cite>DataOne</cite> 。 由于 <cite>DataTwo</cite> 是抽象的，因此不会被发现。
 由于 <cite>DataThree</cite> 使用 <cite>PartNotDiscoverable</cite> 特性，因此不会被发现。</p>
 <blockquote>
-<div><div class="highlight-csharp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="na">[Export]</span>
-<span class="k">public</span> <span class="k">class</span> <span class="nc">DataOne</span>
-<span class="p">{</span>
-    <span class="c1">//This part will be discovered</span>
-    <span class="c1">//as normal by the catalog.</span>
-<span class="p">}</span>
-
-<span class="na">[Export]</span>
-<span class="hll"><span class="k">public</span> <span class="k">abstract</span> <span class="k">class</span> <span class="nc">DataTwo</span>
-</span><span class="p">{</span>
-    <span class="c1">//This part will not be discovered</span>
-    <span class="c1">//by the catalog.</span>
-<span class="p">}</span>
-
-<span class="hll"><span class="na">[PartNotDiscoverable]</span>
-</span><span class="na">[Export]</span>
-<span class="k">public</span> <span class="k">class</span> <span class="nc">DataThree</span>
-<span class="p">{</span>
-    <span class="c1">//This part will also not be discovered</span>
-    <span class="c1">//by the catalog.</span>
-<span class="p">}</span>
+<div><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="na">[Export]</span>
+<span class="linenos"> 2</span><span class="k">public</span> <span class="k">class</span> <span class="nc">DataOne</span>
+<span class="linenos"> 3</span><span class="p">{</span>
+<span class="linenos"> 4</span>    <span class="c1">//This part will be discovered</span>
+<span class="linenos"> 5</span>    <span class="c1">//as normal by the catalog.</span>
+<span class="linenos"> 6</span><span class="p">}</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span><span class="na">[Export]</span>
+<span class="hll"><span class="linenos"> 9</span><span class="k">public</span> <span class="k">abstract</span> <span class="k">class</span> <span class="nc">DataTwo</span>
+</span><span class="linenos">10</span><span class="p">{</span>
+<span class="linenos">11</span>    <span class="c1">//This part will not be discovered</span>
+<span class="linenos">12</span>    <span class="c1">//by the catalog.</span>
+<span class="linenos">13</span><span class="p">}</span>
+<span class="linenos">14</span>
+<span class="hll"><span class="linenos">15</span><span class="na">[PartNotDiscoverable]</span>
+</span><span class="linenos">16</span><span class="na">[Export]</span>
+<span class="linenos">17</span><span class="k">public</span> <span class="k">class</span> <span class="nc">DataThree</span>
+<span class="linenos">18</span><span class="p">{</span>
+<span class="linenos">19</span>    <span class="c1">//This part will also not be discovered</span>
+<span class="linenos">20</span>    <span class="c1">//by the catalog.</span>
+<span class="linenos">21</span><span class="p">}</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div></blockquote>
 </li>
 </ol>
@@ -617,21 +526,15 @@ B之前先构造对象B，并且对象B导入对象A，则该循环将无法解�
 些元数据。元数据视图界面必须 <strong>仅具有属性</strong> ，并且这些属性 <strong>必须具有get访问器</strong> 。
 以下接口是一个元数据视图的示例：</p>
 <blockquote>
-<div><div class="highlight-csharp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span>
-<span class="normal">6</span>
-<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">interface</span> <span class="n">IPluginMetadata</span>
-<span class="p">{</span>
-    <span class="kt">string</span> <span class="n">Name</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="p">}</span>
-
-<span class="na">    [DefaultValue(1)]</span>
-    <span class="kt">int</span> <span class="n">Version</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="p">}</span>
-<span class="p">}</span>
+<div><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">public</span> <span class="k">interface</span> <span class="n">IPluginMetadata</span>
+<span class="linenos">2</span><span class="p">{</span>
+<span class="linenos">3</span>    <span class="kt">string</span> <span class="n">Name</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="p">}</span>
+<span class="linenos">4</span>
+<span class="linenos">5</span><span class="na">    [DefaultValue(1)]</span>
+<span class="linenos">6</span>    <span class="kt">int</span> <span class="n">Version</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="p">}</span>
+<span class="linenos">7</span><span class="p">}</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div></blockquote>
 <p>也可以将通用集合 <cite>IDictionary &lt;string，object&gt;</cite> 用作元数据视图，但这没有类
 型检查的好处，应避免使用。</p>
@@ -640,33 +543,21 @@ B之前先构造对象B，并且对象B导入对象A，则该循环将无法解�
 则将为其分配默认值，该默认值将被指定为 <cite>DefaultValue</cite> 的参数。以下是用元数
 据修饰的两个不同的类。这两个类都将与先前的元数据视图匹配：</p>
 <blockquote>
-<div><div class="highlight-csharp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="na">[Export(typeof(IPlugin)),</span>
-<span class="hll"><span class="na">    ExportMetadata(&quot;Name&quot;, &quot;Logger&quot;),</span>
-</span><span class="hll"><span class="na">    ExportMetadata(&quot;Version&quot;, 4)]</span>
-</span><span class="k">public</span> <span class="k">class</span> <span class="nc">Logger</span> <span class="p">:</span> <span class="n">IPlugin</span>
-<span class="p">{</span>
-<span class="p">}</span>
-
-<span class="na">[Export(typeof(IPlugin)),</span>
-<span class="na">    ExportMetadata(&quot;Name&quot;, &quot;Disk Writer&quot;)]</span>
-    <span class="c1">//Version is not required because of the DefaultValue</span>
-<span class="k">public</span> <span class="k">class</span> <span class="nc">DWriter</span> <span class="p">:</span> <span class="n">IPlugin</span>
-<span class="p">{</span>
-<span class="p">}</span>
+<div><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="na">[Export(typeof(IPlugin)),</span>
+<span class="hll"><span class="linenos"> 2</span><span class="na">    ExportMetadata(&quot;Name&quot;, &quot;Logger&quot;),</span>
+</span><span class="hll"><span class="linenos"> 3</span><span class="na">    ExportMetadata(&quot;Version&quot;, 4)]</span>
+</span><span class="linenos"> 4</span><span class="k">public</span> <span class="k">class</span> <span class="nc">Logger</span> <span class="p">:</span> <span class="n">IPlugin</span>
+<span class="linenos"> 5</span><span class="p">{</span>
+<span class="linenos"> 6</span><span class="p">}</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span><span class="na">[Export(typeof(IPlugin)),</span>
+<span class="linenos"> 9</span><span class="na">    ExportMetadata(&quot;Name&quot;, &quot;Disk Writer&quot;)]</span>
+<span class="linenos">10</span>    <span class="c1">//Version is not required because of the DefaultValue</span>
+<span class="linenos">11</span><span class="k">public</span> <span class="k">class</span> <span class="nc">DWriter</span> <span class="p">:</span> <span class="n">IPlugin</span>
+<span class="linenos">12</span><span class="p">{</span>
+<span class="linenos">13</span><span class="p">}</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div></blockquote>
 <p>元数据通过使用 <cite>ExportMetadata</cite> 属性在 <cite>Export</cite> 特性之后表达。每条元数据都
 由名称/值对组成。元数据的名称部分必须与元数据视图中相应属性的名称相匹配，而值
@@ -675,57 +566,37 @@ B之前先构造对象B，并且对象B导入对象A，则该循环将无法解�
 方式声明的，元数据接口是 <cite>Lazy&lt;T,T&gt;</cite> 的第二个类型参数。下面的类导入了前面带
 元数据的部分:</p>
 <blockquote>
-<div><div class="highlight-csharp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">class</span> <span class="nc">Addin</span>
-<span class="p">{</span>
-<span class="na">    [Import]</span>
-<span class="hll">    <span class="k">public</span> <span class="n">Lazy</span><span class="p">&lt;</span><span class="n">IPlugin</span><span class="p">,</span> <span class="n">IPluginMetadata</span><span class="p">&gt;</span> <span class="n">plugin</span><span class="p">;</span>
-</span><span class="p">}</span>
+<div><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">public</span> <span class="k">class</span> <span class="nc">Addin</span>
+<span class="linenos">2</span><span class="p">{</span>
+<span class="linenos">3</span><span class="na">    [Import]</span>
+<span class="hll"><span class="linenos">4</span>    <span class="k">public</span> <span class="n">Lazy</span><span class="p">&lt;</span><span class="n">IPlugin</span><span class="p">,</span> <span class="n">IPluginMetadata</span><span class="p">&gt;</span> <span class="n">plugin</span><span class="p">;</span>
+</span><span class="linenos">5</span><span class="p">}</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div></blockquote>
 <p>在许多情况下，您将希望将元数据与 <cite>ImportMany</cite> 特性结合在一起，以便解析可用的
 导入并仅选择和实例化一个导入，或过滤一个集合以匹配特定条件。下列类仅实例化具有
 <cite>Name</cite> 值 <cite>Logger</cite> 的 <cite>IPlugin</cite> 对象:</p>
 <blockquote>
-<div><div class="highlight-csharp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">class</span> <span class="nc">User</span>
-<span class="p">{</span>
-<span class="hll"><span class="na">    [ImportMany]</span>
-</span><span class="hll">    <span class="k">public</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">Lazy</span><span class="p">&lt;</span><span class="n">IPlugin</span><span class="p">,</span> <span class="n">IPluginMetadata</span><span class="p">&gt;&gt;</span> <span class="n">plugins</span><span class="p">;</span>
-</span>
-    <span class="k">public</span> <span class="n">IPlugin</span> <span class="nf">InstantiateLogger</span><span class="p">()</span>
-    <span class="p">{</span>
-        <span class="n">IPlugin</span> <span class="n">logger</span> <span class="p">=</span> <span class="k">null</span><span class="p">;</span>
-
-        <span class="k">foreach</span> <span class="p">(</span><span class="n">Lazy</span><span class="p">&lt;</span><span class="n">IPlugin</span><span class="p">,</span> <span class="n">IPluginMetadata</span><span class="p">&gt;</span> <span class="n">plugin</span> <span class="k">in</span> <span class="n">plugins</span><span class="p">)</span>
-        <span class="p">{</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">plugin</span><span class="p">.</span><span class="n">Metadata</span><span class="p">.</span><span class="n">Name</span> <span class="p">==</span> <span class="s">&quot;Logger&quot;</span><span class="p">)</span>
-                <span class="n">logger</span> <span class="p">=</span> <span class="n">plugin</span><span class="p">.</span><span class="n">Value</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="k">return</span> <span class="n">logger</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<div><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">public</span> <span class="k">class</span> <span class="nc">User</span>
+<span class="linenos"> 2</span><span class="p">{</span>
+<span class="hll"><span class="linenos"> 3</span><span class="na">    [ImportMany]</span>
+</span><span class="hll"><span class="linenos"> 4</span>    <span class="k">public</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">Lazy</span><span class="p">&lt;</span><span class="n">IPlugin</span><span class="p">,</span> <span class="n">IPluginMetadata</span><span class="p">&gt;&gt;</span> <span class="n">plugins</span><span class="p">;</span>
+</span><span class="linenos"> 5</span>
+<span class="linenos"> 6</span>    <span class="k">public</span> <span class="n">IPlugin</span> <span class="nf">InstantiateLogger</span><span class="p">()</span>
+<span class="linenos"> 7</span>    <span class="p">{</span>
+<span class="linenos"> 8</span>        <span class="n">IPlugin</span> <span class="n">logger</span> <span class="p">=</span> <span class="k">null</span><span class="p">;</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span>        <span class="k">foreach</span> <span class="p">(</span><span class="n">Lazy</span><span class="p">&lt;</span><span class="n">IPlugin</span><span class="p">,</span> <span class="n">IPluginMetadata</span><span class="p">&gt;</span> <span class="n">plugin</span> <span class="k">in</span> <span class="n">plugins</span><span class="p">)</span>
+<span class="linenos">11</span>        <span class="p">{</span>
+<span class="linenos">12</span>            <span class="k">if</span> <span class="p">(</span><span class="n">plugin</span><span class="p">.</span><span class="n">Metadata</span><span class="p">.</span><span class="n">Name</span> <span class="p">==</span> <span class="s">&quot;Logger&quot;</span><span class="p">)</span>
+<span class="linenos">13</span>                <span class="n">logger</span> <span class="p">=</span> <span class="n">plugin</span><span class="p">.</span><span class="n">Value</span><span class="p">;</span>
+<span class="linenos">14</span>        <span class="p">}</span>
+<span class="linenos">15</span>        <span class="k">return</span> <span class="n">logger</span><span class="p">;</span>
+<span class="linenos">16</span>    <span class="p">}</span>
+<span class="linenos">17</span><span class="p">}</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div></blockquote>
 </div>
 <div class="section" id="id12">
@@ -742,81 +613,45 @@ B之前先构造对象B，并且对象B导入对象A，则该循环将无法解�
 所以 <cite>NumFour</cite> 有一个 <cite>ContractType</cite> 为 <cite>NumThree</cite> 的导出。成员级的导出永
 远不会被继承，所以 <cite>IMyData</cite> 不会被导出:</p>
 <blockquote>
-<div><div class="highlight-csharp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
-<span class="normal">35</span>
-<span class="normal">36</span>
-<span class="normal">37</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="na">[Export]</span>
-<span class="k">public</span> <span class="k">class</span> <span class="nc">NumOne</span>
-<span class="p">{</span>
-<span class="na">    [Import]</span>
-    <span class="k">public</span> <span class="n">IMyData</span> <span class="n">MyData</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="k">public</span> <span class="k">class</span> <span class="nc">NumTwo</span> <span class="p">:</span> <span class="n">NumOne</span>
-<span class="p">{</span>
-    <span class="c1">//Imports are always inherited, so NumTwo will</span>
-    <span class="c1">//import IMyData.</span>
-
-    <span class="c1">//Ordinary exports are not inherited, so</span>
-    <span class="c1">//NumTwo will NOT export anything. As a result it</span>
-<span class="hll">    <span class="c1">//will not be discovered by the catalog!</span>
-</span><span class="p">}</span>
-
-<span class="na">[InheritedExport]</span>
-<span class="k">public</span> <span class="k">class</span> <span class="nc">NumThree</span>
-<span class="p">{</span>
-<span class="na">    [Export]</span>
-    <span class="n">Public</span> <span class="n">IMyData</span> <span class="n">MyData</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
-
-    <span class="c1">//This part provides two exports, one of</span>
-    <span class="c1">//contract type NumThree, and one of</span>
-    <span class="c1">//contract type IMyData.</span>
-<span class="p">}</span>
-
-<span class="k">public</span> <span class="k">class</span> <span class="nc">NumFour</span> <span class="p">:</span> <span class="n">NumThree</span>
-<span class="p">{</span>
-    <span class="c1">//Because NumThree used InheritedExport,</span>
-    <span class="c1">//this part has one export with contract</span>
-    <span class="c1">//type NumThree.</span>
-
-    <span class="c1">//Member-level exports are never inherited,</span>
-    <span class="c1">//so IMyData is not exported.</span>
-<span class="p">}</span>
+<div><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="na">[Export]</span>
+<span class="linenos"> 2</span><span class="k">public</span> <span class="k">class</span> <span class="nc">NumOne</span>
+<span class="linenos"> 3</span><span class="p">{</span>
+<span class="linenos"> 4</span><span class="na">    [Import]</span>
+<span class="linenos"> 5</span>    <span class="k">public</span> <span class="n">IMyData</span> <span class="n">MyData</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+<span class="linenos"> 6</span><span class="p">}</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span><span class="k">public</span> <span class="k">class</span> <span class="nc">NumTwo</span> <span class="p">:</span> <span class="n">NumOne</span>
+<span class="linenos"> 9</span><span class="p">{</span>
+<span class="linenos">10</span>    <span class="c1">//Imports are always inherited, so NumTwo will</span>
+<span class="linenos">11</span>    <span class="c1">//import IMyData.</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span>    <span class="c1">//Ordinary exports are not inherited, so</span>
+<span class="linenos">14</span>    <span class="c1">//NumTwo will NOT export anything. As a result it</span>
+<span class="hll"><span class="linenos">15</span>    <span class="c1">//will not be discovered by the catalog!</span>
+</span><span class="linenos">16</span><span class="p">}</span>
+<span class="linenos">17</span>
+<span class="linenos">18</span><span class="na">[InheritedExport]</span>
+<span class="linenos">19</span><span class="k">public</span> <span class="k">class</span> <span class="nc">NumThree</span>
+<span class="linenos">20</span><span class="p">{</span>
+<span class="linenos">21</span><span class="na">    [Export]</span>
+<span class="linenos">22</span>    <span class="n">Public</span> <span class="n">IMyData</span> <span class="n">MyData</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+<span class="linenos">23</span>
+<span class="linenos">24</span>    <span class="c1">//This part provides two exports, one of</span>
+<span class="linenos">25</span>    <span class="c1">//contract type NumThree, and one of</span>
+<span class="linenos">26</span>    <span class="c1">//contract type IMyData.</span>
+<span class="linenos">27</span><span class="p">}</span>
+<span class="linenos">28</span>
+<span class="linenos">29</span><span class="k">public</span> <span class="k">class</span> <span class="nc">NumFour</span> <span class="p">:</span> <span class="n">NumThree</span>
+<span class="linenos">30</span><span class="p">{</span>
+<span class="linenos">31</span>    <span class="c1">//Because NumThree used InheritedExport,</span>
+<span class="linenos">32</span>    <span class="c1">//this part has one export with contract</span>
+<span class="linenos">33</span>    <span class="c1">//type NumThree.</span>
+<span class="linenos">34</span>
+<span class="linenos">35</span>    <span class="c1">//Member-level exports are never inherited,</span>
+<span class="linenos">36</span>    <span class="c1">//so IMyData is not exported.</span>
+<span class="linenos">37</span><span class="p">}</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div></blockquote>
 <p>如果有与 <cite>InheritedExport</cite> 特性相关联的元数据，该元数据也将被继承。(更多信息，
 请参阅前面的 <a class="reference internal" href="#id11"><span class="std std-ref">元数据和元数据视图</span></a> 一节)。继承的元数据不能被子类
@@ -826,53 +661,31 @@ B之前先构造对象B，并且对象B导入对象A，则该循环将无法解�
 属性。由于 <cite>MegaLogger</cite> 重新声明了名为 <cite>Status</cite> 的新元数据，所以它没有继承
 <cite>Logger</cite> 的 <cite>Name</cite> 和 <cite>Version</cite> 元数据：</p>
 <blockquote>
-<div><div class="highlight-csharp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="hll"><span class="na">[InheritedExport(typeof(IPlugin)),</span>
-</span><span class="hll"><span class="na">    ExportMetadata(&quot;Name&quot;, &quot;Logger&quot;),</span>
-</span><span class="hll"><span class="na">    ExportMetadata(&quot;Version&quot;, 4)]</span>
-</span><span class="k">public</span> <span class="k">class</span> <span class="nc">Logger</span> <span class="p">:</span> <span class="n">IPlugin</span>
-<span class="p">{</span>
-    <span class="c1">//Exports with contract type IPlugin and</span>
-    <span class="c1">//metadata &quot;Name&quot; and &quot;Version&quot;.</span>
-<span class="p">}</span>
-
-<span class="k">public</span> <span class="k">class</span> <span class="nc">SuperLogger</span> <span class="p">:</span> <span class="n">Logger</span>
-<span class="p">{</span>
-    <span class="c1">//Exports with contract type IPlugin and</span>
-    <span class="c1">//metadata &quot;Name&quot; and &quot;Version&quot;, exactly the same</span>
-    <span class="c1">//as the Logger class.</span>
-<span class="p">}</span>
-
-<span class="hll"><span class="na">[InheritedExport(typeof(IPlugin)),</span>
-</span><span class="hll"><span class="na">    ExportMetadata(&quot;Status&quot;, &quot;Green&quot;)]</span>
-</span><span class="hll"><span class="k">public</span> <span class="k">class</span> <span class="nc">MegaLogger</span> <span class="p">:</span> <span class="n">Logger</span>        <span class="p">{</span>
-</span>    <span class="c1">//Exports with contract type IPlugin and</span>
-    <span class="c1">//metadata &quot;Status&quot; only. Re-declaring</span>
-    <span class="c1">//the attribute replaces all metadata.</span>
-<span class="p">}</span>
+<div><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos"> 1</span><span class="na">[InheritedExport(typeof(IPlugin)),</span>
+</span><span class="hll"><span class="linenos"> 2</span><span class="na">    ExportMetadata(&quot;Name&quot;, &quot;Logger&quot;),</span>
+</span><span class="hll"><span class="linenos"> 3</span><span class="na">    ExportMetadata(&quot;Version&quot;, 4)]</span>
+</span><span class="linenos"> 4</span><span class="k">public</span> <span class="k">class</span> <span class="nc">Logger</span> <span class="p">:</span> <span class="n">IPlugin</span>
+<span class="linenos"> 5</span><span class="p">{</span>
+<span class="linenos"> 6</span>    <span class="c1">//Exports with contract type IPlugin and</span>
+<span class="linenos"> 7</span>    <span class="c1">//metadata &quot;Name&quot; and &quot;Version&quot;.</span>
+<span class="linenos"> 8</span><span class="p">}</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="k">public</span> <span class="k">class</span> <span class="nc">SuperLogger</span> <span class="p">:</span> <span class="n">Logger</span>
+<span class="linenos">11</span><span class="p">{</span>
+<span class="linenos">12</span>    <span class="c1">//Exports with contract type IPlugin and</span>
+<span class="linenos">13</span>    <span class="c1">//metadata &quot;Name&quot; and &quot;Version&quot;, exactly the same</span>
+<span class="linenos">14</span>    <span class="c1">//as the Logger class.</span>
+<span class="linenos">15</span><span class="p">}</span>
+<span class="linenos">16</span>
+<span class="hll"><span class="linenos">17</span><span class="na">[InheritedExport(typeof(IPlugin)),</span>
+</span><span class="hll"><span class="linenos">18</span><span class="na">    ExportMetadata(&quot;Status&quot;, &quot;Green&quot;)]</span>
+</span><span class="hll"><span class="linenos">19</span><span class="k">public</span> <span class="k">class</span> <span class="nc">MegaLogger</span> <span class="p">:</span> <span class="n">Logger</span>        <span class="p">{</span>
+</span><span class="linenos">20</span>    <span class="c1">//Exports with contract type IPlugin and</span>
+<span class="linenos">21</span>    <span class="c1">//metadata &quot;Status&quot; only. Re-declaring</span>
+<span class="linenos">22</span>    <span class="c1">//the attribute replaces all metadata.</span>
+<span class="linenos">23</span><span class="p">}</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div></blockquote>
 <p>重新声明 <cite>InheritedExport</cite> 特性以覆盖元数据时，请确保 <cite>ContractType</cite> 相同。
 （在前面的示例中，是 <cite>IPlugin</cite> 类型）如果它们不同，则不是覆盖，第二个属性将
@@ -890,48 +703,34 @@ B之前先构造对象B，并且对象B导入对象A，则该循环将无法解�
 自定义属性，必须使用 <cite>MetadataAttribute</cite> 特性修饰从 <cite>ExportAttribute</cite>
 （或 <cite>InheritedExportAttribute</cite> ）继承的类。下列类定义了一个自定义特性：</p>
 <blockquote>
-<div><div class="highlight-csharp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="hll"><span class="na">[MetadataAttribute]</span>
-</span><span class="na">[AttributeUsage(AttributeTargets.Class, AllowMultiple=false)]</span>
-<span class="hll"><span class="k">public</span> <span class="k">class</span> <span class="nc">MyAttribute</span> <span class="p">:</span> <span class="n">ExportAttribute</span>
-</span><span class="p">{</span>
-    <span class="k">public</span> <span class="nf">MyAttribute</span><span class="p">(</span><span class="kt">string</span> <span class="n">myMetadata</span><span class="p">)</span>
-        <span class="p">:</span> <span class="k">base</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="n">IMyAddin</span><span class="p">))</span>
-    <span class="p">{</span>
-        <span class="n">MyMetadata</span> <span class="p">=</span> <span class="n">myMetadata</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="k">public</span> <span class="kt">string</span> <span class="n">MyMetadata</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">private</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
-<span class="p">}</span>
+<div><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos"> 1</span><span class="na">[MetadataAttribute]</span>
+</span><span class="linenos"> 2</span><span class="na">[AttributeUsage(AttributeTargets.Class, AllowMultiple=false)]</span>
+<span class="hll"><span class="linenos"> 3</span><span class="k">public</span> <span class="k">class</span> <span class="nc">MyAttribute</span> <span class="p">:</span> <span class="n">ExportAttribute</span>
+</span><span class="linenos"> 4</span><span class="p">{</span>
+<span class="linenos"> 5</span>    <span class="k">public</span> <span class="nf">MyAttribute</span><span class="p">(</span><span class="kt">string</span> <span class="n">myMetadata</span><span class="p">)</span>
+<span class="linenos"> 6</span>        <span class="p">:</span> <span class="k">base</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="n">IMyAddin</span><span class="p">))</span>
+<span class="linenos"> 7</span>    <span class="p">{</span>
+<span class="linenos"> 8</span>        <span class="n">MyMetadata</span> <span class="p">=</span> <span class="n">myMetadata</span><span class="p">;</span>
+<span class="linenos"> 9</span>    <span class="p">}</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span>    <span class="k">public</span> <span class="kt">string</span> <span class="n">MyMetadata</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">private</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+<span class="linenos">12</span><span class="p">}</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div></blockquote>
 <p>此类定义了一个名为 <cite>MyAttribute</cite> 的自定义特性，其 <cite>ContractType</cite> 为 <cite>IMyAddin</cite>
 以及一些名为 <cite>MyMetadata</cite> 的元数据。 <strong>标记为 `MetadataAttribute` 特性的类中的所有属性均视为在自定义属性中定义的元数据</strong> 。
 以下两个声明是等效的：</p>
 <blockquote>
-<div><div class="highlight-csharp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="hll"><span class="na">[Export(typeof(IMyAddin)),</span>
-</span><span class="hll"><span class="na">    ExportMetadata(&quot;MyMetadata&quot;, &quot;theData&quot;)]</span>
-</span><span class="k">public</span> <span class="n">MyAddin</span> <span class="n">myAddin</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+<div><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos">1</span><span class="na">[Export(typeof(IMyAddin)),</span>
+</span><span class="hll"><span class="linenos">2</span><span class="na">    ExportMetadata(&quot;MyMetadata&quot;, &quot;theData&quot;)]</span>
+</span><span class="linenos">3</span><span class="k">public</span> <span class="n">MyAddin</span> <span class="n">myAddin</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
 </pre></div>
-</td></tr></table></div>
-<div class="highlight-csharp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="hll"><span class="na">[MyAttribute(&quot;theData&quot;)]</span>
-</span><span class="k">public</span> <span class="n">MyAddin</span> <span class="n">myAddin</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</div>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos">1</span><span class="na">[MyAttribute(&quot;theData&quot;)]</span>
+</span><span class="linenos">2</span><span class="k">public</span> <span class="n">MyAddin</span> <span class="n">myAddin</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div></blockquote>
 <p>在第一个声明中， <cite>ContractType</cite> 和元数据是明确定义的。在第二种声明中， <cite>ContractType</cite>
 和元数据隐含在自定义特性中。特别是在大量相同的元数据必须应用于许多部件的情况下
@@ -963,135 +762,72 @@ B之前先构造对象B，并且对象B导入对象A，则该循环将无法解�
 导出一样。如果导入和导出都指定了 <code class="docutils literal notranslate"><span class="pre">Any</span></code>，或者没有指定创建策略而默认为 <code class="docutils literal notranslate"><span class="pre">Any</span></code> ，
 则创建策略将默认为 <code class="docutils literal notranslate"><span class="pre">Shared</span></code> 。</p>
 <blockquote>
-<div><div class="highlight-csharp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
-<span class="normal">35</span>
-<span class="normal">36</span>
-<span class="normal">37</span>
-<span class="normal">38</span>
-<span class="normal">39</span>
-<span class="normal">40</span>
-<span class="normal">41</span>
-<span class="normal">42</span>
-<span class="normal">43</span>
-<span class="normal">44</span>
-<span class="normal">45</span>
-<span class="normal">46</span>
-<span class="normal">47</span>
-<span class="normal">48</span>
-<span class="normal">49</span>
-<span class="normal">50</span>
-<span class="normal">51</span>
-<span class="normal">52</span>
-<span class="normal">53</span>
-<span class="normal">54</span>
-<span class="normal">55</span>
-<span class="normal">56</span>
-<span class="normal">57</span>
-<span class="normal">58</span>
-<span class="normal">59</span>
-<span class="normal">60</span>
-<span class="normal">61</span>
-<span class="normal">62</span>
-<span class="normal">63</span>
-<span class="normal">64</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="na">[Export]</span>
-<span class="k">public</span> <span class="k">class</span> <span class="nc">PartOne</span>
-<span class="p">{</span>
-    <span class="c1">//The default creation policy for an export is Any.</span>
-<span class="p">}</span>
-
-<span class="k">public</span> <span class="k">class</span> <span class="nc">PartTwo</span>
-<span class="p">{</span>
-<span class="na">    [Import]</span>
-    <span class="k">public</span> <span class="n">PartOne</span> <span class="n">partOne</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
-
-    <span class="c1">//The default creation policy for an import is Any.</span>
-    <span class="c1">//If both policies are Any, the part will be shared.</span>
-<span class="p">}</span>
-
-<span class="k">public</span> <span class="k">class</span> <span class="nc">PartThree</span>
-<span class="p">{</span>
-<span class="hll"><span class="na">    [Import(RequiredCreationPolicy = CreationPolicy.Shared)]</span>
-</span>    <span class="k">public</span> <span class="n">PartOne</span> <span class="n">partOne</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
-
-    <span class="c1">//The Shared creation policy is explicitly specified.</span>
-    <span class="c1">//PartTwo and PartThree will receive references to the</span>
-    <span class="c1">//SAME copy of PartOne.</span>
-<span class="p">}</span>
-
-<span class="na">[Export]</span>
-<span class="hll"><span class="na">[PartCreationPolicy(CreationPolicy.NonShared)]</span>
-</span><span class="k">public</span> <span class="k">class</span> <span class="nc">PartFour</span>
-<span class="p">{</span>
-    <span class="c1">//The NonShared creation policy is explicitly specified.</span>
-<span class="p">}</span>
-
-<span class="k">public</span> <span class="k">class</span> <span class="nc">PartFive</span>
-<span class="p">{</span>
-<span class="na">    [Import]</span>
-    <span class="k">public</span> <span class="n">PartFour</span> <span class="n">partFour</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
-
-    <span class="c1">//The default creation policy for an import is Any.</span>
-    <span class="c1">//Since the export&#39;s creation policy was explicitly</span>
-    <span class="c1">//defined, the creation policy for this property will</span>
-    <span class="c1">//be non-shared.</span>
-<span class="p">}</span>
-
-<span class="k">public</span> <span class="k">class</span> <span class="nc">PartSix</span>
-<span class="p">{</span>
-<span class="hll"><span class="na">    [Import(RequiredCreationPolicy = CreationPolicy.NonShared)]</span>
-</span>    <span class="k">public</span> <span class="n">PartFour</span> <span class="n">partFour</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
-
-    <span class="c1">//Both import and export specify matching creation</span>
-    <span class="c1">//policies.  PartFive and PartSix will each receive</span>
-    <span class="c1">//SEPARATE copies of PartFour, each with its own</span>
-    <span class="c1">//internal state.</span>
-<span class="p">}</span>
-
-<span class="k">public</span> <span class="k">class</span> <span class="nc">PartSeven</span>
-<span class="p">{</span>
-<span class="hll"><span class="na">    [Import(RequiredCreationPolicy = CreationPolicy.Shared)]</span>
-</span>    <span class="k">public</span> <span class="n">PartFour</span> <span class="n">partFour</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
-
-    <span class="c1">//A creation policy mismatch.  Because there is no</span>
-    <span class="c1">//exported PartFour with a creation policy of Shared,</span>
-    <span class="c1">//this import does not match anything and will not be</span>
-    <span class="c1">//filled.</span>
-<span class="p">}</span>
+<div><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="na">[Export]</span>
+<span class="linenos"> 2</span><span class="k">public</span> <span class="k">class</span> <span class="nc">PartOne</span>
+<span class="linenos"> 3</span><span class="p">{</span>
+<span class="linenos"> 4</span>    <span class="c1">//The default creation policy for an export is Any.</span>
+<span class="linenos"> 5</span><span class="p">}</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="k">public</span> <span class="k">class</span> <span class="nc">PartTwo</span>
+<span class="linenos"> 8</span><span class="p">{</span>
+<span class="linenos"> 9</span><span class="na">    [Import]</span>
+<span class="linenos">10</span>    <span class="k">public</span> <span class="n">PartOne</span> <span class="n">partOne</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span>    <span class="c1">//The default creation policy for an import is Any.</span>
+<span class="linenos">13</span>    <span class="c1">//If both policies are Any, the part will be shared.</span>
+<span class="linenos">14</span><span class="p">}</span>
+<span class="linenos">15</span>
+<span class="linenos">16</span><span class="k">public</span> <span class="k">class</span> <span class="nc">PartThree</span>
+<span class="linenos">17</span><span class="p">{</span>
+<span class="hll"><span class="linenos">18</span><span class="na">    [Import(RequiredCreationPolicy = CreationPolicy.Shared)]</span>
+</span><span class="linenos">19</span>    <span class="k">public</span> <span class="n">PartOne</span> <span class="n">partOne</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+<span class="linenos">20</span>
+<span class="linenos">21</span>    <span class="c1">//The Shared creation policy is explicitly specified.</span>
+<span class="linenos">22</span>    <span class="c1">//PartTwo and PartThree will receive references to the</span>
+<span class="linenos">23</span>    <span class="c1">//SAME copy of PartOne.</span>
+<span class="linenos">24</span><span class="p">}</span>
+<span class="linenos">25</span>
+<span class="linenos">26</span><span class="na">[Export]</span>
+<span class="hll"><span class="linenos">27</span><span class="na">[PartCreationPolicy(CreationPolicy.NonShared)]</span>
+</span><span class="linenos">28</span><span class="k">public</span> <span class="k">class</span> <span class="nc">PartFour</span>
+<span class="linenos">29</span><span class="p">{</span>
+<span class="linenos">30</span>    <span class="c1">//The NonShared creation policy is explicitly specified.</span>
+<span class="linenos">31</span><span class="p">}</span>
+<span class="linenos">32</span>
+<span class="linenos">33</span><span class="k">public</span> <span class="k">class</span> <span class="nc">PartFive</span>
+<span class="linenos">34</span><span class="p">{</span>
+<span class="linenos">35</span><span class="na">    [Import]</span>
+<span class="linenos">36</span>    <span class="k">public</span> <span class="n">PartFour</span> <span class="n">partFour</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+<span class="linenos">37</span>
+<span class="linenos">38</span>    <span class="c1">//The default creation policy for an import is Any.</span>
+<span class="linenos">39</span>    <span class="c1">//Since the export&#39;s creation policy was explicitly</span>
+<span class="linenos">40</span>    <span class="c1">//defined, the creation policy for this property will</span>
+<span class="linenos">41</span>    <span class="c1">//be non-shared.</span>
+<span class="linenos">42</span><span class="p">}</span>
+<span class="linenos">43</span>
+<span class="linenos">44</span><span class="k">public</span> <span class="k">class</span> <span class="nc">PartSix</span>
+<span class="linenos">45</span><span class="p">{</span>
+<span class="hll"><span class="linenos">46</span><span class="na">    [Import(RequiredCreationPolicy = CreationPolicy.NonShared)]</span>
+</span><span class="linenos">47</span>    <span class="k">public</span> <span class="n">PartFour</span> <span class="n">partFour</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+<span class="linenos">48</span>
+<span class="linenos">49</span>    <span class="c1">//Both import and export specify matching creation</span>
+<span class="linenos">50</span>    <span class="c1">//policies.  PartFive and PartSix will each receive</span>
+<span class="linenos">51</span>    <span class="c1">//SEPARATE copies of PartFour, each with its own</span>
+<span class="linenos">52</span>    <span class="c1">//internal state.</span>
+<span class="linenos">53</span><span class="p">}</span>
+<span class="linenos">54</span>
+<span class="linenos">55</span><span class="k">public</span> <span class="k">class</span> <span class="nc">PartSeven</span>
+<span class="linenos">56</span><span class="p">{</span>
+<span class="hll"><span class="linenos">57</span><span class="na">    [Import(RequiredCreationPolicy = CreationPolicy.Shared)]</span>
+</span><span class="linenos">58</span>    <span class="k">public</span> <span class="n">PartFour</span> <span class="n">partFour</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+<span class="linenos">59</span>
+<span class="linenos">60</span>    <span class="c1">//A creation policy mismatch.  Because there is no</span>
+<span class="linenos">61</span>    <span class="c1">//exported PartFour with a creation policy of Shared,</span>
+<span class="linenos">62</span>    <span class="c1">//this import does not match anything and will not be</span>
+<span class="linenos">63</span>    <span class="c1">//filled.</span>
+<span class="linenos">64</span><span class="p">}</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div></blockquote>
 </div>
 <div class="section" id="id14">
@@ -1125,8 +861,8 @@ B之前先构造对象B，并且对象B导入对象A，则该循环将无法解�
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="EMail.html" class="btn btn-neutral float-right" title="Relative Concepts of EMail" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="Ubuntu.html" class="btn btn-neutral float-left" title="Ubuntu" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="EMail.html" class="btn btn-neutral float-right" title="Relative Concepts of EMail" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="Ubuntu.html" class="btn btn-neutral float-left" title="Ubuntu" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
     </div>
 
   <hr/>
@@ -1140,11 +876,11 @@ B之前先构造对象B，并且对象B导入对象A，则该循环将无法解�
     
     
     
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
     
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
     
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发. 
 
 </footer>
         </div>

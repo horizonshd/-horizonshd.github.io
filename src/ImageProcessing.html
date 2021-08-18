@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Graphviz - Graph Visualization Software &mdash; Cheatsheet 1.0.0 文档</title>
+  <title>Image Processing &mdash; Cheatsheet 1.0.0 文档</title>
   
 
   
@@ -38,14 +38,15 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/translations.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
     
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="git" href="git.html" />
-    <link rel="prev" title="Charset and Encoding" href="Encoding.html" /> 
+    <link rel="next" title="OpenCV" href="OpenCV.html" />
+    <link rel="prev" title="C++" href="C%2B%2B.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -95,11 +96,14 @@
 <li class="toctree-l1"><a class="reference internal" href="reStructuresText.html">reStructuresText</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sphinx.html">sphinx</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Encoding.html">Charset and Encoding</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Graphviz - Graph Visualization Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Graphviz.html">Graphviz - Graph Visualization Software</a></li>
 <li class="toctree-l1"><a class="reference internal" href="git.html">git</a></li>
 <li class="toctree-l1"><a class="reference internal" href="CMake.html">CMake</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C%2B%2B.html">C++</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ImageProcessing.html">Image Processing</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Image Processing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">基础概念</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="OpenCV.html">OpenCV</a></li>
 <li class="toctree-l1"><a class="reference internal" href="OpenGL.html">OpenGL</a></li>
 <li class="toctree-l1"><a class="reference internal" href="GameEngine.html">GameEngine</a></li>
@@ -171,13 +175,13 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Graphviz - Graph Visualization Software</li>
+      <li>Image Processing</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/src/Graphviz.rst.txt" rel="nofollow"> 查看页面源码</a>
+            <a href="../_sources/src/ImageProcessing.rst.txt" rel="nofollow"> 查看页面源码</a>
           
         
       </li>
@@ -190,8 +194,48 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="graphviz-graph-visualization-software">
-<h1>Graphviz - Graph Visualization Software<a class="headerlink" href="#graphviz-graph-visualization-software" title="永久链接至标题">¶</a></h1>
+  <div class="section" id="image-processing">
+<h1>Image Processing<a class="headerlink" href="#image-processing" title="永久链接至标题">¶</a></h1>
+<div class="section" id="id1">
+<h2>基础概念<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<ul>
+<li><p>灰度值</p></li>
+<li><p>亮度</p></li>
+<li><p>饱和度</p></li>
+<li><p>对比度</p></li>
+<li><p>图像亮度（image brightness）</p></li>
+<li><p>图像灰度（image grayscale）</p>
+<p>灰度是表明图像明暗的数值，即黑白图像中点的颜色深度，范围一般从0到255，白色为255 ，
+黑色为0，故黑白图片也称灰度图像。</p>
+<p>灰度值指的是单个像素点的亮度。灰度值越大表示越亮。</p>
+<p>灰度就是没有色彩，RGB 色彩分量全部相等。图像的灰度化就是让像素点矩阵中的每一个像素点
+都满足关系：R = G = B，此时的这个值叫做灰度值。如 RGB(100,100,100) 就代表灰度值为
+100,RGB(50,50,50) 代表灰度值为 50。</p>
+</li>
+<li><p>图像强度（image intensity）</p></li>
+<li><p>灰度图</p></li>
+</ul>
+<p>I<sup>2</sup>C</p>
+<p>Since Pythagoras, we know that <span class="math notranslate nohighlight">\(a^2 + b^2 = c^2\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[(a + b)^2 = a^2 + 2ab + b^2\]</div>
+<div class="math notranslate nohighlight">
+\[I_{new} = (\frac{I_{old}}{10}) * 10\]</div>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}(a + b)^2 = a^2 + 2ab + b^2\\(a - b)^2 = a^2 - 2ab + b^2\end{aligned}\end{align} \]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}(a + b)^2  &amp;=  (a + b)(a + b) \\
+           &amp;=  a^2 + 2ab + b^2\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\begin{eqnarray}
+   y    &amp; = &amp; ax^2 + bx + c \\
+   f(x) &amp; = &amp; x^2 + 2xy + y^2
+\end{eqnarray}</div><p>Role for cross-referencing equations via their label. This currently works only within the same document. Example:</p>
+<div class="math notranslate nohighlight" id="equation-euler">
+<span class="eqno">(1)<a class="headerlink" href="#equation-euler" title="公式的永久链接">¶</a></span>\[e^{i\pi} + 1 = 0\]</div>
+<p>Euler’s identity, equation <a class="reference internal" href="#equation-euler">(1)</a>, was elected one of the most
+beautiful mathematical formulas.</p>
+</div>
 </div>
 
 
@@ -200,8 +244,8 @@
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="git.html" class="btn btn-neutral float-right" title="git" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="Encoding.html" class="btn btn-neutral float-left" title="Charset and Encoding" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="OpenCV.html" class="btn btn-neutral float-right" title="OpenCV" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="C%2B%2B.html" class="btn btn-neutral float-left" title="C++" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
     </div>
 
   <hr/>

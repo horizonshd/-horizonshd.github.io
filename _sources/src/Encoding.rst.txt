@@ -1,3 +1,43 @@
 ====================
 Charset and Encoding
 ====================
+
+Basically:
+
+    #.  charset is the set of characters you can use
+    #.  encoding is the way these characters are stored into memory
+
+Every encoding has a particular charset associated with it, but there can be 
+more than one encoding for a given charset. A charset is simply what it sounds 
+like, a set of characters. There are a large number of charsets, including many 
+that are intended for particular scripts or languages.
+
+However, we are well along the way in the transition to Unicode, which includes 
+a character set capable of representing almost all the world's scripts. However,
+there are multiple encodings for Unicode. An encoding is a way of mapping a 
+string of characters to a string of bytes. Examples of Unicode encodings include
+UTF-8 [#b]_ , UTF-16 BE [#c]_ , and UTF-16 LE [#c]_ . Each of these 
+has advantages for particular applications or machine architectures.
+
+
+A character encoding consists of:
+
+    -   The set of supported characters
+    -   A mapping between characters and integers ("code points")
+    -   How code points are encoded as a series of "code units" (e.g., 16-bit units for UTF-16)
+    -   How code units are encoded into bytes (e.g., big-endian or little-endian)
+    
+    
+Unicode:
+
+-   CJK = Chinese-Japanese-Korean
+
+参考文献：
+
+.. [#a] `Character encoding <https://en.wikipedia.org/wiki/Character_encoding>`_
+.. [#b] `UTF-8 <https://en.wikipedia.org/wiki/UTF-8>`_
+.. [#c] `UTF-16 <https://en.wikipedia.org/wiki/UTF-16>`_
+.. [#d] `What's the difference between encoding and charset? <https://stackoverflow.com/questions/2281646/whats-the-difference-between-encoding-and-charset>`_
+.. [#e] `The Absolute Minimum Every Software Developer Absolutely, Positively Must Know About Unicode and Character Sets <https://www.joelonsoftware.com/2003/10/08/the-absolute-minimum-every-software-developer-absolutely-positively-must-know-about-unicode-and-character-sets-no-excuses/>`_
+.. [#f] `What is character encoding and why should I bother with it <https://stackoverflow.com/questions/10611455/what-is-character-encoding-and-why-should-i-bother-with-it>`_
+

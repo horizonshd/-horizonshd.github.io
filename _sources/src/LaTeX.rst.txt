@@ -1,3 +1,271 @@
-=====
+================================================================================
 LaTeX
-=====
+================================================================================
+
+
+.. :
+
+    = - ` : ' " ~ ^ _ * + # < >
+
+    ====================
+    --------------------
+    ~~~~~~~~~~~~~~~~~~~~
+    ********************
+    ++++++++++++++++++++
+    ####################
+    ::::::::::::::::::::
+    >>>>>>>>>>>>>>>>>>>>
+    <<<<<<<<<<<<<<<<<<<<
+
+数学符号对应表
+================================================================================
+
+希腊字母
+--------------------------------------------------------------------------------
+
+====================    ====================    ====================    ====================
+Symbol                  LaTeX                   Symbol                  LaTeX
+====================    ====================    ====================    ====================
+:math:`\alpha`          \\alpha                 :math:`\Alpha`          \\Alpha
+:math:`\beta`           \\beta                  :math:`\Beta`           \\Beta
+:math:`\gamma`          \\gamma                 :math:`\Gamma`          \\Gamma
+:math:`\delta`          \\delta                 :math:`\Delta`          \\Delta
+:math:`\epsilon`        \\epsilon               :math:`\Epsilon`        \\Epsilon
+:math:`\varepsilon`     \\varepsilon
+:math:`\zeta`           \\zeta                  :math:`\Zeta`           \\Zeta
+:math:`\eta`            \\eta                   :math:`\Eta`            \\Eta
+:math:`\theta`          \\theta                 :math:`\Theta`          \\Theta
+:math:`\vartheta`       \\vartheta
+:math:`\iota`           \\iota                  :math:`\Iota`           \\Iota
+:math:`\kappa`          \\kappa                 :math:`\Kappa`          \\Kappa
+:math:`\lambda`         \\lambda                :math:`\Lambda`         \\Lambda
+:math:`\mu`             \\mu                    :math:`\Mu`             \\Mu
+:math:`\nu`             \\nu                    :math:`\Nu`             \\Nu
+:math:`\omicron`        \\omicron               :math:`\omicron`        \\omicron
+:math:`\pi`             \\pi                    :math:`\Pi`             \\Pi
+:math:`\varpi`          \\varpi
+:math:`\rho`            \\rho                   :math:`\Rho`            \\Rho
+:math:`\varrho`         \\varrho
+:math:`\sigma`          \\sigma                 :math:`\Sigma`          \\Sigma
+:math:`\varsigma`       \\varsigma
+:math:`\tau`            \\tau                   :math:`\Tau`            \\Tau
+:math:`\upsilon`        \\upsilon               :math:`\Upsilon`        \\Upsilon
+:math:`\phi`            \\phi                   :math:`\Phi`            \\Phi
+:math:`\varphi`         \\varphi
+:math:`\chi`            \\chi                   :math:`\Chi`            \\Chi
+:math:`\psi`            \\psi                   :math:`\Psi`            \\Psi
+:math:`\omega`          \\omega                 :math:`\Omega`          \\Omega
+====================    ====================    ====================    ====================
+
+
+运算符号
+--------------------------------------------------------------------------------
+
+========================    ========================
+Symbol                      LaTeX
+========================    ========================
+:math:`\pm`                 \\pm
+:math:`\mp`                 \\mp
+:math:`\times`              \\times
+:math:`\div`                \\div
+:math:`\cdot`               \\cdot
+:math:`\cdot`               \\cdot
+:math:`\ast`                \\ast
+:math:`\star`               \\star
+:math:`\dagger`             \\dagger
+:math:`\ddagger`            \\ddagger
+:math:`\amalg`              \\amalg
+:math:`\cap`                \\cap
+:math:`\cup`                \\cup
+:math:`\uplus`              \\uplus
+:math:`\sqcap`              \\sqcap
+:math:`\sqcup`              \\sqcup
+:math:`\vee`                \\vee
+:math:`\wedge`              \\wedge
+:math:`\setminus`           \\setminus
+:math:`\wr`                 \\wr
+:math:`\circ`               \\circ
+:math:`\bullet`             \\bullet
+:math:`\oslash`             \\oslash
+:math:`\odot`               \\odot
+:math:`\bigcirc`            \\bigcirc
+:math:`\bigtriangleup`      \\bigtriangleup
+:math:`\bigtriangledown`    \\bigtriangledown
+:math:`\triangleleft`       \\triangleleft
+:math:`\triangleright`      \\triangleright
+:math:`\oplus`              \\oplus
+:math:`\ominus`             \\ominus
+:math:`\ominus`             \\ominus
+:math:`\bot`                \\bot
+:math:`\top`                \\top
+:math:`\sum`                \\sum
+:math:`\prod`               \\prod
+:math:`\int`                \\int
+:math:`\oint`               \\oint
+:math:`\biguplus`           \\biguplus
+:math:`\bigoplus`           \\bigoplus
+:math:`\bigvee`             \\bigvee
+:math:`\bigcap`             \\bigcap
+:math:`\bigotimes`          \\bigotimes
+:math:`\bigwedge`           \\bigwedge
+:math:`\bigcup`             \\bigcup
+:math:`\bigodot`            \\bigodot
+:math:`\bigsqcup`           \\bigsqcup
+========================    ========================
+
+关系符号
+--------------------------------------------------------------------------------
+
+========================    ========================
+Symbol                      LaTeX
+========================    ========================
+:math:`\<`                  \\<
+:math:`\>`                  \\>
+:math:`\leq`                \\leq
+:math:`\geq`                \\geq
+:math:`\ll`                 \\ll
+:math:`\gg`                 \\gg
+:math:`\neq`                \\neq
+:math:`\doteq`              \\doteq
+:math:`\sim`                \\sim
+:math:`\simeq`              \\simeq
+:math:`\approx`             \\approx
+:math:`\asymp`              \\asymp
+:math:`\cong`               \\cong
+:math:`\equiv`              \\equiv
+:math:`\subset`             \\subset
+:math:`\supset`             \\supset
+:math:`\subseteq`           \\subseteq
+:math:`\supseteq`           \\supseteq
+:math:`\sqsubseteq`         \\sqsubseteq
+:math:`\sqsupseteq`         \\sqsupseteq
+:math:`\in`                 \\in
+:math:`\ni`                 \\ni
+:math:`\notin`              \\notin
+:math:`\models`             \\models
+:math:`\vdash`              \\vdash
+:math:`\dashv`              \\dashv
+:math:`\perp`               \\perp
+:math:`\mid`                \\mid
+:math:`\parallel`           \\parallel
+:math:`\propto`             \\propto
+:math:`\bowtie`             \\bowtie
+:math:`\prec`               \\prec
+:math:`\preceq`             \\preceq
+:math:`\succ`               \\succ
+:math:`\succeq`             \\succeq
+:math:`\nless`              \\nless
+:math:`\ngtr`               \\ngtr
+:math:`\nleqslant`          \\nleqslant
+:math:`\ngeqslant`          \\ngeqslant
+:math:`\not\equiv`          \\not\\equiv
+:math:`\not\approx`         \\not\\approx
+:math:`\not\cong`           \\not\\cong
+:math:`\not\sim`            \\not\\sim
+:math:`\not\simeq`          \\not\\simeq
+:math:`\not\models`         \\not\\models
+:math:`\not\ni`             \\not\\ni
+:math:`\not\succ`           \\not\\succ
+:math:`\not\succeq`         \\not\\succeq
+:math:`\not\prec`           \\not\\prec
+:math:`\not\preceq`         \\not\\preceq
+:math:`\not\parallel`       \\not\\parallel
+:math:`\not\subset`         \\not\\subset
+:math:`\not\supset`         \\not\\supset
+:math:`\not\subseteq`       \\not\\subseteq
+:math:`\not\supseteq`       \\not\\supseteq
+========================    ========================
+
+箭头符号
+--------------------------------------------------------------------------------
+
+============================    ============================
+Symbol                          LaTeX
+============================    ============================
+:math:`\leftarrow`              \\leftarrow
+:math:`\Leftarrow`              \\Leftarrow
+:math:`\longleftarrow`          \\longleftarrow
+:math:`\Longleftarrow`          \\Longleftarrow
+:math:`\rightarrow`             \\rightarrow
+:math:`\Rightarrow`             \\Rightarrow
+:math:`\longrightarrow`         \\longrightarrow
+:math:`\Longrightarrow`         \\Longrightarrow
+:math:`\leftrightarrow`         \\leftrightarrow
+:math:`\Leftrightarrow`         \\Leftrightarrow
+:math:`\longleftrightarrow`     \\longleftrightarrow
+:math:`\Longleftrightarrow`     \\Longleftrightarrow
+:math:`\hookleftarrow`          \\hookleftarrow
+:math:`\hookrightarrow`         \\hookrightarrow
+:math:`\leftharpoondown`        \\leftharpoondown
+:math:`\rightharpoondown`       \\rightharpoondown
+:math:`\leftharpoonup`          \\leftharpoonup
+:math:`\rightharpoonup`         \\rightharpoonup
+:math:`\uparrow`                \\uparrow
+:math:`\Uparrow`                \\Uparrow
+:math:`\downarrow`              \\downarrow
+:math:`\Downarrow`              \\Downarrow
+:math:`\updownarrow`            \\updownarrow
+:math:`\Updownarrow`            \\Updownarrow
+:math:`\swarrow`                \\swarrow
+:math:`\nearrow`                \\nearrow
+:math:`\nwarrow`                \\nwarrow
+:math:`\searrow`                \\searrow
+:math:`\mapsto`                 \\mapsto
+:math:`\longmapsto`             \\longmapsto
+============================    ============================
+
+括号符号
+--------------------------------------------------------------------------------
+
+====================    ====================
+Symbol                  LaTeX
+====================    ====================
+:math:`\lbrace`         \\lbrace
+:math:`\rbrace`         \\rbrace
+:math:`\lbrack`         \\lbrack
+:math:`\rbrack`         \\rbrack
+:math:`\langle`         \\langle
+:math:`\rangle`         \\rangle
+:math:`\lceil`          \\lceil
+:math:`\rceil`          \\rceil
+:math:`\lfloor`         \\lfloor
+:math:`\rfloor`         \\rfloor
+:math:`\vert`           \\vert
+:math:`\Vert`           \\Vert
+:math:`\backslash`      \\backslash
+====================    ====================
+
+其它符号
+--------------------------------------------------------------------------------
+
+====================    ====================
+Symbol                  LaTeX
+====================    ====================
+:math:`\infty`          \\infty
+:math:`\exists`         \\exists
+:math:`\forall`         \\forall
+:math:`\neg`            \\neg
+:math:`\nabla`          \\nabla
+:math:`\triangle`       \\triangle
+:math:`\angle`          \\angle
+:math:`\partial`        \\partial
+:math:`\emptyset`       \\emptyset
+:math:`\prime`          \\prime
+:math:`\colon`          \\colon
+:math:`\Re`             \\Re
+:math:`\Im`             \\Im
+:math:`\ldots`          \\ldots
+:math:`\cdots`          \\cdots
+:math:`\vdots`          \\vdots
+:math:`\ddots`          \\ddots
+:math:`\surd`           \\surd
+:math:`\ldotp`          \\ldotp
+:math:`\to`             \\to
+:math:`\gets`           \\gets
+:math:`\aleph`          \\aleph
+:math:`\hbar`           \\hbar
+:math:`\wp`             \\wp
+:math:`\ell`            \\ell
+:math:`\imath`          \\imath
+:math:`\jmath`          \\jmath
+====================    ====================

@@ -1,0 +1,1107 @@
+================================================================================
+OpenCV
+================================================================================
+
+.. :
+
+    = - ` : ' " ~ ^ _ * + # < >
+
+    ====================
+    --------------------
+    ~~~~~~~~~~~~~~~~~~~~
+    ********************
+    ++++++++++++++++++++
+    ####################
+    ::::::::::::::::::::
+    >>>>>>>>>>>>>>>>>>>>
+    <<<<<<<<<<<<<<<<<<<<
+
+`OpenCV Tutorials(4.5.3) <https://docs.opencv.org/4.5.3/d9/df8/tutorial_root.html>`_
+======================================================================================
+
+1. 核心功能（core module）
+--------------------------------------------------------------------------------
+
+1.1 Mat - 基础的突图像容器
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+OpenCV 使用 Mat 类来保存图像中的数据和提供对图像的处理方法
+
+Mat
+********************************************************************************
+
+OpenCV 自 2001 年使用 C 语言实现，最大的问题是需要手动对内存进行管理。从 OpenCV 2.0 开
+始，引入了 C++ 的实现，再也不需要关心内存管理相关的问题。
+
+使用 Mat 时不再需要手动进行内存的分配和释放，如果需要也是可以的。OpenCV 中的许多函数都
+会为其输出的数据自动分配内存，但是如果你传入了一个已经分配了所需空间的 Mat 对象，将会被
+重用。
+
+Mat 是一个包含两部分数据的类：矩阵头部（包含了如矩阵大小、保存方式等等）和指向矩阵数据的
+指针。矩阵头部的大小是一个常数，然而矩阵本身的大小是根据其表示的图像不同而不同的。
+
+OpenCV 是一个图像处理库，提供了大量的图像处理函数。在解决一个问题的时候，大多数情况下需
+要将库里面提供的多个函数组合起来使用。因此，在代码中对图像数据的传递是经常发生的。我们不
+希望因为存在对较大的图像属数据进行不必要的复制而降低程序的速度。
+
+OpenCV 使用了引用计数系统来解决上述问题。每个 Mat 对象拥有自己的头部信息，但是不同的
+Mat 对象可以通过保存同样的矩阵指针数据实现矩阵数据在多个 Mat 对象之间的共享。Mat 对象的
+copy 操作仅仅会 copy **头部信息和指向矩阵数据的指针** ，而不会对矩阵数据本身进行 copy 。
+
+.. code-block:: c++
+
+    cv::Mat A, C;                                   // creates just the header parts
+    A = cv::imread("test.jpg", cv::IMREAD_COLOR);   // here we'll know the method used (allocate matrix)
+    cv::Mat B(A);                                   // Use the copy constructor
+    C = A;                                          // Assignment operator
+
+最终，所有上述对象都指向同一个数据矩阵，使用其中任何一个对象进行修改都会影响到其他所有对
+象。在实践中，不同的对象只是为相同的底层数据提供不同的访问方法。然而，它们的头部部分是不
+同的。真正有趣的部分是，您可以创建只引用完整数据的一部分的头文件。例如，要在图像中创建感
+兴趣区域(ROI)，只需创建一个具有新边界的新头部：
+
+.. code-block:: c++
+
+    cv::Mat D(A, cv::Rect(10, 10, 100, 100));           // using a rectangle
+    cv::Mat E = A(cv::Range::all(), cv::Range(1, 3));   // using row and column boundaries
+
+有时你也想复制矩阵本身，所以 OpenCV 提供 ``cv::Mat::clone()`` 和 ``cv::Mat::copyTo()`` 函数。
+
+.. code-block:: c++
+
+    cv::Mat F = A.clone();
+    cv::Mat G;
+    A.copyTo(G);
+
+现在修改 F 或 G 将不会影响 A 的头部所指向的矩阵。
+
+小结：
+
+    -   OpenCV 函数的输出图像内存分配是自动的(除非另外指定)。
+    -   您不需要考虑OpenCV的c++接口的内存管理。
+    -   赋值操作符和复制构造函数只复制头部信息。
+    -   可以使用 ``cv::Mat::clone()`` 和 ``cv::Mat::copyTo()`` 函数复制图像的底层矩阵。
+
+矩阵数据的存储方式
+********************************************************************************
+
+这是关于如何存储像素值。您可以选择色彩空间和使用的数据类型。色彩空间指的是我们如何组合颜
+色成分来编码给定的颜色。最简单的一种是灰度，我们可以使用黑白两色。这些元素的结合让我们创
+造出许多灰色的阴影。
+
+对于彩色的方式，我们有很多方法可以选择。它们中的每一个都可以分解为三到四个基本组成部分，
+我们可以利用这些组成部分的组合来创建其他的部分。最受欢迎的是 RGB ，主要是因为这也是我们
+的眼睛构建颜色的方式。它的底色是红、绿、蓝。要对颜色的透明度进行编码，有时需要添加第四个
+元素:alpha (A)。
+
+然而，还有许多其他的颜色系统，每一种都有自己的优点:
+
+    -   RGB是最常见的，因为我们的眼睛使用类似的东西，但是请记住，OpenCV 标准显示系统使
+        用 BGR 颜色空间(红色和蓝色通道交换位置)组成颜色。
+    -   HSV和HLS将颜色分解为色相、饱和度和值/亮度组成部分，这对我们来说是一种更自然的
+        描述颜色的方式。例如，您可能会忽略最后一个组件，使您的算法对输入图像的光照条件
+        不那么敏感。
+    -   YCrCb用于流行的JPEG图像格式。
+    -   CIE L*a*b* 是一个感知上统一的颜色空间，如果你需要测量一个给定颜色与另一个颜色的
+        距离，它会很方便。
+
+每个组成部分都有自己的有效域。这就导致了所使用的数据类型。我们存储组成部分的方式定义了我
+们对其域的控制。可能的最小数据类型是 char，这意味着一个字节或 8 位。这可以是无符号的（因
+此可以存储 0 到 255 的值）或有符号的（值从 -127 到 +127）。尽管在三个组成部分的情况下，
+这已经提供了 1600 万种可能的颜色来表示（如RGB），我们可以通过为每个组成部分使用 float
+（4字节 = 32位）或 double（8字节 = 64位）数据类型来获得更精细的控制。不过，请记住，增加
+组成部分的大小也会增加整个图像在内存中的大小。
+
+显示创建一个 Mat 对象
+********************************************************************************
+
+可以使用 ``cv::imwrite()`` 函数将矩阵数据保存到文件中。但是，出于调试的目的，查看实际
+的数值要方便得多。可以使用 Mat 的 ``<<`` 运算符来实现这一点。但是这只适用于二维矩阵。
+
+虽然 Mat 作为一个图像容器工作得很好，但它也是一个通用的矩阵类。因此，可以创建和操作多维
+矩阵。你可以用多种方式创建 Mat 对象：
+
+    #.  ``cv::Mat::Mat`` 构造函数
+
+        .. code-block:: C++
+            
+            cv::Mat M(2, 2, CV_8UC3, cv::Scalar(0, 0, 255));
+            std::cout << "M = " << std::endl << " " << M << std::endl << std::endl;
+    
+        输出： ::
+        
+            M =
+             [  0,   0, 255,   0,   0, 255;
+               0,   0, 255,   0,   0, 255]
+
+
+        对于二维和多通道图像，我们首先定义它们的大小:行和列计数。
+        
+        然后我们需要指定用于存储元素的数据类型和每个矩阵点的通道数量。为了做到这一点，
+        我们根据以下约定构造了多个定义:
+        
+            CV_[The number of bits per item][Signed or Unsigned][Type Prefix]C[The channel number]
+
+        例如，CV_8UC3 意味着我们使用 8 位长的 unsigned char 类型，每个像素有三个这样
+        的字符来组成三个通道。有多达四个通道预定义的类型。cv::Scalar 是四个元素的短向
+        量。指定它，您就可以用自定义值初始化所有矩阵点。如果您需要更多数量的通道，您可
+        以用上面的宏创建类型，在括号中设置通道数量，如下所示。
+        
+    #.  使用 C/C++数组作为参数并通过构造函数进行初始化
+        
+        .. code-block:: C++
+        
+            int sz[3] = { 2,2,2 };
+            cv::Mat L(3,sz, CV_8UC(1), cv::Scalar::all(0));
+        
+        上面的示例展示了如何创建一个二维以上的矩阵。指定它的维度，然后传递一个指针，其
+        中包含每个维度的大小，其余的保持不变。
+        
+    #.  ``cv::Mat::create`` 函数
+    
+        .. code-block:: C++
+        
+            M.create(4, 4, CV_8UC(1));
+            std::cout << "M = " << std::endl << " " << M << std::endl << std::endl;
+        
+        不能使用此构造初始化矩阵值。它只会在新的大小不适合旧的尺寸的时候重新分配它的矩阵
+        数据内存。
+        
+    #.  MATLAB风格初始化器: ``cv::Mat::zero`` , ``cv::Mat::ones`` , ``cv::Mat::eye`` 。指定要使用的大小和数据类型
+    
+        .. code-block:: C++
+
+            cv::Mat E = cv::Mat::eye(4, 4, CV_64F);
+            std::cout << "E = " << std::endl << " " << E << std::endl << std::endl;
+            cv::Mat O = cv::Mat::ones(2, 2, CV_32F);
+            std::cout << "O = " << std::endl << " " << O << std::endl << std::endl;
+            cv::Mat Z = cv::Mat::zeros(3, 3, CV_8UC1);
+            std::cout << "Z = " << std::endl << " " << Z << std::endl << std::endl;
+
+        输出： ::
+        
+            E =
+             [1, 0, 0, 0;
+             0, 1, 0, 0;
+             0, 0, 1, 0;
+             0, 0, 0, 1]
+
+            O =
+             [1, 1;
+             1, 1]
+
+            Z =
+             [  0,   0,   0;
+               0,   0,   0;
+               0,   0,   0]
+    
+    #.  对于小矩阵，可以使用逗号分隔的初始化式或初始化式列表
+    
+        .. code-block:: C++
+        
+            cv::Mat C = (cv::Mat_<double>(3, 3) << 0, -1, 0, -1, 5, -1, 0, -1, 0);
+            std::cout << "C = " << std::endl << " " << C << std::endl << std::endl;
+    
+            // or
+            C = (cv::Mat_<double>({ 0, -1, 0, -1, 5, -1, 0, -1, 0 })).reshape(3);
+            std::cout << "C = " << std::endl << " " << C << std::endl << std::endl;
+
+        输出： ::
+        
+            C =
+             [0, -1, 0;
+             -1, 5, -1;
+             0, -1, 0]
+
+    #.  为一个已存在的 Mat 对象创建一个新的头部并使用 ``cv::Mat::clone`` 或 ``cv::Mat::copyTo`` 创建其矩阵数据
+    
+        .. code-block:: C++
+        
+            cv::Mat RowClone = C.row(1).clone();
+            std::cout << "RowClone = " << std::endl << " " << RowClone << std::endl << std::endl;
+    
+        输出： ::
+        
+            RowClone =
+             [-1, 5, -1]
+
+.. Note::
+
+    可以使用 ``cv::randu()`` 函数用随机值填充矩阵。您需要给出随机值的上限和下限:
+        
+    .. code-block:: C++
+    
+        cv::Mat R = cv::Mat(3, 2, CV_8UC3);
+        cv::randu(R, cv::Scalar::all(0), cv::Scalar::all(255));
+
+格式化输出
+********************************************************************************
+
+在上面的例子中，您可以看到默认格式输出。然而，OpenCV 允许您格式化矩阵输出。
+
+-   Default
+    
+    .. code-block:: C++
+    
+        std::cout << "R (default) = " << std::endl << R << std::endl << std::endl;
+        
+    输出： ::
+    
+        R (default) =
+        [ 91,   2,  79, 179,  52, 205;
+         236,   8, 181, 239,  26, 248;
+         207, 218,  45, 183, 158, 101]
+
+-   Python
+    
+    .. code-block:: C++
+    
+        std::cout << "R (python)  = " << std::endl << format(R, cv::Formatter::FMT_PYTHON) << std::endl << std::endl;
+    
+    输出： ::
+    
+        R (python)  =
+        [[[ 91,   2,  79], [179,  52, 205]],
+         [[236,   8, 181], [239,  26, 248]],
+         [[207, 218,  45], [183, 158, 101]]]
+
+-   CSV
+    
+    .. code-block:: C++
+    
+        std::cout << "R (csv)     = " << std::endl << format(R, cv::Formatter::FMT_CSV) << std::endl << std::endl;
+        
+    输出： ::
+    
+        R (csv)     =
+         91,   2,  79, 179,  52, 205
+        236,   8, 181, 239,  26, 248
+        207, 218,  45, 183, 158, 101
+
+-   Numpy
+    
+    .. code-block:: C++
+    
+        std::cout << "R (numpy)   = " << std::endl << format(R, cv::Formatter::FMT_NUMPY) << std::endl << std::endl;
+    
+    输出： ::
+    
+        R (numpy)   =
+        array([[[ 91,   2,  79], [179,  52, 205]],
+               [[236,   8, 181], [239,  26, 248]],
+               [[207, 218,  45], [183, 158, 101]]], dtype='uint8')
+
+-   C
+    
+    .. code-block:: C++
+    
+        std::cout << "R (c)       = " << std::endl << format(R, cv::Formatter::FMT_C) << std::endl << std::endl;
+    
+    输出： ::
+    
+        R (c)       =
+        { 91,   2,  79, 179,  52, 205,
+         236,   8, 181, 239,  26, 248,
+         207, 218,  45, 183, 158, 101}
+
+其它对象的格式化输出
+********************************************************************************
+
+OpenCV 也支持通过 ``<<`` 操作符输出其他常见的 OpenCV 数据结构:
+
+-   2D Point
+
+    .. code-block:: C++
+    
+        cv::Point2f P(5, 1);
+        std::cout << "Point (2D) = " << P << std::endl << std::endl;
+    
+    输出： ::
+    
+        Point (2D) = [5, 1]
+    
+-   3D Point
+
+    .. code-block:: C++
+    
+        cv::Point3f P3f(2, 6, 7);
+        std::cout << "Point (3D) = " << P3f << std::endl << std::endl;
+    
+    输出： ::
+    
+        Point (3D) = [2, 6, 7]
+    
+-   std::vector via cv::Mat
+
+    .. code-block:: C++
+    
+        std::vector<float> v;
+        v.push_back((float)CV_PI);
+        v.push_back(2);
+        v.push_back(3.01f);
+        std::cout << "Vector of floats via Mat = " << cv::Mat(v) << std::endl << std::endl;
+    
+    输出： ::
+    
+        Vector of floats via Mat = [3.1415927;
+         2;
+         3.01]
+
+-   std::vector of points
+
+    .. code-block:: C++
+    
+        std::vector<cv::Point2f> vPoints(20);
+        for (size_t i = 0; i < vPoints.size(); ++i)
+            vPoints[i] = cv::Point2f((float)(i * 5), (float)(i % 7));
+        std::cout << "A vector of 2D Points = " << vPoints << std::endl << std::endl;
+    
+    输出： ::
+
+        A vector of 2D Points = [0, 0;
+         5, 1;
+         10, 2;
+         15, 3;
+         20, 4;
+         25, 5;
+         30, 6;
+         35, 0;
+         40, 1;
+         45, 2;
+         50, 3;
+         55, 4;
+         60, 5;
+         65, 6;
+         70, 0;
+         75, 1;
+         80, 2;
+         85, 3;
+         90, 4;
+         95, 5]
+
+1.2 扫描图像、查找表和时间测量
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+让我们考虑一种简单的颜色减少（reduction）方法。通过使用 unsigned char C 和 C++ 类型来
+作为矩阵中的项，一个像素通道可以有多达 256 个不同的值。对于一个三通道的图像，这可能会形
+成太多的颜色（确切地说是1600万）。使用如此多的色度可能会给我们的算法性能带来沉重的打击。
+然而，有时候，与更少的数据一起工作就足以得到相同的最终结果。
+
+在这种情况下，我们通常会减少颜色空间。这意味着我们用一个新的输入值分割颜色空间的当前值，
+以减少颜色。例如，0 到 9 之间的每个值都取新值 0，10 到 19 之间的每个值取新值 10，以此
+类推。
+
+当你将一个 uchar （unsigned char - 值在 0 和 255 之间）与一个 int 值分割时，结果也是
+char。这些值只能是 char 值。因此，任何分数都将被舍入。利用这一事实，上述操作在 uchar 所
+表示的区间内可表示为：
+
+.. math:: I_{new} = (\frac{I_{old}}{10}) * 10
+
+一个简单的色彩空间缩减算法只需要通过图像矩阵的每个像素并应用这个公式。值得注意的是，我们
+做了一个除法和一个乘法运算。对于一个系统来说，这些操作是非常昂贵的。如果可能的话，可以使
+用一些更便宜的操作，比如一些减法、加法，或者在最好的情况下，一个简单的赋值来避免它们。此
+外，注意我们只有有限数量的输入值用于上面的操作。在 uchar 系统中，只有 256 中不同的输入。
+
+对于较大的图像，最好是事先计算所有可能的值，并在赋值期间使用查找表进行赋值。查询表是简单
+的数组（有一个或多个维度），对于给定的输入值变化，它保存最终的输出值。它的优点是我们不需
+要做计算，我们只需要读取结果。
+
+我们的测试用例程序（和下面的代码示例）将做以下工作：读取作为命令行参数传递的图像（它可以
+是彩色或灰度），并使用给定的命令行参数整数值进行缩减。在 OpenCV 中，目前有三种主要的逐
+像素查看图像的方法。为了让事情变得更有趣，我们将使用这些方法对图像进行扫描，并打印出所需
+的时间。
+
+.. code-block:: C++
+    :caption: calculate the lookup table
+    
+    int divideWith = 0; // convert our input string to number - C++ style
+    std::stringstream s;
+    s << argv[2];
+    s >> divideWith;
+    if (!s || !divideWith)
+    {
+        std::cout << "Invalid number entered for dividing. " << std::endl;
+        return -1;
+    }
+    uchar table[256];
+    for (int i = 0; i < 256; ++i)
+        table[i] = (uchar)(divideWith * (i / divideWith));
+
+.. code-block:: C++
+    :caption: time measuration
+
+    double t = (double)cv::getTickCount();
+    // do something ...
+    t = ((double)cv::getTickCount() - t) / cv::getTickFrequency();
+    std::cout << "Times passed in seconds: " << t << std::endl;
+    
+图像的矩阵数据在内存中是如何存储的
+********************************************************************************
+
+矩阵的大小取决于所用的色彩系统。更准确地说，它取决于所使用的颜色通道的数量。
+
+对于多通道图像，每一列包含与通道数量相同的子列。
+
+注意在 BGR 色彩系统中，通道的顺序是 BGR 而不是 RGB 。因为在许多情况下，内存足够大，可以
+连续地存储行，所以行可能会一个接一个地出现，创建一个长长的行。因为所有东西都在一个单一的
+地方，一个接着一个，这可能有助于加快扫描过程。我们可以使用 ``cv::Mat::isContinuous()``
+函数来询问矩阵是否为这种情况。
+
+高效的方式
+********************************************************************************
+
+当谈到性能时，您无法击败经典的 C 风格操作符[]（指针）访问。因此，我们可以推荐的最有效的
+赋值方法是：
+
+.. code-block:: C++
+    :emphasize-lines: 17
+
+    cv::Mat& ScanImageAndReduceC(cv::Mat& I, const uchar* const table)
+    {
+        // accept only char type matrices
+        CV_Assert(I.depth() == CV_8U);
+        int channels = I.channels();
+        int nRows = I.rows;
+        int nCols = I.cols * channels;
+        if (I.isContinuous())
+        {
+            nCols *= nRows;
+            nRows = 1;
+        }
+        int i, j;
+        uchar* p;
+        for (i = 0; i < nRows; ++i)
+        {
+            p = I.ptr<uchar>(i);    // 获取指向每一行起始的指针的"智能"方法
+            for (j = 0; j < nCols; ++j)
+            {
+                p[j] = table[p[j]];
+            }
+        }
+        return I;
+    }
+
+在这里，我们只是简单地获取一个指向每一行开始的指针，然后遍历它，直到它结束。在矩阵以连续
+方式存储的特殊情况下，我们只需要请求指针一次，并使用它一直遍历到最后。我们需要注意彩色图
+像：我们有三个（I.channels()）通道，所以我们需要在每一行中遍历三倍的数据。
+
+还有另一种方法。Mat 对象的 data 数据成员返回指向第一行第一列的指针。如果该指针为空，则
+该对象中没有有效的输入。检查这个是检查图像加载是否成功的最简单的方法。如果存储是连续的，
+我们可以用它来遍历整个数据指针。在灰度图像中，它是这样的:
+
+.. code-block:: C++
+
+    uchar* p = I.data;
+    for (unsigned int i = 0; i < nCols * nRows; ++i)
+        *p++ = table[*p];
+
+你会得到同样的结果。然而，这段代码在以后阅读起来要困难得多。如果你掌握了一些更高级的技术，
+那就更难了。此外，在实践中，我观察到您将得到相同的性能结果（因为大多数现代编译器可能会自
+动为您实现这个小的优化技巧）。
+
+迭代器（安全）方式
+********************************************************************************
+
+在前面 :ref:`src/OpenCV:高效的方式` 中，确保处理了正确数量的 uchar 字段，并跳过行之
+间可能出现的间隙是编码人员的责任。迭代器方法被认为是一种更安全的方法，因为它从用户那里接
+管这些任务。您所需要做的就是询问图像矩阵的开始和结束，然后增加 begin 迭代器，直到到达结
+束。要获取迭代器所指向的值，请使用 ``*`` 操作符。
+
+.. code-block:: C++
+    :emphasize-lines: 10,11,17,18
+
+    cv::Mat& ScanImageAndReduceIterator(cv::Mat& I, const uchar* const table)
+    {
+        // accept only char type matrices
+        CV_Assert(I.depth() == CV_8U);
+        const int channels = I.channels();
+        switch (channels)
+        {
+        case 1:
+        {
+            cv::MatIterator_<uchar> it, end;
+            for (it = I.begin<uchar>(), end = I.end<uchar>(); it != end; ++it)
+                *it = table[*it];
+            break;
+        }
+        case 3:
+        {
+            cv::MatIterator_<cv::Vec3b> it, end;
+            for (it = I.begin<cv::Vec3b>(), end = I.end<cv::Vec3b>(); it != end; ++it)
+            {
+                (*it)[0] = table[(*it)[0]];
+                (*it)[1] = table[(*it)[1]];
+                (*it)[2] = table[(*it)[2]];
+            }
+        }
+        }
+        return I;
+    }
+
+在彩色图像的情况下，每列有三个 uchar 类型的数据。这可以被认为是包含 uchar 类型数据的短
+向量，在 OpenCV 中被命名为 Vec3b 。为了访问第 n 个子列，我们使用简单的 ``[]`` 操作符
+访问。重要的是要记住 OpenCV 迭代器遍历列并自动跳到下一行。 *因此，对于彩色图像，如果你使
+用简单的 uchar 迭代器，你将只能访问到蓝色通道的值。*
+
+直接通过指定位置数据引用进行修改
+********************************************************************************
+
+最后一种方法不推荐用于扫描。它是用来获取或修改图像中的随机元素的。它的基本用法是指定要访
+问的项所在的的行号和列号。在我们之前的扫描方法中，你可能已经注意到传递图像的类型是很重要
+的。这里也没有什么不同，你可以在以下源代码的灰度图像中观察到这一点（使用 ``cv::Mat::at()``
+函数)）。
+
+.. code-block:: C++
+    :emphasize-lines: 12,17,25
+
+    cv::Mat& ScanImageAndReduceRandomAccess(cv::Mat& I, const uchar* const table)
+    {
+        // accept only char type matrices
+        CV_Assert(I.depth() == CV_8U);
+        const int channels = I.channels();
+        switch (channels)
+        {
+        case 1:
+        {
+            for (int i = 0; i < I.rows; ++i)
+                for (int j = 0; j < I.cols; ++j)
+                    I.at<uchar>(i, j) = table[I.at<uchar>(i, j)];
+            break;
+        }
+        case 3:
+        {
+            cv::Mat_<cv::Vec3b> _I = I;
+            for (int i = 0; i < I.rows; ++i)
+                for (int j = 0; j < I.cols; ++j)
+                {
+                    _I(i, j)[0] = table[_I(i, j)[0]];
+                    _I(i, j)[1] = table[_I(i, j)[1]];
+                    _I(i, j)[2] = table[_I(i, j)[2]];
+                }
+            I = _I;
+
+            // Or
+            //for (int i = 0; i < I.rows; ++i)
+            //    for (int j = 0; j < I.cols; ++j)
+            //    {
+            //        I.at<cv::Vec3b>(i, j)[0] = table[I.at<cv::Vec3b>(i, j)[0]];
+            //        I.at<cv::Vec3b>(i, j)[1] = table[I.at<cv::Vec3b>(i, j)[1]];
+            //        I.at<cv::Vec3b>(i, j)[2] = table[I.at<cv::Vec3b>(i, j)[2]];
+            //    }
+            break;
+        }
+        }
+        return I;
+    }
+
+如果您需要使用此方法对图像进行多次查找，那么为每次访问输入类型和 at 关键字可能会很麻烦
+和耗时。为了解决这个问题，OpenCV 有一个 ``cv::Mat_`` 数据类型。它和 Mat 一样，只是需
+要在定义时指定要查看数据矩阵的数据类型，但是作为回报，您可以使用operator()来快速访问项
+目。为了让事情变得更好，这很容易转换为通常的 ``cv::Mat`` 数据类型。你可以在上面函数的
+彩色图像中看到一个使用这种方法的示例。然而，需要注意的是，同样的操作（运行时速度相同）也
+可以用 ``cv::Mat::at`` 函数来完成。这只是一个为懒惰的程序员编写的小技巧。
+
+核心函数
+********************************************************************************
+
+这是在图像中实现查找表修改的额外方法。在图像处理中，你想要将所有给定的图像值修改为其他值
+是很常见的。OpenCV 提供了一个修改图像值的函数，而不需要编写图像的扫描逻辑。我们使用 core
+module 的 ``cv::LUT()`` 函数。
+
+首先，我们构建一个 Mat 类型的查找表:
+
+.. code-block:: C++
+
+    cv::Mat lookUpTable(1, 256, CV_8U);
+    uchar* p = lookUpTable.ptr();
+    for (int i = 0; i < 256; ++i)
+        p[i] = table[i];
+
+然后调用函数（I是我们的输入图像，J是输出图像）：
+
+.. code-block:: C++
+
+    cv::LUT(I, lookUpTable, J);
+    
+性能差异
+********************************************************************************
+
+为了得到最好的结果，编译程序并自己运行它。为了使差异更清楚，我使用了一个相当大的
+(2560 X 1600) 图像。这里展示的性能是针对彩色图像的。为了获得更精确的值，我将调用该函数
+数百次后得到的值取平均值。
+
+我们可以得出一些结论。如果可能的话，使用 OpenCV 已经创建的函数（而不是重新造轮子）。最
+快的方法是LUT函数。这是因为 OpenCV 库是通过 Intel 线程构建块
+（Intel Threaded Building Blocks）启用的多线程。
+
+但是，如果需要编写一个简单的图像扫描，最好使用指针方法。
+迭代器是一种更安全的选择，不过速度会慢得多。
+在 Debug 模式下，使用最后一种方法进行全图像扫描的开销最大。
+在 Release 模式下，它可能会打败迭代器方法，也可能不会，但它肯定会为此牺牲迭代器的安全特
+性。
+
+1.3 矩阵掩码运算（简单滤波）
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+对矩阵的掩码作是相当简单的。我们的想法是根据掩码矩阵（也称为 kernel）重新计算图像中每个
+像素的值。掩码中的值将调整相邻像素（和当前像素）对新像素值的影响程度。从数学的角度来看，
+我们用我们指定的值进行加权平均。
+
+.. math:: I(i,j) = 5 * I(i,j) - [I(i - 1,j) + I(i + 1,j) + I(i,j - 1) + I(i,j + 1)]
+
+自己实现
+********************************************************************************
+
+.. code-block:: C++
+
+    void Sharpen(const cv::Mat& myImage, cv::Mat& Result)
+    {
+        CV_Assert(myImage.depth() == CV_8U);  // accept only uchar images
+        const int nChannels = myImage.channels();
+        Result.create(myImage.size(), myImage.type());
+        for (int j = 1; j < myImage.rows - 1; ++j)
+        {
+            const uchar* previous = myImage.ptr<uchar>(j - 1);
+            const uchar* current = myImage.ptr<uchar>(j);
+            const uchar* next = myImage.ptr<uchar>(j + 1);
+            uchar* output = Result.ptr<uchar>(j);
+            for (int i = nChannels; i < nChannels * (myImage.cols - 1); ++i)
+            {
+                *output++ = cv::saturate_cast<uchar>(5 * current[i]- current[i - nChannels] - current[i + nChannels] - previous[i] - next[i]);
+            }
+        }
+        Result.row(0).setTo(cv::Scalar(0));
+        Result.row(Result.rows - 1).setTo(cv::Scalar(0));
+        Result.col(0).setTo(cv::Scalar(0));
+        Result.col(Result.cols - 1).setTo(cv::Scalar(0));
+    }
+
+cv::filter2D()
+********************************************************************************
+
+在图像处理中应用这样的过滤器是如此常见，以至于在 OpenCV 中有一个函数将负责应用掩码
+（在某些地方也称为 kernel）。为此，您首先需要定义一个保存 mask 的对象：
+
+.. code-block:: C++
+
+    cv::Mat kernel = (cv::Mat_<char>(3, 3) << 0, -1, 0,
+        -1, 5, -1,
+        0, -1, 0);
+        
+然后调用 ``cv::filter2D()`` 函数，指定要使用的输入、输出图像和掩码：
+
+.. code-block:: C++
+
+    cv::filter2D(src, dst1, src.depth(), kernel);
+
+该函数甚至有第五个可选参数来指定 kernel 的中心，第六个参数用于在将过滤后的像素存储到 K 
+中之前向其添加一个可选值，第七个参数用于确定在未定义操作（边界）的区域中要做什么。
+
+这个函数更短，更简洁，而且由于进行了一些优化，它通常比手工编码的方法更快。
+
+1.4 图像的操作
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+输入、输出
+********************************************************************************
+
+从文件加载图像：
+
+.. code-block:: C++
+
+    cv::Mat img = cv::imread(filename);
+
+当加载一个 jpg 图像文件时，默认会创建一个包含三通道的图像数据。如果是希望获取一个灰度图，
+则使用一下的方式：
+
+.. code-block:: C++
+
+    cv::Mat img = cv::imread(filename, cv::IMREAD_GRAYSCALE);
+    
+保存图像数据到文件：
+
+.. code-block:: C++
+
+    cv::imwrite(filename, img);
+    
+.. Note ::
+
+    加载图像文件时，图像的格式是由文件内容（前几个字节）所决定；
+    保存文件时，保存的格式由文件后缀名确定。
+
+
+获取像素强度值
+********************************************************************************
+
+为了得到像素强度值，必须知道图像的类型和通道的数量。下面是单通道灰度图像（类型为 8UC1）
+和像素坐标为 x 和 y （此处的坐标是图片中像素的坐标，一般是左上角为原点，水平向右为 x 轴
+正方向，竖直向下为 y 轴正方向）的示例：
+
+.. code-block:: C++
+
+    cv::Scalar intensity = img.at<uchar>(y, x);
+
+仅 C++ 版本：intensity.val[0] 的取值范围为0 ~ 255。注意 x 和 y 的顺序。因为在 OpenCV
+中图像是由与矩阵相同的结构表示的，所以我们对这两种情况使用相同的约定——基于 0 的行索引
+（或 y 坐标）首先，基于 0 的列索引（或 x 坐标）紧随其后。或者，您可以使用以下表示法
+（仅限 C++）：
+
+.. code-block:: C++
+
+    cv::Scalar intensity = img.at<uchar>(cv::Point(x, y));
+
+同样的方法可以用来改变像素的强度：
+
+.. code-block:: C++
+
+    img.at<uchar>(y, x) = 128;
+
+一个带有 BGR 颜色排序的3通道图像（imread返回的默认格式）：
+
+.. code-block:: C++
+
+    cv::Vec3b intensity = img.at<cv::Vec3b>(y, x);
+    uchar blue = intensity.val[0];
+    uchar green = intensity.val[1];
+    uchar red = intensity.val[2];
+    
+您可以对浮点图像使用相同的方法（例如，您可以通过在3通道图像上运行 Sobel 来获得这样的图
+像）（仅限 C++）：
+
+.. code-block:: C++
+
+    cv::Vec3f intensity = img.at<cv::Vec3f>(y, x);
+    float blue = intensity.val[0];
+    float green = intensity.val[1];
+    float red = intensity.val[2];
+    
+OpenCV 中有一些函数，尤其是来自 calib3d 模块的函数，如 ``cv::projectPoints`` ，它们
+以 Mat 的形式获取 2D 或 3D 点的数组。矩阵应该恰好包含一列，每一行对应一个点，矩阵类型应
+该是 32FC2 或 32FC3 。这样的矩阵可以很容易通过使用 ``std::vector`` 来构造（仅 C++）：
+
+.. code-block:: C++
+
+    std::vector<cv::Point2f> points;
+    //... fill the array
+    cv::Mat pointsMat = cv::Mat(points);
+    
+可以使用相同的方法访问这个矩阵中的一个点（仅限 C++）:
+
+.. code-block:: C++
+
+    cv::Point2f point = pointsMat.at<cv::Point2f>(i, 0);
+
+内存管理和引用计数
+********************************************************************************
+
+Mat 是一种保存了矩阵/图像特征（行和列数，数据类型等）和数据指针的结构。所以没有什么能阻
+止我们有多个 Mat 实例对应于相同的数据。Mat 保留一个引用计数，用于告诉当 Mat 的一个特定
+实例被销毁时，是否需要释放数据。下面是一个在不复制数据的情况下创建两个矩阵的例子（仅限
+C++）：
+
+.. code-block:: C++
+
+    std::vector<cv::Point3f> points;
+    // .. fill the array
+    cv::Mat pointsMat = cv::Mat(points).reshape(1);
+
+结果是我们得到了一个有 3 列的 32FC1 矩阵，而不是有 1 列的 32FC3 矩阵。 pointsMat 使用
+来自点的数据，并且在销毁时不会释放内存。然而，在这种特殊情况下，开发人员必须确保点的生命
+周期长于 pointsMat 。
+
+如果我们需要复制数据，可以使用例如： ``cv::Mat::copyTo`` 或者 ``cv::Mat::clone``：
+
+.. code-block:: C++
+
+    cv::Mat img = cv::imread("image.jpg");
+    cv::Mat img1 = img.clone();
+
+可以为每个函数提供一个空的输出 Mat。每个实现调用 ``Mat::create`` 作为目标矩阵。该方法
+在矩阵为空时为其分配数据。如果它不是空的，并且具有正确的大小和类型，则该方法不执行任何操
+作。但是，如果大小或类型与输入参数不同，数据将被释放（并丢失），并分配新的数据。例如：
+
+.. code-block:: C++
+
+    cv::Mat img = cv::imread("image.jpg");
+    cv::Mat sobelx;
+    cv::Sobel(img, sobelx, CV_32F, 1, 0);
+
+图元操作
+********************************************************************************
+
+在矩阵上定义了许多方便的运算操作。
+
+-   从现有的灰度图像 img 制作黑色图像：
+    
+    .. code-block:: C++
+    
+        img = cv::Scalar(0);
+
+-   选择感兴趣区域：
+
+    .. code-block:: C++
+    
+        cv::Rect r(10, 10, 100, 100);
+        cv::Mat smallImg = img(r);
+
+-   从彩色到灰度的转换：
+
+    .. code-block:: C++
+    
+        cv::Mat img = cv::imread("image.jpg"); // loading a 8UC3 image
+        cv::Mat grey;
+        cvtColor(img, grey, cv::COLOR_BGR2GRAY);
+
+-   将图像类型从 8UC1 更改为 32FC1：
+
+    .. code-block:: C++
+    
+        src.convertTo(dst, CV_32F);
+
+图像可视化
+********************************************************************************
+
+在开发过程中看到算法的中间结果是非常有用的。OpenCV 提供了一种方便的图像可视化方法。一个
+8U 类型的像可以使用一下代码进行显示：
+
+.. code-block:: C++
+    
+    cv::Mat img = cv::imread("image.jpg");
+    cv::namedWindow("image", cv::WINDOW_AUTOSIZE);
+    cv::imshow("image", img);
+    cv::waitKey();
+
+调用 ``waitKey()`` 开始一个消息传递循环，等待 "image" 窗口中的按键。
+
+32F 类型的图像需要转换为 8U 类型以进行显示。例如：
+
+.. code-block:: C++
+
+    cv::Mat img = cv::imread("image.jpg");
+    cv::Mat grey;
+    cv::cvtColor(img, grey, cv::COLOR_BGR2GRAY);
+    cv::Mat sobelx;
+    cv::Sobel(grey, sobelx, CV_32F, 1, 0);
+    double minVal, maxVal;
+    cv::minMaxLoc(sobelx, &minVal, &maxVal); //find minimum and maximum intensities
+    cv::Mat draw;
+    sobelx.convertTo(draw, CV_8U, 255.0 / (maxVal - minVal), -minVal * 255.0 / (maxVal - minVal));
+    cv::namedWindow("image", cv::WINDOW_AUTOSIZE);
+    cv::imshow("image", draw);
+    cv::waitKey();
+
+.. note ::
+
+    这里 ``cv::namedWindow`` 是没有必要的，因为它是紧接着 ``cv::imshow`` 。然而，它
+    可以用来改变窗口属性或当使用 ``cv::createTrackbar``
+
+1.5 添加（混合）两个图像
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. math:: g(x) = (1-\alpha)f_0(x) + \alpha f_1(x)
+
+.. code-block:: C++
+    :emphasize-lines: 19
+    
+    double alpha = 0.5;
+    double beta;
+    double input;
+    cv::Mat src1, src2, dst;
+    std::cout << " Simple Linear Blender " << std::endl;
+    std::cout << "-----------------------" << std::endl;
+    std::cout << "* Enter alpha [0.0-1.0]: ";
+    std::cin >> input;
+    // We use the alpha provided by the user if it is between 0 and 1
+    if (input >= 0 && input <= 1)
+    {
+        alpha = input;
+    }
+    src1 = cv::imread("LinuxLogo.jpg");
+    src2 = cv::imread("WindowsLogo.jpg");
+    if (src1.empty()) { std::cout << "Error loading src1" << std::endl; return EXIT_FAILURE; }
+    if (src2.empty()) { std::cout << "Error loading src2" << std::endl; return EXIT_FAILURE; }
+    beta = (1.0 - alpha);
+    cv::addWeighted(src1, alpha, src2, beta, 0.0, dst);
+    cv::imshow("Linear Blend", dst);
+    cv::waitKey(0);
+    
+.. warning ::
+    
+    src1 和 src2 必须是相同的大小（宽和高）和类型。
+    
+
+.. note ::
+
+    cv::addWeighted 方法处理方式为：:math:`dst = \alpha \cdot src1 + \beta \cdot src2 + \gamma`
+
+1.6 改变图像的对比度和亮度
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+理论：图像处理
+********************************************************************************
+
+-   一般图像处理运算是一个函数，它接受一个或多个输入图像并生成输出图像。
+-   图像变换可以看作是:
+
+    -   点的运算(像素变换)
+    -   邻域（基于区域）运算
+
+理论：像素变换
+********************************************************************************
+
+-   在这种图像处理变换中，每个输出像素的值仅依赖于相应的输入像素值（可能加上一些全局收
+    集的信息或参数）。
+-   这类操作的例子包括亮度和对比度调整以及颜色校正和转换。
+
+理论：亮度和对比对调整
+********************************************************************************
+
+-   两个常用的点运算是和一个常数进行乘法和加法：
+
+        .. math:: g(x) = \alpha f(x) + \beta
+
+-   参数 α > 0 和 β 常被称为增益和偏置参数;有时这些参数被称为分别控制 **对比度** 和
+    **亮度** 。
+-   可以把 :math:`f(x)` 看作输入图像像素数据，把 :math:`g(x)` 看作输出图像像素数据。
+    这样，更方便的写法是：
+
+        .. math:: g(i,j) = \alpha f(i,j) + \beta
+    
+    其中 i 和 j 表示该像素位于第 i 行第 j 列。
+
+.. code-block:: C++
+    :emphasize-lines: 18,19,20,21,22,23,24,25
+    
+    int main(int argc, char** argv)
+    {
+        cv::CommandLineParser parser(argc, argv, "{@input | lena.jpg | input image}");
+        cv::Mat image = cv::imread(parser.get<cv::String>("@input"));
+        if (image.empty())
+        {
+            std::cout << "Could not open or find the image!\n" << std::endl;
+            std::cout << "Usage: " << argv[0] << " <Input image>" << std::endl;
+            return -1;
+        }
+        cv::Mat new_image = cv::Mat::zeros(image.size(), image.type());
+        double alpha = 1.0; /*< Simple contrast control */
+        int beta = 0;       /*< Simple brightness control */
+        std::cout << " Basic Linear Transforms " << std::endl;
+        std::cout << "-------------------------" << std::endl;
+        std::cout << "* Enter the alpha value [1.0-3.0]: "; std::cin >> alpha;
+        std::cout << "* Enter the beta value [0-100]: ";    std::cin >> beta;
+        for (int y = 0; y < image.rows; y++) {
+            for (int x = 0; x < image.cols; x++) {
+                for (int c = 0; c < image.channels(); c++) {
+                    new_image.at<cv::Vec3b>(y, x)[c] =
+                        cv::saturate_cast<uchar>(alpha * image.at<cv::Vec3b>(y, x)[c] + beta);
+                }
+            }
+        }
+        cv::imshow("Original Image", image);
+        cv::imshow("New Image", new_image);
+        cv::waitKey();
+        return 0;
+    }
+
+.. warning::
+
+    由于操作 :math:`g(x) = \alpha f(x) + \beta` 可能给出超出范围的值或非整数（如果 α
+    是浮点数），我们使用 ``cv::saturate_cast`` 以确保结果是有效的。
+
+.. note ::
+    
+    我们可以使用一下的方法，而不是使用 for 循环来访问每个像素
+    
+    .. code-block:: C++
+    
+        image.convertTo(new_image, -1, alpha, beta);
+
+实际案例
+********************************************************************************
+
+在前面的介绍中，我们通过调整图像的亮度和对比度来纠正曝光不足的图像。我们还将看到另一种校
+正图像亮度的技术，称为 **伽马校正** 。
+
+亮度和对比度调整
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+伽马校正
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+伽马校正通过将输入值和映射输出值之间做非线性的变换来校正图像的亮度：
+
+.. math:: O = (\frac{I}{255})^\gamma \times 255
+
+由于这种关系是非线性的，所以这种影响在具有不同像素值的像素上都是不一样的。
+
+当 γ < 1 时，原暗区变亮，直方图右移；而 γ > 1时则相反。
+
+.. plot:: pyplots/gamma_calibration.py
+
+.. code-block:: C++
+    :emphasize-lines: 9
+    
+    void GamaCalibration(const cv::Mat& src, cv::Mat& dst, double gamma)
+    {
+        CV_Assert(src.depth() == CV_8U);
+        dst.create(src.size(), src.type());
+
+        cv::Mat lookUpTable(1, 256, CV_8U);
+        uchar* p = lookUpTable.ptr();
+        for (int i = 0; i < 256; ++i)
+            p[i] = cv::saturate_cast<uchar>(pow(i / 255.0, gamma) * 255.0);
+
+        LUT(src, lookUpTable, dst);
+    }
+
+1.7 离散傅里叶变换
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1.8 使用 XML 和 YAML 格式的文件输入输出
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1.9 使用 parallel_for_ 并行化代码
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+2. 图像处理（imgproc module）
+--------------------------------------------------------------------------------
+
+基础
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+变换
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+直方图
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+轮廓
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+其它
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+3. 应用层工具（highgui, imgcodecs, videoio modulea）
+--------------------------------------------------------------------------------
+
+4. 摄像机标定及三维重建（calib3d module）
+--------------------------------------------------------------------------------
+
+5. 2D 特征框架（feature2d module）
+--------------------------------------------------------------------------------
+
+6. 深度神经网络（dnn module）
+--------------------------------------------------------------------------------
+
+7. 图形 API（gapi module）
+--------------------------------------------------------------------------------
+
+8. 其它（ml, objdetect, photo, stiching, video）
+--------------------------------------------------------------------------------
+
+9. GPU 加速的计算机视觉（cuda module）
+--------------------------------------------------------------------------------

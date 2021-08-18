@@ -13,7 +13,10 @@
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" />
 
   
   
@@ -30,6 +33,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -69,7 +73,7 @@
           
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="在文档中搜索" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -86,7 +90,7 @@
               
             
             
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="reStructuresText.html">reStructuresText</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sphinx.html">sphinx</a></li>
@@ -95,6 +99,8 @@
 <li class="toctree-l1"><a class="reference internal" href="git.html">git</a></li>
 <li class="toctree-l1"><a class="reference internal" href="CMake.html">CMake</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C%2B%2B.html">C++</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ImageProcessing.html">Image Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OpenCV.html">OpenCV</a></li>
 <li class="toctree-l1"><a class="reference internal" href="OpenGL.html">OpenGL</a></li>
 <li class="toctree-l1"><a class="reference internal" href="GameEngine.html">GameEngine</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DTD.html">DTD</a></li>
@@ -171,7 +177,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/src/Encoding.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/src/Encoding.rst.txt" rel="nofollow"> 查看页面源码</a>
           
         
       </li>
@@ -186,6 +192,57 @@
             
   <div class="section" id="charset-and-encoding">
 <h1>Charset and Encoding<a class="headerlink" href="#charset-and-encoding" title="永久链接至标题">¶</a></h1>
+<p>Basically:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>charset is the set of characters you can use</p></li>
+<li><p>encoding is the way these characters are stored into memory</p></li>
+</ol>
+</div></blockquote>
+<p>Every encoding has a particular charset associated with it, but there can be
+more than one encoding for a given charset. A charset is simply what it sounds
+like, a set of characters. There are a large number of charsets, including many
+that are intended for particular scripts or languages.</p>
+<p>However, we are well along the way in the transition to Unicode, which includes
+a character set capable of representing almost all the world’s scripts. However,
+there are multiple encodings for Unicode. An encoding is a way of mapping a
+string of characters to a string of bytes. Examples of Unicode encodings include
+UTF-8 <a class="footnote-reference brackets" href="#b" id="id1">2</a> , UTF-16 BE <a class="footnote-reference brackets" href="#c" id="id2">3</a> , and UTF-16 LE <a class="footnote-reference brackets" href="#c" id="id3">3</a> . Each of these
+has advantages for particular applications or machine architectures.</p>
+<p>A character encoding consists of:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The set of supported characters</p></li>
+<li><p>A mapping between characters and integers (“code points”)</p></li>
+<li><p>How code points are encoded as a series of “code units” (e.g., 16-bit units for UTF-16)</p></li>
+<li><p>How code units are encoded into bytes (e.g., big-endian or little-endian)</p></li>
+</ul>
+</div></blockquote>
+<p>Unicode:</p>
+<ul class="simple">
+<li><p>CJK = Chinese-Japanese-Korean</p></li>
+</ul>
+<p>参考文献：</p>
+<dl class="footnote brackets">
+<dt class="label" id="a"><span class="brackets">1</span></dt>
+<dd><p><a class="reference external" href="https://en.wikipedia.org/wiki/Character_encoding">Character encoding</a></p>
+</dd>
+<dt class="label" id="b"><span class="brackets"><a class="fn-backref" href="#id1">2</a></span></dt>
+<dd><p><a class="reference external" href="https://en.wikipedia.org/wiki/UTF-8">UTF-8</a></p>
+</dd>
+<dt class="label" id="c"><span class="brackets">3</span><span class="fn-backref">(<a href="#id2">1</a>,<a href="#id3">2</a>)</span></dt>
+<dd><p><a class="reference external" href="https://en.wikipedia.org/wiki/UTF-16">UTF-16</a></p>
+</dd>
+<dt class="label" id="d"><span class="brackets">4</span></dt>
+<dd><p><a class="reference external" href="https://stackoverflow.com/questions/2281646/whats-the-difference-between-encoding-and-charset">What’s the difference between encoding and charset?</a></p>
+</dd>
+<dt class="label" id="e"><span class="brackets">5</span></dt>
+<dd><p><a class="reference external" href="https://www.joelonsoftware.com/2003/10/08/the-absolute-minimum-every-software-developer-absolutely-positively-must-know-about-unicode-and-character-sets-no-excuses/">The Absolute Minimum Every Software Developer Absolutely, Positively Must Know About Unicode and Character Sets</a></p>
+</dd>
+<dt class="label" id="f"><span class="brackets">6</span></dt>
+<dd><p><a class="reference external" href="https://stackoverflow.com/questions/10611455/what-is-character-encoding-and-why-should-i-bother-with-it">What is character encoding and why should I bother with it</a></p>
+</dd>
+</dl>
 </div>
 
 
@@ -194,8 +251,8 @@
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="Graphviz.html" class="btn btn-neutral float-right" title="Graphviz - Graph Visualization Software" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="sphinx.html" class="btn btn-neutral float-left" title="sphinx" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Graphviz.html" class="btn btn-neutral float-right" title="Graphviz - Graph Visualization Software" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="sphinx.html" class="btn btn-neutral float-left" title="sphinx" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
     </div>
 
   <hr/>
@@ -209,11 +266,11 @@
     
     
     
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
     
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
     
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发. 
 
 </footer>
         </div>

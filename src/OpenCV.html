@@ -1,0 +1,1261 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>OpenCV &mdash; Cheatsheet 1.0.0 文档</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="OpenGL" href="OpenGL.html" />
+    <link rel="prev" title="Image Processing" href="ImageProcessing.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Cheatsheet
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="在文档中搜索" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="reStructuresText.html">reStructuresText</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sphinx.html">sphinx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Encoding.html">Charset and Encoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Graphviz.html">Graphviz - Graph Visualization Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="git.html">git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CMake.html">CMake</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C%2B%2B.html">C++</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ImageProcessing.html">Image Processing</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">OpenCV</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">OpenCV Tutorials(4.5.3)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#core-module">1. 核心功能（core module）</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#mat">1.1 Mat - 基础的突图像容器</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7">1.2 扫描图像、查找表和时间测量</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id14">1.3 矩阵掩码运算（简单滤波）</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id16">1.4 图像的操作</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id22">1.5 添加（混合）两个图像</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id23">1.6 改变图像的对比度和亮度</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id30">1.7 离散傅里叶变换</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xml-yaml">1.8 使用 XML 和 YAML 格式的文件输入输出</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#parallel-for">1.9 使用 parallel_for_ 并行化代码</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#imgproc-module">2. 图像处理（imgproc module）</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id31">基础</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id32">变换</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id33">直方图</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id34">轮廓</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id35">其它</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#highgui-imgcodecs-videoio-modulea">3. 应用层工具（highgui, imgcodecs, videoio modulea）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#calib3d-module">4. 摄像机标定及三维重建（calib3d module）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#d-feature2d-module">5. 2D 特征框架（feature2d module）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dnn-module">6. 深度神经网络（dnn module）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#api-gapi-module">7. 图形 API（gapi module）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ml-objdetect-photo-stiching-video">8. 其它（ml, objdetect, photo, stiching, video）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpu-cuda-module">9. GPU 加速的计算机视觉（cuda module）</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="OpenGL.html">OpenGL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GameEngine.html">GameEngine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DTD.html">DTD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="XSD.html">XSD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="WSDL.html">WSDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dotnet.html">dotnet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cmd.html">cmd</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SSH.html">SSH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Python.html">Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="WindowsTerminal.html">Windows Terminal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manim.html">manim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NSIS.html">nullsoft scriptable install system 3.0.4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Algorithm.html">Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Vocabulary.html">Vocabulary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ECFDeploy.html">ECF AutoDeploy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lua.html">Lua</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LaTeX.html">LaTeX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Ubuntu.html">Ubuntu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MEF.html">MEF in .NET Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="EMail.html">Relative Concepts of EMail</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FFmpeg.html">FFmpeg</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OpenSourceProjects.html">Open Source Projects</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Cheatsheet</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>OpenCV</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/src/OpenCV.rst.txt" rel="nofollow"> 查看页面源码</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="opencv">
+<h1>OpenCV<a class="headerlink" href="#opencv" title="永久链接至标题">¶</a></h1>
+<div class="section" id="id1">
+<h2><a class="reference external" href="https://docs.opencv.org/4.5.3/d9/df8/tutorial_root.html">OpenCV Tutorials(4.5.3)</a><a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<div class="section" id="core-module">
+<h3>1. 核心功能（core module）<a class="headerlink" href="#core-module" title="永久链接至标题">¶</a></h3>
+<div class="section" id="mat">
+<h4>1.1 Mat - 基础的突图像容器<a class="headerlink" href="#mat" title="永久链接至标题">¶</a></h4>
+<p>OpenCV 使用 Mat 类来保存图像中的数据和提供对图像的处理方法</p>
+<div class="section" id="id2">
+<h5>Mat<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h5>
+<p>OpenCV 自 2001 年使用 C 语言实现，最大的问题是需要手动对内存进行管理。从 OpenCV 2.0 开
+始，引入了 C++ 的实现，再也不需要关心内存管理相关的问题。</p>
+<p>使用 Mat 时不再需要手动进行内存的分配和释放，如果需要也是可以的。OpenCV 中的许多函数都
+会为其输出的数据自动分配内存，但是如果你传入了一个已经分配了所需空间的 Mat 对象，将会被
+重用。</p>
+<p>Mat 是一个包含两部分数据的类：矩阵头部（包含了如矩阵大小、保存方式等等）和指向矩阵数据的
+指针。矩阵头部的大小是一个常数，然而矩阵本身的大小是根据其表示的图像不同而不同的。</p>
+<p>OpenCV 是一个图像处理库，提供了大量的图像处理函数。在解决一个问题的时候，大多数情况下需
+要将库里面提供的多个函数组合起来使用。因此，在代码中对图像数据的传递是经常发生的。我们不
+希望因为存在对较大的图像属数据进行不必要的复制而降低程序的速度。</p>
+<p>OpenCV 使用了引用计数系统来解决上述问题。每个 Mat 对象拥有自己的头部信息，但是不同的
+Mat 对象可以通过保存同样的矩阵指针数据实现矩阵数据在多个 Mat 对象之间的共享。Mat 对象的
+copy 操作仅仅会 copy <strong>头部信息和指向矩阵数据的指针</strong> ，而不会对矩阵数据本身进行 copy 。</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">A</span><span class="p">,</span> <span class="n">C</span><span class="p">;</span>                                   <span class="c1">// creates just the header parts</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">imread</span><span class="p">(</span><span class="s">&quot;test.jpg&quot;</span><span class="p">,</span> <span class="n">cv</span><span class="o">::</span><span class="n">IMREAD_COLOR</span><span class="p">);</span>   <span class="c1">// here we&#39;ll know the method used (allocate matrix)</span>
+<span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">B</span><span class="p">(</span><span class="n">A</span><span class="p">);</span>                                   <span class="c1">// Use the copy constructor</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">A</span><span class="p">;</span>                                          <span class="c1">// Assignment operator</span>
+</pre></div>
+</div>
+<p>最终，所有上述对象都指向同一个数据矩阵，使用其中任何一个对象进行修改都会影响到其他所有对
+象。在实践中，不同的对象只是为相同的底层数据提供不同的访问方法。然而，它们的头部部分是不
+同的。真正有趣的部分是，您可以创建只引用完整数据的一部分的头文件。例如，要在图像中创建感
+兴趣区域(ROI)，只需创建一个具有新边界的新头部：</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">D</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">cv</span><span class="o">::</span><span class="n">Rect</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">));</span>           <span class="c1">// using a rectangle</span>
+<span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">E</span> <span class="o">=</span> <span class="n">A</span><span class="p">(</span><span class="n">cv</span><span class="o">::</span><span class="n">Range</span><span class="o">::</span><span class="n">all</span><span class="p">(),</span> <span class="n">cv</span><span class="o">::</span><span class="n">Range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">));</span>   <span class="c1">// using row and column boundaries</span>
+</pre></div>
+</div>
+<p>有时你也想复制矩阵本身，所以 OpenCV 提供 <code class="docutils literal notranslate"><span class="pre">cv::Mat::clone()</span></code> 和 <code class="docutils literal notranslate"><span class="pre">cv::Mat::copyTo()</span></code> 函数。</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">F</span> <span class="o">=</span> <span class="n">A</span><span class="p">.</span><span class="n">clone</span><span class="p">();</span>
+<span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">G</span><span class="p">;</span>
+<span class="n">A</span><span class="p">.</span><span class="n">copyTo</span><span class="p">(</span><span class="n">G</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>现在修改 F 或 G 将不会影响 A 的头部所指向的矩阵。</p>
+<p>小结：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>OpenCV 函数的输出图像内存分配是自动的(除非另外指定)。</p></li>
+<li><p>您不需要考虑OpenCV的c++接口的内存管理。</p></li>
+<li><p>赋值操作符和复制构造函数只复制头部信息。</p></li>
+<li><p>可以使用 <code class="docutils literal notranslate"><span class="pre">cv::Mat::clone()</span></code> 和 <code class="docutils literal notranslate"><span class="pre">cv::Mat::copyTo()</span></code> 函数复制图像的底层矩阵。</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="id3">
+<h5>矩阵数据的存储方式<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h5>
+<p>这是关于如何存储像素值。您可以选择色彩空间和使用的数据类型。色彩空间指的是我们如何组合颜
+色成分来编码给定的颜色。最简单的一种是灰度，我们可以使用黑白两色。这些元素的结合让我们创
+造出许多灰色的阴影。</p>
+<p>对于彩色的方式，我们有很多方法可以选择。它们中的每一个都可以分解为三到四个基本组成部分，
+我们可以利用这些组成部分的组合来创建其他的部分。最受欢迎的是 RGB ，主要是因为这也是我们
+的眼睛构建颜色的方式。它的底色是红、绿、蓝。要对颜色的透明度进行编码，有时需要添加第四个
+元素:alpha (A)。</p>
+<p>然而，还有许多其他的颜色系统，每一种都有自己的优点:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>RGB是最常见的，因为我们的眼睛使用类似的东西，但是请记住，OpenCV 标准显示系统使
+用 BGR 颜色空间(红色和蓝色通道交换位置)组成颜色。</p></li>
+<li><p>HSV和HLS将颜色分解为色相、饱和度和值/亮度组成部分，这对我们来说是一种更自然的
+描述颜色的方式。例如，您可能会忽略最后一个组件，使您的算法对输入图像的光照条件
+不那么敏感。</p></li>
+<li><p>YCrCb用于流行的JPEG图像格式。</p></li>
+<li><p>CIE L*a*b* 是一个感知上统一的颜色空间，如果你需要测量一个给定颜色与另一个颜色的
+距离，它会很方便。</p></li>
+</ul>
+</div></blockquote>
+<p>每个组成部分都有自己的有效域。这就导致了所使用的数据类型。我们存储组成部分的方式定义了我
+们对其域的控制。可能的最小数据类型是 char，这意味着一个字节或 8 位。这可以是无符号的（因
+此可以存储 0 到 255 的值）或有符号的（值从 -127 到 +127）。尽管在三个组成部分的情况下，
+这已经提供了 1600 万种可能的颜色来表示（如RGB），我们可以通过为每个组成部分使用 float
+（4字节 = 32位）或 double（8字节 = 64位）数据类型来获得更精细的控制。不过，请记住，增加
+组成部分的大小也会增加整个图像在内存中的大小。</p>
+</div>
+<div class="section" id="id4">
+<h5>显示创建一个 Mat 对象<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h5>
+<p>可以使用 <code class="docutils literal notranslate"><span class="pre">cv::imwrite()</span></code> 函数将矩阵数据保存到文件中。但是，出于调试的目的，查看实际
+的数值要方便得多。可以使用 Mat 的 <code class="docutils literal notranslate"><span class="pre">&lt;&lt;</span></code> 运算符来实现这一点。但是这只适用于二维矩阵。</p>
+<p>虽然 Mat 作为一个图像容器工作得很好，但它也是一个通用的矩阵类。因此，可以创建和操作多维
+矩阵。你可以用多种方式创建 Mat 对象：</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p><code class="docutils literal notranslate"><span class="pre">cv::Mat::Mat</span></code> 构造函数</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">M</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">CV_8UC3</span><span class="p">,</span> <span class="n">cv</span><span class="o">::</span><span class="n">Scalar</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">));</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;M = &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">M</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>输出：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">M</span> <span class="o">=</span>
+ <span class="p">[</span>  <span class="mi">0</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">;</span>
+   <span class="mi">0</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>对于二维和多通道图像，我们首先定义它们的大小:行和列计数。</p>
+<p>然后我们需要指定用于存储元素的数据类型和每个矩阵点的通道数量。为了做到这一点，
+我们根据以下约定构造了多个定义:</p>
+<blockquote>
+<div><p>CV_[The number of bits per item][Signed or Unsigned][Type Prefix]C[The channel number]</p>
+</div></blockquote>
+<p>例如，CV_8UC3 意味着我们使用 8 位长的 unsigned char 类型，每个像素有三个这样
+的字符来组成三个通道。有多达四个通道预定义的类型。cv::Scalar 是四个元素的短向
+量。指定它，您就可以用自定义值初始化所有矩阵点。如果您需要更多数量的通道，您可
+以用上面的宏创建类型，在括号中设置通道数量，如下所示。</p>
+</li>
+<li><p>使用 C/C++数组作为参数并通过构造函数进行初始化</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">sz</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span> <span class="p">};</span>
+<span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">L</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="n">sz</span><span class="p">,</span> <span class="n">CV_8UC</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">cv</span><span class="o">::</span><span class="n">Scalar</span><span class="o">::</span><span class="n">all</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>上面的示例展示了如何创建一个二维以上的矩阵。指定它的维度，然后传递一个指针，其
+中包含每个维度的大小，其余的保持不变。</p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cv::Mat::create</span></code> 函数</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">M</span><span class="p">.</span><span class="n">create</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">CV_8UC</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;M = &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">M</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>不能使用此构造初始化矩阵值。它只会在新的大小不适合旧的尺寸的时候重新分配它的矩阵
+数据内存。</p>
+</li>
+<li><p>MATLAB风格初始化器: <code class="docutils literal notranslate"><span class="pre">cv::Mat::zero</span></code> , <code class="docutils literal notranslate"><span class="pre">cv::Mat::ones</span></code> , <code class="docutils literal notranslate"><span class="pre">cv::Mat::eye</span></code> 。指定要使用的大小和数据类型</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">E</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">Mat</span><span class="o">::</span><span class="n">eye</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">CV_64F</span><span class="p">);</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;E = &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">E</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">O</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">Mat</span><span class="o">::</span><span class="n">ones</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">CV_32F</span><span class="p">);</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;O = &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">O</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">Z</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">Mat</span><span class="o">::</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">CV_8UC1</span><span class="p">);</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Z = &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">Z</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>输出：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">E</span> <span class="o">=</span>
+ <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">;</span>
+ <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">;</span>
+ <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">;</span>
+ <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="n">O</span> <span class="o">=</span>
+ <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">;</span>
+ <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="n">Z</span> <span class="o">=</span>
+ <span class="p">[</span>  <span class="mi">0</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span>   <span class="mi">0</span><span class="p">;</span>
+   <span class="mi">0</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span>   <span class="mi">0</span><span class="p">;</span>
+   <span class="mi">0</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span>   <span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</li>
+<li><p>对于小矩阵，可以使用逗号分隔的初始化式或初始化式列表</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">C</span> <span class="o">=</span> <span class="p">(</span><span class="n">cv</span><span class="o">::</span><span class="n">Mat_</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">-1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">-1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">-1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">-1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;C = &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">C</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="c1">// or</span>
+<span class="n">C</span> <span class="o">=</span> <span class="p">(</span><span class="n">cv</span><span class="o">::</span><span class="n">Mat_</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">({</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">-1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">-1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">-1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">-1</span><span class="p">,</span> <span class="mi">0</span> <span class="p">})).</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;C = &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">C</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>输出：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">C</span> <span class="o">=</span>
+ <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">;</span>
+ <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+ <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</li>
+<li><p>为一个已存在的 Mat 对象创建一个新的头部并使用 <code class="docutils literal notranslate"><span class="pre">cv::Mat::clone</span></code> 或 <code class="docutils literal notranslate"><span class="pre">cv::Mat::copyTo</span></code> 创建其矩阵数据</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">RowClone</span> <span class="o">=</span> <span class="n">C</span><span class="p">.</span><span class="n">row</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="n">clone</span><span class="p">();</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;RowClone = &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">RowClone</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>输出：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">RowClone</span> <span class="o">=</span>
+ <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">注解</p>
+<p>可以使用 <code class="docutils literal notranslate"><span class="pre">cv::randu()</span></code> 函数用随机值填充矩阵。您需要给出随机值的上限和下限:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">R</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">Mat</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">CV_8UC3</span><span class="p">);</span>
+<span class="n">cv</span><span class="o">::</span><span class="n">randu</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">cv</span><span class="o">::</span><span class="n">Scalar</span><span class="o">::</span><span class="n">all</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">cv</span><span class="o">::</span><span class="n">Scalar</span><span class="o">::</span><span class="n">all</span><span class="p">(</span><span class="mi">255</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id5">
+<h5>格式化输出<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h5>
+<p>在上面的例子中，您可以看到默认格式输出。然而，OpenCV 允许您格式化矩阵输出。</p>
+<ul>
+<li><p>Default</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;R (default) = &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span> <span class="o">&lt;&lt;</span> <span class="n">R</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>输出：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">R</span> <span class="p">(</span><span class="n">default</span><span class="p">)</span> <span class="o">=</span>
+<span class="p">[</span> <span class="mi">91</span><span class="p">,</span>   <span class="mi">2</span><span class="p">,</span>  <span class="mi">79</span><span class="p">,</span> <span class="mi">179</span><span class="p">,</span>  <span class="mi">52</span><span class="p">,</span> <span class="mi">205</span><span class="p">;</span>
+ <span class="mi">236</span><span class="p">,</span>   <span class="mi">8</span><span class="p">,</span> <span class="mi">181</span><span class="p">,</span> <span class="mi">239</span><span class="p">,</span>  <span class="mi">26</span><span class="p">,</span> <span class="mi">248</span><span class="p">;</span>
+ <span class="mi">207</span><span class="p">,</span> <span class="mi">218</span><span class="p">,</span>  <span class="mi">45</span><span class="p">,</span> <span class="mi">183</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">101</span><span class="p">]</span>
+</pre></div>
+</div>
+</li>
+<li><p>Python</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;R (python)  = &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span> <span class="o">&lt;&lt;</span> <span class="n">format</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">cv</span><span class="o">::</span><span class="n">Formatter</span><span class="o">::</span><span class="n">FMT_PYTHON</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>输出：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">R</span> <span class="p">(</span><span class="n">python</span><span class="p">)</span>  <span class="o">=</span>
+<span class="p">[[[</span> <span class="mi">91</span><span class="p">,</span>   <span class="mi">2</span><span class="p">,</span>  <span class="mi">79</span><span class="p">],</span> <span class="p">[</span><span class="mi">179</span><span class="p">,</span>  <span class="mi">52</span><span class="p">,</span> <span class="mi">205</span><span class="p">]],</span>
+ <span class="p">[[</span><span class="mi">236</span><span class="p">,</span>   <span class="mi">8</span><span class="p">,</span> <span class="mi">181</span><span class="p">],</span> <span class="p">[</span><span class="mi">239</span><span class="p">,</span>  <span class="mi">26</span><span class="p">,</span> <span class="mi">248</span><span class="p">]],</span>
+ <span class="p">[[</span><span class="mi">207</span><span class="p">,</span> <span class="mi">218</span><span class="p">,</span>  <span class="mi">45</span><span class="p">],</span> <span class="p">[</span><span class="mi">183</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">101</span><span class="p">]]]</span>
+</pre></div>
+</div>
+</li>
+<li><p>CSV</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;R (csv)     = &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span> <span class="o">&lt;&lt;</span> <span class="n">format</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">cv</span><span class="o">::</span><span class="n">Formatter</span><span class="o">::</span><span class="n">FMT_CSV</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>输出：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">R</span> <span class="p">(</span><span class="n">csv</span><span class="p">)</span>     <span class="o">=</span>
+ <span class="mi">91</span><span class="p">,</span>   <span class="mi">2</span><span class="p">,</span>  <span class="mi">79</span><span class="p">,</span> <span class="mi">179</span><span class="p">,</span>  <span class="mi">52</span><span class="p">,</span> <span class="mi">205</span>
+<span class="mi">236</span><span class="p">,</span>   <span class="mi">8</span><span class="p">,</span> <span class="mi">181</span><span class="p">,</span> <span class="mi">239</span><span class="p">,</span>  <span class="mi">26</span><span class="p">,</span> <span class="mi">248</span>
+<span class="mi">207</span><span class="p">,</span> <span class="mi">218</span><span class="p">,</span>  <span class="mi">45</span><span class="p">,</span> <span class="mi">183</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">101</span>
+</pre></div>
+</div>
+</li>
+<li><p>Numpy</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;R (numpy)   = &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span> <span class="o">&lt;&lt;</span> <span class="n">format</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">cv</span><span class="o">::</span><span class="n">Formatter</span><span class="o">::</span><span class="n">FMT_NUMPY</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>输出：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">R</span> <span class="p">(</span><span class="n">numpy</span><span class="p">)</span>   <span class="o">=</span>
+<span class="n">array</span><span class="p">([[[</span> <span class="mi">91</span><span class="p">,</span>   <span class="mi">2</span><span class="p">,</span>  <span class="mi">79</span><span class="p">],</span> <span class="p">[</span><span class="mi">179</span><span class="p">,</span>  <span class="mi">52</span><span class="p">,</span> <span class="mi">205</span><span class="p">]],</span>
+       <span class="p">[[</span><span class="mi">236</span><span class="p">,</span>   <span class="mi">8</span><span class="p">,</span> <span class="mi">181</span><span class="p">],</span> <span class="p">[</span><span class="mi">239</span><span class="p">,</span>  <span class="mi">26</span><span class="p">,</span> <span class="mi">248</span><span class="p">]],</span>
+       <span class="p">[[</span><span class="mi">207</span><span class="p">,</span> <span class="mi">218</span><span class="p">,</span>  <span class="mi">45</span><span class="p">],</span> <span class="p">[</span><span class="mi">183</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">101</span><span class="p">]]],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;uint8&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>C</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;R (c)       = &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span> <span class="o">&lt;&lt;</span> <span class="n">format</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">cv</span><span class="o">::</span><span class="n">Formatter</span><span class="o">::</span><span class="n">FMT_C</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>输出：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">R</span> <span class="p">(</span><span class="n">c</span><span class="p">)</span>       <span class="o">=</span>
+<span class="p">{</span> <span class="mi">91</span><span class="p">,</span>   <span class="mi">2</span><span class="p">,</span>  <span class="mi">79</span><span class="p">,</span> <span class="mi">179</span><span class="p">,</span>  <span class="mi">52</span><span class="p">,</span> <span class="mi">205</span><span class="p">,</span>
+ <span class="mi">236</span><span class="p">,</span>   <span class="mi">8</span><span class="p">,</span> <span class="mi">181</span><span class="p">,</span> <span class="mi">239</span><span class="p">,</span>  <span class="mi">26</span><span class="p">,</span> <span class="mi">248</span><span class="p">,</span>
+ <span class="mi">207</span><span class="p">,</span> <span class="mi">218</span><span class="p">,</span>  <span class="mi">45</span><span class="p">,</span> <span class="mi">183</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">101</span><span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="id6">
+<h5>其它对象的格式化输出<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h5>
+<p>OpenCV 也支持通过 <code class="docutils literal notranslate"><span class="pre">&lt;&lt;</span></code> 操作符输出其他常见的 OpenCV 数据结构:</p>
+<ul>
+<li><p>2D Point</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">cv</span><span class="o">::</span><span class="n">Point2f</span> <span class="n">P</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Point (2D) = &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">P</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>输出：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Point</span> <span class="p">(</span><span class="mi">2</span><span class="n">D</span><span class="p">)</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</li>
+<li><p>3D Point</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">cv</span><span class="o">::</span><span class="n">Point3f</span> <span class="n">P3f</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">);</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Point (3D) = &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">P3f</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>输出：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Point</span> <span class="p">(</span><span class="mi">3</span><span class="n">D</span><span class="p">)</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
+</pre></div>
+</div>
+</li>
+<li><p>std::vector via cv::Mat</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">v</span><span class="p">;</span>
+<span class="n">v</span><span class="p">.</span><span class="n">push_back</span><span class="p">((</span><span class="kt">float</span><span class="p">)</span><span class="n">CV_PI</span><span class="p">);</span>
+<span class="n">v</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="n">v</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mf">3.01f</span><span class="p">);</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Vector of floats via Mat = &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">cv</span><span class="o">::</span><span class="n">Mat</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>输出：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Vector</span> <span class="n">of</span> <span class="n">floats</span> <span class="n">via</span> <span class="n">Mat</span> <span class="o">=</span> <span class="p">[</span><span class="mf">3.1415927</span><span class="p">;</span>
+ <span class="mi">2</span><span class="p">;</span>
+ <span class="mf">3.01</span><span class="p">]</span>
+</pre></div>
+</div>
+</li>
+<li><p>std::vector of points</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">cv</span><span class="o">::</span><span class="n">Point2f</span><span class="o">&gt;</span> <span class="n">vPoints</span><span class="p">(</span><span class="mi">20</span><span class="p">);</span>
+<span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">vPoints</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">vPoints</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">Point2f</span><span class="p">((</span><span class="kt">float</span><span class="p">)(</span><span class="n">i</span> <span class="o">*</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="kt">float</span><span class="p">)(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">7</span><span class="p">));</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;A vector of 2D Points = &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">vPoints</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>输出：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="n">vector</span> <span class="n">of</span> <span class="mi">2</span><span class="n">D</span> <span class="n">Points</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">;</span>
+ <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">;</span>
+ <span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">;</span>
+ <span class="mi">15</span><span class="p">,</span> <span class="mi">3</span><span class="p">;</span>
+ <span class="mi">20</span><span class="p">,</span> <span class="mi">4</span><span class="p">;</span>
+ <span class="mi">25</span><span class="p">,</span> <span class="mi">5</span><span class="p">;</span>
+ <span class="mi">30</span><span class="p">,</span> <span class="mi">6</span><span class="p">;</span>
+ <span class="mi">35</span><span class="p">,</span> <span class="mi">0</span><span class="p">;</span>
+ <span class="mi">40</span><span class="p">,</span> <span class="mi">1</span><span class="p">;</span>
+ <span class="mi">45</span><span class="p">,</span> <span class="mi">2</span><span class="p">;</span>
+ <span class="mi">50</span><span class="p">,</span> <span class="mi">3</span><span class="p">;</span>
+ <span class="mi">55</span><span class="p">,</span> <span class="mi">4</span><span class="p">;</span>
+ <span class="mi">60</span><span class="p">,</span> <span class="mi">5</span><span class="p">;</span>
+ <span class="mi">65</span><span class="p">,</span> <span class="mi">6</span><span class="p">;</span>
+ <span class="mi">70</span><span class="p">,</span> <span class="mi">0</span><span class="p">;</span>
+ <span class="mi">75</span><span class="p">,</span> <span class="mi">1</span><span class="p">;</span>
+ <span class="mi">80</span><span class="p">,</span> <span class="mi">2</span><span class="p">;</span>
+ <span class="mi">85</span><span class="p">,</span> <span class="mi">3</span><span class="p">;</span>
+ <span class="mi">90</span><span class="p">,</span> <span class="mi">4</span><span class="p">;</span>
+ <span class="mi">95</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="id7">
+<h4>1.2 扫描图像、查找表和时间测量<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h4>
+<p>让我们考虑一种简单的颜色减少（reduction）方法。通过使用 unsigned char C 和 C++ 类型来
+作为矩阵中的项，一个像素通道可以有多达 256 个不同的值。对于一个三通道的图像，这可能会形
+成太多的颜色（确切地说是1600万）。使用如此多的色度可能会给我们的算法性能带来沉重的打击。
+然而，有时候，与更少的数据一起工作就足以得到相同的最终结果。</p>
+<p>在这种情况下，我们通常会减少颜色空间。这意味着我们用一个新的输入值分割颜色空间的当前值，
+以减少颜色。例如，0 到 9 之间的每个值都取新值 0，10 到 19 之间的每个值取新值 10，以此
+类推。</p>
+<p>当你将一个 uchar （unsigned char - 值在 0 和 255 之间）与一个 int 值分割时，结果也是
+char。这些值只能是 char 值。因此，任何分数都将被舍入。利用这一事实，上述操作在 uchar 所
+表示的区间内可表示为：</p>
+<div class="math notranslate nohighlight">
+\[I_{new} = (\frac{I_{old}}{10}) * 10\]</div>
+<p>一个简单的色彩空间缩减算法只需要通过图像矩阵的每个像素并应用这个公式。值得注意的是，我们
+做了一个除法和一个乘法运算。对于一个系统来说，这些操作是非常昂贵的。如果可能的话，可以使
+用一些更便宜的操作，比如一些减法、加法，或者在最好的情况下，一个简单的赋值来避免它们。此
+外，注意我们只有有限数量的输入值用于上面的操作。在 uchar 系统中，只有 256 中不同的输入。</p>
+<p>对于较大的图像，最好是事先计算所有可能的值，并在赋值期间使用查找表进行赋值。查询表是简单
+的数组（有一个或多个维度），对于给定的输入值变化，它保存最终的输出值。它的优点是我们不需
+要做计算，我们只需要读取结果。</p>
+<p>我们的测试用例程序（和下面的代码示例）将做以下工作：读取作为命令行参数传递的图像（它可以
+是彩色或灰度），并使用给定的命令行参数整数值进行缩减。在 OpenCV 中，目前有三种主要的逐
+像素查看图像的方法。为了让事情变得更有趣，我们将使用这些方法对图像进行扫描，并打印出所需
+的时间。</p>
+<div class="literal-block-wrapper docutils container" id="id36">
+<div class="code-block-caption"><span class="caption-text">calculate the lookup table</span><a class="headerlink" href="#id36" title="永久链接至代码">¶</a></div>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">divideWith</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// convert our input string to number - C++ style</span>
+<span class="n">std</span><span class="o">::</span><span class="n">stringstream</span> <span class="n">s</span><span class="p">;</span>
+<span class="n">s</span> <span class="o">&lt;&lt;</span> <span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+<span class="n">s</span> <span class="o">&gt;&gt;</span> <span class="n">divideWith</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">s</span> <span class="o">||</span> <span class="o">!</span><span class="n">divideWith</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Invalid number entered for dividing. &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mi">-1</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="n">uchar</span> <span class="n">table</span><span class="p">[</span><span class="mi">256</span><span class="p">];</span>
+<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">256</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">table</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">uchar</span><span class="p">)(</span><span class="n">divideWith</span> <span class="o">*</span> <span class="p">(</span><span class="n">i</span> <span class="o">/</span> <span class="n">divideWith</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id37">
+<div class="code-block-caption"><span class="caption-text">time measuration</span><a class="headerlink" href="#id37" title="永久链接至代码">¶</a></div>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="kt">double</span> <span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">cv</span><span class="o">::</span><span class="n">getTickCount</span><span class="p">();</span>
+<span class="c1">// do something ...</span>
+<span class="n">t</span> <span class="o">=</span> <span class="p">((</span><span class="kt">double</span><span class="p">)</span><span class="n">cv</span><span class="o">::</span><span class="n">getTickCount</span><span class="p">()</span> <span class="o">-</span> <span class="n">t</span><span class="p">)</span> <span class="o">/</span> <span class="n">cv</span><span class="o">::</span><span class="n">getTickFrequency</span><span class="p">();</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Times passed in seconds: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">t</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id8">
+<h5>图像的矩阵数据在内存中是如何存储的<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h5>
+<p>矩阵的大小取决于所用的色彩系统。更准确地说，它取决于所使用的颜色通道的数量。</p>
+<p>对于多通道图像，每一列包含与通道数量相同的子列。</p>
+<p>注意在 BGR 色彩系统中，通道的顺序是 BGR 而不是 RGB 。因为在许多情况下，内存足够大，可以
+连续地存储行，所以行可能会一个接一个地出现，创建一个长长的行。因为所有东西都在一个单一的
+地方，一个接着一个，这可能有助于加快扫描过程。我们可以使用 <code class="docutils literal notranslate"><span class="pre">cv::Mat::isContinuous()</span></code>
+函数来询问矩阵是否为这种情况。</p>
+</div>
+<div class="section" id="id9">
+<h5>高效的方式<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h5>
+<p>当谈到性能时，您无法击败经典的 C 风格操作符[]（指针）访问。因此，我们可以推荐的最有效的
+赋值方法是：</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">cv</span><span class="o">::</span><span class="n">Mat</span><span class="o">&amp;</span> <span class="n">ScanImageAndReduceC</span><span class="p">(</span><span class="n">cv</span><span class="o">::</span><span class="n">Mat</span><span class="o">&amp;</span> <span class="n">I</span><span class="p">,</span> <span class="k">const</span> <span class="n">uchar</span><span class="o">*</span> <span class="k">const</span> <span class="n">table</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// accept only char type matrices</span>
+    <span class="n">CV_Assert</span><span class="p">(</span><span class="n">I</span><span class="p">.</span><span class="n">depth</span><span class="p">()</span> <span class="o">==</span> <span class="n">CV_8U</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">channels</span> <span class="o">=</span> <span class="n">I</span><span class="p">.</span><span class="n">channels</span><span class="p">();</span>
+    <span class="kt">int</span> <span class="n">nRows</span> <span class="o">=</span> <span class="n">I</span><span class="p">.</span><span class="n">rows</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">nCols</span> <span class="o">=</span> <span class="n">I</span><span class="p">.</span><span class="n">cols</span> <span class="o">*</span> <span class="n">channels</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">I</span><span class="p">.</span><span class="n">isContinuous</span><span class="p">())</span>
+    <span class="p">{</span>
+        <span class="n">nCols</span> <span class="o">*=</span> <span class="n">nRows</span><span class="p">;</span>
+        <span class="n">nRows</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">;</span>
+    <span class="n">uchar</span><span class="o">*</span> <span class="n">p</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nRows</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+    <span class="p">{</span>
+<span class="hll">        <span class="n">p</span> <span class="o">=</span> <span class="n">I</span><span class="p">.</span><span class="n">ptr</span><span class="o">&lt;</span><span class="n">uchar</span><span class="o">&gt;</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>    <span class="c1">// 获取指向每一行起始的指针的&quot;智能&quot;方法</span>
+</span>        <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">nCols</span><span class="p">;</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">p</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">table</span><span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="n">j</span><span class="p">]];</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">I</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>在这里，我们只是简单地获取一个指向每一行开始的指针，然后遍历它，直到它结束。在矩阵以连续
+方式存储的特殊情况下，我们只需要请求指针一次，并使用它一直遍历到最后。我们需要注意彩色图
+像：我们有三个（I.channels()）通道，所以我们需要在每一行中遍历三倍的数据。</p>
+<p>还有另一种方法。Mat 对象的 data 数据成员返回指向第一行第一列的指针。如果该指针为空，则
+该对象中没有有效的输入。检查这个是检查图像加载是否成功的最简单的方法。如果存储是连续的，
+我们可以用它来遍历整个数据指针。在灰度图像中，它是这样的:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">uchar</span><span class="o">*</span> <span class="n">p</span> <span class="o">=</span> <span class="n">I</span><span class="p">.</span><span class="n">data</span><span class="p">;</span>
+<span class="k">for</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nCols</span> <span class="o">*</span> <span class="n">nRows</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+    <span class="o">*</span><span class="n">p</span><span class="o">++</span> <span class="o">=</span> <span class="n">table</span><span class="p">[</span><span class="o">*</span><span class="n">p</span><span class="p">];</span>
+</pre></div>
+</div>
+<p>你会得到同样的结果。然而，这段代码在以后阅读起来要困难得多。如果你掌握了一些更高级的技术，
+那就更难了。此外，在实践中，我观察到您将得到相同的性能结果（因为大多数现代编译器可能会自
+动为您实现这个小的优化技巧）。</p>
+</div>
+<div class="section" id="id10">
+<h5>迭代器（安全）方式<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h5>
+<p>在前面 <a class="reference internal" href="#id9"><span class="std std-ref">高效的方式</span></a> 中，确保处理了正确数量的 uchar 字段，并跳过行之
+间可能出现的间隙是编码人员的责任。迭代器方法被认为是一种更安全的方法，因为它从用户那里接
+管这些任务。您所需要做的就是询问图像矩阵的开始和结束，然后增加 begin 迭代器，直到到达结
+束。要获取迭代器所指向的值，请使用 <code class="docutils literal notranslate"><span class="pre">*</span></code> 操作符。</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">cv</span><span class="o">::</span><span class="n">Mat</span><span class="o">&amp;</span> <span class="n">ScanImageAndReduceIterator</span><span class="p">(</span><span class="n">cv</span><span class="o">::</span><span class="n">Mat</span><span class="o">&amp;</span> <span class="n">I</span><span class="p">,</span> <span class="k">const</span> <span class="n">uchar</span><span class="o">*</span> <span class="k">const</span> <span class="n">table</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// accept only char type matrices</span>
+    <span class="n">CV_Assert</span><span class="p">(</span><span class="n">I</span><span class="p">.</span><span class="n">depth</span><span class="p">()</span> <span class="o">==</span> <span class="n">CV_8U</span><span class="p">);</span>
+    <span class="k">const</span> <span class="kt">int</span> <span class="n">channels</span> <span class="o">=</span> <span class="n">I</span><span class="p">.</span><span class="n">channels</span><span class="p">();</span>
+    <span class="k">switch</span> <span class="p">(</span><span class="n">channels</span><span class="p">)</span>
+    <span class="p">{</span>
+    <span class="k">case</span> <span class="mi">1</span><span class="o">:</span>
+    <span class="p">{</span>
+<span class="hll">        <span class="n">cv</span><span class="o">::</span><span class="n">MatIterator_</span><span class="o">&lt;</span><span class="n">uchar</span><span class="o">&gt;</span> <span class="n">it</span><span class="p">,</span> <span class="n">end</span><span class="p">;</span>
+</span><span class="hll">        <span class="k">for</span> <span class="p">(</span><span class="n">it</span> <span class="o">=</span> <span class="n">I</span><span class="p">.</span><span class="n">begin</span><span class="o">&lt;</span><span class="n">uchar</span><span class="o">&gt;</span><span class="p">(),</span> <span class="n">end</span> <span class="o">=</span> <span class="n">I</span><span class="p">.</span><span class="n">end</span><span class="o">&lt;</span><span class="n">uchar</span><span class="o">&gt;</span><span class="p">();</span> <span class="n">it</span> <span class="o">!=</span> <span class="n">end</span><span class="p">;</span> <span class="o">++</span><span class="n">it</span><span class="p">)</span>
+</span>            <span class="o">*</span><span class="n">it</span> <span class="o">=</span> <span class="n">table</span><span class="p">[</span><span class="o">*</span><span class="n">it</span><span class="p">];</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">case</span> <span class="mi">3</span><span class="o">:</span>
+    <span class="p">{</span>
+<span class="hll">        <span class="n">cv</span><span class="o">::</span><span class="n">MatIterator_</span><span class="o">&lt;</span><span class="n">cv</span><span class="o">::</span><span class="n">Vec3b</span><span class="o">&gt;</span> <span class="n">it</span><span class="p">,</span> <span class="n">end</span><span class="p">;</span>
+</span><span class="hll">        <span class="k">for</span> <span class="p">(</span><span class="n">it</span> <span class="o">=</span> <span class="n">I</span><span class="p">.</span><span class="n">begin</span><span class="o">&lt;</span><span class="n">cv</span><span class="o">::</span><span class="n">Vec3b</span><span class="o">&gt;</span><span class="p">(),</span> <span class="n">end</span> <span class="o">=</span> <span class="n">I</span><span class="p">.</span><span class="n">end</span><span class="o">&lt;</span><span class="n">cv</span><span class="o">::</span><span class="n">Vec3b</span><span class="o">&gt;</span><span class="p">();</span> <span class="n">it</span> <span class="o">!=</span> <span class="n">end</span><span class="p">;</span> <span class="o">++</span><span class="n">it</span><span class="p">)</span>
+</span>        <span class="p">{</span>
+            <span class="p">(</span><span class="o">*</span><span class="n">it</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">table</span><span class="p">[(</span><span class="o">*</span><span class="n">it</span><span class="p">)[</span><span class="mi">0</span><span class="p">]];</span>
+            <span class="p">(</span><span class="o">*</span><span class="n">it</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">table</span><span class="p">[(</span><span class="o">*</span><span class="n">it</span><span class="p">)[</span><span class="mi">1</span><span class="p">]];</span>
+            <span class="p">(</span><span class="o">*</span><span class="n">it</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">table</span><span class="p">[(</span><span class="o">*</span><span class="n">it</span><span class="p">)[</span><span class="mi">2</span><span class="p">]];</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">I</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>在彩色图像的情况下，每列有三个 uchar 类型的数据。这可以被认为是包含 uchar 类型数据的短
+向量，在 OpenCV 中被命名为 Vec3b 。为了访问第 n 个子列，我们使用简单的 <code class="docutils literal notranslate"><span class="pre">[]</span></code> 操作符
+访问。重要的是要记住 OpenCV 迭代器遍历列并自动跳到下一行。 <em>因此，对于彩色图像，如果你使
+用简单的 uchar 迭代器，你将只能访问到蓝色通道的值。</em></p>
+</div>
+<div class="section" id="id11">
+<h5>直接通过指定位置数据引用进行修改<a class="headerlink" href="#id11" title="永久链接至标题">¶</a></h5>
+<p>最后一种方法不推荐用于扫描。它是用来获取或修改图像中的随机元素的。它的基本用法是指定要访
+问的项所在的的行号和列号。在我们之前的扫描方法中，你可能已经注意到传递图像的类型是很重要
+的。这里也没有什么不同，你可以在以下源代码的灰度图像中观察到这一点（使用 <code class="docutils literal notranslate"><span class="pre">cv::Mat::at()</span></code>
+函数)）。</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">cv</span><span class="o">::</span><span class="n">Mat</span><span class="o">&amp;</span> <span class="n">ScanImageAndReduceRandomAccess</span><span class="p">(</span><span class="n">cv</span><span class="o">::</span><span class="n">Mat</span><span class="o">&amp;</span> <span class="n">I</span><span class="p">,</span> <span class="k">const</span> <span class="n">uchar</span><span class="o">*</span> <span class="k">const</span> <span class="n">table</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// accept only char type matrices</span>
+    <span class="n">CV_Assert</span><span class="p">(</span><span class="n">I</span><span class="p">.</span><span class="n">depth</span><span class="p">()</span> <span class="o">==</span> <span class="n">CV_8U</span><span class="p">);</span>
+    <span class="k">const</span> <span class="kt">int</span> <span class="n">channels</span> <span class="o">=</span> <span class="n">I</span><span class="p">.</span><span class="n">channels</span><span class="p">();</span>
+    <span class="k">switch</span> <span class="p">(</span><span class="n">channels</span><span class="p">)</span>
+    <span class="p">{</span>
+    <span class="k">case</span> <span class="mi">1</span><span class="o">:</span>
+    <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">I</span><span class="p">.</span><span class="n">rows</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">I</span><span class="p">.</span><span class="n">cols</span><span class="p">;</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span>
+<span class="hll">                <span class="n">I</span><span class="p">.</span><span class="n">at</span><span class="o">&lt;</span><span class="n">uchar</span><span class="o">&gt;</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="o">=</span> <span class="n">table</span><span class="p">[</span><span class="n">I</span><span class="p">.</span><span class="n">at</span><span class="o">&lt;</span><span class="n">uchar</span><span class="o">&gt;</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)];</span>
+</span>        <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">case</span> <span class="mi">3</span><span class="o">:</span>
+    <span class="p">{</span>
+<span class="hll">        <span class="n">cv</span><span class="o">::</span><span class="n">Mat_</span><span class="o">&lt;</span><span class="n">cv</span><span class="o">::</span><span class="n">Vec3b</span><span class="o">&gt;</span> <span class="n">_I</span> <span class="o">=</span> <span class="n">I</span><span class="p">;</span>
+</span>        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">I</span><span class="p">.</span><span class="n">rows</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">I</span><span class="p">.</span><span class="n">cols</span><span class="p">;</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">_I</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">table</span><span class="p">[</span><span class="n">_I</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)[</span><span class="mi">0</span><span class="p">]];</span>
+                <span class="n">_I</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">table</span><span class="p">[</span><span class="n">_I</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)[</span><span class="mi">1</span><span class="p">]];</span>
+                <span class="n">_I</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">table</span><span class="p">[</span><span class="n">_I</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)[</span><span class="mi">2</span><span class="p">]];</span>
+            <span class="p">}</span>
+<span class="hll">        <span class="n">I</span> <span class="o">=</span> <span class="n">_I</span><span class="p">;</span>
+</span>
+        <span class="c1">// Or</span>
+        <span class="c1">//for (int i = 0; i &lt; I.rows; ++i)</span>
+        <span class="c1">//    for (int j = 0; j &lt; I.cols; ++j)</span>
+        <span class="c1">//    {</span>
+        <span class="c1">//        I.at&lt;cv::Vec3b&gt;(i, j)[0] = table[I.at&lt;cv::Vec3b&gt;(i, j)[0]];</span>
+        <span class="c1">//        I.at&lt;cv::Vec3b&gt;(i, j)[1] = table[I.at&lt;cv::Vec3b&gt;(i, j)[1]];</span>
+        <span class="c1">//        I.at&lt;cv::Vec3b&gt;(i, j)[2] = table[I.at&lt;cv::Vec3b&gt;(i, j)[2]];</span>
+        <span class="c1">//    }</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">I</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>如果您需要使用此方法对图像进行多次查找，那么为每次访问输入类型和 at 关键字可能会很麻烦
+和耗时。为了解决这个问题，OpenCV 有一个 <code class="docutils literal notranslate"><span class="pre">cv::Mat_</span></code> 数据类型。它和 Mat 一样，只是需
+要在定义时指定要查看数据矩阵的数据类型，但是作为回报，您可以使用operator()来快速访问项
+目。为了让事情变得更好，这很容易转换为通常的 <code class="docutils literal notranslate"><span class="pre">cv::Mat</span></code> 数据类型。你可以在上面函数的
+彩色图像中看到一个使用这种方法的示例。然而，需要注意的是，同样的操作（运行时速度相同）也
+可以用 <code class="docutils literal notranslate"><span class="pre">cv::Mat::at</span></code> 函数来完成。这只是一个为懒惰的程序员编写的小技巧。</p>
+</div>
+<div class="section" id="id12">
+<h5>核心函数<a class="headerlink" href="#id12" title="永久链接至标题">¶</a></h5>
+<p>这是在图像中实现查找表修改的额外方法。在图像处理中，你想要将所有给定的图像值修改为其他值
+是很常见的。OpenCV 提供了一个修改图像值的函数，而不需要编写图像的扫描逻辑。我们使用 core
+module 的 <code class="docutils literal notranslate"><span class="pre">cv::LUT()</span></code> 函数。</p>
+<p>首先，我们构建一个 Mat 类型的查找表:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">lookUpTable</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="n">CV_8U</span><span class="p">);</span>
+<span class="n">uchar</span><span class="o">*</span> <span class="n">p</span> <span class="o">=</span> <span class="n">lookUpTable</span><span class="p">.</span><span class="n">ptr</span><span class="p">();</span>
+<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">256</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">table</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</pre></div>
+</div>
+<p>然后调用函数（I是我们的输入图像，J是输出图像）：</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">cv</span><span class="o">::</span><span class="n">LUT</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">lookUpTable</span><span class="p">,</span> <span class="n">J</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id13">
+<h5>性能差异<a class="headerlink" href="#id13" title="永久链接至标题">¶</a></h5>
+<p>为了得到最好的结果，编译程序并自己运行它。为了使差异更清楚，我使用了一个相当大的
+(2560 X 1600) 图像。这里展示的性能是针对彩色图像的。为了获得更精确的值，我将调用该函数
+数百次后得到的值取平均值。</p>
+<p>我们可以得出一些结论。如果可能的话，使用 OpenCV 已经创建的函数（而不是重新造轮子）。最
+快的方法是LUT函数。这是因为 OpenCV 库是通过 Intel 线程构建块
+（Intel Threaded Building Blocks）启用的多线程。</p>
+<p>但是，如果需要编写一个简单的图像扫描，最好使用指针方法。
+迭代器是一种更安全的选择，不过速度会慢得多。
+在 Debug 模式下，使用最后一种方法进行全图像扫描的开销最大。
+在 Release 模式下，它可能会打败迭代器方法，也可能不会，但它肯定会为此牺牲迭代器的安全特
+性。</p>
+</div>
+</div>
+<div class="section" id="id14">
+<h4>1.3 矩阵掩码运算（简单滤波）<a class="headerlink" href="#id14" title="永久链接至标题">¶</a></h4>
+<p>对矩阵的掩码作是相当简单的。我们的想法是根据掩码矩阵（也称为 kernel）重新计算图像中每个
+像素的值。掩码中的值将调整相邻像素（和当前像素）对新像素值的影响程度。从数学的角度来看，
+我们用我们指定的值进行加权平均。</p>
+<div class="math notranslate nohighlight">
+\[I(i,j) = 5 * I(i,j) - [I(i - 1,j) + I(i + 1,j) + I(i,j - 1) + I(i,j + 1)]\]</div>
+<div class="section" id="id15">
+<h5>自己实现<a class="headerlink" href="#id15" title="永久链接至标题">¶</a></h5>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">Sharpen</span><span class="p">(</span><span class="k">const</span> <span class="n">cv</span><span class="o">::</span><span class="n">Mat</span><span class="o">&amp;</span> <span class="n">myImage</span><span class="p">,</span> <span class="n">cv</span><span class="o">::</span><span class="n">Mat</span><span class="o">&amp;</span> <span class="n">Result</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">CV_Assert</span><span class="p">(</span><span class="n">myImage</span><span class="p">.</span><span class="n">depth</span><span class="p">()</span> <span class="o">==</span> <span class="n">CV_8U</span><span class="p">);</span>  <span class="c1">// accept only uchar images</span>
+    <span class="k">const</span> <span class="kt">int</span> <span class="n">nChannels</span> <span class="o">=</span> <span class="n">myImage</span><span class="p">.</span><span class="n">channels</span><span class="p">();</span>
+    <span class="n">Result</span><span class="p">.</span><span class="n">create</span><span class="p">(</span><span class="n">myImage</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">myImage</span><span class="p">.</span><span class="n">type</span><span class="p">());</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">myImage</span><span class="p">.</span><span class="n">rows</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">const</span> <span class="n">uchar</span><span class="o">*</span> <span class="n">previous</span> <span class="o">=</span> <span class="n">myImage</span><span class="p">.</span><span class="n">ptr</span><span class="o">&lt;</span><span class="n">uchar</span><span class="o">&gt;</span><span class="p">(</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="k">const</span> <span class="n">uchar</span><span class="o">*</span> <span class="n">current</span> <span class="o">=</span> <span class="n">myImage</span><span class="p">.</span><span class="n">ptr</span><span class="o">&lt;</span><span class="n">uchar</span><span class="o">&gt;</span><span class="p">(</span><span class="n">j</span><span class="p">);</span>
+        <span class="k">const</span> <span class="n">uchar</span><span class="o">*</span> <span class="n">next</span> <span class="o">=</span> <span class="n">myImage</span><span class="p">.</span><span class="n">ptr</span><span class="o">&lt;</span><span class="n">uchar</span><span class="o">&gt;</span><span class="p">(</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="n">uchar</span><span class="o">*</span> <span class="n">output</span> <span class="o">=</span> <span class="n">Result</span><span class="p">.</span><span class="n">ptr</span><span class="o">&lt;</span><span class="n">uchar</span><span class="o">&gt;</span><span class="p">(</span><span class="n">j</span><span class="p">);</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">nChannels</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nChannels</span> <span class="o">*</span> <span class="p">(</span><span class="n">myImage</span><span class="p">.</span><span class="n">cols</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="o">*</span><span class="n">output</span><span class="o">++</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">saturate_cast</span><span class="o">&lt;</span><span class="n">uchar</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">5</span> <span class="o">*</span> <span class="n">current</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span> <span class="n">current</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">nChannels</span><span class="p">]</span> <span class="o">-</span> <span class="n">current</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">nChannels</span><span class="p">]</span> <span class="o">-</span> <span class="n">previous</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">next</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">Result</span><span class="p">.</span><span class="n">row</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="n">setTo</span><span class="p">(</span><span class="n">cv</span><span class="o">::</span><span class="n">Scalar</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span>
+    <span class="n">Result</span><span class="p">.</span><span class="n">row</span><span class="p">(</span><span class="n">Result</span><span class="p">.</span><span class="n">rows</span> <span class="o">-</span> <span class="mi">1</span><span class="p">).</span><span class="n">setTo</span><span class="p">(</span><span class="n">cv</span><span class="o">::</span><span class="n">Scalar</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span>
+    <span class="n">Result</span><span class="p">.</span><span class="n">col</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="n">setTo</span><span class="p">(</span><span class="n">cv</span><span class="o">::</span><span class="n">Scalar</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span>
+    <span class="n">Result</span><span class="p">.</span><span class="n">col</span><span class="p">(</span><span class="n">Result</span><span class="p">.</span><span class="n">cols</span> <span class="o">-</span> <span class="mi">1</span><span class="p">).</span><span class="n">setTo</span><span class="p">(</span><span class="n">cv</span><span class="o">::</span><span class="n">Scalar</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cv-filter2d">
+<h5>cv::filter2D()<a class="headerlink" href="#cv-filter2d" title="永久链接至标题">¶</a></h5>
+<p>在图像处理中应用这样的过滤器是如此常见，以至于在 OpenCV 中有一个函数将负责应用掩码
+（在某些地方也称为 kernel）。为此，您首先需要定义一个保存 mask 的对象：</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">kernel</span> <span class="o">=</span> <span class="p">(</span><span class="n">cv</span><span class="o">::</span><span class="n">Mat_</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">-1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="mi">-1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">-1</span><span class="p">,</span>
+    <span class="mi">0</span><span class="p">,</span> <span class="mi">-1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>然后调用 <code class="docutils literal notranslate"><span class="pre">cv::filter2D()</span></code> 函数，指定要使用的输入、输出图像和掩码：</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">cv</span><span class="o">::</span><span class="n">filter2D</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">dst1</span><span class="p">,</span> <span class="n">src</span><span class="p">.</span><span class="n">depth</span><span class="p">(),</span> <span class="n">kernel</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>该函数甚至有第五个可选参数来指定 kernel 的中心，第六个参数用于在将过滤后的像素存储到 K
+中之前向其添加一个可选值，第七个参数用于确定在未定义操作（边界）的区域中要做什么。</p>
+<p>这个函数更短，更简洁，而且由于进行了一些优化，它通常比手工编码的方法更快。</p>
+</div>
+</div>
+<div class="section" id="id16">
+<h4>1.4 图像的操作<a class="headerlink" href="#id16" title="永久链接至标题">¶</a></h4>
+<div class="section" id="id17">
+<h5>输入、输出<a class="headerlink" href="#id17" title="永久链接至标题">¶</a></h5>
+<p>从文件加载图像：</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">img</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">imread</span><span class="p">(</span><span class="n">filename</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>当加载一个 jpg 图像文件时，默认会创建一个包含三通道的图像数据。如果是希望获取一个灰度图，
+则使用一下的方式：</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">img</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">imread</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">cv</span><span class="o">::</span><span class="n">IMREAD_GRAYSCALE</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>保存图像数据到文件：</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">cv</span><span class="o">::</span><span class="n">imwrite</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">img</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">注解</p>
+<p>加载图像文件时，图像的格式是由文件内容（前几个字节）所决定；
+保存文件时，保存的格式由文件后缀名确定。</p>
+</div>
+</div>
+<div class="section" id="id18">
+<h5>获取像素强度值<a class="headerlink" href="#id18" title="永久链接至标题">¶</a></h5>
+<p>为了得到像素强度值，必须知道图像的类型和通道的数量。下面是单通道灰度图像（类型为 8UC1）
+和像素坐标为 x 和 y （此处的坐标是图片中像素的坐标，一般是左上角为原点，水平向右为 x 轴
+正方向，竖直向下为 y 轴正方向）的示例：</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">cv</span><span class="o">::</span><span class="n">Scalar</span> <span class="n">intensity</span> <span class="o">=</span> <span class="n">img</span><span class="p">.</span><span class="n">at</span><span class="o">&lt;</span><span class="n">uchar</span><span class="o">&gt;</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>仅 C++ 版本：intensity.val[0] 的取值范围为0 ~ 255。注意 x 和 y 的顺序。因为在 OpenCV
+中图像是由与矩阵相同的结构表示的，所以我们对这两种情况使用相同的约定——基于 0 的行索引
+（或 y 坐标）首先，基于 0 的列索引（或 x 坐标）紧随其后。或者，您可以使用以下表示法
+（仅限 C++）：</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">cv</span><span class="o">::</span><span class="n">Scalar</span> <span class="n">intensity</span> <span class="o">=</span> <span class="n">img</span><span class="p">.</span><span class="n">at</span><span class="o">&lt;</span><span class="n">uchar</span><span class="o">&gt;</span><span class="p">(</span><span class="n">cv</span><span class="o">::</span><span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>同样的方法可以用来改变像素的强度：</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">img</span><span class="p">.</span><span class="n">at</span><span class="o">&lt;</span><span class="n">uchar</span><span class="o">&gt;</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="mi">128</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>一个带有 BGR 颜色排序的3通道图像（imread返回的默认格式）：</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">cv</span><span class="o">::</span><span class="n">Vec3b</span> <span class="n">intensity</span> <span class="o">=</span> <span class="n">img</span><span class="p">.</span><span class="n">at</span><span class="o">&lt;</span><span class="n">cv</span><span class="o">::</span><span class="n">Vec3b</span><span class="o">&gt;</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+<span class="n">uchar</span> <span class="n">blue</span> <span class="o">=</span> <span class="n">intensity</span><span class="p">.</span><span class="n">val</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+<span class="n">uchar</span> <span class="n">green</span> <span class="o">=</span> <span class="n">intensity</span><span class="p">.</span><span class="n">val</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+<span class="n">uchar</span> <span class="n">red</span> <span class="o">=</span> <span class="n">intensity</span><span class="p">.</span><span class="n">val</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+</pre></div>
+</div>
+<p>您可以对浮点图像使用相同的方法（例如，您可以通过在3通道图像上运行 Sobel 来获得这样的图
+像）（仅限 C++）：</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">cv</span><span class="o">::</span><span class="n">Vec3f</span> <span class="n">intensity</span> <span class="o">=</span> <span class="n">img</span><span class="p">.</span><span class="n">at</span><span class="o">&lt;</span><span class="n">cv</span><span class="o">::</span><span class="n">Vec3f</span><span class="o">&gt;</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+<span class="kt">float</span> <span class="n">blue</span> <span class="o">=</span> <span class="n">intensity</span><span class="p">.</span><span class="n">val</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+<span class="kt">float</span> <span class="n">green</span> <span class="o">=</span> <span class="n">intensity</span><span class="p">.</span><span class="n">val</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+<span class="kt">float</span> <span class="n">red</span> <span class="o">=</span> <span class="n">intensity</span><span class="p">.</span><span class="n">val</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+</pre></div>
+</div>
+<p>OpenCV 中有一些函数，尤其是来自 calib3d 模块的函数，如 <code class="docutils literal notranslate"><span class="pre">cv::projectPoints</span></code> ，它们
+以 Mat 的形式获取 2D 或 3D 点的数组。矩阵应该恰好包含一列，每一行对应一个点，矩阵类型应
+该是 32FC2 或 32FC3 。这样的矩阵可以很容易通过使用 <code class="docutils literal notranslate"><span class="pre">std::vector</span></code> 来构造（仅 C++）：</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">cv</span><span class="o">::</span><span class="n">Point2f</span><span class="o">&gt;</span> <span class="n">points</span><span class="p">;</span>
+<span class="c1">//... fill the array</span>
+<span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">pointsMat</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">Mat</span><span class="p">(</span><span class="n">points</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>可以使用相同的方法访问这个矩阵中的一个点（仅限 C++）:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">cv</span><span class="o">::</span><span class="n">Point2f</span> <span class="n">point</span> <span class="o">=</span> <span class="n">pointsMat</span><span class="p">.</span><span class="n">at</span><span class="o">&lt;</span><span class="n">cv</span><span class="o">::</span><span class="n">Point2f</span><span class="o">&gt;</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id19">
+<h5>内存管理和引用计数<a class="headerlink" href="#id19" title="永久链接至标题">¶</a></h5>
+<p>Mat 是一种保存了矩阵/图像特征（行和列数，数据类型等）和数据指针的结构。所以没有什么能阻
+止我们有多个 Mat 实例对应于相同的数据。Mat 保留一个引用计数，用于告诉当 Mat 的一个特定
+实例被销毁时，是否需要释放数据。下面是一个在不复制数据的情况下创建两个矩阵的例子（仅限
+C++）：</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">cv</span><span class="o">::</span><span class="n">Point3f</span><span class="o">&gt;</span> <span class="n">points</span><span class="p">;</span>
+<span class="c1">// .. fill the array</span>
+<span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">pointsMat</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">Mat</span><span class="p">(</span><span class="n">points</span><span class="p">).</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>结果是我们得到了一个有 3 列的 32FC1 矩阵，而不是有 1 列的 32FC3 矩阵。 pointsMat 使用
+来自点的数据，并且在销毁时不会释放内存。然而，在这种特殊情况下，开发人员必须确保点的生命
+周期长于 pointsMat 。</p>
+<p>如果我们需要复制数据，可以使用例如： <code class="docutils literal notranslate"><span class="pre">cv::Mat::copyTo</span></code> 或者 <code class="docutils literal notranslate"><span class="pre">cv::Mat::clone</span></code>：</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">img</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">imread</span><span class="p">(</span><span class="s">&quot;image.jpg&quot;</span><span class="p">);</span>
+<span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">img1</span> <span class="o">=</span> <span class="n">img</span><span class="p">.</span><span class="n">clone</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>可以为每个函数提供一个空的输出 Mat。每个实现调用 <code class="docutils literal notranslate"><span class="pre">Mat::create</span></code> 作为目标矩阵。该方法
+在矩阵为空时为其分配数据。如果它不是空的，并且具有正确的大小和类型，则该方法不执行任何操
+作。但是，如果大小或类型与输入参数不同，数据将被释放（并丢失），并分配新的数据。例如：</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">img</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">imread</span><span class="p">(</span><span class="s">&quot;image.jpg&quot;</span><span class="p">);</span>
+<span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">sobelx</span><span class="p">;</span>
+<span class="n">cv</span><span class="o">::</span><span class="n">Sobel</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">sobelx</span><span class="p">,</span> <span class="n">CV_32F</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id20">
+<h5>图元操作<a class="headerlink" href="#id20" title="永久链接至标题">¶</a></h5>
+<p>在矩阵上定义了许多方便的运算操作。</p>
+<ul>
+<li><p>从现有的灰度图像 img 制作黑色图像：</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">img</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">Scalar</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</pre></div>
+</div>
+</li>
+<li><p>选择感兴趣区域：</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">cv</span><span class="o">::</span><span class="n">Rect</span> <span class="n">r</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
+<span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">smallImg</span> <span class="o">=</span> <span class="n">img</span><span class="p">(</span><span class="n">r</span><span class="p">);</span>
+</pre></div>
+</div>
+</li>
+<li><p>从彩色到灰度的转换：</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">img</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">imread</span><span class="p">(</span><span class="s">&quot;image.jpg&quot;</span><span class="p">);</span> <span class="c1">// loading a 8UC3 image</span>
+<span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">grey</span><span class="p">;</span>
+<span class="n">cvtColor</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">grey</span><span class="p">,</span> <span class="n">cv</span><span class="o">::</span><span class="n">COLOR_BGR2GRAY</span><span class="p">);</span>
+</pre></div>
+</div>
+</li>
+<li><p>将图像类型从 8UC1 更改为 32FC1：</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">src</span><span class="p">.</span><span class="n">convertTo</span><span class="p">(</span><span class="n">dst</span><span class="p">,</span> <span class="n">CV_32F</span><span class="p">);</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="id21">
+<h5>图像可视化<a class="headerlink" href="#id21" title="永久链接至标题">¶</a></h5>
+<p>在开发过程中看到算法的中间结果是非常有用的。OpenCV 提供了一种方便的图像可视化方法。一个
+8U 类型的像可以使用一下代码进行显示：</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">img</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">imread</span><span class="p">(</span><span class="s">&quot;image.jpg&quot;</span><span class="p">);</span>
+<span class="n">cv</span><span class="o">::</span><span class="n">namedWindow</span><span class="p">(</span><span class="s">&quot;image&quot;</span><span class="p">,</span> <span class="n">cv</span><span class="o">::</span><span class="n">WINDOW_AUTOSIZE</span><span class="p">);</span>
+<span class="n">cv</span><span class="o">::</span><span class="n">imshow</span><span class="p">(</span><span class="s">&quot;image&quot;</span><span class="p">,</span> <span class="n">img</span><span class="p">);</span>
+<span class="n">cv</span><span class="o">::</span><span class="n">waitKey</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>调用 <code class="docutils literal notranslate"><span class="pre">waitKey()</span></code> 开始一个消息传递循环，等待 “image” 窗口中的按键。</p>
+<p>32F 类型的图像需要转换为 8U 类型以进行显示。例如：</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">img</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">imread</span><span class="p">(</span><span class="s">&quot;image.jpg&quot;</span><span class="p">);</span>
+<span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">grey</span><span class="p">;</span>
+<span class="n">cv</span><span class="o">::</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">grey</span><span class="p">,</span> <span class="n">cv</span><span class="o">::</span><span class="n">COLOR_BGR2GRAY</span><span class="p">);</span>
+<span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">sobelx</span><span class="p">;</span>
+<span class="n">cv</span><span class="o">::</span><span class="n">Sobel</span><span class="p">(</span><span class="n">grey</span><span class="p">,</span> <span class="n">sobelx</span><span class="p">,</span> <span class="n">CV_32F</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="kt">double</span> <span class="n">minVal</span><span class="p">,</span> <span class="n">maxVal</span><span class="p">;</span>
+<span class="n">cv</span><span class="o">::</span><span class="n">minMaxLoc</span><span class="p">(</span><span class="n">sobelx</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">minVal</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">maxVal</span><span class="p">);</span> <span class="c1">//find minimum and maximum intensities</span>
+<span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">draw</span><span class="p">;</span>
+<span class="n">sobelx</span><span class="p">.</span><span class="n">convertTo</span><span class="p">(</span><span class="n">draw</span><span class="p">,</span> <span class="n">CV_8U</span><span class="p">,</span> <span class="mf">255.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">maxVal</span> <span class="o">-</span> <span class="n">minVal</span><span class="p">),</span> <span class="o">-</span><span class="n">minVal</span> <span class="o">*</span> <span class="mf">255.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">maxVal</span> <span class="o">-</span> <span class="n">minVal</span><span class="p">));</span>
+<span class="n">cv</span><span class="o">::</span><span class="n">namedWindow</span><span class="p">(</span><span class="s">&quot;image&quot;</span><span class="p">,</span> <span class="n">cv</span><span class="o">::</span><span class="n">WINDOW_AUTOSIZE</span><span class="p">);</span>
+<span class="n">cv</span><span class="o">::</span><span class="n">imshow</span><span class="p">(</span><span class="s">&quot;image&quot;</span><span class="p">,</span> <span class="n">draw</span><span class="p">);</span>
+<span class="n">cv</span><span class="o">::</span><span class="n">waitKey</span><span class="p">();</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">注解</p>
+<p>这里 <code class="docutils literal notranslate"><span class="pre">cv::namedWindow</span></code> 是没有必要的，因为它是紧接着 <code class="docutils literal notranslate"><span class="pre">cv::imshow</span></code> 。然而，它
+可以用来改变窗口属性或当使用 <code class="docutils literal notranslate"><span class="pre">cv::createTrackbar</span></code></p>
+</div>
+</div>
+</div>
+<div class="section" id="id22">
+<h4>1.5 添加（混合）两个图像<a class="headerlink" href="#id22" title="永久链接至标题">¶</a></h4>
+<div class="math notranslate nohighlight">
+\[g(x) = (1-\alpha)f_0(x) + \alpha f_1(x)\]</div>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="kt">double</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">;</span>
+<span class="kt">double</span> <span class="n">beta</span><span class="p">;</span>
+<span class="kt">double</span> <span class="n">input</span><span class="p">;</span>
+<span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">src1</span><span class="p">,</span> <span class="n">src2</span><span class="p">,</span> <span class="n">dst</span><span class="p">;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; Simple Linear Blender &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;-----------------------&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;* Enter alpha [0.0-1.0]: &quot;</span><span class="p">;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">input</span><span class="p">;</span>
+<span class="c1">// We use the alpha provided by the user if it is between 0 and 1</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">input</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">input</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">alpha</span> <span class="o">=</span> <span class="n">input</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="n">src1</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">imread</span><span class="p">(</span><span class="s">&quot;LinuxLogo.jpg&quot;</span><span class="p">);</span>
+<span class="n">src2</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">imread</span><span class="p">(</span><span class="s">&quot;WindowsLogo.jpg&quot;</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">src1</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Error loading src1&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span> <span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span> <span class="p">}</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">src2</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Error loading src2&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span> <span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span> <span class="p">}</span>
+<span class="n">beta</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">);</span>
+<span class="hll"><span class="n">cv</span><span class="o">::</span><span class="n">addWeighted</span><span class="p">(</span><span class="n">src1</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">src2</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">dst</span><span class="p">);</span>
+</span><span class="n">cv</span><span class="o">::</span><span class="n">imshow</span><span class="p">(</span><span class="s">&quot;Linear Blend&quot;</span><span class="p">,</span> <span class="n">dst</span><span class="p">);</span>
+<span class="n">cv</span><span class="o">::</span><span class="n">waitKey</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">警告</p>
+<p>src1 和 src2 必须是相同的大小（宽和高）和类型。</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">注解</p>
+<p>cv::addWeighted 方法处理方式为：<span class="math notranslate nohighlight">\(dst = \alpha \cdot src1 + \beta \cdot src2 + \gamma\)</span></p>
+</div>
+</div>
+<div class="section" id="id23">
+<h4>1.6 改变图像的对比度和亮度<a class="headerlink" href="#id23" title="永久链接至标题">¶</a></h4>
+<div class="section" id="id24">
+<h5>理论：图像处理<a class="headerlink" href="#id24" title="永久链接至标题">¶</a></h5>
+<ul class="simple">
+<li><p>一般图像处理运算是一个函数，它接受一个或多个输入图像并生成输出图像。</p></li>
+<li><p>图像变换可以看作是:</p>
+<ul>
+<li><p>点的运算(像素变换)</p></li>
+<li><p>邻域（基于区域）运算</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id25">
+<h5>理论：像素变换<a class="headerlink" href="#id25" title="永久链接至标题">¶</a></h5>
+<ul class="simple">
+<li><p>在这种图像处理变换中，每个输出像素的值仅依赖于相应的输入像素值（可能加上一些全局收
+集的信息或参数）。</p></li>
+<li><p>这类操作的例子包括亮度和对比度调整以及颜色校正和转换。</p></li>
+</ul>
+</div>
+<div class="section" id="id26">
+<h5>理论：亮度和对比对调整<a class="headerlink" href="#id26" title="永久链接至标题">¶</a></h5>
+<ul>
+<li><p>两个常用的点运算是和一个常数进行乘法和加法：</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[g(x) = \alpha f(x) + \beta\]</div>
+</div></blockquote>
+</li>
+<li><p>参数 α &gt; 0 和 β 常被称为增益和偏置参数;有时这些参数被称为分别控制 <strong>对比度</strong> 和
+<strong>亮度</strong> 。</p></li>
+<li><p>可以把 <span class="math notranslate nohighlight">\(f(x)\)</span> 看作输入图像像素数据，把 <span class="math notranslate nohighlight">\(g(x)\)</span> 看作输出图像像素数据。
+这样，更方便的写法是：</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[g(i,j) = \alpha f(i,j) + \beta\]</div>
+</div></blockquote>
+<p>其中 i 和 j 表示该像素位于第 i 行第 j 列。</p>
+</li>
+</ul>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">cv</span><span class="o">::</span><span class="n">CommandLineParser</span> <span class="n">parser</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">,</span> <span class="s">&quot;{@input | lena.jpg | input image}&quot;</span><span class="p">);</span>
+    <span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">image</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">imread</span><span class="p">(</span><span class="n">parser</span><span class="p">.</span><span class="n">get</span><span class="o">&lt;</span><span class="n">cv</span><span class="o">::</span><span class="n">String</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;@input&quot;</span><span class="p">));</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">image</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
+    <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Could not open or find the image!</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Usage: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &lt;Input image&gt;&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+        <span class="k">return</span> <span class="mi">-1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">new_image</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">Mat</span><span class="o">::</span><span class="n">zeros</span><span class="p">(</span><span class="n">image</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">image</span><span class="p">.</span><span class="n">type</span><span class="p">());</span>
+    <span class="kt">double</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span> <span class="cm">/*&lt; Simple contrast control */</span>
+    <span class="kt">int</span> <span class="n">beta</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>       <span class="cm">/*&lt; Simple brightness control */</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; Basic Linear Transforms &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;-------------------------&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;* Enter the alpha value [1.0-3.0]: &quot;</span><span class="p">;</span> <span class="n">std</span><span class="o">::</span><span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">alpha</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;* Enter the beta value [0-100]: &quot;</span><span class="p">;</span>    <span class="n">std</span><span class="o">::</span><span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">beta</span><span class="p">;</span>
+<span class="hll">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="n">image</span><span class="p">.</span><span class="n">rows</span><span class="p">;</span> <span class="n">y</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="hll">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">image</span><span class="p">.</span><span class="n">cols</span><span class="p">;</span> <span class="n">x</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="hll">            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">c</span> <span class="o">&lt;</span> <span class="n">image</span><span class="p">.</span><span class="n">channels</span><span class="p">();</span> <span class="n">c</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="hll">                <span class="n">new_image</span><span class="p">.</span><span class="n">at</span><span class="o">&lt;</span><span class="n">cv</span><span class="o">::</span><span class="n">Vec3b</span><span class="o">&gt;</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span>
+</span><span class="hll">                    <span class="n">cv</span><span class="o">::</span><span class="n">saturate_cast</span><span class="o">&lt;</span><span class="n">uchar</span><span class="o">&gt;</span><span class="p">(</span><span class="n">alpha</span> <span class="o">*</span> <span class="n">image</span><span class="p">.</span><span class="n">at</span><span class="o">&lt;</span><span class="n">cv</span><span class="o">::</span><span class="n">Vec3b</span><span class="o">&gt;</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)[</span><span class="n">c</span><span class="p">]</span> <span class="o">+</span> <span class="n">beta</span><span class="p">);</span>
+</span><span class="hll">            <span class="p">}</span>
+</span><span class="hll">        <span class="p">}</span>
+</span><span class="hll">    <span class="p">}</span>
+</span>    <span class="n">cv</span><span class="o">::</span><span class="n">imshow</span><span class="p">(</span><span class="s">&quot;Original Image&quot;</span><span class="p">,</span> <span class="n">image</span><span class="p">);</span>
+    <span class="n">cv</span><span class="o">::</span><span class="n">imshow</span><span class="p">(</span><span class="s">&quot;New Image&quot;</span><span class="p">,</span> <span class="n">new_image</span><span class="p">);</span>
+    <span class="n">cv</span><span class="o">::</span><span class="n">waitKey</span><span class="p">();</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">警告</p>
+<p>由于操作 <span class="math notranslate nohighlight">\(g(x) = \alpha f(x) + \beta\)</span> 可能给出超出范围的值或非整数（如果 α
+是浮点数），我们使用 <code class="docutils literal notranslate"><span class="pre">cv::saturate_cast</span></code> 以确保结果是有效的。</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">注解</p>
+<p>我们可以使用一下的方法，而不是使用 for 循环来访问每个像素</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">image</span><span class="p">.</span><span class="n">convertTo</span><span class="p">(</span><span class="n">new_image</span><span class="p">,</span> <span class="mi">-1</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id27">
+<h5>实际案例<a class="headerlink" href="#id27" title="永久链接至标题">¶</a></h5>
+<p>在前面的介绍中，我们通过调整图像的亮度和对比度来纠正曝光不足的图像。我们还将看到另一种校
+正图像亮度的技术，称为 <strong>伽马校正</strong> 。</p>
+<div class="section" id="id28">
+<h6>亮度和对比度调整<a class="headerlink" href="#id28" title="永久链接至标题">¶</a></h6>
+</div>
+<div class="section" id="id29">
+<h6>伽马校正<a class="headerlink" href="#id29" title="永久链接至标题">¶</a></h6>
+<p>伽马校正通过将输入值和映射输出值之间做非线性的变换来校正图像的亮度：</p>
+<div class="math notranslate nohighlight">
+\[O = (\frac{I}{255})^\gamma \times 255\]</div>
+<p>由于这种关系是非线性的，所以这种影响在具有不同像素值的像素上都是不一样的。</p>
+<p>当 γ &lt; 1 时，原暗区变亮，直方图右移；而 γ &gt; 1时则相反。</p>
+<p>(<a class="reference external" href="../pyplots/gamma_calibration.py">Source code</a>, <a class="reference external" href="../pyplots/gamma_calibration.png">png</a>, <a class="reference external" href="../pyplots/gamma_calibration.hires.png">hires.png</a>, <a class="reference external" href="../pyplots/gamma_calibration.pdf">pdf</a>)</p>
+<div class="figure align-default">
+<img alt="../_images/gamma_calibration.png" class="plot-directive" src="../_images/gamma_calibration.png" />
+</div>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">GamaCalibration</span><span class="p">(</span><span class="k">const</span> <span class="n">cv</span><span class="o">::</span><span class="n">Mat</span><span class="o">&amp;</span> <span class="n">src</span><span class="p">,</span> <span class="n">cv</span><span class="o">::</span><span class="n">Mat</span><span class="o">&amp;</span> <span class="n">dst</span><span class="p">,</span> <span class="kt">double</span> <span class="n">gamma</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">CV_Assert</span><span class="p">(</span><span class="n">src</span><span class="p">.</span><span class="n">depth</span><span class="p">()</span> <span class="o">==</span> <span class="n">CV_8U</span><span class="p">);</span>
+    <span class="n">dst</span><span class="p">.</span><span class="n">create</span><span class="p">(</span><span class="n">src</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">src</span><span class="p">.</span><span class="n">type</span><span class="p">());</span>
+
+    <span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">lookUpTable</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="n">CV_8U</span><span class="p">);</span>
+    <span class="n">uchar</span><span class="o">*</span> <span class="n">p</span> <span class="o">=</span> <span class="n">lookUpTable</span><span class="p">.</span><span class="n">ptr</span><span class="p">();</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">256</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+<span class="hll">        <span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">saturate_cast</span><span class="o">&lt;</span><span class="n">uchar</span><span class="o">&gt;</span><span class="p">(</span><span class="n">pow</span><span class="p">(</span><span class="n">i</span> <span class="o">/</span> <span class="mf">255.0</span><span class="p">,</span> <span class="n">gamma</span><span class="p">)</span> <span class="o">*</span> <span class="mf">255.0</span><span class="p">);</span>
+</span>
+    <span class="n">LUT</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">lookUpTable</span><span class="p">,</span> <span class="n">dst</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id30">
+<h4>1.7 离散傅里叶变换<a class="headerlink" href="#id30" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="xml-yaml">
+<h4>1.8 使用 XML 和 YAML 格式的文件输入输出<a class="headerlink" href="#xml-yaml" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="parallel-for">
+<h4>1.9 使用 <a href="#id38"><span class="problematic" id="id39">parallel_for_</span></a> 并行化代码<a class="headerlink" href="#parallel-for" title="永久链接至标题">¶</a></h4>
+</div>
+</div>
+<div class="section" id="imgproc-module">
+<h3>2. 图像处理（imgproc module）<a class="headerlink" href="#imgproc-module" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id31">
+<h4>基础<a class="headerlink" href="#id31" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id32">
+<h4>变换<a class="headerlink" href="#id32" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id33">
+<h4>直方图<a class="headerlink" href="#id33" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id34">
+<h4>轮廓<a class="headerlink" href="#id34" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id35">
+<h4>其它<a class="headerlink" href="#id35" title="永久链接至标题">¶</a></h4>
+</div>
+</div>
+<div class="section" id="highgui-imgcodecs-videoio-modulea">
+<h3>3. 应用层工具（highgui, imgcodecs, videoio modulea）<a class="headerlink" href="#highgui-imgcodecs-videoio-modulea" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="calib3d-module">
+<h3>4. 摄像机标定及三维重建（calib3d module）<a class="headerlink" href="#calib3d-module" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="d-feature2d-module">
+<h3>5. 2D 特征框架（feature2d module）<a class="headerlink" href="#d-feature2d-module" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="dnn-module">
+<h3>6. 深度神经网络（dnn module）<a class="headerlink" href="#dnn-module" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="api-gapi-module">
+<h3>7. 图形 API（gapi module）<a class="headerlink" href="#api-gapi-module" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="ml-objdetect-photo-stiching-video">
+<h3>8. 其它（ml, objdetect, photo, stiching, video）<a class="headerlink" href="#ml-objdetect-photo-stiching-video" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="gpu-cuda-module">
+<h3>9. GPU 加速的计算机视觉（cuda module）<a class="headerlink" href="#gpu-cuda-module" title="永久链接至标题">¶</a></h3>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="OpenGL.html" class="btn btn-neutral float-right" title="OpenGL" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="ImageProcessing.html" class="btn btn-neutral float-left" title="Image Processing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; 版权所有 2021, horizonshd.
+
+    </p>
+  </div>
+    
+    
+    
+    利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

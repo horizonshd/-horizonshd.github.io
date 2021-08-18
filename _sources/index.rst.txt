@@ -17,6 +17,8 @@ Welcome to Cheatsheet's documentation!
    src/git
    src/CMake
    src/C++
+   src/ImageProcessing
+   src/OpenCV
    src/OpenGL
    src/GameEngine
    src/DTD
