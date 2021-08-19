@@ -112,6 +112,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Python</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#id1">基础技能</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id2">入门知识</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">国内镜像源</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pip">常用 pip 命令</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#virtualenv">VirtualEnv 使用</a></li>
 </ul>
@@ -243,6 +244,36 @@
 </div>
 </li>
 </ol>
+</div>
+<div class="section" id="id3">
+<h3>国内镜像源<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h3>
+<p>镜像源列表：</p>
+<ul class="simple">
+<li><p>清华大学：<a class="reference external" href="https://pypi.tuna.tsinghua.edu.cn/simple">https://pypi.tuna.tsinghua.edu.cn/simple</a></p></li>
+<li><p>中国科技大学：<a class="reference external" href="https://pypi.mirrors.ustc.edu.cn/simple/">https://pypi.mirrors.ustc.edu.cn/simple/</a></p></li>
+<li><p>华中理工大学：<a class="reference external" href="http://pypi.hustunique.com/">http://pypi.hustunique.com/</a></p></li>
+<li><p>山东理工大学：<a class="reference external" href="http://pypi.sdutlinux.org/">http://pypi.sdutlinux.org/</a></p></li>
+<li><p>豆瓣：<a class="reference external" href="http://pypi.douban.com/simple/">http://pypi.douban.com/simple/</a></p></li>
+<li><p>阿里云：<a class="reference external" href="http://mirrors.aliyun.com/pypi/simple/">http://mirrors.aliyun.com/pypi/simple/</a></p></li>
+</ul>
+<p>使用方式：</p>
+<blockquote>
+<div><p>命令行中使用：</p>
+<blockquote>
+<div><p>pip install &lt;package name&gt; -i &lt;mirror url&gt;</p>
+</div></blockquote>
+<p>修改配置文件:</p>
+<blockquote>
+<div><p>修改或创建配置文件 pip.conf 或 pip.ini</p>
+<p>文件内容：</p>
+<blockquote>
+<div><p>[global]
+index-url = <a class="reference external" href="https://pypi.tuna.tsinghua.edu.cn/simple">https://pypi.tuna.tsinghua.edu.cn/simple</a></p>
+</div></blockquote>
+<p>linux 下文件路径:    ~/.pip/pip.conf</p>
+<p>windows 下文件路径:  %userprofile%pip/pip.ini</p>
+</div></blockquote>
+</div></blockquote>
 </div>
 <div class="section" id="pip">
 <h3>常用 pip 命令<a class="headerlink" href="#pip" title="永久链接至标题">¶</a></h3>
