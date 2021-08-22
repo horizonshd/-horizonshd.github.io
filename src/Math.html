@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>CMake &mdash; Cheatsheet 1.0.0 文档</title>
+  <title>Math &mdash; Cheatsheet 1.0.0 文档</title>
   
 
   
@@ -38,14 +38,15 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/translations.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
     
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="C++" href="C%2B%2B.html" />
-    <link rel="prev" title="git" href="git.html" /> 
+    <link rel="next" title="Image Processing" href="ImageProcessing.html" />
+    <link rel="prev" title="C++" href="C%2B%2B.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -97,9 +98,35 @@
 <li class="toctree-l1"><a class="reference internal" href="Encoding.html">Charset and Encoding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Graphviz.html">Graphviz - Graph Visualization Software</a></li>
 <li class="toctree-l1"><a class="reference internal" href="git.html">git</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">CMake</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CMake.html">CMake</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C%2B%2B.html">C++</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Math.html">Math</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Math</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#misc">Misc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fourier-transform">Fourier Transform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#linear-algebra">Linear Algebra</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">线性代数的本质</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id3">00 序言</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">01 向量究竟是什么？</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">02 线性组合、张成的空间与基</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">03 矩阵与线性变换</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7">04 矩阵乘法与线性变换复合</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id8">00 三维空间中的线性变换</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id9">05 行列式</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id10">06 逆矩阵、列空间与零空间</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id11">00 非方阵</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id12">07 点积与对偶性</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id13">08-1 叉积的标准介绍</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id14">08-2 以线性变换的眼光看叉积</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id15">09 基变换</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id16">10 特征向量与特征值</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id17">11 抽象向量空间</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id18">12 克莱姆法则及其几何解释</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="ImageProcessing.html">Image Processing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="OpenCV.html">OpenCV</a></li>
 <li class="toctree-l1"><a class="reference internal" href="OpenGL.html">OpenGL</a></li>
@@ -172,13 +199,13 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>CMake</li>
+      <li>Math</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/src/CMake.rst.txt" rel="nofollow"> 查看页面源码</a>
+            <a href="../_sources/src/Math.rst.txt" rel="nofollow"> 查看页面源码</a>
           
         
       </li>
@@ -191,8 +218,79 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="cmake">
-<h1>CMake<a class="headerlink" href="#cmake" title="永久链接至标题">¶</a></h1>
+  <div class="section" id="math">
+<h1>Math<a class="headerlink" href="#math" title="永久链接至标题">¶</a></h1>
+<div class="section" id="misc">
+<h2>Misc<a class="headerlink" href="#misc" title="永久链接至标题">¶</a></h2>
+</div>
+<div class="section" id="fourier-transform">
+<h2>Fourier Transform<a class="headerlink" href="#fourier-transform" title="永久链接至标题">¶</a></h2>
+<div class="math notranslate nohighlight">
+\[\begin{split}G(f) &amp;= \int_{-\infty}^{\infty}g(t)e^{-i2 \pi ft}dt \\
+G(\omega) &amp;= \int_{-\infty}^{\infty}g(t)e^{-i \omega t}dt\end{split}\]</div>
+<p>简单说明：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(g(t)\)</span> : 以时间 t 为自变量的原函数</p></li>
+<li><p><span class="math notranslate nohighlight">\(e^{-i2 \pi ft}\)</span> 或者 <span class="math notranslate nohighlight">\(e^{-i \omega t}\)</span> : 以频率 f （或者角速
+度 <span class="math notranslate nohighlight">\(omega\)</span>）在复平面上以顺时针方向做圆周运动的点的位置</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="linear-algebra">
+<h2>Linear Algebra<a class="headerlink" href="#linear-algebra" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id2">
+<h3><a class="reference external" href="https://www.bilibili.com/video/BV1ys411472E">线性代数的本质</a><a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id3">
+<h4>00 序言<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id4">
+<h4>01 向量究竟是什么？<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id5">
+<h4>02 线性组合、张成的空间与基<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id6">
+<h4>03 矩阵与线性变换<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id7">
+<h4>04 矩阵乘法与线性变换复合<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id8">
+<h4>00 三维空间中的线性变换<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id9">
+<h4>05 行列式<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id10">
+<h4>06 逆矩阵、列空间与零空间<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id11">
+<h4>00 非方阵<a class="headerlink" href="#id11" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id12">
+<h4>07 点积与对偶性<a class="headerlink" href="#id12" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id13">
+<h4>08-1 叉积的标准介绍<a class="headerlink" href="#id13" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id14">
+<h4>08-2 以线性变换的眼光看叉积<a class="headerlink" href="#id14" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id15">
+<h4>09 基变换<a class="headerlink" href="#id15" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id16">
+<h4>10 特征向量与特征值<a class="headerlink" href="#id16" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id17">
+<h4>11 抽象向量空间<a class="headerlink" href="#id17" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id18">
+<h4>12 克莱姆法则及其几何解释<a class="headerlink" href="#id18" title="永久链接至标题">¶</a></h4>
+</div>
+</div>
+</div>
 </div>
 
 
@@ -201,8 +299,8 @@
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="C%2B%2B.html" class="btn btn-neutral float-right" title="C++" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="git.html" class="btn btn-neutral float-left" title="git" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="ImageProcessing.html" class="btn btn-neutral float-right" title="Image Processing" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="C%2B%2B.html" class="btn btn-neutral float-left" title="C++" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
     </div>
 
   <hr/>

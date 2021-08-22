@@ -11,12 +11,16 @@ Welcome to Cheatsheet's documentation!
    :caption: Contents:
    
    src/reStructuresText
+   src/cmd
+   src/WindowsTerminal
+   src/SSH
    src/sphinx
    src/Encoding
    src/Graphviz
    src/git
    src/CMake
    src/C++
+   src/Math
    src/ImageProcessing
    src/OpenCV
    src/OpenGL
@@ -25,10 +29,7 @@ Welcome to Cheatsheet's documentation!
    src/XSD
    src/WSDL
    src/dotnet
-   src/cmd
-   src/SSH
    src/Python
-   src/WindowsTerminal
    src/manim
    src/NSIS
    src/Algorithm

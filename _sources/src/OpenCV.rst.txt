@@ -1059,7 +1059,7 @@ C++）：
 
 .. math::
 
-    F(k,l) = f(i,j)e^{-i2\pi(\frac{ki}{N} + \frac{lj}{N})}
+    F(k,l) = \sum_{i=0}^{N-1}\sum_{j=0}^{N-1} f(i,j)e^{-i2\pi(\frac{ki}{N} + \frac{lj}{N})}
 
 
     

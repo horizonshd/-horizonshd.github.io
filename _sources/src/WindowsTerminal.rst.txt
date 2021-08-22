@@ -8,3 +8,8 @@ Windows Terminal
 - ``Alt + Shift + =``   左右分屏
 - ``Alt + Shift + -``   上下分屏
 - ``Ctrl + Shift + w``  关闭当前分屏
+
+::
+
+    wt -p {0caa0dad-35be-5f56-a8ff-afceeeaa6101} --title "sphinx" cmd /k "cd c:\dev\PythonVirtualEnvironments\sphinxEnv\Scripts && activate && cd %userprofile%/OneDrive/SphinxDocs"  ; ^
+    new-tab -p {0caa0dad-35be-5f56-a8ff-afceeeaa6101} --title "manim" cmd /k "cd c:\dev\PythonVirtualEnvironments\manimEnv\Scripts && activate && cd c:\dev\manim" ; focus-tab -t 0
