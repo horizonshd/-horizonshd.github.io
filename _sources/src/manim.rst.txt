@@ -1,6 +1,20 @@
-=====
+================================================================================
 manim
-=====
+================================================================================
+
+.. :
+
+    = - ` : ' " ~ ^ _ * + # < >
+
+    ====================
+    --------------------
+    ~~~~~~~~~~~~~~~~~~~~
+    ********************
+    ++++++++++++++++++++
+    ####################
+    ::::::::::::::::::::
+    >>>>>>>>>>>>>>>>>>>>
+    <<<<<<<<<<<<<<<<<<<<
 
 `Manim` 是一个精确编程动画的引擎，旨在创建解释性的数学视频。
 
@@ -14,8 +28,72 @@ manim
 自从 Fork 以来，当前版本已经发展到在 OpenGL 的基础上工作，并允许在场景最终确定并
 写入文件之前实时渲染到一个交互式窗口。
 
+教程
+================================================================================
+
+预览
+--------------------------------------------------------------------------------
+
+.. code-block:: python
+    :caption: Shapes.py
+
+    from manimlib import *
+
+    class Shapes(Scene):
+    # A few simple shapes
+    # Python 2.7 version runs in Python 3.7 without changes
+        def construct(self):
+            circle = Circle()
+            square = Square()
+            line=Line(np.array([3,0,0]),np.array([5,0,0]))
+            triangle=Polygon(np.array([0,0,0]),np.array([1,1,0]),np.array([1,-1,0]))
+
+            self.add(line)
+            self.play(ShowCreation(circle))
+            self.play(FadeOut(circle))
+            self.play(GrowFromCenter(square))
+            self.play(Transform(square,triangle))
+
+渲染效果：
+
+.. figure:: /_static/MyImages/Shapes.gif
+
+.. code-block:: python
+    :caption: MoreShapes.py
+
+    from manimlib import *
+
+    class MoreShapes(Scene):
+       # A few more simple shapes
+       # 2.7 version runs in 3.7 without any changes
+       # Note: I fixed my 'play command not found' issue by installing sox
+       def construct(self):
+           circle = Circle(color=PURPLE_A)
+           square = Square(fill_color=GOLD_B, fill_opacity=1, color=GOLD_A)
+           square.move_to(UP+LEFT)
+           circle.surround(square)
+           rectangle = Rectangle(height=2, width=3)
+           ellipse=Ellipse(width=3, height=1, color=RED)
+           ellipse.shift(2*DOWN+2*RIGHT)
+           pointer = CurvedArrow(2*RIGHT,5*RIGHT,color=MAROON_C)
+           arrow = Arrow(LEFT,UP)
+           arrow.next_to(circle,DOWN+LEFT)
+           rectangle.next_to(arrow,DOWN+LEFT)
+           ring=Annulus(inner_radius=.5, outer_radius=1, color=BLUE)
+           ring.next_to(ellipse, RIGHT)
+
+           self.add(pointer)
+           self.play(FadeIn(square))
+           self.play(Rotating(square),FadeIn(circle))
+           self.play(GrowArrow(arrow))
+           self.play(GrowFromCenter(rectangle), GrowFromCenter(ellipse), GrowFromCenter(ring))
+
+渲染效果：
+
+    .. figure:: /_static/MyImages/MoreShapes.gif
+
 安装
-====
+================================================================================
 
 `Manim` 在 `Python 3.6` 或更高版本上运行（推荐使用 `Python 3.8`）。
 
@@ -32,3 +110,6 @@ manim
         2. cd manim
         3. pip install -e .
         4. manimgl example_scenes.py OpeningManimExample
+
+
+命令行参数说明： ``python -m manimlib -h``

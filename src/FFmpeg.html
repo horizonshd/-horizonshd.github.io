@@ -122,7 +122,10 @@
 <li class="toctree-l1"><a class="reference internal" href="Ubuntu.html">Ubuntu</a></li>
 <li class="toctree-l1"><a class="reference internal" href="MEF.html">MEF in .NET Framework</a></li>
 <li class="toctree-l1"><a class="reference internal" href="EMail.html">Relative Concepts of EMail</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">FFmpeg</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">FFmpeg</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">基础使用</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="OpenSourceProjects.html">Open Source Projects</a></li>
 </ul>
 
@@ -193,6 +196,17 @@
             
   <div class="section" id="ffmpeg">
 <h1>FFmpeg<a class="headerlink" href="#ffmpeg" title="永久链接至标题">¶</a></h1>
+<div class="section" id="id1">
+<h2>基础使用<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<ul>
+<li><p>命令行基本格式：</p>
+<p>usage: ffmpeg [options] [[infile options] -i infile]… {[outfile options] outfile}…</p>
+</li>
+<li><p>mp4 转 git:</p>
+<p>ffmpeg -i ./videos/Shapes.mp4 -an -filter:v “setpts=0.5*PTS” ./videos/Shapes.gif</p>
+</li>
+</ul>
+</div>
 </div>
 
 
