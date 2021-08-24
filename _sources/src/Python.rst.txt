@@ -2530,6 +2530,599 @@ VirtualEnv 使用
         Scripts\deactivate
 
 
-Matplotlib
+`Matplotlib Tutorials <https://matplotlib.org/stable/tutorials/index.html>`_
 ================================================================================
 
+入门
+--------------------------------------------------------------------------------
+
+`教程一 <https://matplotlib.org/stable/tutorials/introductory/usage.html#sphx-glr-tutorials-introductory-usage-py>`_
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Matplotlib 在 ``matplotlib.figure.Figure`` s 对象（如 windows, Jupyter widgets等）
+上绘制数据，每个可以包含一个或多个 ``matplotlib.axes.Axes`` （一个 Axes 表示为一个区
+域，可以在里面指定在 x-y 坐标，或在 theta-r 极坐标，或在 x-y-z 3D图中的点数据)。
+使用 ``matplotlib.pyplot.subplots`` 方法可以创建一个包含一个 axes 的 figure。
+然后我们可以使用 ``matplotlib.axes.Axes.plot`` 方法在 axes 上绘制数据。
+
+.. plot:: pyplots/matplot_001.py
+    :include-source:
+
+图表的组成
+********************************************************************************
+
+#.  Figure ( ``matplot.figure.Figure`` )
+
+    一个 Figure 对象代表了整个图表。Figure 对象对其中所有 Axes ，部分特殊的 Artist
+    (titles, figure legends,etc) 和 **canvas** （它是非常重要的，因为它是实际绘制图形
+    的对象，但作为用户，它对你来说或多或少是不可见的） 进行维护。
+    
+    一个 Figure 对象可以包含任意数量的 Axes ，但通常至少有一个。
+    创建一个新的 Figure 对象的方式是使用 ``matplotlib.pyplot`` :
+
+    .. code-block :: python
+
+        fig = plt.figure( )  # an empty figure with no Axes
+        fig, ax = plt.subplots()  # a figure with a single Axes
+        fig, axs  = plt.subplots(2, 2)  # a figure with a 2x2 grid of Axes
+
+    与 Figure 一起创建 Axes 很方便，但是也可以稍后再添加 Axes ，
+    以实现更复杂的 Axes 布局。
+
+#.  Axes ( ``matplot.axes.Axes`` )
+
+    Axes 就是你所认为的一个“绘图”，它是包含数据的图像区域。一个 Figure 中可以包含多个
+    Axes 对象，但是一个 Axes 对象只能在一个 Figure 中。
+    
+    一个 Axes 包含 2 个（3D 绘图中是 3 个） Axis 对象，它们负责对数据进行限制（也可以
+    通过使用 ``matplotlib.axes.Axes.set_xlim()``
+    和 ``matplotlib.axes.Axes.set_ylim`` 进行控制）。
+    
+    每一个 Axes 对象都包含：
+    
+        -   一个 title（通过 ``matplot.axes.Axes.set_title()`` 进行设置）
+        -   一个 x-label（通过 ``matplot.axes.Axes.set_xlabel()`` 进行设置）
+        -   一个 y-label（通过 ``matplot.axes.Axes.set_ylabel()`` 进行设置）
+    
+    
+    
+#.  Axis ( ``matplot.axis.Axis`` )
+
+    它们是像数轴一样的对象。它们负责设置图形限制并生成刻度（轴上的标记）和
+    刻度标签（标记刻度的字符串）。刻度的位置由 ``matplotlib.ticket.Locator`` 对象决定，
+    而刻度标签则通过一个 ``matplot.ticker.Formatter`` 进行格式化。
+    正确的 Locator 和 Formatter 的组合可以很好地控制刻度的位置和刻度标签。
+
+#.  Artist ( ``matplot.artist.Artist`` )
+
+    基本上，在图上看到的所有东西都是一个 Artist（甚至包括 Figure、Axes 和 Axis 等对象）。
+    这包括以下常见的对象：
+    
+    -   ``matplotlib.text.Text``
+    -   ``matplotlib.lines.Line2D``
+    -   ``matplotlib.collections``
+    -   ``matplotlib.patches.Patch``
+    -   ...
+
+    当一个 Figure 被渲染的时候，所有的 Artist 对象都被绘制到 **canvans** 上。
+    大多数 Artist 对象是关联到 Axes 对象的，这种 Artist 对象就不能在多个 Axes 对象间
+    共享，也不能从一个 Axes 对象中移到另一个 Axes 对象中。
+
+绘制函数的输入参数类型
+********************************************************************************
+
+所有的绘制函数都使用 ``numpy.array`` 或者 ``numpy.ma.masked_array`` 类型的对象作为
+输入参数。使用类似数组的 ``pandas`` 或者 ``numpy.matrix`` 对象作为输入参数可能会或
+可能不会像预期那样正常运行。因此在绘制前最好将这类数据转换为 ``numpy.array`` 类型的对象。
+
+例如，转换一个 ``pandas.DataFrame`` 类型的对象：
+
+.. code-block :: python
+
+    a = pandas.DataFrame(np.random.rand(4, 5), columns = list('abcde'))
+    a_asarray = a.values
+
+转换一个 ``numpy.matrix`` 类型的对象：
+
+.. code-block :: python
+
+    b = np.matrix([[1, 2], [3, 4]])
+    b_asarray = np.asarray(b)
+
+面向对象的接口和 pyplot 接口
+********************************************************************************
+
+就像在前面提到的那样，实际上有两种使用 Matplotlib 的方式：
+
+    -   显示创建 Figure 和 Axes 对象，然后调用这些对象上的方法（面向对象的风格）
+    -   依赖 pyplot 去自动创建和管理 Figure 和 Axes 对象，然后使用 pyplot 提供的函数绘制
+
+因此，我们可以使用两种风格的代码：
+
+.. plot:: pyplots/matplot_002.py
+    :include-source:
+    :caption: OO-style
+    
+
+.. plot:: pyplots/matplot_003.py
+    :include-source:
+    :caption: pyplot-style
+
+此外，还有第三种方法，用于在 GUI 应用程序中嵌入 Matplotlib，
+更多信息参考 `Embedding Matplotlib in graphical user interfaces <https://matplotlib.org/stable/gallery/index.html#user-interfaces>`_ 。
+
+Matplotlib 的文档和示例同时使用面向对象和 pyplot 风格（它们同样强大），
+您可以随意使用它们（但是，最好选择其中一种并坚持使用，而不是混合使用）。
+一般来说，我们建议在交互式绘制（例如，在Jupyter笔记本中）使用 pyplot 风格，
+对于非交互式绘制（在打算作为更大项目的一部分重用的函数和脚本中）使用面向对象风格。
+
+.. note ::
+
+    在以前的例子中，你可能会发现使用所谓的 pylab 接口的例子，
+    使用 ``form pylab import *`` 。
+    这将从 pyplot 和 numpy 模块中导入所有内容，
+    因此可以使用以下更类似于MATLAB 风格的代码：
+
+    .. code-block :: python
+
+        x = linspace(0, 2, 100)
+        plot(x, x, label='linear')
+
+    现在强烈反对并弃用这种方法。这里只提到它，因为你可能仍然在其它地方遇到。
+
+通常情况下，人们会发现自己一次又一次地绘制相同的图，但使用不同的数据集，
+这导致需要编写专门的函数来进行绘制。建议的函数签名类似于：
+
+.. code-block :: python
+
+    def my_plotter(ax, data1, data2, param_dict):
+        """
+        A helper function to make a graph
+
+        Parameters
+        ----------
+        ax : Axes
+            The axes to draw to
+
+        data1 : array
+           The x data
+
+        data2 : array
+           The y data
+
+        param_dict : dict
+           Dictionary of kwargs to pass to ax.plot
+
+        Returns
+        -------
+        out : list
+            list of artists added
+        """
+        out = ax.plot(data1, data2, **param_dict)
+        return out
+
+然后你可以这样使用：
+
+.. code-block :: python
+
+    data1, data2, data3, data4 = np.random.randn(4, 100)
+    fig, ax = plt.subplots(1, 1)
+    my_plotter(ax, data1, data2, {'marker': 'x'})
+
+.. plot:: pyplots/matplot_004.py
+
+或者如果你想有两个图：
+
+.. code-block :: python
+
+    data1, data2, data3, data4 = np.random.randn(4, 100)
+    fig, ax = plt.subplots(1, 1)
+    my_plotter(ax, data1, data2, {'marker': 'x'})
+
+.. plot:: pyplots/matplot_005.py
+
+对于这些简单的例子来说，这种方式似乎有点过犹不及，
+但是一旦图表变得稍微复杂一点，就会体会到它的方便之处。
+
+后端 Backends
+********************************************************************************
+
+#.  什么是一个 backend
+
+    网上许多文档都提到了 "backend"，许多新用户对这个术语感到困惑。 
+    Matplotlib 允许不同的用例和输出格式。
+    有些人从 python shell 交互式地使用 Matplotlib，并在他们键入命令时弹出绘图窗口。 
+    有些人运行 Jupyter notebook 并绘制内联图以进行快速数据分析。
+    其他人将 Matplotlib 嵌入到 PyQt 或 PyGObject 等图形用户界面中以构建丰富的应用程序。
+    有些人在批处理脚本中使用 Matplotlib 从数值模拟中生成 postscript 图像，
+    还有一些人运行 Web 应用程序服务器来动态提供图形。
+
+    为了支持所有这些用例，Matplotlib 可以有不同的输出，每一个都被称为 backend;
+    "frontend" 是面向用户的代码，即绘图代码;
+    而 "backend" 则完成所有幕后的艰苦工作来生成图形。
+    有两种类型的后端:
+    
+        -   用户界面后端（用于PyQt/PySide, PyGObject, Tkinter, wxPython，或macOS/Cocoa)
+            ，也被称为“交互式后端”。
+        -   硬拷贝后端用于制作图像文件（PNG, SVG, PDF, PS），也被称为“非交互式后端”。
+
+#.  选择一个 backend
+
+    有三种方法类配置 backend ：
+    
+        #.  通过 matplotlibrc 文件中的 `rcParams["backend"] <https://matplotlib.org/stable/tutorials/introductory/customizing.html?highlight=backend#a-sample-matplotlibrc-file>`_ 参数
+        #.  `MPLBACKEND <https://matplotlib.org/stable/faq/environment_variables_faq.html#envvar-MPLBACKEND>`_ 环境变量
+        #.  使用 ``matplotlib.use()`` 方法
+    
+    如果存在多个这样的配置，则列表中的最后一个优先。
+    例如，调用 ``matplotlib.use()`` 将重写 matplotlibrc 文件中的设置。
+
+    如果没有显式设置 backend ，Matplotlib 会根据系统上可用的内容和GUI事件循环是否已经
+    在运行，自动检测可用后端。
+    在Linux上，如果没有设置环境变量 ``DISPLAY`` ，则“事件循环”被标识为“headless”，
+    这将导致回退到非交互后端(agg)。
+    在所有其他情况下，首选交互式后端(通常，至少tkagg是可用的)。
+
+    下面是配置方法的详细说明：
+    
+        #.  在 matplotlibrc 文件中设置 ``rcParams["backend"]`` 参数：
+        
+            ::
+            
+                backend : qt5agg   # use pyqt5 with antigrain (agg) rendering
+            
+            更多其它详细信息，请参考 `Customizing Matplotlib with style sheets and rcParams <https://matplotlib.org/stable/tutorials/introductory/customizing.html>`_ 。
+        #.  设置 ``MPLBACKEND`` 环境变量：
+        
+            您可以为当前shell或单个脚本设置环境变量。
+            
+            在 Unix 系统中： ::
+            
+                > export MPLBACKEND=qt5agg
+                > python simple_plot.py
+
+                > MPLBACKEND=qt5agg python simple_plot.py
+            
+            在 Windows 系统中，只能使用第一种方式： ::
+            
+                > set MPLBACKEND=qt5agg
+                > python simple_plot.py
+            
+            设置此环境变量将覆盖任何 matplotlibrc 文件中的 backend 参数设置，
+            即使当前工作目录中存在 matplotlibrc 文件。
+            因此，设置全局的 ``MPLBACKEND`` 环境变量，例如在 .bashrc 或 .profile 中，
+            是不鼓励的，因为它可能会导致反直觉的行为。
+            
+        #.  如果脚本依赖于一个特定的 backend ，可以使用函数 ``matplotlib.use()`` ：
+        
+            .. code-block :: python
+            
+                import matplotlib
+                matplotlib.use('qt5agg')
+
+            这应该在创建任何图形之前完成，否则 Matplotlib 可能无法切换 backend 并引发
+            ImportError 。
+            
+            如果用户想要使用不同的 backend ，使用这种方式将需要更改代码。
+            因此，除非绝对必要，否则应该避免在脚本中显式调用 ``matplotlib.use()`` 方法。
+    
+#.  内置的 backends
+
+    默认情况下，Matplotlib 应该自动选择一个默认的 backend ，
+    使它能够在交互模式和从脚本绘图的情况下正常工作，并输出到屏幕和/或文件。
+    所以至少在最开始的时候，不需要考虑 backend 的设置。最常见的异常是，
+    如果您的 Python 发行版没有 `tkinter <https://docs.python.org/3/library/tkinter.html#module-tkinter>`_ ，
+    并且您没有安装其他 GUI 工具包。
+    这种情况发生在某些 Linux 发行版上，
+    您需要安装一个名为 python-tk(或其它类似) 的 Linux 包。
+    
+    但是，如果您是以下情况，请继续阅读：
+    
+        -   想要编写图形用户界面
+        -   想要编写web应用服务器（ `Embedding in a web application server (Flask) <https://matplotlib.org/stable/gallery/user_interfaces/web_application_server_sgskip.html>`_ ）
+        -   需要更好地理解正在发生的事情
+    
+    为了让图形用户界面更易于定制，Matplotlib 将渲染器（实际进行绘图的东西）与 canvans 
+    （绘图的地方）的概念分离。用户界面的典型渲染器是 ``Agg`` ，它使用 
+    `Anti-Grain Geometry <http://antigrain.com/>`_ C++ 库来制作 Figure 的光栅（像素）图像。
+    它被 Qt5Agg, Qt4Agg, GTK3Agg, wxAgg, TkAgg 和 macosx 的 backend 使用。
+    另一种渲染器基于 ``Cairo`` 库，由 Qt5Cairo、Qt4Cairo 等使用。
+    
+    对于渲染引擎，还可以分为 **矢量渲染器** 和 **光栅渲染器** 。
+    矢量图形语言发出像“从这一点到这一点画一条线”这样的绘图命令，因此是 scale free 的；
+    光栅后端生成线的像素表示，其准确性取决于 DPI 设置。
+    
+    下面是 Matplotlib 渲染器的概要（每个渲染器都有一个同名的 backend ；
+    这些是非交互式 backend，能够写入文件）：
+    
+    ========    ================    ============================================
+    渲染器       文件类型             描述
+    ========    ================    ============================================
+    AGG         png                 光栅图——使用 ``Anti-Grain Geometry``
+                                    引擎渲染的高质量图像
+    PDF         pdf                 向量图——Portable Document Format
+    PS          ps,eps              向量图——Postscript 
+    SVG         svg                 向量图——Scalable Vector Graphics
+    PGF         pgf,pdf             向量图——使用 `pgf <https://ctan.org/pkg/pgf>`_ 包
+    Cairo       png,ps,pdf,svg      光栅图、向量图——使用 ``Cairo`` 库
+    ========    ================    ============================================
+    
+    使用 ``matplotlib.pyplot.savefig('filename')`` 方法以非交互式 backend 保存图表。
+    
+    下面是支持的用户界面和渲染器组合。这些是交互式 backend，能够将图表显示到屏幕上，
+    并使用上表中的适当的渲染器将其写入到文件：
+    
+    ================    ========================================================
+    Backend             描述
+    ================    ========================================================
+    Qt5Agg              
+    ipympl              
+    GTK3Agg
+    macosx
+    TkAgg
+    nbAgg
+    WebAgg
+    GTK3Cairo
+    Qt4Agg
+    wxAgg
+    ================    ========================================================
+    
+    .. note ::
+    
+        内置 backend 的名称不区分大小写。例如，"Qt5Agg" 和 "Qt5Agg" 是等价的。
+    
+#.  使用非内置的 backends
+
+    更一般地，任何可导入的 backend 都可以通过使用上面的任何方法来选择。
+    如果 ``name.of.the.backend`` 是包含 backend 的模块，
+    使用 ``module://name.of.the.backend`` 作为 backend 的名称，
+    例如：
+    
+    .. code-block :: python
+
+        matplotlib.use('module://name.of.the.Backend')
+    
+什么是交互式模式
+********************************************************************************
+
+#.  交互式案例
+
+    在普通的 python 提示符中，或者在没有设置额外选项的情况下调用 ipython 之后，
+    测试以下代码：
+    
+    .. code-block:: python
+    
+        import matplotlib.pyplot as plt
+        plt.ion()
+        plt.plot([1.6, 2.7])
+    
+    这将弹出一个绘图窗口。您的终端提示符将保持活动状态，以便您可以键入其他命令，例如：
+    
+    .. code-block:: python
+
+        plt.title("interactive test")
+        plt.xlabel("index")
+
+    在大多数交互式 backend 中，如果您通过面向对象接口更改 figure ，窗口也将被更新。
+    例如，获取一个 Axes 实例的引用，并调用该实例的一个方法：
+    
+    .. code-block:: python
+
+        ax = plt.gca()
+        ax.plot([3.1, 2.2])
+    
+    如果您正在使用某些 backend （如 macosx ）或较老版本的 Matplotlib ，
+    您可能不会立即看到新添加到图表中的线条。
+    在这种情况下，您需要显式地调用 ``draw()`` 来更新图表：
+    
+    .. code-block:: python
+
+        plt.draw()
+    
+#.  非交互式案例
+
+    像前面的例子一样启动一个新的会话，但是现在关闭交互模式：
+    
+    .. code-block:: python
+        :emphasize-lines: 2
+
+        import matplotlib.pyplot as plt
+        plt.ioff()
+        plt.plot([1.6, 2.7])
+    
+    什么都没有发生——或者至少什么都没有显示在屏幕上（除非您正在使用了反常的 macosx backend）。
+    为了让图表出现，你需要这样做：
+    
+    .. code-block:: python
+    
+        plt.show()
+
+    现在您看到了这个图，但是您的终端命令行没有响应。
+    ``matplotlib.pyplot.show()`` 方法会阻止其他命令的输入，直到您手动杀死绘图的窗口。
+    
+    这有什么好处——被迫使用阻塞函数？
+    假设您需要一个脚本来将文件的内容绘制到屏幕上。你想看一下图表，然后结束脚本。
+    如果没有 ``show()`` 这样的阻塞命令，脚本就会弹出图表，然后立即结束，
+    在屏幕上什么也不留下。
+
+    此外，非交互模式会延迟所有绘制，直到调用 ``show()`` 。
+    这样比每次脚本中的新添加一行新功能时就重新绘制更有效。
+
+    在 1.0 版本之前， ``show()`` 方法通常不能在单个脚本中调用多次（尽管有时可以使用它）。
+    对于版本 1.0.1 及更高版本，这个限制被取消，因此可以编写下面这样的脚本：
+    
+    .. code-block:: python
+    
+        import numpy as np
+        import matplotlib.pyplot as plt
+
+        plt.ioff()
+        for i in range(3):
+            plt.plot(np.random.rand(10))
+            plt.show()
+    
+    这将产生三个图表，一次一个。
+    也就是说，一旦第一个图表被关闭，第二个图表就会显示。
+
+#.  总结
+
+性能
+********************************************************************************
+
+无论是以交互模式处理数据，还是以编程方式保存大量图表，
+渲染性能都可能是工作流中一个令人痛苦的瓶颈。Matplotlib 提供了几种方法，
+可以大大减少渲染时间，但代价是在图表的外观上的一些细微改变（到一个可自行设定的容忍度）。
+创建的绘图的类型决定了哪些方式是可用的。
+
+#.  线段简化
+
+    对于包含线段的图（e.g. typical line plots, outlines of polygons, etc.），
+    渲染性能可以通过下面的设置来控制。
+    例如可以在 matplotlibrc 文件中定义，
+    更多细节参考 `Customizing Matplotlib with style sheets and rcParams <https://matplotlib.org/stable/tutorials/introductory/customizing.html>`_ 。
+
+        -   ``rcParams["path.simplify"]`` (default: True)： 
+            一个布尔值，指定是否对线段进行简化。
+        
+        -   ``rcParams["path.simplify_threshold"]`` (default: 0.111111111111)：
+            控制简化多少线段，值越大渲染会更快。
+
+    下面的脚本将首先显示未经任何简化的数据，然后显示经过简化的相同数据。
+    
+    .. code-block:: python
+        :emphasize-lines: 9,11,15
+
+        import numpy as np
+        import matplotlib.pyplot as plt
+        import matplotlib as mpl
+
+        # Setup, and create the data to plot
+        y = np.random.rand(100000)
+        y[50000:] *= 2
+        y[np.geomspace(10, 50000, 400).astype(int)] = -1
+        mpl.rcParams['path.simplify'] = True
+
+        mpl.rcParams['path.simplify_threshold'] = 0.0
+        plt.plot(y)
+        plt.show()
+
+        mpl.rcParams['path.simplify_threshold'] = 1.0
+        plt.plot(y)
+        plt.show()
+
+    Matplotlib 当前默认的简化阈值为比较保守的 1/9。如果要修改默认值，
+    可以更改 matplotlibrc 文件。或者，您可以为交互式绘图（最大限度地简化）创建一种新样式，
+    为出版物高质量绘图（最小限度地简化）创建另一种样式，并在必要时激活它们。
+    关于如何实现请参考 `Customizing Matplotlib with style sheets and rcParams <https://matplotlib.org/stable/tutorials/introductory/customizing.html>`_ 。
+    
+    简化的方法是迭代地将线段合并为单个矢量，直到下一个线段与矢量的垂直距离
+    （在显示坐标空间中测量）大于 "path.simplify_threshold" 参数。
+    
+    .. note ::
+
+        在 2.1 版中对如何简化线段进行了更改。
+        在 2.1 版本之前，这些参数仍然会提高渲染时间，
+        但对某些类型数据的渲染时间将在 2.1 及更高版本中得到极大的改善。
+
+#.  标记简化
+
+    标记也可以简化，尽管不像线段那么强大。标记简化仅对 ``matplotlib.lines.Line2D``
+    对象可用（通过 markevery 属性）。只要 Line2D 对象作为构造参数被传递，
+    就可以使用 markevery 参数。
+    比如 ``matplotlib.pyplot.plot()`` 和 ``matplotlib.axes.Axes.plot()`` 。
+    
+    .. code-block:: python
+    
+        plt.plot(x, y, markevery=10)
+    
+    markevery 参数允许简单的子采样，或尝试均匀间隔（沿 x 轴）采样。
+    参考 `Markevery Demo <https://matplotlib.org/stable/gallery/lines_bars_and_markers/markevery_demo.html>`_ 以了解更多信息。
+    
+#.  分割线条为更小的块
+
+    If you are using the Agg backend, then you can make use of 
+    rcParams["agg.path.chunksize"] (default: 0).
+    This allows you to specify a chunk size, and any lines with greater than 
+    that many vertices will be split into multiple lines,
+    each of which has no more than agg.path.chunksize many vertices. 
+    (Unless agg.path.chunksize is zero, in which case there is no chunking.) 
+    For some kind of data, 
+    chunking the line up into reasonable sizes can greatly decrease rendering time.
+    
+    下面的脚本将首先在没有没有任何块大小限制的情况下显示数据；
+    然后设置块大小为 10,000 ，显示相同的数据。
+    当图形很大的时候，可以比较好地看到区别，尝试最大化 GUI ，然后与它们交互：
+    
+    .. code-block :: python
+
+        import numpy as np
+        import matplotlib.pyplot as plt
+        import matplotlib as mpl
+        mpl.rcParams['path.simplify_threshold'] = 1.0
+
+        # Setup, and create the data to plot
+        y = np.random.rand(100000)
+        y[50000:] *= 2
+        y[np.geomspace(10, 50000, 400).astype(int)] = -1
+        mpl.rcParams['path.simplify'] = True
+
+        mpl.rcParams['agg.path.chunksize'] = 0
+        plt.plot(y)
+        plt.show()
+
+        mpl.rcParams['agg.path.chunksize'] = 10000
+        plt.plot(y)
+        plt.show()
+    
+#.  图例
+
+    Axes 的默认图例行为试图找到覆盖最少数据点的位置（loc='best'）。
+    如果有很多数据点，这可能是一个非常昂贵的计算。
+    在这种情况下，您可能需要提供一个特定的位置。
+    
+#.  使用 fast style
+
+    ``fast`` 样式可以用来自动地将简化和分块参数设置为合理的设置，
+    以加快绘制大量数据的速度。它可以简单地通过以下设置来使用：
+    
+    .. code-blocK:: python
+
+        import matplotlib.style as mplstyle
+        mplstyle.use('fast')
+
+    它是非常轻量的，所以它可以很好地与其它样式一起使用，
+    只要确保 ``fast`` 样式是最后应用的，这样不会被其它样式所覆盖：
+    
+    .. code-blocK:: python
+
+        mplstyle.use(['dark_background', 'ggplot', 'fast'])
+
+`教程二 <https://matplotlib.org/stable/tutorials/introductory/pyplot.html#sphx-glr-tutorials-introductory-pyplot-py>`_
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+`教程三 <https://matplotlib.org/stable/tutorials/introductory/sample_plots.html#sphx-glr-tutorials-introductory-sample-plots-py>`_
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+`教程四 <https://matplotlib.org/stable/tutorials/introductory/images.html#sphx-glr-tutorials-introductory-images-py>`_
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+`教程五 <https://matplotlib.org/stable/tutorials/introductory/lifecycle.html#sphx-glr-tutorials-introductory-lifecycle-py>`_
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+`教程六 <https://matplotlib.org/stable/tutorials/introductory/customizing.html#sphx-glr-tutorials-introductory-customizing-py>`_
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+中级
+--------------------------------------------------------------------------------
+
+高级
+--------------------------------------------------------------------------------
+
+色彩
+--------------------------------------------------------------------------------
+
+文本
+--------------------------------------------------------------------------------
+
+工具包
+--------------------------------------------------------------------------------

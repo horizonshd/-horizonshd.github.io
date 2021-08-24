@@ -34,13 +34,13 @@ Welcome to Cheatsheet's documentation!
    src/NSIS
    src/Algorithm
    src/Vocabulary
-   src/ECFDeploy
    src/Lua
    src/LaTeX
    src/Ubuntu
    src/MEF
    src/EMail
    src/FFmpeg
+   src/VisualStudioCode
    src/OpenSourceProjects
 
 
