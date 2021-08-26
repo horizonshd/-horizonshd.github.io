@@ -40,6 +40,8 @@ Welcome to Cheatsheet's documentation!
    src/MEF
    src/EMail
    src/FFmpeg
+   src/MindFusion
+   src/DigitalSignalProcess
    src/VisualStudioCode
    src/OpenSourceProjects
 

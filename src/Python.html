@@ -211,17 +211,34 @@
 <li class="toctree-l3"><a class="reference internal" href="#id79">入门</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id81">教程一</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id89">教程二</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id91">教程三</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id93">教程四</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id95">教程五</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id97">教程六</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id99">教程三</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id101">教程四</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id103">教程五</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id105">教程六</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#id98">中级</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id99">高级</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id100">色彩</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id101">文本</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id102">工具包</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id106">中级</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id107">高级</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id108">色彩</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id109">文本</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id110">工具包</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id111">NumPy Reference</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id112">数组对象</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#n-ndarry">N-维数组（ndarry）</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id115">标量</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dtype">数据类型对象（ dtype ）</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id116">索引</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id117">数组遍历</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id118">数组的标准子类</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id119">掩码数组</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id120">数组接口</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id121">时间和时间差</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id122">常量</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id123">全局函数</a></li>
 </ul>
 </li>
 </ul>
@@ -236,6 +253,8 @@
 <li class="toctree-l1"><a class="reference internal" href="MEF.html">MEF in .NET Framework</a></li>
 <li class="toctree-l1"><a class="reference internal" href="EMail.html">Relative Concepts of EMail</a></li>
 <li class="toctree-l1"><a class="reference internal" href="FFmpeg.html">FFmpeg Tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MindFusion.html">MindFusion.Diagramming for WPF, V3.7</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DigitalSignalProcess.html">Digital Signal Process</a></li>
 <li class="toctree-l1"><a class="reference internal" href="VisualStudioCode.html">Visual Studio Code</a></li>
 <li class="toctree-l1"><a class="reference internal" href="OpenSourceProjects.html">Open Source Projects</a></li>
 </ul>
@@ -429,8 +448,8 @@ Hello,Python!
 <p>通过脚本参数调用解释器开始执行脚本，直到脚本执行完毕。当脚本执行完成后，解释器不再有效。</p>
 <p>让我们写一个简单的 Python 脚本程序。所有 Python 文件将以 .py 为扩展名。将以下的源代码
 拷贝至 test.py 文件中。</p>
-<div class="literal-block-wrapper docutils container" id="id103">
-<div class="code-block-caption"><span class="caption-text">test.py</span><a class="headerlink" href="#id103" title="永久链接至代码">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id124">
+<div class="code-block-caption"><span class="caption-text">test.py</span><a class="headerlink" href="#id124" title="永久链接至代码">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Hello, Python!&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -2303,8 +2322,8 @@ Good bye!
 把相关的代码分配到一个模块里能让你的代码更好用，更易懂。</p>
 <p>模块能定义函数，类和变量，模块里也能包含可执行的代码。
 下例是个简单的模块 support.py：</p>
-<div class="literal-block-wrapper docutils container" id="id104">
-<div class="code-block-caption"><span class="caption-text">support.py</span><a class="headerlink" href="#id104" title="永久链接至代码">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id125">
+<div class="code-block-caption"><span class="caption-text">support.py</span><a class="headerlink" href="#id125" title="永久链接至代码">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">print_func</span><span class="p">(</span> <span class="n">par</span> <span class="p">):</span>
    <span class="nb">print</span> <span class="s2">&quot;Hello : &quot;</span><span class="p">,</span> <span class="n">par</span>
    <span class="k">return</span>
@@ -2498,8 +2517,8 @@ test.py 为测试调用包的代码，目录结构如下：</p>
 <span class="o">|--</span> <span class="n">runoob2</span><span class="o">.</span><span class="n">py</span>
 </pre></div>
 </div>
-<div class="literal-block-wrapper docutils container" id="id105">
-<div class="code-block-caption"><span class="caption-text">package_runoob/runoob1.py</span><a class="headerlink" href="#id105" title="永久链接至代码">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id126">
+<div class="code-block-caption"><span class="caption-text">package_runoob/runoob1.py</span><a class="headerlink" href="#id126" title="永久链接至代码">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/python</span>
 <span class="c1"># -*- coding: UTF-8 -*-</span>
 
@@ -2508,8 +2527,8 @@ test.py 为测试调用包的代码，目录结构如下：</p>
 </pre></div>
 </div>
 </div>
-<div class="literal-block-wrapper docutils container" id="id106">
-<div class="code-block-caption"><span class="caption-text">package_runoob/runoob2.py</span><a class="headerlink" href="#id106" title="永久链接至代码">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id127">
+<div class="code-block-caption"><span class="caption-text">package_runoob/runoob2.py</span><a class="headerlink" href="#id127" title="永久链接至代码">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/python</span>
 <span class="c1"># -*- coding: UTF-8 -*-</span>
 
@@ -2518,8 +2537,8 @@ test.py 为测试调用包的代码，目录结构如下：</p>
 </pre></div>
 </div>
 </div>
-<div class="literal-block-wrapper docutils container" id="id107">
-<div class="code-block-caption"><span class="caption-text">package_runoob/__init__.py</span><a class="headerlink" href="#id107" title="永久链接至代码">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id128">
+<div class="code-block-caption"><span class="caption-text">package_runoob/__init__.py</span><a class="headerlink" href="#id128" title="永久链接至代码">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/python</span>
 <span class="c1"># -*- coding: UTF-8 -*-</span>
 
@@ -2533,8 +2552,8 @@ test.py 为测试调用包的代码，目录结构如下：</p>
 </div></blockquote>
 <p>然后我们在 package_runoob 同级目录下创建 test.py 来调用 package_runoob 包：</p>
 <blockquote>
-<div><div class="literal-block-wrapper docutils container" id="id108">
-<div class="code-block-caption"><span class="caption-text">test.py</span><a class="headerlink" href="#id108" title="永久链接至代码">¶</a></div>
+<div><div class="literal-block-wrapper docutils container" id="id129">
+<div class="code-block-caption"><span class="caption-text">test.py</span><a class="headerlink" href="#id129" title="永久链接至代码">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/python</span>
 <span class="c1"># -*- coding: UTF-8 -*-</span>
 
@@ -3266,9 +3285,9 @@ Axes 对象，但是一个 Axes 对象只能在一个 Figure 中。</p>
 </pre></div>
 </div>
 <p>(<a class="reference external" href="../pyplots/matplot_002.py">Source code</a>, <a class="reference external" href="../pyplots/matplot_002.png">png</a>, <a class="reference external" href="../pyplots/matplot_002.hires.png">hires.png</a>, <a class="reference external" href="../pyplots/matplot_002.pdf">pdf</a>)</p>
-<div class="figure align-default" id="id109">
+<div class="figure align-default" id="id130">
 <img alt="../_images/matplot_002.png" class="plot-directive" src="../_images/matplot_002.png" />
-<p class="caption"><span class="caption-text">OO-style</span><a class="headerlink" href="#id109" title="永久链接至图片">¶</a></p>
+<p class="caption"><span class="caption-text">OO-style</span><a class="headerlink" href="#id130" title="永久链接至图片">¶</a></p>
 </div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -3287,9 +3306,9 @@ Axes 对象，但是一个 Axes 对象只能在一个 Figure 中。</p>
 </pre></div>
 </div>
 <p>(<a class="reference external" href="../pyplots/matplot_003.py">Source code</a>, <a class="reference external" href="../pyplots/matplot_003.png">png</a>, <a class="reference external" href="../pyplots/matplot_003.hires.png">hires.png</a>, <a class="reference external" href="../pyplots/matplot_003.pdf">pdf</a>)</p>
-<div class="figure align-default" id="id111">
+<div class="figure align-default" id="id132">
 <img alt="../_images/matplot_003.png" class="plot-directive" src="../_images/matplot_003.png" />
-<p class="caption"><span class="caption-text">pyplot-style</span><a class="headerlink" href="#id111" title="永久链接至图片">¶</a></p>
+<p class="caption"><span class="caption-text">pyplot-style</span><a class="headerlink" href="#id132" title="永久链接至图片">¶</a></p>
 </div>
 <p>此外，还有第三种方法，用于在 GUI 应用程序中嵌入 Matplotlib，
 更多信息参考 <a class="reference external" href="https://matplotlib.org/stable/gallery/index.html#user-interfaces">Embedding Matplotlib in graphical user interfaces</a> 。</p>
@@ -3755,34 +3774,972 @@ chunking the line up into reasonable sizes can greatly decrease rendering time.<
 </div>
 <div class="section" id="id89">
 <h4><a class="reference external" href="https://matplotlib.org/stable/tutorials/introductory/pyplot.html#sphx-glr-tutorials-introductory-pyplot-py">教程二</a><a class="headerlink" href="#id89" title="永久链接至标题">¶</a></h4>
+<div class="section" id="id90">
+<h5>pyplot 简介<a class="headerlink" href="#id90" title="永久链接至标题">¶</a></h5>
+<p><code class="docutils literal notranslate"><span class="pre">matplotlib.pyplot</span></code> 模块提供了大量的函数，使得 matplotlib 能够以 MATLAB 类似的方式
+进行使用。里面的每一个绘制函数都会对 Figure 对象进行一定的调整，
+例如：创建图形，在图形中创建绘图区域，在绘图区域中绘制一些线，用标签修饰绘图等等。</p>
+<p>在不同的函数被调用时， <code class="docutils literal notranslate"><span class="pre">matplotlib.pyplot</span></code> 对象中始终同步着各种状态，
+以便跟踪许多事情，比如：当前图形和绘图区域等对象，
+因此绘制函数将正确地指向当前的 Axes 对象。</p>
+<div class="admonition note">
+<p class="admonition-title">注解</p>
+<p>pyplot 风格的接口通常不如面向对象风格的接口灵活。
+这里看到的大多数函数调用也可以使用对 Axes 对象的方法调用。</p>
+</div>
+<p>使用 pyplot 生成可视化内容非常容易：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;some numbers&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>(<a class="reference external" href="../pyplots/matplot_006.py">Source code</a>, <a class="reference external" href="../pyplots/matplot_006.png">png</a>, <a class="reference external" href="../pyplots/matplot_006.hires.png">hires.png</a>, <a class="reference external" href="../pyplots/matplot_006.pdf">pdf</a>)</p>
+<div class="figure align-default">
+<img alt="../_images/matplot_006.png" class="plot-directive" src="../_images/matplot_006.png" />
+</div>
+<p>您可能想知道为什么 x 轴的范围是 0-3 ，y轴的范围是 1-4 。
+如果您提供一个一维列表或数组来绘图，matplotlib 会假定它是一个 y 值序列，
+并自动为您生成 x 值。
+由于 python 的范围以 0 开始，默认的 x 向量与 y 长度相同，但以 0 开始。
+因此 x 数据是 [0,1,2,3] 。</p>
+<p><code class="docutils literal notranslate"><span class="pre">matplotlib.pyplot.plot</span></code> 是一个多功能函数，可以接受任意数量的参数。
+例如，要绘制 x 与 y 的关系，可以编写：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">16</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>(<a class="reference external" href="../pyplots/matplot_007.py">Source code</a>, <a class="reference external" href="../pyplots/matplot_007.png">png</a>, <a class="reference external" href="../pyplots/matplot_007.hires.png">hires.png</a>, <a class="reference external" href="../pyplots/matplot_007.pdf">pdf</a>)</p>
+<div class="figure align-default">
+<img alt="../_images/matplot_007.png" class="plot-directive" src="../_images/matplot_007.png" />
+</div>
 </div>
 <div class="section" id="id91">
-<h4><a class="reference external" href="https://matplotlib.org/stable/tutorials/introductory/sample_plots.html#sphx-glr-tutorials-introductory-sample-plots-py">教程三</a><a class="headerlink" href="#id91" title="永久链接至标题">¶</a></h4>
+<h5>图表样式设置<a class="headerlink" href="#id91" title="永久链接至标题">¶</a></h5>
+<p>对于每一对 x, y 参数，都有一个可选的第三个参数，它是表示图表颜色和线条类型的格式字符串。
+格式字符串的字母和符号来自 MATLAB ，您将一个颜色字符串与一个行样式字符串连接起来。
+默认格式字符串是 ‘b-‘ ，它表示蓝色实线。例如，要用红色圆圈绘制上面的图：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">16</span><span class="p">],</span><span class="s1">&#39;ro&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
 </div>
-<div class="section" id="id93">
-<h4><a class="reference external" href="https://matplotlib.org/stable/tutorials/introductory/images.html#sphx-glr-tutorials-introductory-images-py">教程四</a><a class="headerlink" href="#id93" title="永久链接至标题">¶</a></h4>
+<p>(<a class="reference external" href="../pyplots/matplot_008.py">Source code</a>, <a class="reference external" href="../pyplots/matplot_008.png">png</a>, <a class="reference external" href="../pyplots/matplot_008.hires.png">hires.png</a>, <a class="reference external" href="../pyplots/matplot_008.pdf">pdf</a>)</p>
+<div class="figure align-default">
+<img alt="../_images/matplot_008.png" class="plot-directive" src="../_images/matplot_008.png" />
+</div>
+<p>上面示例中的 <code class="docutils literal notranslate"><span class="pre">matplotlib.pyplot.aixs</span></code> 函数接受 [xmin, xmax, ymin, ymax] 的一个列表，
+以指定 Axes （即绘图区域）的视口。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">matplotlib</span><span class="o">.</span><span class="n">pyplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">scalex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">scaley</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>调用方式：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">([</span><span class="n">x</span><span class="p">],</span> <span class="n">y</span><span class="p">,</span> <span class="p">[</span><span class="n">fmt</span><span class="p">],</span> <span class="o">*</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">([</span><span class="n">x</span><span class="p">],</span> <span class="n">y</span><span class="p">,</span> <span class="p">[</span><span class="n">fmt</span><span class="p">],</span> <span class="p">[</span><span class="n">x2</span><span class="p">],</span> <span class="n">y2</span><span class="p">,</span> <span class="p">[</span><span class="n">fmt2</span><span class="p">],</span> <span class="o">...</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>点或线节点的坐标由 x, y 给出。可选参数 fmt 是定义基本格式的一种方便方法。
+fmt 的格式如下：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fmt</span> <span class="o">=</span> <span class="s1">&#39;[marker][line][color]&#39;</span>
+</pre></div>
+</div>
+<p>Each of them is optional.
+If not provided, the value from the style cycle is used.
+Exception: If line is given, but no marker,
+the data will be a line without markers.</p>
+<p>Other combinations such as [color][marker][line] are also supported,
+but note that their parsing may be ambiguous.</p>
+<ol class="arabic simple">
+<li><p>Markers</p></li>
+</ol>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 67%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>character</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>'.'</p></td>
+<td><p>point marker</p></td>
+</tr>
+<tr class="row-odd"><td><p>','</p></td>
+<td><p>pixel marker</p></td>
+</tr>
+<tr class="row-even"><td><p>'o'</p></td>
+<td><p>circle marker</p></td>
+</tr>
+<tr class="row-odd"><td><p>'v'</p></td>
+<td><p>triangle_down marker</p></td>
+</tr>
+<tr class="row-even"><td><p>'^'</p></td>
+<td><p>triangle_up marker</p></td>
+</tr>
+<tr class="row-odd"><td><p>'&lt;'</p></td>
+<td><p>triangle_left marker</p></td>
+</tr>
+<tr class="row-even"><td><p>'&gt;'</p></td>
+<td><p>triangle_right marker</p></td>
+</tr>
+<tr class="row-odd"><td><p>'1'</p></td>
+<td><p>tri_down marker</p></td>
+</tr>
+<tr class="row-even"><td><p>'2'</p></td>
+<td><p>tri_up marker</p></td>
+</tr>
+<tr class="row-odd"><td><p>'3'</p></td>
+<td><p>tri_left marker</p></td>
+</tr>
+<tr class="row-even"><td><p>'4'</p></td>
+<td><p>tri_right marker</p></td>
+</tr>
+<tr class="row-odd"><td><p>'8'</p></td>
+<td><p>octagon marker</p></td>
+</tr>
+<tr class="row-even"><td><p>'s'</p></td>
+<td><p>square marker</p></td>
+</tr>
+<tr class="row-odd"><td><p>'p'</p></td>
+<td><p>pentagon marker</p></td>
+</tr>
+<tr class="row-even"><td><p>'P'</p></td>
+<td><p>plus (filled) marker</p></td>
+</tr>
+<tr class="row-odd"><td><p>'*'</p></td>
+<td><p>star marker</p></td>
+</tr>
+<tr class="row-even"><td><p>'h'</p></td>
+<td><p>hexagon1 marker</p></td>
+</tr>
+<tr class="row-odd"><td><p>'H'</p></td>
+<td><p>hexagon2 marker</p></td>
+</tr>
+<tr class="row-even"><td><p>'+'</p></td>
+<td><p>plus marker</p></td>
+</tr>
+<tr class="row-odd"><td><p>'x'</p></td>
+<td><p>x marker</p></td>
+</tr>
+<tr class="row-even"><td><p>'X'</p></td>
+<td><p>x (filled) marker</p></td>
+</tr>
+<tr class="row-odd"><td><p>'D'</p></td>
+<td><p>diamond marker</p></td>
+</tr>
+<tr class="row-even"><td><p>'d'</p></td>
+<td><p>thin_diamond marker</p></td>
+</tr>
+<tr class="row-odd"><td><p>'<a href="#id92"><span class="problematic" id="id93">|</span></a>'</p></td>
+<td><p>vline marker</p></td>
+</tr>
+<tr class="row-even"><td><p>'_'</p></td>
+<td><p>hline marker</p></td>
+</tr>
+</tbody>
+</table>
+<ol class="arabic simple">
+<li><p>Line Styles</p></li>
+</ol>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 67%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>character</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>'-'</p></td>
+<td><p>solid line style</p></td>
+</tr>
+<tr class="row-odd"><td><p>'--'</p></td>
+<td><p>dashed line style</p></td>
+</tr>
+<tr class="row-even"><td><p>'-.'</p></td>
+<td><p>dash-dot line style</p></td>
+</tr>
+<tr class="row-odd"><td><p>'..'</p></td>
+<td><p>dotted line style</p></td>
+</tr>
+</tbody>
+</table>
+<ol class="arabic simple">
+<li><p>Colors</p></li>
+</ol>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 67%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>character</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>'b'</p></td>
+<td><p>blue</p></td>
+</tr>
+<tr class="row-odd"><td><p>'g'</p></td>
+<td><p>green</p></td>
+</tr>
+<tr class="row-even"><td><p>'r'</p></td>
+<td><p>red</p></td>
+</tr>
+<tr class="row-odd"><td><p>'c'</p></td>
+<td><p>cyan</p></td>
+</tr>
+<tr class="row-even"><td><p>'m'</p></td>
+<td><p>magenta</p></td>
+</tr>
+<tr class="row-odd"><td><p>'y'</p></td>
+<td><p>yellow</p></td>
+</tr>
+<tr class="row-even"><td><p>'k'</p></td>
+<td><p>black</p></td>
+</tr>
+<tr class="row-odd"><td><p>'w'</p></td>
+<td><p>white</p></td>
+</tr>
+</tbody>
+</table>
+<p>如果 matplotlib 仅限于处理列表类型的数据，那么它对于数字处理来说就是相当无用的。
+通常，您将使用 numpy 数组。
+事实上，所有序列都在内部转换为 numpy 数组。
+下面的示例演示了在一个函数调用中使用数组作为参数传递来绘制具有不同样式的几条线：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># evenly sampled time at 200ms intervals</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">5.</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">)</span>
+
+<span class="c1"># red dashes, blue squares and green triangles</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="s1">&#39;--r&#39;</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">t</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;bs&#39;</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">t</span><span class="o">**</span><span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;g^&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>(<a class="reference external" href="../pyplots/matplot_009.py">Source code</a>, <a class="reference external" href="../pyplots/matplot_009.png">png</a>, <a class="reference external" href="../pyplots/matplot_009.hires.png">hires.png</a>, <a class="reference external" href="../pyplots/matplot_009.pdf">pdf</a>)</p>
+<div class="figure align-default">
+<img alt="../_images/matplot_009.png" class="plot-directive" src="../_images/matplot_009.png" />
+</div>
+</div>
+<div class="section" id="id94">
+<h5>使用关键字字符串绘制<a class="headerlink" href="#id94" title="永久链接至标题">¶</a></h5>
+<p>在某些情况下，数据的格式允许您使用以字符串形式的关键字访问特定的数据。
+例如，使用 <code class="docutils literal notranslate"><span class="pre">numpy.recarray</span></code> 或 <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code> 。</p>
+<p>Matplotlib 允许您使用 data 关键字参数提供这样一个对象。
+如果提供了，那么您可以通过字符串关键字来使用相应的数据以生成图表。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span>
+        <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">),</span>
+        <span class="s1">&#39;d&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">50</span><span class="p">)}</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;d&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;d&#39;</span><span class="p">])</span> <span class="o">*</span> <span class="mi">100</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;entry a&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;entry b&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>(<a class="reference external" href="../pyplots/matplot_010.py">Source code</a>, <a class="reference external" href="../pyplots/matplot_010.png">png</a>, <a class="reference external" href="../pyplots/matplot_010.hires.png">hires.png</a>, <a class="reference external" href="../pyplots/matplot_010.pdf">pdf</a>)</p>
+<div class="figure align-default">
+<img alt="../_images/matplot_010.png" class="plot-directive" src="../_images/matplot_010.png" />
+</div>
+</div>
+<div class="section" id="plotting-with-categorical-variables">
+<h5>Plotting with categorical variables<a class="headerlink" href="#plotting-with-categorical-variables" title="永久链接至标题">¶</a></h5>
+<p>It is also possible to create a plot using categorical variables.
+Matplotlib allows you to pass categorical variables directly to
+many plotting functions. For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;group_a&#39;</span><span class="p">,</span> <span class="s1">&#39;group_b&#39;</span><span class="p">,</span> <span class="s1">&#39;group_c&#39;</span><span class="p">]</span>
+<span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">131</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">132</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">133</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Categorical Plotting&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>(<a class="reference external" href="../pyplots/matplot_011.py">Source code</a>, <a class="reference external" href="../pyplots/matplot_011.png">png</a>, <a class="reference external" href="../pyplots/matplot_011.hires.png">hires.png</a>, <a class="reference external" href="../pyplots/matplot_011.pdf">pdf</a>)</p>
+<div class="figure align-default">
+<img alt="../_images/matplot_011.png" class="plot-directive" src="../_images/matplot_011.png" />
+</div>
 </div>
 <div class="section" id="id95">
-<h4><a class="reference external" href="https://matplotlib.org/stable/tutorials/introductory/lifecycle.html#sphx-glr-tutorials-introductory-lifecycle-py">教程五</a><a class="headerlink" href="#id95" title="永久链接至标题">¶</a></h4>
+<h5>控制线条属性<a class="headerlink" href="#id95" title="永久链接至标题">¶</a></h5>
+<p>线条有很多属性，你可以设置:线宽，破折号样式，抗锯齿，等等。
+参考 <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.lines.Line2D.html#matplotlib.lines.Line2D">matplotlib.lines.Line2D</a> 。
+有几种方法可以设置线条的属性：</p>
+<blockquote>
+<div><ul>
+<li><p>使用关键字参数：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>使用 Line2D 对象的 setter 方法。plot 方法返回一个 Line2D 对象列表。
+例如，line1, line2 = plot(x1, y1, x2, y2)。
+在下面的代码中，我们假设只有一个 Line2D 对象，因此返回的列表长度为 1。
+我们使用 line 进行元组解包，以获得列表的第一个元素：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">line</span><span class="p">,</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">)</span>
+<span class="n">line</span><span class="o">.</span><span class="n">set_antialiased</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span> <span class="c1"># turn off antialiasing</span>
+</pre></div>
+</div>
+</li>
+<li><p>使用 <code class="docutils literal notranslate"><span class="pre">matplotlib.pyplot.setp()</span></code> 方法：</p>
+<p>下面的示例使用 MATLAB 风格的函数在一个线条集合上设置多个属性。
+Setp 函数透明地对一个线条或多个线条对象进行处理。
+你可以使用 python 关键字参数或 MATLAB 风格的字符串键值对:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">lines</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span>
+<span class="c1"># use keyword args</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+<span class="c1"># or MATLAB style string value pairs</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span> <span class="s1">&#39;color&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;linewidth&#39;</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div></blockquote>
+<p>下面是可用的 Line2D 对象的属性：</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 32%" />
+<col style="width: 68%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>属性</p></th>
+<th class="head"><p>值类型</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>alpha</p></td>
+<td><p>float</p></td>
+</tr>
+<tr class="row-odd"><td><p>animated</p></td>
+<td><p>[True | False]</p></td>
+</tr>
+<tr class="row-even"><td><p>antialiased or aa</p></td>
+<td><p>[True | False]</p></td>
+</tr>
+<tr class="row-odd"><td><p>clip_box</p></td>
+<td><p>a matplotlib.transform.Bbox instance</p></td>
+</tr>
+<tr class="row-even"><td><p>clip_on</p></td>
+<td><p>[True | False]</p></td>
+</tr>
+<tr class="row-odd"><td><p>clip_path</p></td>
+<td><p>a Path instance and a Transform instance, a Patch</p></td>
+</tr>
+<tr class="row-even"><td><p>color or c</p></td>
+<td><p>any matplotlib color</p></td>
+</tr>
+<tr class="row-odd"><td><p>contains</p></td>
+<td><p>the hit testing function</p></td>
+</tr>
+<tr class="row-even"><td><p>dash_capstyle</p></td>
+<td><p>[‘butt’ | ‘round’ | ‘projecting’]</p></td>
+</tr>
+<tr class="row-odd"><td><p>dash_joinstyle</p></td>
+<td><p>[‘miter’ | ‘round’ | ‘bevel’]</p></td>
+</tr>
+<tr class="row-even"><td><p>dashes</p></td>
+<td><p>sequence of on/off ink in points</p></td>
+</tr>
+<tr class="row-odd"><td><p>data</p></td>
+<td><p>(np.array xdata, np.array ydata)</p></td>
+</tr>
+<tr class="row-even"><td><p>figure</p></td>
+<td><p>a matplotlib.figure.Figure instance</p></td>
+</tr>
+<tr class="row-odd"><td><p>label</p></td>
+<td><p>any string</p></td>
+</tr>
+<tr class="row-even"><td><p>linestyle or ls</p></td>
+<td><p>[ ‘-‘ | ‘–’ | ‘-.’ | ‘:’ | ‘steps’ | …]</p></td>
+</tr>
+<tr class="row-odd"><td><p>linewidth or lw</p></td>
+<td><p>float value in points</p></td>
+</tr>
+<tr class="row-even"><td><p>marker</p></td>
+<td><p>[ ‘+’ | ‘,’ | ‘.’ | ‘1’ | ‘2’ | ‘3’ | ‘4’ ]</p></td>
+</tr>
+<tr class="row-odd"><td><p>markeredgecolor or mec</p></td>
+<td><p>any matplotlib color</p></td>
+</tr>
+<tr class="row-even"><td><p>markeredgewidth or mew</p></td>
+<td><p>float value in points</p></td>
+</tr>
+<tr class="row-odd"><td><p>markerfacecolor or mfc</p></td>
+<td><p>any matplotlib color</p></td>
+</tr>
+<tr class="row-even"><td><p>markersize or ms</p></td>
+<td><p>float</p></td>
+</tr>
+<tr class="row-odd"><td><p>markevery</p></td>
+<td><p>[ None | integer | (startind, stride) ]</p></td>
+</tr>
+<tr class="row-even"><td><p>picker</p></td>
+<td><p>used in interactive line selection</p></td>
+</tr>
+<tr class="row-odd"><td><p>pickradius</p></td>
+<td><p>the line pick selection radius</p></td>
+</tr>
+<tr class="row-even"><td><p>solid_capstyle</p></td>
+<td><p>[‘butt’ | ‘round’ | ‘projecting’]</p></td>
+</tr>
+<tr class="row-odd"><td><p>solid_joinstyle</p></td>
+<td><p>[‘miter’ | ‘round’ | ‘bevel’]</p></td>
+</tr>
+<tr class="row-even"><td><p>transform</p></td>
+<td><p>a matplotlib.transforms.Transform instance</p></td>
+</tr>
+<tr class="row-odd"><td><p>visible</p></td>
+<td><p>[True | False]</p></td>
+</tr>
+<tr class="row-even"><td><p>xdata</p></td>
+<td><p>np.array</p></td>
+</tr>
+<tr class="row-odd"><td><p>ydata</p></td>
+<td><p>np.array</p></td>
+</tr>
+<tr class="row-even"><td><p>zorder</p></td>
+<td><p>any number</p></td>
+</tr>
+</tbody>
+</table>
+<p>要获取可以进行设置的线条属性列表，
+请使用一个或多个行作为参数调用 <code class="docutils literal notranslate"><span class="pre">matplotlib.pyplot.setp()</span></code> 函数：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">69</span><span class="p">]:</span> <span class="n">lines</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">70</span><span class="p">]:</span> <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
+  <span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span>
+  <span class="n">animated</span><span class="p">:</span> <span class="p">[</span><span class="kc">True</span> <span class="o">|</span> <span class="kc">False</span><span class="p">]</span>
+  <span class="n">antialiased</span> <span class="ow">or</span> <span class="n">aa</span><span class="p">:</span> <span class="p">[</span><span class="kc">True</span> <span class="o">|</span> <span class="kc">False</span><span class="p">]</span>
+  <span class="o">...</span><span class="n">snip</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="figure-axes">
+<h5>使用多个 Figure 和 Axes<a class="headerlink" href="#figure-axes" title="永久链接至标题">¶</a></h5>
+<p>MATLAB 和 pyplot 都有当前 Figure 和 当前 Axes 的概念。
+所有的绘图函数都是对当前 Axes 对象进行处理。
+使用 <code class="docutils literal notranslate"><span class="pre">matplotlib.pylot.gca()</span></code> 函数可以返回当前的 Axes 对象；
+使用 <code class="docutils literal notranslate"><span class="pre">matplotlib.pylot.gcf()</span></code> 函数可以返回当前的 Figure 对象。
+通常情况下，你不必担心这个，因为所有这些都是在幕后处理的。</p>
+<p>下面是创建两个图标的脚本：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">t</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
+
+<span class="n">t1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="n">t2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">211</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">t1</span><span class="p">),</span> <span class="s1">&#39;bo&#39;</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">t2</span><span class="p">),</span> <span class="s1">&#39;k&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">212</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">t2</span><span class="p">),</span> <span class="s1">&#39;r--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>(<a class="reference external" href="../pyplots/matplot_012.py">Source code</a>, <a class="reference external" href="../pyplots/matplot_012.png">png</a>, <a class="reference external" href="../pyplots/matplot_012.hires.png">hires.png</a>, <a class="reference external" href="../pyplots/matplot_012.pdf">pdf</a>)</p>
+<div class="figure align-default">
+<img alt="../_images/matplot_012.png" class="plot-directive" src="../_images/matplot_012.png" />
+</div>
+<p>这里 <code class="docutils literal notranslate"><span class="pre">figure</span></code> 函数的调用是可选的，因为在 Figure 对象实例不存在的时候，
+将会自动创建一个 Figure 对象。就像不存在 Axes 对象时，将自动创建一个 Axes 对象
+（相当于显式调用 <code class="docutils literal notranslate"><span class="pre">subplot()</span></code> 函数）一样。<code class="docutils literal notranslate"><span class="pre">subplot()</span></code> 函数调用时指定
+numrows, numcols, plot_number，其中 plot_number 的有效取值为 [1, numrows*numcols]。
+如果 numrows*numcols &lt; 10 , <code class="docutils literal notranslate"><span class="pre">subplot()</span></code> 函数调用中的逗号是可选的。
+所以 <code class="docutils literal notranslate"><span class="pre">subplot(211)</span></code> 和 <code class="docutils literal notranslate"><span class="pre">subplot(2,</span> <span class="pre">1,</span> <span class="pre">1)</span></code> 是等价的。</p>
+<p>You can create an arbitrary number of subplots and axes.
+If you want to place an axes manually, i.e., not on a rectangular grid, use axes,
+which allows you to specify the location as axes([left, bottom, width, height])
+where all values are in fractional (0 to 1) coordinates.
+See Axes Demo for an example of placing axes manually and Basic Subplot Demo
+for an example with lots of subplots.</p>
+<p>可以通过多次调用 <code class="docutils literal notranslate"><span class="pre">matplotlib.pyplot.figure()</span></code> 函数来创建多个 Figure 。
+当然，每个 Figure 可以包含任意多的 axes subplots :</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>                <span class="c1"># the first figure</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">211</span><span class="p">)</span>             <span class="c1"># the first subplot in the first figure</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">212</span><span class="p">)</span>             <span class="c1"># the second subplot in the first figure</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>                <span class="c1"># a second figure</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>          <span class="c1"># creates a subplot() by default</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>                <span class="c1"># figure 1 current; subplot(212) still current</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">211</span><span class="p">)</span>             <span class="c1"># make subplot(211) in figure1 current</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Easy as 1, 2, 3&#39;</span><span class="p">)</span> <span class="c1"># subplot 211 title</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>(<a class="reference external" href="../pyplots/matplot_013.py">Source code</a>)</p>
+<div class="figure align-default" id="id134">
+<img alt="../_images/matplot_013_00.png" class="plot-directive" src="../_images/matplot_013_00.png" />
+<p class="caption"><span class="caption-text">(<a class="reference external" href="../pyplots/matplot_013_00.png">png</a>, <a class="reference external" href="../pyplots/matplot_013_00.hires.png">hires.png</a>, <a class="reference external" href="../pyplots/matplot_013_00.pdf">pdf</a>)</span><a class="headerlink" href="#id134" title="永久链接至图片">¶</a></p>
+</div>
+<div class="figure align-default" id="id135">
+<img alt="../_images/matplot_013_01.png" class="plot-directive" src="../_images/matplot_013_01.png" />
+<p class="caption"><span class="caption-text">(<a class="reference external" href="../pyplots/matplot_013_01.png">png</a>, <a class="reference external" href="../pyplots/matplot_013_01.hires.png">hires.png</a>, <a class="reference external" href="../pyplots/matplot_013_01.pdf">pdf</a>)</span><a class="headerlink" href="#id135" title="永久链接至图片">¶</a></p>
+</div>
+</div>
+<div class="section" id="id96">
+<h5>绘制文本<a class="headerlink" href="#id96" title="永久链接至标题">¶</a></h5>
 </div>
 <div class="section" id="id97">
-<h4><a class="reference external" href="https://matplotlib.org/stable/tutorials/introductory/customizing.html#sphx-glr-tutorials-introductory-customizing-py">教程六</a><a class="headerlink" href="#id97" title="永久链接至标题">¶</a></h4>
+<h5>对数轴和其它非线性轴<a class="headerlink" href="#id97" title="永久链接至标题">¶</a></h5>
 </div>
-</div>
-<div class="section" id="id98">
-<h3>中级<a class="headerlink" href="#id98" title="永久链接至标题">¶</a></h3>
 </div>
 <div class="section" id="id99">
-<h3>高级<a class="headerlink" href="#id99" title="永久链接至标题">¶</a></h3>
-</div>
-<div class="section" id="id100">
-<h3>色彩<a class="headerlink" href="#id100" title="永久链接至标题">¶</a></h3>
+<h4><a class="reference external" href="https://matplotlib.org/stable/tutorials/introductory/sample_plots.html#sphx-glr-tutorials-introductory-sample-plots-py">教程三</a><a class="headerlink" href="#id99" title="永久链接至标题">¶</a></h4>
 </div>
 <div class="section" id="id101">
-<h3>文本<a class="headerlink" href="#id101" title="永久链接至标题">¶</a></h3>
+<h4><a class="reference external" href="https://matplotlib.org/stable/tutorials/introductory/images.html#sphx-glr-tutorials-introductory-images-py">教程四</a><a class="headerlink" href="#id101" title="永久链接至标题">¶</a></h4>
 </div>
-<div class="section" id="id102">
-<h3>工具包<a class="headerlink" href="#id102" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id103">
+<h4><a class="reference external" href="https://matplotlib.org/stable/tutorials/introductory/lifecycle.html#sphx-glr-tutorials-introductory-lifecycle-py">教程五</a><a class="headerlink" href="#id103" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id105">
+<h4><a class="reference external" href="https://matplotlib.org/stable/tutorials/introductory/customizing.html#sphx-glr-tutorials-introductory-customizing-py">教程六</a><a class="headerlink" href="#id105" title="永久链接至标题">¶</a></h4>
+</div>
+</div>
+<div class="section" id="id106">
+<h3>中级<a class="headerlink" href="#id106" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="id107">
+<h3>高级<a class="headerlink" href="#id107" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="id108">
+<h3>色彩<a class="headerlink" href="#id108" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="id109">
+<h3>文本<a class="headerlink" href="#id109" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="id110">
+<h3>工具包<a class="headerlink" href="#id110" title="永久链接至标题">¶</a></h3>
+</div>
+</div>
+<div class="section" id="id111">
+<h2><a class="reference external" href="https://numpy.org/doc/stable/reference/index.html">NumPy Reference</a><a class="headerlink" href="#id111" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id112">
+<h3>数组对象<a class="headerlink" href="#id112" title="永久链接至标题">¶</a></h3>
+<p>NumPy 提供了一个 N-维 的数组类型 <code class="docutils literal notranslate"><span class="pre">ndarray</span></code> ，它描述了包含相同数据类型项的集合。
+这些项可以使用例如 N 个整数进行索引。</p>
+<p>每一个 ndarry 对象都是同构的：
+其中每一项占用同样大小的内存空间；
+这些内存空间中的数据以相同的方式进行解释。
+ndarry 对象中的 <code class="docutils literal notranslate"><span class="pre">data-type</span></code> 属性决定了这些数据该被如何解释。
+除了使用基本数据类型（如整数、浮点数等），还可以使用其它的数据结构。</p>
+<div class="section" id="n-ndarry">
+<h4>N-维数组（ndarry）<a class="headerlink" href="#n-ndarry" title="永久链接至标题">¶</a></h4>
+<p>ndarray 是一个包含多项同种类型数据的多维的（通常是固定大小的）容器（可称为数组）。
+ndarray 对象的维数和包含数据的数量由它的 <code class="docutils literal notranslate"><span class="pre">shape</span></code> 属性决定，
+这是一个 <code class="docutils literal notranslate"><span class="pre">tuple</span></code> 类型的属性，包含了 N 个非负的整数，每一个数字代表了对应维度上的尺寸。
+数据的类型由 <code class="docutils literal notranslate"><span class="pre">dtype</span></code> 属性所确定。</p>
+<p>和 Python 中其它的容器对象一样，可以通过索引、切片（例如使用 N 个整数）或者
+相关方法和属性来访问和修改其中的内容。</p>
+<p>不同的 ndarray 对象可以共享相同的数据，因此一个对象对数据的修改在另一个对象中也能看到。
+即一个对象拥有另一个对象的数据的 <strong>视图</strong> 。
+ndarray 对象也可以这种方式看到 Python 中的 string 类型或实现了 buffer 或着 array
+接口的类型的对象的内存。</p>
+<p>下面定义了一个尺寸为 2x3 且数据类型为 4 字节的整数的 2 维数组：</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]],</span> <span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">&lt;class &#39;numpy.ndarray&#39;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(2, 3)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">dtype</span>
+<span class="go">dtype(&#39;int32&#39;)</span>
+</pre></div>
+</div>
+<p>可以使用 Python 中像容器那样的语法对其中的数据进行索引：</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># The element of x in the *second* row, *third* column, namely, 6.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="go">6</span>
+</pre></div>
+</div>
+<p>切片操作可以产生数组对象的视图：</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span>
+<span class="go">array([2, 5])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">9</span> <span class="c1"># this also changes the corresponding element in x</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span>
+<span class="go">array([9, 5])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span>
+<span class="go">array([[1, 9, 3],</span>
+<span class="go">       [4, 5, 6]])</span>
+</pre></div>
+</div>
+<ol class="arabic">
+<li><p>构造数组</p>
+<p>使用比较底层的构造函数：
+<code class="docutils literal notranslate"><span class="pre">ndarray(shape,</span> <span class="pre">dtype=float,</span> <span class="pre">buffer=None,</span> <span class="pre">offset=0,strides=None,</span> <span class="pre">order=None)</span></code></p>
+<p>常用创建方式：</p>
+<ul>
+<li><p>Ones 和 Zeros 填充</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 40%" />
+<col style="width: 60%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>empty(shape,[,dtype,order,like])</p></td>
+<td><p>返回一个指定形状和数据类型的未对其中数据初始化的新数组</p></td>
+</tr>
+<tr class="row-even"><td><p>empty_like(prototype[,dtype,order,subok,…])</p></td>
+<td><p>返回一个和给定数组同同形状、同数据类型的新数组</p></td>
+</tr>
+<tr class="row-odd"><td><p>eye(N[,M,k,dtype,order,like])</p></td>
+<td><p>返回一个二维对角数组，对角线上的数据为 1 ，其它为 0</p></td>
+</tr>
+<tr class="row-even"><td><p>identity(N[,dtype,like])</p></td>
+<td><p>返回一个单位矩阵，主对角线上的数据为 1 ，其它为 0</p></td>
+</tr>
+<tr class="row-odd"><td><p>ones(shape[,dtype,order,like])</p></td>
+<td><p>返回一个指定形状和数据类型数据的新数组，填充数据 1</p></td>
+</tr>
+<tr class="row-even"><td><p>ones_like(a[,dtype,order,subok,shape])</p></td>
+<td><p>返回一个和给定数组同形状、同数据类型的数组，填充数据 1</p></td>
+</tr>
+<tr class="row-odd"><td><p>zeros(shape[,dtype,order,like])</p></td>
+<td><p>返回一个指定形状和数据类型数据的新数组，填充数据 0</p></td>
+</tr>
+<tr class="row-even"><td><p>zeros_like(a[,dtype,order,subok,shape])</p></td>
+<td><p>返回一个和给定数组同形状、同数据类型的数组，填充数据 0</p></td>
+</tr>
+<tr class="row-odd"><td><p>full(shape,fill_value[,dtype,order,like])</p></td>
+<td><p>返回一个指定形状和数据类型的新数组，填充数据 fill_value</p></td>
+</tr>
+<tr class="row-even"><td><p>full_like(a,fill_value[,dtype,order,…])</p></td>
+<td><p>返回一个和给定数组同形状、同数据类型的数组，填充数据 fill_value</p></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p>使用已有数据</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 40%" />
+<col style="width: 60%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>array(object[,dtype,copy,order,subok,…])</p></td>
+<td><p>使用给定的数据创建数组</p></td>
+</tr>
+<tr class="row-even"><td><p>asarray(a[,dtype,order,like])</p></td>
+<td><p>使用给定的数据创建数组</p></td>
+</tr>
+<tr class="row-odd"><td><p>asanyarray(a[,dtype,order,like])</p></td>
+<td><p>Convert the input to an ndarray, but pass ndarray subclasses through.</p></td>
+</tr>
+<tr class="row-even"><td><p>ascontiguousarray(a[,dtype,like])</p></td>
+<td><p>Return a contiguous array (ndim &gt;= 1) in memory (C order).</p></td>
+</tr>
+<tr class="row-odd"><td><p>asmatrix(data[,dtype])</p></td>
+<td><p>将输入数据翻译为矩阵，等效为 matrix(data,copy = False)</p></td>
+</tr>
+<tr class="row-even"><td><p>copy(a[,order,subok])</p></td>
+<td><p>返回给定数组的副本，等效为 array(a,copy = True)</p></td>
+</tr>
+<tr class="row-odd"><td><p>frombuffer(buffer[,dtype,count,offset,like])</p></td>
+<td><p>将给定缓冲区中的数据翻译为一维数组</p></td>
+</tr>
+<tr class="row-even"><td><p>fromfile(file[,dtype,count,seq,offset,like])</p></td>
+<td><p>从文本或二进制文件中的数据构造一个数组</p></td>
+</tr>
+<tr class="row-odd"><td><p>fromfunction(function,shape,*[,dtype,like])</p></td>
+<td><p>通过在每个坐标上执行函数来构造数组，result[i][j] = func(i,j)</p></td>
+</tr>
+<tr class="row-even"><td><p>fromiter(iter,dtype[,count,like])</p></td>
+<td><p>使用一个迭代器对象构建一个新的一维数组</p></td>
+</tr>
+<tr class="row-odd"><td><p>fromstring(string[,dtype,count,seq,like])</p></td>
+<td><p>使用一个字符串数据构建一个新的一维数组</p></td>
+</tr>
+<tr class="row-even"><td><p>loadtxt(fname[,dtype,comments,delimiter,…])</p></td>
+<td><p>使用文件中的数据构建一个数组</p></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p>创建记录数组（ numpy.rec ）</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 40%" />
+<col style="width: 60%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>rec.array(obj[,dtype,shape,…])</p></td>
+<td><p>使用各种各样的对象构造一个记录数组</p></td>
+</tr>
+<tr class="row-even"><td><p>rec.fromarrays(arrayList[,dtype,…])</p></td>
+<td><p>Create a record array from a (flat) list of arrays</p></td>
+</tr>
+<tr class="row-odd"><td><p>rec.fromrecords(recList[,dtype,…])</p></td>
+<td><p>使用文本数据中的记录创建一个记录数组</p></td>
+</tr>
+<tr class="row-even"><td><p>rec.fromstring(datastring[,dtype,…])</p></td>
+<td><p>使用二进制数据创建一个记录数组</p></td>
+</tr>
+<tr class="row-odd"><td><p>rec.fromfile(fd[,dtype,shape,…])</p></td>
+<td><p>使用文件中的二进制数据创建一个记录数组</p></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p>创建字符数组（ numpy.char ）</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 40%" />
+<col style="width: 60%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>char.array(obj[,itemsize,…])</p></td>
+<td><p>创建一个字符数组</p></td>
+</tr>
+<tr class="row-even"><td><p>char.char.asarray(obj[,itemsize,…])</p></td>
+<td><p>将数据转换为字符数组，仅在必要时复制数据</p></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p>数值范围</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 40%" />
+<col style="width: 60%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>arange([start,]stop[,step,][,dtype,like])</p></td>
+<td><p>在给定的区间（[start,stop)）内均匀间隔的值</p></td>
+</tr>
+<tr class="row-even"><td><p>linspace(start,stop[,num,endpoint,…])</p></td>
+<td><p>在给定的区间（[start,stop]）内返回均匀间隔的指定数量的数据。</p></td>
+</tr>
+<tr class="row-odd"><td><p>logspace(start,stop[,num,endpoint,base,…])</p></td>
+<td><p>返回在对数尺度上均匀间隔的数字</p></td>
+</tr>
+<tr class="row-even"><td><p>geomspace(start,stop[,num,endpoint,…])</p></td>
+<td><p>返回在对数尺度上均匀间隔的数字(几何级数)</p></td>
+</tr>
+<tr class="row-odd"><td><p>meshgrid(<a href="#id113"><span class="problematic" id="id114">*</span></a>xi[,copy,sparse, indexing])</p></td>
+<td><p>从坐标向量返回坐标矩阵</p></td>
+</tr>
+<tr class="row-even"><td><p>mgrid</p></td>
+<td><p>nd_grid instance which returns a dense multi-dimensional “meshgrid”.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ogrid</p></td>
+<td><p>nd_grid instance which returns an open multi-dimensional “meshgrid”.</p></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p>创建矩阵</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 40%" />
+<col style="width: 60%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>diag(v[,K])</p></td>
+<td><p>提取对角线或构造对角线数组</p></td>
+</tr>
+<tr class="row-even"><td><p>diagflat(V[,K])</p></td>
+<td><p>Create a two-dimensional array with the flattened input as a diagonal.</p></td>
+</tr>
+<tr class="row-odd"><td><p>tri(N[,M,k,dtype,like])</p></td>
+<td><p>在给定的对角线处和下面为 1，其他地方为 0 的数组</p></td>
+</tr>
+<tr class="row-even"><td><p>tril(m[,K])</p></td>
+<td><p>数组的下三角形</p></td>
+</tr>
+<tr class="row-odd"><td><p>triu(m[,K])</p></td>
+<td><p>数组的上三角形</p></td>
+</tr>
+<tr class="row-even"><td><p>vander(X[,N,increasing])</p></td>
+<td><p>生成范德蒙矩阵</p></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p>矩阵类</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 40%" />
+<col style="width: 60%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>mat(data[,dtype])</p></td>
+<td><p>将输入数据解释为一个矩阵</p></td>
+</tr>
+<tr class="row-even"><td><p>bmat(obj[,ldict,gdict])</p></td>
+<td><p>从字符串、嵌套序列或数组数据构建矩阵对象</p></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</li>
+<li><p>索引数组</p>
+<p>可以使用扩展的 Python 切片语法对数组建立索引 <code class="docutils literal notranslate"><span class="pre">array[selection]</span></code> 。
+类似的语法也用于访问 <strong>结构化数据类型</strong> 中的字段。</p>
+</li>
+<li><p>数组的内存布局</p></li>
+<li><p>数组的特性</p></li>
+<li><p>数组的方法</p></li>
+<li><p>算术、矩阵乘法和比较运算</p></li>
+<li><p>特殊方法</p></li>
+</ol>
+</div>
+<div class="section" id="id115">
+<h4>标量<a class="headerlink" href="#id115" title="永久链接至标题">¶</a></h4>
+<ol class="arabic simple">
+<li><p>内置的标量类型</p></li>
+<li><p>特性</p></li>
+<li><p>索引</p></li>
+<li><p>方法</p></li>
+<li><p>定义新类型</p></li>
+</ol>
+</div>
+<div class="section" id="dtype">
+<h4>数据类型对象（ dtype ）<a class="headerlink" href="#dtype" title="永久链接至标题">¶</a></h4>
+<ol class="arabic simple">
+<li><p>指定并构建数据类型</p></li>
+<li><p>dtype</p></li>
+</ol>
+</div>
+<div class="section" id="id116">
+<h4>索引<a class="headerlink" href="#id116" title="永久链接至标题">¶</a></h4>
+<ol class="arabic simple">
+<li><p>基本的切片和索引</p></li>
+<li><p>高级索引</p></li>
+<li><p>详细说明</p></li>
+<li><p>字段访问</p></li>
+<li><p>Flat iterator 索引</p></li>
+</ol>
+</div>
+<div class="section" id="id117">
+<h4>数组遍历<a class="headerlink" href="#id117" title="永久链接至标题">¶</a></h4>
+<ol class="arabic simple">
+<li><p>Single Array Iteration</p></li>
+<li><p>Broadcasting Array Iteration</p></li>
+<li><p>Putting the Inner Loop in Cython</p></li>
+</ol>
+</div>
+<div class="section" id="id118">
+<h4>数组的标准子类<a class="headerlink" href="#id118" title="永久链接至标题">¶</a></h4>
+<ol class="arabic simple">
+<li><p>特殊特性和方法</p></li>
+<li><p>矩阵对象</p></li>
+<li><p>内存映射文件数组</p></li>
+<li><p>字符数组（ numpy.char ）</p></li>
+<li><p>记录数组（ numpy.rec ）</p></li>
+<li><p>掩码数组（ numpy.ma ）</p></li>
+<li><p>标准容器类</p></li>
+<li><p>数组迭代器</p></li>
+</ol>
+</div>
+<div class="section" id="id119">
+<h4>掩码数组<a class="headerlink" href="#id119" title="永久链接至标题">¶</a></h4>
+<ol class="arabic simple">
+<li><p>numpy.ma 模块</p></li>
+<li><p>numpy.ma 的使用</p></li>
+<li><p>示例</p></li>
+<li><p>numpy.ma 模块的常量</p></li>
+<li><p>MaskArray 类</p></li>
+<li><p>MaskArray 类的方法</p></li>
+<li><p>掩码数组的操作</p></li>
+</ol>
+</div>
+<div class="section" id="id120">
+<h4>数组接口<a class="headerlink" href="#id120" title="永久链接至标题">¶</a></h4>
+<ul class="simple">
+<li><p>Python side</p></li>
+<li><p>C-struct access</p></li>
+<li><p>Type description examples</p></li>
+<li><p>Differences with Array interface (Version 2)</p></li>
+</ul>
+</div>
+<div class="section" id="id121">
+<h4>时间和时间差<a class="headerlink" href="#id121" title="永久链接至标题">¶</a></h4>
+<ul class="simple">
+<li><p>基本的日期时间</p></li>
+<li><p>Datetime 和 Timedelta 的相关运算</p></li>
+<li><p>日期时间的单位</p></li>
+<li><p>Business Day Functionality</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="id122">
+<h3>常量<a class="headerlink" href="#id122" title="永久链接至标题">¶</a></h3>
+<p>NumPy 包含了一些常量：</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">numpy.inf</span></code> <code class="docutils literal notranslate"><span class="pre">numpy.Inf</span></code> <code class="docutils literal notranslate"><span class="pre">numpy.Infinity</span></code> <code class="docutils literal notranslate"><span class="pre">numpy.PINF</span></code> <code class="docutils literal notranslate"><span class="pre">numpy.infty</span></code></p>
+<p>说明：(正）无穷大的 IEEE 754 浮点表示。</p>
+<p>类型：float</p>
+<p>相关方法： <code class="docutils literal notranslate"><span class="pre">numpy.isinf()</span></code> <code class="docutils literal notranslate"><span class="pre">numpy.isposinf()</span></code> <code class="docutils literal notranslate"><span class="pre">numpy.isneginf()</span></code>
+<code class="docutils literal notranslate"><span class="pre">numpy.isnan()</span></code> <code class="docutils literal notranslate"><span class="pre">numpy.isfinite()</span></code></p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">numpy.NINF</span></code></p>
+<p>说明：负无穷的 IEEE 754浮点表示。</p>
+<p>类型：float</p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">numpy.nan</span></code> <code class="docutils literal notranslate"><span class="pre">numpy.NaN</span></code> <code class="docutils literal notranslate"><span class="pre">numpy.NAN</span></code></p>
+<p>说明：非数字的浮点表示。</p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">numpy.NZERO</span></code></p>
+<p>说明：负零的 IEEE 754 浮点表示。</p>
+<p>类型：float</p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">numpy.PZERO</span></code></p>
+<p>说明：正零的 IEEE 754 浮点表示。</p>
+<p>类型：float</p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">numpy.pi</span></code></p>
+<p>说明：圆周率</p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">numpy.e</span></code></p>
+<p>说明：欧拉数，自然对数函数的底数，纳皮尔常数。</p>
+<p>相关方法：<code class="docutils literal notranslate"><span class="pre">numpy.exp()</span></code> <code class="docutils literal notranslate"><span class="pre">numpy.log()</span></code></p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">numpy.euler_gamma</span></code></p>
+<p>说明： <a class="reference external" href="https://en.wikipedia.org/wiki/Euler-Mascheroni_constant">Euler-Mascheroni_constant</a></p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">numpy.newaxis</span></code></p>
+<p>说明： <code class="docutils literal notranslate"><span class="pre">No​​ne</span></code> 的别名，对索引数组很有用。</p>
+</li>
+</ul>
+</div>
+<div class="section" id="id123">
+<h3>全局函数<a class="headerlink" href="#id123" title="永久链接至标题">¶</a></h3>
 </div>
 </div>
 </div>

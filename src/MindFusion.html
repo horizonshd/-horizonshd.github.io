@@ -1,0 +1,970 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>MindFusion.Diagramming for WPF, V3.7 &mdash; Cheatsheet 1.0.0 文档</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="Digital Signal Process" href="DigitalSignalProcess.html" />
+    <link rel="prev" title="FFmpeg Tool" href="FFmpeg.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Cheatsheet
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="在文档中搜索" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="reStructuresText.html">reStructuresText</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cmd.html">cmd</a></li>
+<li class="toctree-l1"><a class="reference internal" href="WindowsTerminal.html">Windows Terminal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SSH.html">SSH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sphinx.html">sphinx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Encoding.html">Charset and Encoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Graphviz.html">Graphviz - Graph Visualization Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="git.html">git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CMake.html">CMake</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C%2B%2B.html">C++</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Math.html">Math</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ImageProcessing.html">Image Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OpenCV.html">OpenCV</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OpenGL.html">OpenGL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GameEngine.html">GameEngine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DTD.html">DTD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="XSD.html">XSD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="WSDL.html">WSDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dotnet.html">dotnet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Python.html">Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manim.html">manim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NSIS.html">nullsoft scriptable install system 3.0.4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Algorithm.html">Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Vocabulary.html">Vocabulary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lua.html">Lua</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LaTeX.html">LaTeX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Ubuntu.html">Ubuntu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MEF.html">MEF in .NET Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="EMail.html">Relative Concepts of EMail</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FFmpeg.html">FFmpeg Tool</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">MindFusion.Diagramming for WPF, V3.7</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">参考文档</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">1. 介绍</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">2. 授权许可</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">3. 基本信息</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#wpfdiagram">3.1 关于 WpfDiagram 组件</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">3.2 用户交互</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7">3.3 编程开发</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diagram">3.4 Diagram 的存储和检索</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id8">3.5 输出</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id9">3.6 导入和导出</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id10">3.7 Diagram 元素</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id11">3.8 自动布局</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id12">3.9 外观</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#behavior">3.10 Behavior</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#link-diagram-items">3.11 Link Diagram Items</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id13">3.12 层次分组</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id14">3.13 辅助控件</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id15">4. 编程接口概述</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id16">4.1 集成 WpfDiagram 到用户界面中</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id18">4.2 Diagram 结构</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id19">4.3 用户交互</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id20">4.4 位置和布局</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id21">4.5 撤销重做</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id22">4.6 序列化和输出</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id23">4.7 外观</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#initial-values-of-item-properties">4.8 Initial Values of Item Properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id24">4.9 杂项</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id25">5. 教程</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id26">5.1 加载数据</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id27">5.2 加载层次结构类型的数据</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id28">5.3 创建一个自定义节点类型</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id29">5.4 自定义节点的集成</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id30">开发笔记</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="DigitalSignalProcess.html">Digital Signal Process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="VisualStudioCode.html">Visual Studio Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OpenSourceProjects.html">Open Source Projects</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Cheatsheet</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>MindFusion.Diagramming for WPF, V3.7</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/src/MindFusion.rst.txt" rel="nofollow"> 查看页面源码</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="mindfusion-diagramming-for-wpf-v3-7">
+<h1>MindFusion.Diagramming for WPF, V3.7<a class="headerlink" href="#mindfusion-diagramming-for-wpf-v3-7" title="永久链接至标题">¶</a></h1>
+<div class="section" id="id2">
+<h2><a class="reference external" href="https://www.mindfusion.eu/onlinehelp/wpfdiagram/index.htm">参考文档</a><a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id3">
+<h3>1. 介绍<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h3>
+<p>WpfDiagram 是一个通用软件组件，可用于以多种不同格式显示各种类型的图表。
+它是作为一个 WPF 控件实现的，
+并且可以轻松地集成到任何针对 Microsoft WPF 平台的应用程序中。
+通过为您的软件提供现成的用于可视化和编辑关系数据的功能，
+WpfDiagram 为您节省了数百小时的编码和调试工作。</p>
+<p>WpfDiagram 可以使用图形表示：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>工作流程</p></li>
+<li><p>类关系</p></li>
+<li><p>图和网络</p></li>
+<li><p>实体关系/数据库图</p></li>
+<li><p>IVR系统</p></li>
+<li><p>工业自动化流程</p></li>
+<li><p>家谱树</p></li>
+<li><p>算法和流程图</p></li>
+<li><p>组织结构图</p></li>
+<li><p>XML文件</p></li>
+<li><p>分类层次结构</p></li>
+<li><p>以及更多</p></li>
+</ul>
+</div></blockquote>
+<p>WpfDiagram 为创建或编辑图提供了直观的用户交互模型。
+此外，它的编程接口还提供了许多有用的功能，
+从打印和 XML 序列化到路径查找和自动布局算法。</p>
+</div>
+<div class="section" id="id4">
+<h3>2. 授权许可<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h3>
+<p>MindFusion 组件没有单独的试用版本。
+当您购买组件后，可以在官网页面上找到该组件的许可密钥。
+将此许可密钥分配给 <strong>LicenseKey</strong> 属性，以禁用组件的评估模式并停止显示试用消息。
+如果开发的应用程序包含多个 MindFusion 组件，
+可以从应用程序启动代码中调用 <code class="docutils literal notranslate"><span class="pre">MindFusion.Licensing.LicenseManager.AddLicense(key)</span></code>
+方法指定一次密钥，而不用在使用每个控件时设置。</p>
+</div>
+<div class="section" id="id5">
+<h3>3. 基本信息<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h3>
+<div class="section" id="wpfdiagram">
+<h4>3.1 关于 WpfDiagram 组件<a class="headerlink" href="#wpfdiagram" title="永久链接至标题">¶</a></h4>
+<ul class="simple">
+<li><p>再分发是免费的</p></li>
+<li><p>程序集是强命名的</p></li>
+<li><p>可以购买源代码</p></li>
+<li><p>是用C#编写的</p></li>
+</ul>
+</div>
+<div class="section" id="id6">
+<h4>3.2 用户交互<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h4>
+<ul class="simple">
+<li><p>多种用户交互模式</p></li>
+<li><p>自由式绘图</p></li>
+<li><p>自由形式选择模式</p></li>
+<li><p>滚动和缩放</p></li>
+<li><p>Windows剪贴板的复制、粘贴</p></li>
+<li><p>平移</p></li>
+<li><p>用鼠标拖动项时自动滚动</p></li>
+<li><p>放大</p></li>
+<li><p>网格对齐</p></li>
+<li><p>节点对齐引导线</p></li>
+<li><p>多项选择</p></li>
+<li><p>Tooltips</p></li>
+<li><p>可以为节点定义停靠点（Docking points）</p></li>
+<li><p>撤销/重做支持</p></li>
+<li><p>同时调整多个节点的大小</p></li>
+<li><p>旋转和翻转形状</p></li>
+</ul>
+</div>
+<div class="section" id="id7">
+<h4>3.3 编程开发<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h4>
+<ul class="simple">
+<li><p>对图表元素的程序化访问</p></li>
+<li><p>流畅的 API 的扩展方法</p></li>
+<li><p>用于自定义外观和行为的众多属性</p></li>
+<li><p>众多的实用方法</p></li>
+<li><p>路径搜索和环形检测</p></li>
+<li><p>丰富的事件集</p></li>
+</ul>
+</div>
+<div class="section" id="diagram">
+<h4>3.4 Diagram 的存储和检索<a class="headerlink" href="#diagram" title="永久链接至标题">¶</a></h4>
+<ul class="simple">
+<li><p>磁盘上的文件</p></li>
+<li><p>.NET 流</p></li>
+<li><p>ASCII 字符串</p></li>
+<li><p>XML文件</p></li>
+<li><p>JSON 字符串</p></li>
+</ul>
+</div>
+<div class="section" id="id8">
+<h4>3.5 输出<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h4>
+<ul class="simple">
+<li><p>使用 WPF 渲染到屏幕</p></li>
+<li><p>打印和打印预览</p></li>
+<li><p>到使用 HTML 图像映射的浏览器</p></li>
+<li><p>以 3D 方式显示图形</p></li>
+</ul>
+</div>
+<div class="section" id="id9">
+<h4>3.6 导入和导出<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h4>
+<ul class="simple">
+<li><p>导入 Visio 2003 XML (VDX) 图纸。</p></li>
+<li><p>导入 Visio 2013 XML (VSDX) 图纸</p></li>
+<li><p>导入 OpenOffice Draw (ODG) 文件</p></li>
+<li><p>导入 Scalable Vector Graphics （SVG） 文件</p></li>
+<li><p>导出位图图像</p></li>
+<li><p>导出 Portable Document Format (PDF) 文件</p></li>
+<li><p>导出 Scalable Vector Graphics (SVG) 文件</p></li>
+<li><p>导出 Visio 2003 XML (VDX) 图纸</p></li>
+<li><p>导出 Visio 2013 XML (VSDX) 图纸</p></li>
+<li><p>导出 Excel Open XML Format (XLSX) 文件</p></li>
+<li><p>导出 Windows MetaFile (WMF) 图像</p></li>
+<li><p>导出 Drawing Exchange Format (DXF) 文件</p></li>
+</ul>
+</div>
+<div class="section" id="id10">
+<h4>3.7 Diagram 元素<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h4>
+<ul class="simple">
+<li><p>使用任何 WPF UIElement 作为 diagram node</p></li>
+<li><p>超过 100 种预定义节点形状</p></li>
+<li><p>在节点中显示 SVG 绘图</p></li>
+<li><p>能够定义自定义形状和形状库</p></li>
+<li><p>可模板化的图表节点</p></li>
+<li><p>形状可以任意角度的旋转</p></li>
+<li><p>容器节点</p></li>
+<li><p>无限行数和列数的表格</p></li>
+<li><p>表格单元格可以跨越几列和几行</p></li>
+<li><p>用户绘制的自由形式的轮廓</p></li>
+<li><p>在 TreeView 节点中显示层级数据</p></li>
+<li><p>使用 Visio 模板文件显示形状</p></li>
+<li><p>给 diagram item 指定图层</p></li>
+<li><p>表行的 Sections 可以展开或折叠</p></li>
+<li><p>链接可以由多个段（segments）组成</p></li>
+<li><p>链接段（link segments）可以是直线或曲线</p></li>
+<li><p>每个链接显示多个标签</p></li>
+<li><p>支持自定义节点和链接类型</p></li>
+</ul>
+</div>
+<div class="section" id="id11">
+<h4>3.8 自动布局<a class="headerlink" href="#id11" title="永久链接至标题">¶</a></h4>
+<ul class="simple">
+<li><p>避开障碍方法</p></li>
+<li><p>Spring-Embedder图形布局</p></li>
+<li><p>定向树布局</p></li>
+<li><p>水平/垂直二元树布局</p></li>
+<li><p>径向树状布局</p></li>
+<li><p>分形树布局</p></li>
+<li><p>分层图形布局</p></li>
+<li><p>网格布局</p></li>
+<li><p>模拟退火图布局</p></li>
+<li><p>单向图布局</p></li>
+<li><p>正交图形布局</p></li>
+<li><p>圆形图布局</p></li>
+<li><p>正交链路路由器</p></li>
+<li><p>源代码流程图布局</p></li>
+<li><p>决策流程图布局</p></li>
+<li><p>流程图布局</p></li>
+<li><p>树形图布局</p></li>
+<li><p>泳道图布局图</p></li>
+<li><p>拓扑图布局</p></li>
+<li><p>级联图布局</p></li>
+<li><p>层次图布局</p></li>
+<li><p>三角形图形布局</p></li>
+<li><p>多层次图形布局</p></li>
+<li><p>自动链接路由</p></li>
+</ul>
+</div>
+<div class="section" id="id12">
+<h4>3.9 外观<a class="headerlink" href="#id12" title="永久链接至标题">¶</a></h4>
+<ul class="simple">
+<li><p>节点可以显示图像和文本</p></li>
+<li><p>各种文本对齐方式</p></li>
+<li><p>文字可以在多边形区域内布局。</p></li>
+<li><p>玻璃视觉效果</p></li>
+<li><p>样式化的类似HTML的文本格式</p></li>
+<li><p>可定制的字体和颜色</p></li>
+<li><p>节点的自定义绘画</p></li>
+<li><p>阴影</p></li>
+<li><p>用户指定的鼠标光标</p></li>
+<li><p>Z顺序</p></li>
+<li><p>丰富的笔和画笔风格选择</p></li>
+<li><p>透明节点</p></li>
+<li><p>隐形节点</p></li>
+<li><p>背景泳道网格</p></li>
+</ul>
+</div>
+<div class="section" id="behavior">
+<h4>3.10 Behavior<a class="headerlink" href="#behavior" title="永久链接至标题">¶</a></h4>
+<ul class="simple">
+<li><p>锁定图表元素</p></li>
+<li><p>支持只读模式</p></li>
+<li><p>表格可以滚动</p></li>
+<li><p>折叠和展开层次结构分支</p></li>
+<li><p>In-place text editing</p></li>
+<li><p>链接相对于其所连接的节点动态定位</p></li>
+</ul>
+</div>
+<div class="section" id="link-diagram-items">
+<h4>3.11 Link Diagram Items<a class="headerlink" href="#link-diagram-items" title="永久链接至标题">¶</a></h4>
+<ul class="simple">
+<li><p>节点到节点</p></li>
+<li><p>表行到表行</p></li>
+<li><p>表行到节点</p></li>
+<li><p>未连接的链接</p></li>
+</ul>
+</div>
+<div class="section" id="id13">
+<h4>3.12 层次分组<a class="headerlink" href="#id13" title="永久链接至标题">¶</a></h4>
+<ul class="simple">
+<li><p>将节点附加到其他节点</p></li>
+<li><p>将节点附加到链接控制点（link control points）</p></li>
+<li><p>将节点附加到链接段（link segments）</p></li>
+</ul>
+</div>
+<div class="section" id="id14">
+<h4>3.13 辅助控件<a class="headerlink" href="#id14" title="永久链接至标题">¶</a></h4>
+<ul class="simple">
+<li><p>预览控件</p></li>
+<li><p>标尺控件</p></li>
+<li><p>虚拟图表控件</p></li>
+<li><p>NodeListView控件</p></li>
+<li><p>ShapeListBox控件</p></li>
+<li><p>LayerListView控件</p></li>
+<li><p>TabbedDiagramView控件</p></li>
+<li><p>缩放控件</p></li>
+<li><p>形状设计器控件</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="id15">
+<h3>4. 编程接口概述<a class="headerlink" href="#id15" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id16">
+<h4>4.1 集成 WpfDiagram 到用户界面中<a class="headerlink" href="#id16" title="永久链接至标题">¶</a></h4>
+<p>WpfDiagram 开发包中提供的大部分功能都是由 <a class="reference external" href="https://www.mindfusion.eu/onlinehelp/wpfdiagram/T_MindFusion_Diagramming_Wpf_Diagram.htm">Diagram</a>
+类实现的。你可以直接它的实例作为 <strong>Panel</strong> 派生对象的子元素。
+在这种情况下，它将和其它 WPF 控件一样进行测量和布局 。
+注意，在测量阶段， <strong>Diagram</strong> 实例总是返回他的 <a class="reference external" href="https://www.mindfusion.eu/onlinehelp/wpfdiagram/P_MindFusion_Diagramming_Wpf_Diagram_Bounds_0.htm">Bounds</a>
+属性作为所需的尺寸，而不是使用其内容的尺寸。</p>
+<p><strong>Diagram</strong> 也可以放在以下容器中：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>ScrollViewer</strong>: 使用它以提供对 Diagram 内容的滚动和平移操作。</p></li>
+<li><p><a class="reference external" href="https://www.mindfusion.eu/onlinehelp/wpfdiagram/T_MindFusion_Diagramming_Wpf_Ruler.htm">Ruler</a> :
+提供滚动操作，还显示对齐标尺，用于测量和对齐 diagram 中的对象。</p></li>
+<li><p><a class="reference external" href="https://www.mindfusion.eu/onlinehelp/wpfdiagram/T_MindFusion_Diagramming_Wpf_DiagramView.htm">DiagramView</a> :
+支持显示同一个 diagram 的多个视图，每个视图具有不同的缩放级别和滚动位置。</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="id18">
+<h4>4.2 Diagram 结构<a class="headerlink" href="#id18" title="永久链接至标题">¶</a></h4>
+<ol class="arabic simple">
+<li><p>标准的 Item 类型</p>
+<ul class="simple">
+<li><p>Shape Nodes</p></li>
+<li><p>SVG Nodes</p></li>
+<li><p>Templated Nodes</p></li>
+<li><p>Table Nodes</p></li>
+<li><p>Container Nodes</p></li>
+<li><p>Free-form Nodes</p></li>
+<li><p>TreeView Nodes</p></li>
+<li><p>Visio Nodes</p></li>
+<li><p>Barcode Nodes</p></li>
+<li><p>Links</p></li>
+</ul>
+</li>
+<li><p>自定义 Item 类型</p>
+<ul class="simple">
+<li><p>序列化</p></li>
+<li><p>剪贴板操作</p></li>
+<li><p>渲染</p></li>
+<li><p>用户交互</p></li>
+</ul>
+</li>
+<li><p>使用 WPF 控件作为节点</p>
+<ul class="simple">
+<li><p>交互式创建</p></li>
+<li><p>编程式创建</p></li>
+</ul>
+</li>
+<li><p>创建和删除 Items</p>
+<ul class="simple">
+<li><p>编程式创建 Items</p></li>
+<li><p>绘制新的 Items</p></li>
+<li><p>删除 Items</p></li>
+</ul>
+</li>
+<li><p>访问 Items</p>
+<ul class="simple">
+<li><p>选中的 Items</p></li>
+<li><p>查找 Items</p></li>
+<li><p>关系查询</p></li>
+</ul>
+</li>
+<li><p>附加（Attaching）、组合（Grouping） Items</p>
+<ul class="simple">
+<li><p>可能的使用场景</p></li>
+<li><p>组合（Grouping）</p></li>
+<li><p>Unions</p></li>
+<li><p>附加（Attaching） Items 到 Group</p></li>
+<li><p>访问 Group 中的 Items</p></li>
+<li><p>销毁 Groups</p></li>
+</ul>
+</li>
+<li><p>图层</p>
+<ul class="simple">
+<li><p>说明</p></li>
+<li><p>Layer list 控件</p></li>
+</ul>
+</li>
+<li><p>树型分支的折叠展开</p>
+<ul class="simple">
+<li><p>显示展开/折叠按钮</p></li>
+<li><p>Defining Tree Direction</p></li>
+<li><p>递归地展开分支</p></li>
+<li><p>HtmlBuilder 的支持</p></li>
+<li><p>自定义展开/折叠功能</p></li>
+</ul>
+</li>
+<li><p>多个 Diagram Pages</p></li>
+</ol>
+</div>
+<div class="section" id="id19">
+<h4>4.3 用户交互<a class="headerlink" href="#id19" title="永久链接至标题">¶</a></h4>
+<ol class="arabic simple">
+<li><p>控制用户交互</p>
+<ul class="simple">
+<li><p>禁用交互</p></li>
+<li><p>指定如何解释用户的操作</p></li>
+<li><p>设置 diagram 的边界（Bounds）</p></li>
+<li><p>Item 的约束</p></li>
+<li><p>控制链接（Links）如何连接到节点（Nodes）</p></li>
+<li><p>In-place Text Editing</p></li>
+<li><p>验证事件</p></li>
+<li><p>杂项</p></li>
+</ul>
+</li>
+<li><p>事件的处理</p></li>
+<li><p>单选、多选</p>
+<ul class="simple">
+<li><p>Items 的选取和编辑</p></li>
+<li><p>Active Item</p></li>
+<li><p>多选</p></li>
+<li><p>绘制选中套索（Lasso）</p></li>
+<li><p>外观</p></li>
+<li><p>枚举 Items</p></li>
+<li><p>自动选取</p></li>
+</ul>
+</li>
+<li><p>自动对齐</p>
+<ul class="simple">
+<li><p>对齐网格</p></li>
+<li><p>节点（nodes）对齐到节点（ nodes ）</p></li>
+<li><p>将链接吸附（snap）到附近的节点（nodes）</p></li>
+</ul>
+</li>
+<li><p>剪贴板操作</p></li>
+<li><p>滚动和缩放</p>
+<ul class="simple">
+<li><p>自动滚动</p></li>
+<li><p>Diagram 尺寸</p></li>
+<li><p>编程方式控制滚动</p></li>
+<li><p>滚动表格</p></li>
+<li><p>缩放</p></li>
+<li><p>套索（Lasso）缩放工具</p></li>
+<li><p>放大（Magnifying）</p></li>
+<li><p>平移</p></li>
+</ul>
+</li>
+<li><p>Tooltips</p></li>
+<li><p>In-place Editing the Contents of Items</p>
+<ul class="simple">
+<li><p>标准的 in-place 编辑</p></li>
+<li><p>对自定义 Items 的 in-place 编辑</p></li>
+</ul>
+</li>
+</ol>
+</div>
+<div class="section" id="id20">
+<h4>4.4 位置和布局<a class="headerlink" href="#id20" title="永久链接至标题">¶</a></h4>
+<ol class="arabic simple">
+<li><p>Items 的布局 —— 位置、尺寸和 Z-顺序</p>
+<ul class="simple">
+<li><p>测量单位</p></li>
+<li><p>Nodes 的位置和尺寸</p></li>
+<li><p>链接控制点（Link Control Points）</p></li>
+<li><p>动态链接（Link Dynamic）</p></li>
+<li><p>交互式移动或调整尺寸</p></li>
+<li><p>控制 Z-顺序</p></li>
+</ul>
+</li>
+<li><p>对齐网格</p></li>
+<li><p>车道（Lanes）网格</p></li>
+<li><p>Diagram 的自动布局</p>
+<ul class="simple">
+<li><p>Force-directed layout algorithms</p></li>
+<li><p>Topology based layout algorithms</p></li>
+<li><p>Semantics based layout algorithms</p></li>
+<li><p>Multi-level layout algorithms</p></li>
+</ul>
+</li>
+<li><p>链接的路由</p>
+<ul class="simple">
+<li><p>设置链接的路由器</p></li>
+<li><p>自动式或显式路由</p></li>
+<li><p>调整（Tuning）路由算法</p></li>
+</ul>
+</li>
+<li><p>锚点（Anchor points）和模版（Patterns）</p>
+<ul class="simple">
+<li><p>锚点</p></li>
+<li><p>锚点模板</p></li>
+<li><p>锚点模板和表格</p></li>
+<li><p>锚点和用户交互</p></li>
+<li><p>编程式设置锚点</p></li>
+</ul>
+</li>
+</ol>
+</div>
+<div class="section" id="id21">
+<h4>4.5 撤销重做<a class="headerlink" href="#id21" title="永久链接至标题">¶</a></h4>
+<ol class="arabic">
+<li><p>概述</p>
+<p>用户执行的交互操作和更改图表结构的编程命令都记录在历史队列中。
+当操作记录仍在该队列中时，可以撤消或重做操作。
+队列有一个固定的长度——如果它满了，记录一个新的动作会使最旧的一个从队列中删除。</p>
+<p>默认情况下，撤销功能是被禁用的。将 <code class="docutils literal notranslate"><span class="pre">UndoEnabled</span></code> 属性设置为 <strong>true</strong> 以启用。
+要撤消或重做一个操作，请调用 <code class="docutils literal notranslate"><span class="pre">UndoManager</span></code> 的 <code class="docutils literal notranslate"><span class="pre">Undo</span></code> 或 <code class="docutils literal notranslate"><span class="pre">Redo</span></code> 方法。
+WpfDiagram 组件没有提供用于撤消/重做的键盘快捷键。
+应用程序必须有自己的菜单项和/或键盘加速器来提供必要的用户接口，
+并调用相应的方法来响应 UI 事件。</p>
+<p>WpfDiagram 自动保存以下类型的操作，以供稍后的撤销/重做：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>向 Diagram 中添加一个 Item</p></li>
+<li><p>从 Diagram 中移除一个 Item</p></li>
+<li><p>移动或调整 Items 的尺寸</p></li>
+<li><p>创建一个 Group</p></li>
+<li><p>销毁一个 Group</p></li>
+<li><p>展开或折叠 Trees</p></li>
+<li><p>滚动表格的行</p></li>
+<li><p>添加或移除表格的行</p></li>
+</ul>
+</div></blockquote>
+<p>对属性值的更改不会自动保存在历史记录中。
+如果您的应用程序必须支持对属性更改的撤消/重做，请使用 <code class="docutils literal notranslate"><span class="pre">ChangeItemCmd</span></code> 命令。
+<strong>ChangeItemCmd</strong> 允许将多个属性的更改记录为一个可撤销的原子操作。</p>
+<p>在某些情况下，您可能需要创建自定义的操作或命令类型。
+例如，假设您需要对 Item 的 Tag 属性所做的更改或对嵌入在 ControlNode 类型的 Item
+中的控件的更改实现撤消/重做。但是，WpfDiagram 无法检测到此类更改，因此无法撤消它们。
+这种情况下，为了实现撤消/重做，您必须创建 <code class="docutils literal notranslate"><span class="pre">Command</span></code> 的子类并实现
+<code class="docutils literal notranslate"><span class="pre">Execute</span></code> 、 <code class="docutils literal notranslate"><span class="pre">Undo</span></code> 、 <code class="docutils literal notranslate"><span class="pre">Redo</span></code> 方法。</p>
+</li>
+<li><p>动作（Actions）和命令（Commands）</p>
+<p>WpfDiagram 可执行的可撤销交互操作和编程命令由 <code class="docutils literal notranslate"><span class="pre">Command</span></code> 子类表示。
+<strong>Command</strong> 类提供了 <code class="docutils literal notranslate"><span class="pre">Execute</span></code> 、 <code class="docutils literal notranslate"><span class="pre">Undo</span></code> 或 <code class="docutils literal notranslate"><span class="pre">Redo</span></code> 操作所需的接口。
+在某些情况下，必须在派生类中实现这些方法，但禁止直接调用它们。
+请使用 <code class="docutils literal notranslate"><span class="pre">UndoManager</span></code> 的 <strong>Undo</strong> 或 <strong>Redo</strong> 方法撤消或重做命令。
+使用 <strong>UndoManager</strong> 的方法将调用相应 <strong>Command</strong> 的方法，
+此外还更新命令历史和 Diagram 的状态。</p>
+<p>WpfDiagram 提供的以下这些类派生自 <strong>Command</strong> ：</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 67%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>命令</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>AddItemCmd</p></td>
+<td><p>向 diagram 中添加一个 Item</p></td>
+</tr>
+<tr class="row-odd"><td><p>RemoveItemCmd</p></td>
+<td><p>从 diagram 中移除一个 Item</p></td>
+</tr>
+<tr class="row-even"><td><p>AddGroupCmd</p></td>
+<td><p>创建一个 Group</p></td>
+</tr>
+<tr class="row-odd"><td><p>RemoveGroupCmd</p></td>
+<td><p>销毁一个 Group</p></td>
+</tr>
+<tr class="row-even"><td><p>GroupAttachCmd</p></td>
+<td><p>附加（attach）一个 Item 到一个 Group</p></td>
+</tr>
+<tr class="row-odd"><td><p>GroupDetachCmd</p></td>
+<td><p>从一个 Group 中分离（detach）一个 Item</p></td>
+</tr>
+<tr class="row-even"><td><p>ModifyItemCmd</p></td>
+<td><p>对一个 Item 进行移动或调整其尺寸</p></td>
+</tr>
+<tr class="row-odd"><td><p>RedimTableCmd</p></td>
+<td><p>改变表的行数或列数</p></td>
+</tr>
+<tr class="row-even"><td><p>ExpandItemCmd</p></td>
+<td><p>Expands or collapses a tree of items.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ScrollTableCmd</p></td>
+<td><p>滚动表格的行</p></td>
+</tr>
+<tr class="row-even"><td><p>ExpandHeaderRowCmd</p></td>
+<td><p>Expands or collapses tables sections.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ChangeItemCmd</p></td>
+<td><p>处理 Item 属性更改的撤消/重做</p></td>
+</tr>
+<tr class="row-even"><td><p>CompositeCmd</p></td>
+<td><p>允许同时撤消和重做多个操作</p></td>
+</tr>
+</tbody>
+</table>
+<p>大多数这些类的实例都是由 WpfDiagram 隐式创建的，用以响应用户的操作或方法调用。
+您可能只需要显式实例化 <strong>ChangeItemCmd</strong> —— 用于撤消或重做属性更改；
+和 <strong>CompositeCmd</strong> —— 将多个操作表现为单个可撤消的操作。</p>
+<p>您的应用程序的数据可能紧密集成在 WpfDiagram 图表中，
+例如通过嵌入在 ControlNode Items 中的 Tag 对象或 .NET 控件。
+在这些情况下，WpfDiagram 无法检测、撤消或重做对数据的更改。
+要实现对这些更改的撤销，必须继承 <strong>Command</strong> 类,
+并实现 <strong>Execute</strong> 、 <strong>Undo</strong> 和 <strong>Redo</strong> 方法。
+要在撤消/重做历史记录中记录您自己的操作，
+请调用 <strong>Diagram</strong> 类的 <code class="docutils literal notranslate"><span class="pre">ExecuteCommand</span></code> 方法。</p>
+</li>
+<li><p>Undo Manager</p>
+<p>Undo Manager 充当命令、图表和命令历史记录之间的中介。
+它由 <code class="docutils literal notranslate"><span class="pre">UndoManager</span></code> 类表示，
+该类的唯一实例可以通过 <code class="docutils literal notranslate"><span class="pre">Diagram</span></code> 的 <code class="docutils literal notranslate"><span class="pre">UndoManager</span></code> 属性访问。</p>
+<p>默认情况下，撤消功能是被禁用的 —— 命令被执行，但不会记录在历史中，
+以便以后撤消或重做。要启用撤消功能，请将 <code class="docutils literal notranslate"><span class="pre">UndoEnabled</span></code> 设置为 <strong>true</strong> 。
+在执行不希望被用户撤消的操作之前（例如创建特殊的开始/结束节点），您可能需要禁用撤消。
+另一种可能需要禁用撤销的情况是，
+以编程方式创建大量 diagram items —— 比如数百或数千项。
+WpfDiagram 为每个 Item 的创建创建一个撤销记录；
+如果历史记录的 <code class="docutils literal notranslate"><span class="pre">Capacity</span></code> 小于创建的 items 的数目，
+则在添加新 items 时，大多数记录将从历史队列中删除。
+这将浪费处理能力和内存来创建不会被使用的记录。</p>
+<p>作为一种替代方法，您可以通过调用 <code class="docutils literal notranslate"><span class="pre">StartComposite</span></code> 方法来创建组合记录。
+所有后续的 item 创建操作都保存在这个组合记录中。
+该组合记录以单个记录的形式保存在历史记录中，
+该组合记录允许将其中包含的所有操作作为单个操作进行撤消或重做。
+<strong>StartComposite</strong> 创建并返回一个 <code class="docutils literal notranslate"><span class="pre">CompositeCmd</span></code> 的实例，
+该实例在 undo manager 中标记为 active composite。
+当有一个 active composite 时，所有执行的操作都会添加到其中。
+调用 active composite 的 <code class="docutils literal notranslate"><span class="pre">Execute</span></code> 方法停止继续向其中添加子命令，
+并将其作为可撤销的原子子操作保存在历史记录中。</p>
+<p>使用 undo manager 的 <code class="docutils literal notranslate"><span class="pre">Undo</span></code> 和 <code class="docutils literal notranslate"><span class="pre">Redo</span></code> 方法来撤消或重做操作。
+不要调用 <code class="docutils literal notranslate"><span class="pre">Command</span></code> 类的相应方法 —— 它们由 undo manager 在内部调用，
+此外当前历史记录的位置也会更新并重新绘制图表视图。</p>
+</li>
+<li><p>历史记录</p></li>
+<li><p>关于属性更改的撤销重做</p></li>
+<li><p>组合命令</p></li>
+<li><p>派生 Command 类</p></li>
+</ol>
+</div>
+<div class="section" id="id22">
+<h4>4.6 序列化和输出<a class="headerlink" href="#id22" title="永久链接至标题">¶</a></h4>
+<ol class="arabic simple">
+<li><p>序列化 Diagram</p>
+<ul class="simple">
+<li><p>XML 序列化</p></li>
+<li><p>JSON 序列化</p></li>
+</ul>
+</li>
+<li><p>导出 Diagram</p>
+<ul class="simple">
+<li><p>导出图片</p></li>
+<li><p>导出 PDF</p></li>
+<li><p>导出 SVG</p></li>
+<li><p>导出 WMF 图片</p></li>
+<li><p>导出 Visio</p></li>
+<li><p>导出 Excel</p></li>
+<li><p>导出 DXF</p></li>
+</ul>
+</li>
+<li><p>打印和打印预览</p></li>
+</ol>
+</div>
+<div class="section" id="id23">
+<h4>4.7 外观<a class="headerlink" href="#id23" title="永久链接至标题">¶</a></h4>
+<ol class="arabic simple">
+<li><p>样式和主题</p>
+<ul class="simple">
+<li><p>样式</p></li>
+<li><p>主题</p></li>
+<li><p>主题编辑器</p></li>
+</ul>
+</li>
+<li><p>节点的效果（Effects）</p>
+<ul class="simple">
+<li><p>Aero Effect</p></li>
+<li><p>Glass Effect</p></li>
+<li><p>示例</p></li>
+</ul>
+</li>
+<li><p>修改 Diagram 的外观</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p>背景</p></li>
+<li><p>阴影</p></li>
+<li><p>选中效果</p></li>
+<li><p>鼠标光标</p></li>
+<li><p>网格设置</p></li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple">
+<li><p>自定义 Item 的外观</p>
+<ul class="simple">
+<li><p>设计样式（Styling）</p></li>
+<li><p>Pen 的宽度和样式</p></li>
+<li><p>Diagram 元素的颜色</p></li>
+<li><p>文本</p></li>
+<li><p>图像</p></li>
+<li><p>效果（Effects）</p></li>
+<li><p>DiagramLink-specific Properties</p></li>
+<li><p>Rounded Links</p></li>
+<li><p>Link Crossings</p></li>
+<li><p>ShapeNode-specific Properties</p></li>
+<li><p>TableNode-specific Properties</p></li>
+</ul>
+</li>
+<li><p>用户自定义的节点形状和自定义绘制</p>
+<ul class="simple">
+<li><p>Shape Templates</p></li>
+<li><p>Dynamic Shapes</p></li>
+<li><p>Shape Libraries</p></li>
+<li><p>Custom Painting</p></li>
+<li><p>Combining Custom Shapes with Custom Drawing</p></li>
+<li><p>Shape control points</p></li>
+</ul>
+</li>
+<li><p>文本属性和格式化</p>
+<ul class="simple">
+<li><p>Layout Text in Arbitrary Shapes</p></li>
+<li><p>Text Wrapping</p></li>
+<li><p>Text in Tables</p></li>
+<li><p>Styled Text</p></li>
+<li><p>Links’ Text</p></li>
+<li><p>Fonts</p></li>
+</ul>
+</li>
+</ol>
+</div>
+<div class="section" id="initial-values-of-item-properties">
+<h4>4.8 Initial Values of Item Properties<a class="headerlink" href="#initial-values-of-item-properties" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id24">
+<h4>4.9 杂项<a class="headerlink" href="#id24" title="永久链接至标题">¶</a></h4>
+<ol class="arabic simple">
+<li><p>Associate Custom Data with Items</p></li>
+<li><p>Inspecting Items Geometry</p></li>
+<li><p>Fluent API</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="id25">
+<h3>5. 教程<a class="headerlink" href="#id25" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id26">
+<h4>5.1 加载数据<a class="headerlink" href="#id26" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id27">
+<h4>5.2 加载层次结构类型的数据<a class="headerlink" href="#id27" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id28">
+<h4>5.3 创建一个自定义节点类型<a class="headerlink" href="#id28" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id29">
+<h4>5.4 自定义节点的集成<a class="headerlink" href="#id29" title="永久链接至标题">¶</a></h4>
+</div>
+</div>
+</div>
+<div class="section" id="id30">
+<h2>开发笔记<a class="headerlink" href="#id30" title="永久链接至标题">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="DigitalSignalProcess.html" class="btn btn-neutral float-right" title="Digital Signal Process" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="FFmpeg.html" class="btn btn-neutral float-left" title="FFmpeg Tool" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; 版权所有 2021, horizonshd.
+
+    </p>
+  </div>
+    
+    
+    
+    利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
