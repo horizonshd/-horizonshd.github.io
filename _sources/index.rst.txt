@@ -14,6 +14,8 @@ Welcome to Cheatsheet's documentation!
    src/cmd
    src/WindowsTerminal
    src/SSH
+   src/Bash
+   src/YAML
    src/sphinx
    src/Encoding
    src/Graphviz
@@ -21,10 +23,12 @@ Welcome to Cheatsheet's documentation!
    src/CMake
    src/C++
    src/Math
+   src/LinearAlgebra.MIT
    src/ImageProcessing
    src/OpenCV
    src/OpenGL
    src/GameEngine
+   src/ComputerGraphics
    src/DTD
    src/XSD
    src/WSDL
@@ -42,6 +46,7 @@ Welcome to Cheatsheet's documentation!
    src/FFmpeg
    src/MindFusion
    src/DigitalSignalProcess
+   src/VisualStudio
    src/VisualStudioCode
    src/OpenSourceProjects
 

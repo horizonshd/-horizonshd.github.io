@@ -1,0 +1,24 @@
+================================================================================
+Visual Studio
+================================================================================
+
+
+正则替换
+================================================================================
+
+`中文官方说明 <https://docs.microsoft.com/en-us/visualstudio/ide/using-regular-expressions-in-visual-studio?view=vs-2019>`_
+`英文官方说明 <https://docs.microsoft.com/zh-cn/visualstudio/ide/using-regular-expressions-in-visual-studio?view=vs-2019>`_
+
+(this\.){0,1}RaiseBeforePropertyChanged\("(.+)"\)
+
+RaiseBeforePropertyChanged(nameof($2))
+
+
+(this\.){0,1}RaisePropertyChanged\("(.+)"\)
+
+RaisePropertyChanged(nameof($2))
+
+
+(this\.){0,1}Raise(Before){0,1}PropertyChanged\("(.+)"\)
+
+Raise$2PropertyChanged(nameof($3))

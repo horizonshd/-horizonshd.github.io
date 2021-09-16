@@ -1,0 +1,1543 @@
+================================================================================
+Linear Algrbra - MIT
+================================================================================
+
+.. :
+
+    = - ` : ' " ~ ^ _ * + # < >
+
+    ====================
+    --------------------
+    ~~~~~~~~~~~~~~~~~~~~
+    ********************
+    ++++++++++++++++++++
+    ####################
+    ::::::::::::::::::::
+    >>>>>>>>>>>>>>>>>>>>
+    <<<<<<<<<<<<<<<<<<<<
+
+
+第 01 集 方程组的几何解释
+================================================================================
+
+我们从求解线性方程组来开始这门课，从一个普通的例子讲起：
+方程组有 2 个未知数，一共有 2 个方程，
+分别来看方程组的 **行图像（Row Picture）** 和 **列图像（Column Picture）** 。
+
+有方程组
+:math:`\left\{ \begin{eqnarray*}
+2x & - & y & = & 0 \\
+-x & + & 2y & = & 3
+\end{eqnarray*} \right.` ，
+写作矩阵形式有
+:math:`\left[ \begin{array}{cc}
+2 & -1 \\
+-1 & 2
+\end{array} \right]
+\left[ \begin{array}{c}
+x \\
+y
+\end{array} \right]
+=
+\left[ \begin{array}{c}
+0 \\
+3
+\end{array} \right]` ，
+通常我们把这里面的第一个矩阵称为系数矩阵 :math:`\boldsymbol{A}` ，
+将第二个矩阵称为向量 :math:`\boldsymbol{x}` ，
+将第三个矩阵称为向量 :math:`\boldsymbol{b}` ，
+于是线性方程组可以表示为 :math:`\boldsymbol{A} \boldsymbol{x} = \boldsymbol{b}` 。
+
+
+我们先来看 Row Picture，即我们通常在直角坐标系中绘制的图像：
+
+.. plot:: pyplots/linear_algebra_mit_001.py
+    :include-source:
+
+上图是我们都很熟悉的直角坐标系中两直线相交的情况，接下来我们按列观察方程组：
+:math:`x
+\left[ \begin{array}{c}
+2 \\
+-1
+\end{array} \right]
++
+y
+\left[ \begin{array}{c}
+-1 \\
+2
+\end{array} \right]
+=
+\left[ \begin{array}{c}
+0 \\
+3
+\end{array} \right]`
+（我们把第一个列向量称为 :math:`\boldsymbol{col_1}` ，
+第二个列向量称为 :math:`\boldsymbol{col_2}`），
+可记为
+:math:`x \boldsymbol{col_1} + y \boldsymbol{col_2} = \boldsymbol{b}` 。
+通过简单观察可知当 :math:`x = 1` ， :math:`y = 2` 时该式子成立。
+我们绘制出这里面出现的一些向量，即 Column Picture：
+
+.. plot:: pyplots/linear_algebra_mit_002.py
+    :include-source:
+
+如图所示，绿色向量（ :math:`\boldsymbol{col_1}` ）与蓝色向量（:math:`2\boldsymbol{col_2}`）
+合成了红色向量（ :math:`\boldsymbol{b}` ）。
+
+我们继续观察
+:math:`x \boldsymbol{col_1} + y \boldsymbol{col_2} = \boldsymbol{b}` ，
+:math:`\boldsymbol{col_1}` 和 :math:`\boldsymbol{col_2}`
+的某种线性组合得到向量
+:math:`\boldsymbol{b}` ，
+那么
+:math:`\boldsymbol{col_1}` 和 :math:`\boldsymbol{col_2}`
+的所有线性组合能够得到什么结果？它们将铺满整个平面。
+
+下面进入三个未知数的方程组：
+:math:`\left\{ \begin{eqnarray*}
+2x & - & y & \mbox{ } & \mbox{ } & = & 0 \\
+-x & + & 2y & - & z & = & -1 \\
+\mbox{ } & - & 3y & + & 4z & = & 4
+\end{eqnarray*} \right.` ，
+写作矩阵形式：
+:math:`\boldsymbol{A}
+=
+\left[ \begin{array}{ccc}
+2 & -1 & 0 \\
+-1 & 2 & -1 \\
+0 & -3 & 4
+\end{array} \right]` ，
+:math:`\boldsymbol{b}
+=
+\left[ \begin{array}{c}
+0 \\
+-1 \\
+4
+\end{array} \right]` 。
+
+在三维直角坐标系中，每一个方程将确定一个平面，
+而例子中的三个平面会相交于一点，这个点就是方程组的解。
+
+同样的，我们再按列观察这个方程组：
+:math:`x
+\left[ \begin{array}{c}
+2 \\
+-1 \\
+0
+\end{array} \right]
++
+y
+\left[ \begin{array}{c}
+-1 \\
+2 \\
+3
+\end{array} \right]
++
+z
+\left[ \begin{array}{c}
+0 \\
+-1 \\
+4
+\end{array} \right]
+=
+\left[ \begin{array}{c}
+0 \\
+-1 \\
+4
+\end{array} \right]` 。
+易知教授特意安排的例子中最后一个列向量恰巧等于等式右边的 :math:`\boldsymbol{b}` 向量，
+所以我们需要的线性组合为
+:math:`x = 0` ， :math:`y = 0` ， :math:`z = 1` 。
+
+我们并不能总是这么轻易的求出正确的线性组合，
+所以下一讲将介绍消元法 —— 一种线性方程组的系统性解法。
+
+现在，我们需要考虑，对于任意的 :math:`\boldsymbol{b}` ，
+是否都能求解 :math:`\boldsymbol{A} \boldsymbol{x} = \boldsymbol{b}` ？
+用列向量线性组合的观点阐述就是，列向量的线性组合能否覆盖整个三维向量空间？
+对上面这个例子，答案是肯定的，这个例子中的 :math:`\boldsymbol{A}` 是我们喜欢的矩阵类型，
+但是对另一些矩阵，答案是否定的。
+那么在什么情况下，三个向量的线性组合得不到 :math:`\boldsymbol{b}` ？
+
+如果三个向量在同一个平面上，问题就出现了 —— 那么他们的线性组合也一定都在这个平面上。
+举个例子，比如 :math:`\boldsymbol{col_3} = \boldsymbol{col_1} + \boldsymbol{col_2}` ，
+那么不管怎么组合，这三个向量的结果都逃不出这个平面。
+因此当 :math:`\boldsymbol{b}` 在平面内，方程组有解；
+而当 :math:`\boldsymbol{b}` 不在平面内，这三个列向量就无法构造出 :math:`\boldsymbol{b}` 。
+在后面的课程中，我们会了解到这种情形称为 **奇异** 、 **矩阵不可逆** 。
+
+下面我们推广到九维空间，每个方程有九个未知数，共九个方程，
+此时已经无法从坐标图像中描述问题了，
+但是我们依然可以从求九维列向量线性组合的角度解决问题，
+仍然是上面的问题，是否总能得到 :math:`\boldsymbol{b}` ？
+当然这仍取决于这九个向量，如果我们取一些并不相互独立的向量，则答案是否定的，
+比如取了九列但其实只相当于八列，有一列毫无贡献（这一列是前面列的某种线性组合），
+则会有一部分 :math:`\boldsymbol{b}` 无法求得。
+
+接下来介绍方程的矩阵形式 :math:`\boldsymbol{A} \boldsymbol{x} = \boldsymbol{b}` ，
+这是一种乘法运算，举个例子，取
+:math:`\boldsymbol{A}
+=
+\left[ \begin{array}{cc}
+2 & 5 \\
+1 & 3
+\end{array} \right]` ，
+:math:`\boldsymbol{x}
+=
+\left[ \begin{array}{c}
+1 \\
+2
+\end{array} \right]`
+来看如何计算：
+
+    -   使用列向量线性组合的方式，一次计算一列：
+
+        :math:`\left[ \begin{array}{cc}
+        2 & 5 \\
+        1 & 3
+        \end{array} \right]
+        \left[ \begin{array}{c}
+        1 \\
+        2
+        \end{array} \right]
+        =
+        1
+        \left[ \begin{array}{c}
+        2 \\
+        1
+        \end{array} \right]
+        +
+        2
+        \left[ \begin{array}{c}
+        5 \\
+        3
+        \end{array} \right]
+        =
+        \left[ \begin{array}{c}
+        12 \\
+        7
+        \end{array} \right]`
+
+    -   另一种方法，使用向量内积，矩阵的行向量点乘列向量
+        :math:`\boldsymbol{x}` 的转置 :math:`\boldsymbol{x}^T` ：
+
+        :math:`\left[ \begin{array}{cc} 2 & 5 \end{array} \right]
+        \cdot
+        \left[ \begin{array}{c}
+        1 \\
+        2
+        \end{array} \right]^T
+        =
+        12` ，
+        :math:`\left[ \begin{array}{cc} 1 & 3 \end{array} \right]
+        \cdot
+        \left[ \begin{array}{c}
+        1 \\
+        2
+        \end{array} \right]^T
+        =
+        7`
+
+教授建议使用第一种方法，
+将 :math:`\boldsymbol{A} \boldsymbol{x}` 看做对 :math:`\boldsymbol{A}` 中列向量的线性组合。
+
+第 02 集 矩阵消元
+================================================================================
+
+2.1 消元法(Elimination)
+--------------------------------------------------------------------------------
+
+消元法，这个方法最早由高斯提出，也叫高斯消元法：是为了解线性方程组的。
+
+应用消元法求解的时候，通常会应用以下三种变换，并且每一种变换都不会改变方程组的解：
+
+    -   交换方程组中任意两个方程的位置；
+    -   用一个数乘某一个方程的左右两边；
+    -   将一个方程的两边乘一个数然后加到另一个方程上。
+
+
+求解三元方程组
+:math:`\left\{ \begin{eqnarray*}
+x & + & 2y & + & z & = & 2 \\
+3x & + & 8y & + & z & = & 12 \\
+\mbox{ } & \mbox{ } & 4y & + & z & = & 2
+\end{eqnarray*} \right.` ，
+对应的矩阵形式
+:math:`\boldsymbol{A} \boldsymbol{x} = \boldsymbol{b}`
+为
+:math:`\left[ \begin{array}{ccc}
+1 & 2 & 1 \\
+3 & 8 & 1 \\
+0 & 4 & 1
+\end{array} \right]
+\left[ \begin{array}{c}
+x \\
+y \\
+z
+\end{array} \right]
+=
+\left[ \begin{array}{c}
+2 \\
+12 \\
+2
+\end{array} \right]` 。
+
+按照消元法的思路：
+
+    #.  我们希望在第二个方程中消去 :math:`x` 项，操作系数矩阵
+        :math:`\boldsymbol{A}
+        =
+        \left[ \begin{array}{ccc}
+        \underline{1} & 2 & 1 \\
+        3 & 8 & 1 \\
+        0 & 4 & 1
+        \end{array} \right]` ，
+        下划线的元素为主元（pivot）：
+        
+        :math:`\left[ \begin{array}{ccc}
+        \underline{1} & 2 & 1 \\
+        3 & 8 & 1 \\
+        0 & 4 & 1
+        \end{array} \right]        
+        \xrightarrow{row_2 - 3row_1}
+        \left[ \begin{array}{ccc}
+        \underline{1} & 2 & 1 \\
+        0 & 2 & -2 \\
+        0 & 4 & 1
+        \end{array} \right]`
+        
+        这里我们先不管 :math:`\boldsymbol{b}` 向量，
+        等做完 :math:`\boldsymbol{A}` 的消元可以再做 :math:`\boldsymbol{b}` 的消元。
+        （这是MATLAB等工具经常使用的算法。）
+
+    #.  我们希望在第三个方程中消去 :math:`y` 项，
+        现在第二行第一个非零元素成为了第二个主元：
+
+        :math:`\left[ \begin{array}{ccc}
+        \underline{1} & 2 & 1 \\
+        0 & \underline{2} & -2 \\
+        0 & 4 & 1
+        \end{array} \right]
+        \xrightarrow{row_3 - 2row_2}
+        \left[ \begin{array}{ccc}
+        \underline{1} & 2 & 1 \\
+        0 & \underline{2} & -2 \\
+        0 & 0 & \underline{5}
+        \end{array} \right]`
+        
+        注意到第三行消元过后仅剩一个非零元素，所以它就成为第三个主元。
+        做到这里就算消元完成了。
+
+        再来讨论一下消元失效的情形：
+
+            -   首先，主元不能为零；
+            -   其次，如果在消元时遇到主元位置为零，则需要交换行，使主元不为零；
+            -   最后提一下，如果我们把第三个方程 :math:`z` 前的系数成 :math:`-4` ，
+                会导致第二步消元时最后一行全部为零，则第三个主元就不存在了，
+                至此消元不能继续进行了，这就是下一讲中涉及的 **不可逆** 情况。
+
+    #.  接下来就该回代（back substitution）了，
+        这时我们在 :math:`\boldsymbol{A}` 矩阵后面加上 :math:`\boldsymbol{b}` 向量
+        写成 **增广矩阵（augmented matrix）** 的形式（后文中简写为 RREF）：
+        
+        :math:`[ \begin{array}{c|c} \boldsymbol{A} & \boldsymbol{b} \end{array} ]
+        =
+        \left[ \begin{array}{ccc|c}
+        1 & 2 & 1 & 2 \\
+        3 & 8 & 1 & 12 \\
+        0 & 4 & 1 & 2
+        \end{array} \right]
+        \rightarrow
+        \left[ \begin{array}{ccc|c}
+        1 & 2 & 1 & 2 \\
+        0 & 2 & -2 & 6 \\
+        0 & 4 & 1 & 2
+        \end{array} \right]
+        \rightarrow
+        \left[ \begin{array}{ccc|c}
+        1 & 2 & 1 & 2 \\
+        0 & 2 & -2 & 6 \\
+        0 & 0 & 5 & -10
+        \end{array} \right]`
+
+        不难看出，:math:`z` 的解已经出现了，此时方程组变为
+        :math:`\left\{ \begin{eqnarray*}
+        x & + & 2y & + & z & = & 2 \\
+        \mbox{ } & \mbox{ } & 2y & - & 2z & = & 6 \\
+        \mbox{ } & \mbox{ } & \mbox{ } & \mbox{ } & 5z & = & -10
+        \end{eqnarray*} \right.` ，
+        从第三个方程求出 :math:`z = -2` ，
+        代入第二个方程求出 :math:`y = 1`，
+        再代入第一个方程求出 :math:`x = 2`。
+
+2.2 消元矩阵
+--------------------------------------------------------------------------------
+
+上一讲我们学习了矩阵乘以向量的方法，有三个列向量的矩阵乘以另一个向量，
+按列的线性组合可以写作
+:math:`\left[ \begin{array}{ccc} v_1 & v_2 & v_3 \end{array} \right]
+\left[ \begin{array}{c} 3 \\ 4 \\ 5 \end{array} \right]
+= 3v_1 + 4v_2 + 5v_3` 。
+
+但现在我们希望用矩阵乘法表示行操作，则有
+:math:`\left[ \begin{array}{ccc} 1 & 2 & 7 \end{array} \right]
+\left[ \begin{array}{c} row_1 \\ row_2 \\ row_3 \end{array} \right]
+= 1row_1 + 2row_2 + 7row_3` 。
+易看出这里是一个行向量从左边乘以矩阵，这个行向量按行操作矩阵的行向量，
+并将其合成为一个矩阵行向量的线性组合。
+
+介绍到这里，我们就可以将消元法所做的行操作写成向量乘以矩阵的形式了：
+
+    #.  消元法第一步操作为将第二行改成 :math:`row_2 - 3row_1` ，其余两行不变，则有
+        :math:`\left[ \begin{array}{ccc}
+        1 & 0 & 0 \\
+        -3 & 1 & 0 \\
+        0 & 0 & 1
+        \end{array} \right]
+        \left[ \begin{array}{ccc}
+        1 & 2 & 1 \\
+        3 & 8 & 1 \\
+        0 & 4 & 1
+        \end{array} \right]
+        =
+        \left[ \begin{array}{ccc}
+        1 & 2 & 1 \\
+        0 & 2 & -2 \\
+        0 & 4 & 1
+        \end{array} \right]` 。
+        
+        这个消元矩阵将第二行第一个元素变为零，我们将其记作 :math:`\boldsymbol{E}_{21}` 。
+        
+        另外，如果三行都不变，消元矩阵就是 **单位矩阵**
+        :math:`\boldsymbol{I}
+        =
+        \left[ \begin{array}{ccc}
+        1 & 0 & 0 \\
+        0 & 1 & 0 \\
+        0 & 0 & 1
+        \end{array} \right]` ，
+        :math:`\boldsymbol{I}` 之于矩阵运算相当于 :math:`1` 之于四则运算。
+        
+    #.  接下来就是求 :math:`\boldsymbol{E}_{32}` 消元矩阵了，即将第三行第二个元素变为零，则
+        :math:`\left[ \begin{array}{ccc}
+        1 & 0 & 0 \\
+        0 & 1 & 0 \\
+        0 & -2 & 1
+        \end{array} \right]
+        \left[ \begin{array}{ccc}
+        1 & 2 & 1 \\
+        0 & 2 & -2 \\
+        0 & 4 & 1
+        \end{array} \right]
+        =
+        \left[ \begin{array}{ccc}
+        1 & 2 & 1 \\
+        0 & 2 & -2 \\
+        0 & 0 & 5
+        \end{array} \right]` 。
+        
+        这就是消元所用的两个 **初等矩阵（elementary matrix）** 。
+    #.  最后，我们将这两步综合起来，即
+        :math:`\boldsymbol{E}_{32}(\boldsymbol{E}_{21} \boldsymbol{A}) = \boldsymbol{U}` ，
+        也就是说如果我们想从 :math:`\boldsymbol{A}` 矩阵
+        直接得到 :math:`\boldsymbol{U}` 矩阵的话，只需要
+        :math:`\boldsymbol{E}_{32}(\boldsymbol{E}_{21} \boldsymbol{A})` 即可。
+
+        .. hint::
+
+            矩阵乘法虽然不能随意变动相乘次序，但是可以变动括号位置，
+            也就是满足结合律（associative law ，而结合律在矩阵运算中非常重要，
+            很多定理的证明都需要巧妙的使用结合律。
+
+既然提到了消元用的初等矩阵，那我们再介绍常用的 **置换矩阵（permutation matrix）** ：
+
+    -   :math:`\left[ \begin{array}{cc}
+        0 & 1 \\
+        1 & 0
+        \end{array} \right]
+        \left[ \begin{array}{cc}
+        a & b \\
+        c & d
+        \end{array} \right]
+        =
+        \left[ \begin{array}{cc}
+        c & d \\
+        a & b
+        \end{array} \right]` ，置换矩阵将原矩阵的两行做了互换。
+    -   :math:`\left[ \begin{array}{cc}
+        a & b \\
+        c & d
+        \end{array} \right]
+        \left[ \begin{array}{cc}
+        0 & 1 \\
+        1 & 0
+        \end{array} \right]
+        =
+        \left[ \begin{array}{cc}
+        c & d \\
+        a & b
+        \end{array} \right]` ，置换矩阵将原矩阵的两列做了互换。
+
+我们现在能够将 :math:`\boldsymbol{A}` 通过行变换写成 :math:`\boldsymbol{U}` ，
+那么如何从 :math:`\boldsymbol{U}` 再变回 :math:`\boldsymbol{A}` ，也就是求消元的逆运算。
+对某些“坏”矩阵，并没有 **逆** ，而本讲的例子都是“好”矩阵。
+
+2.3 逆
+--------------------------------------------------------------------------------
+
+现在，我们以 :math:`\boldsymbol{E}_{21}` 为例，什么矩阵可以撤销这次的行变换，即
+:math:`[?]
+\left[ \begin{array}{ccc}
+1 & 0 & 0 \\
+-3 & 1 & 0 \\
+0 & 0 & 1
+\end{array} \right]
+=
+\left[ \begin{array}{ccc}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 1
+\end{array} \right]` ？
+这次变换是从第二行中减去三倍的第一行，那么其逆变换就是给第二行加上三倍的第一行，
+所以逆矩阵就是
+:math:`\left[ \begin{array}{ccc}
+1 & 0 & 0 \\
+3 & 1 & 0 \\
+0 & 0 & 1
+\end{array} \right]` 。
+
+我们把矩阵 :math:`\boldsymbol{E}` 的逆记作 :math:`\boldsymbol{E}^{-1}` ，所以有
+:math:`\boldsymbol{E}^{-1} \boldsymbol{E} = \boldsymbol{I}`。
+
+第 03 集 乘法和逆矩阵
+================================================================================
+
+上一讲大概介绍了矩阵乘法和逆矩阵，本讲就来做进一步说明。
+
+3.1 矩阵乘法
+--------------------------------------------------------------------------------
+
+-   行列内积
+
+    有
+    :math:`m \times n` 矩阵 :math:`\boldsymbol{A}`
+    和
+    :math:`n \times p` 矩阵 :math:`\boldsymbol{B}`
+    （ :math:`\boldsymbol{A}` 的总行数必须与 :math:`\boldsymbol{A}` 的总列数相等），
+    两矩阵相乘有
+    :math:`\boldsymbol{A} \boldsymbol{B} = \boldsymbol{C}` ，
+    :math:`\boldsymbol{C}` 是一个 :math:`m \times p` 矩阵，
+    对于 :math:`\boldsymbol{C}` 矩阵中的第 :math:`i` 行第 :math:`j` 列元素
+    :math:`c_{ij}` ，有：
+    
+    .. math::
+
+        c_{ij} = row_i \cdot column_j = \sum_{k=1}^{n} a_{ik}b_{kj}
+
+    其中
+    :math:`a_{ik}` 是 :math:`\boldsymbol{A}` 矩阵的第 :math:`i` 行第 :math:`k` 列元素，
+    :math:`b_{kj}` 是 :math:`\boldsymbol{B}` 矩阵的第 :math:`k` 行第 :math:`j` 列元素。
+
+    可以看出
+    :math:`c_{ij}` 其实是
+    :math:`\boldsymbol{A}` 矩阵第 :math:`i` 行点乘
+    :math:`\boldsymbol{A}` 矩阵第 :math:`j` 列
+    :math:`\left[ \begin{array}{c}
+    \vdots \\
+    row_i \\
+    \vdots
+    \end{array} \right]
+    \left[ \begin{array}{ccc}
+    \cdots & column_j & \cdots
+    \end{array} \right]
+    =
+    \left[ \begin{array}{ccc}
+    \mbox{ } & \vdots & \mbox{ } \\
+    \cdots & c_{ij} & \cdots \\
+    \mbox{ } & \vdots & \mbox{ }
+    \end{array} \right]` 。
+
+-   整列相乘
+
+    上一讲我们知道了如何计算矩阵乘以向量，而整列相乘就是使用这种线性组合的思想：
+    
+    :math:`\left[ \begin{array}{cccc}
+    \boldsymbol{A}_{col1} & \boldsymbol{A}_{col2} & \cdots & \boldsymbol{A}_{coln}
+    \end{array} \right]
+    \left[ \begin{array}{ccc}
+    \cdots & b_{1j} & \cdots \\
+    \cdots & b_{2j} & \cdots \\
+    \cdots & \vdots & \cdots \\
+    \cdots & b_{nj} & \cdots
+    \end{array} \right]`
+        
+    :math:`=
+    \left[ \begin{array}{ccc}
+    \cdots & (b_{1j}\boldsymbol{A}_{col1} + b_{2j}\boldsymbol{A}_{col2} + \cdots + b_{nj}\boldsymbol{A}_{coln}) & \cdots
+    \end{array} \right]`
+
+    上面的运算为
+    :math:`\boldsymbol{B}` 矩阵的第 :math:`j` 个列向量右乘矩阵 :math:`\boldsymbol{A}` ，
+    求得的结果就是 :math:`\boldsymbol{C}` 矩阵的第 :math:`j` 列，
+    即 :math:`\boldsymbol{C}` 矩阵的第 :math:`j` 列是
+    :math:`\boldsymbol{A}` 矩阵的列向量以 :math:`\boldsymbol{B}` 矩阵的第 :math:`j` 列
+    作为系数所求得的线性组合：
+    :math:`\boldsymbol{C}_{colj}
+    =
+    b_{1j}\boldsymbol{A}_{col1} + b_{2j}\boldsymbol{A}_{col2} + \cdots + b_{nj}\boldsymbol{A}_{coln}` 。
+
+-   整行相乘
+
+    类似的，也可以利用行向量线性组合的思想：
+
+    :math:`\left[ \begin{array}{cccc}
+    \vdots & \vdots & \vdots & \vdots \\
+    a_{i1} & a_{i2} & \cdots & a_{in} \\
+    \vdots & \vdots & \vdots & \vdots
+    \end{array} \right]
+    \left[ \begin{array}{c}
+    \boldsymbol{B}_{row1} \\
+    \boldsymbol{B}_{row2} \\
+    \vdots \\
+    \boldsymbol{B}_{rown}
+    \end{array} \right]`
+
+    :math:`=
+    \left[ \begin{array}{c}
+    \vdots \\
+    (a_{i1}\boldsymbol{B}_{row1} + a_{i2}\boldsymbol{B}_{row2} + \cdots + a_{in}\boldsymbol{B}_{rown}) \\
+    \vdots
+    \end{array} \right]`
+
+    上面的运算为
+    :math:`\boldsymbol{A}` 的第 :math:`i` 个行向量左乘矩阵 :math:`\boldsymbol{B}` ，
+    求得的结果就是 :math:`\boldsymbol{C}` 矩阵的第 :math:`i` 行，
+    即 :math:`\boldsymbol{C}` 矩阵的第 :math:`i` 行是
+    :math:`\boldsymbol{B}` 矩阵的行向量以 :math:`\boldsymbol{A}` 矩阵的第 :math:`i` 行
+    作为系数所求得的线性组合:
+    :math:`\boldsymbol{C}_{rowi}
+    =
+    a_{i1}\boldsymbol{B}_{row1} + a_{i2}\boldsymbol{B}_{row2} + \cdots + a_{in}\boldsymbol{B}_{rown}` 。
+
+-   列乘以行
+
+    用 :math:`\boldsymbol{A}` 矩阵的列乘以 :math:`\boldsymbol{B}` 矩阵的行，
+    得到的矩阵相加即可：
+    
+    :math:`\left[ \begin{array}{cccc}
+    \boldsymbol{A}_{col1} & \boldsymbol{A}_{col2} & \cdots & \boldsymbol{A}_{coln}
+    \end{array} \right]
+    \left[ \begin{array}{c}
+    \boldsymbol{B}_{row1} \\
+    \boldsymbol{B}_{row2} \\
+    \vdots \\
+    \boldsymbol{B}_{rown}
+    \end{array} \right]`
+
+    :math:`=
+    \boldsymbol{A}_{col1}\boldsymbol{B}_{row1} + \boldsymbol{A}_{col2}\boldsymbol{B}_{row2}
+    + \cdots + \boldsymbol{A}_{coln}\boldsymbol{B}_{rown}` 。
+
+    注意，
+    :math:`\boldsymbol{A}_{coli}\boldsymbol{B}_{rowi}` 是一个
+    :math:`m \times 1` 向量乘以一个 :math:`1 \times p` 向量，
+    其结果是一个 :math:`m \times p` 矩阵，
+    而所有的 :math:`m \times p` 矩阵之和就是计算结果。
+
+-   分块乘法
+
+    .. math::
+    
+        \left[ \begin{array}{c|c}
+        \boldsymbol{A}_1 & \boldsymbol{A}_2 \\
+        \hline
+        \boldsymbol{A}_3 & \boldsymbol{A}_4
+        \end{array} \right]
+        \left[ \begin{array}{c|c}
+        \boldsymbol{B}_1 & \boldsymbol{B}_2 \\
+        \hline
+        \boldsymbol{B}_3 & \boldsymbol{B}_4
+        \end{array} \right]
+        =
+        \left[ \begin{array}{c|c}
+        \boldsymbol{A}_1 \boldsymbol{B}_1 + \boldsymbol{A}_2 \boldsymbol{B}_3 & \boldsymbol{A}_1 \boldsymbol{B}_2 + \boldsymbol{A}_2 \boldsymbol{B}_4 \\
+        \hline
+        \boldsymbol{A}_3 \boldsymbol{B}_1 + \boldsymbol{A}_4 \boldsymbol{B}_3 & \boldsymbol{A}_3 \boldsymbol{B}_2 + \boldsymbol{A}_4 \boldsymbol{B}_4
+        \end{array} \right]
+
+    在分块合适的情况下，可以简化运算。
+
+3.2 矩阵的逆
+--------------------------------------------------------------------------------
+
+首先，并不是所有的 **方阵** 都有逆；而如果逆存在，则有
+:math:`\boldsymbol{A}^{-1}\boldsymbol{A} = \boldsymbol{I} = \boldsymbol{A}\boldsymbol{A}^{-1}` 。
+
+.. hint::
+
+    教授这里提前剧透，对于方阵，左逆和右逆是相等的；
+    但是对于非方阵（长方形矩阵），其左逆不等于右逆。
+
+对于这些有逆的矩阵，我们称其为 **非奇异** 的或 **可逆** 的。
+我们先来看看奇异（不可逆）矩阵：
+:math:`\boldsymbol{A} = \left[ \begin{array}{cc} 
+1 & 2 \\
+3 & 6
+\end{array} \right]`，
+在后面将要学习的行列式中，会发现这个矩阵的行列式为 :math:`0` 。
+
+观察这个方阵，我们如果用另一个矩阵乘 :math:`\boldsymbol{A}` ，
+则得到的结果矩阵中的每一列应该都是
+:math:`\left[ \begin{array}{c} 1 \\ 2 \end{array} \right]` 的倍数，
+所以我们不可能从
+:math:`\boldsymbol{A}\boldsymbol{B}` 的乘积中得到单位矩阵 :math:`\boldsymbol{I}` 。
+
+另一种判定方法，如果存在非零向量 :math:`\boldsymbol{x}` 使得
+:math:`\boldsymbol{A}\boldsymbol{x} = 0` ，
+则矩阵 :math:`\boldsymbol{A}` 不可逆。我们来用上面的矩阵为例：
+:math:`\left[ \begin{array}{cc} 
+1 & 2 \\
+3 & 6
+\end{array} \right]
+\left[ \begin{array}{c} 3 \\ -1 \end{array} \right]
+=
+\left[ \begin{array}{c} 0 \\ 0 \end{array} \right]`
+
+证明：如果对于非零向量的 :math:`\boldsymbol{x}` 仍有
+:math:`\boldsymbol{A}\boldsymbol{x} = 0` ，
+且 :math:`\boldsymbol{A}` 有逆 :math:`\boldsymbol{A}^{-1}` ，
+则 :math:`\boldsymbol{A}^{-1}\boldsymbol{A}\boldsymbol{x} = 0` ，
+即 :math:`\boldsymbol{x} = 0` ，与题设矛盾，得证。
+
+现在来看看什么矩阵有逆，设
+:math:`\boldsymbol{A}
+=
+\left[ \begin{array}{cc}
+1 & 3 \\
+2 & 7
+\end{array} \right]` ，
+我们来求 :math:`\boldsymbol{A}^{-1}` 。
+:math:`\left[ \begin{array}{cc}
+1 & 3 \\
+2 & 7
+\end{array} \right]
+\left[ \begin{array}{cc}
+a & b \\
+c & d
+\end{array} \right]
+=
+\left[ \begin{array}{cc}
+1 & 0 \\
+0 & 1
+\end{array} \right]` ，
+使用列向量线性组合的思想，我们可以说
+:math:`\boldsymbol{A}` 乘以 :math:`\boldsymbol{A}^{-1}` 的第 :math:`j` 列，
+能够得到 :math:`\boldsymbol{I}` 的第 :math:`j` 列，这时我会得到一个关于列的方程组：
+
+.. math::
+
+    \left\{ \begin{eqnarray*}
+    \left[\begin{array}{cc} 1 & 3 \\ 2 & 7 \end{array}\right] \left[\begin{array}{c} a \\ c \end{array}\right] & = & \left[\begin{array}{c} 1 \\ 0 \end{array}\right] \\
+    \left[\begin{array}{cc} 1 & 3 \\ 2 & 7 \end{array}\right] \left[\begin{array}{c} b \\ d \end{array}\right] & = & \left[\begin{array}{c} 0 \\ 1 \end{array}\right]
+    \end{eqnarray*} \right.
+
+3.3 Gauss-Jordan 法求矩阵的逆
+--------------------------------------------------------------------------------
+
+接下来介绍高斯-若尔当（Gauss-Jordan）方法，该方法可以一次处理所有的方程：
+
+    #.  构造这样一个矩阵
+        :math:`\left[\begin{array}{cc|cc}
+        1 & 3 & 1 & 0 \\
+        2 & 7 & 0 & 1
+        \end{array}\right]` ，
+        接下来用消元法将左侧变为单位矩阵；
+    #.  :math:`\left[\begin{array}{cc|cc}
+        1 & 3 & 1 & 0 \\
+        2 & 7 & 0 & 1
+        \end{array}\right]
+        \xrightarrow{row_2 - 2row_1}
+        \left[\begin{array}{cc|cc}
+        1 & 3 & 1 & 0 \\
+        0 & 1 & -2 & 1
+        \end{array}\right]
+        \xrightarrow{row_1 - 3row_2}
+        \left[\begin{array}{cc|cc}
+        1 & 0 & 7 & -3 \\
+        0 & 1 & -2 & 1
+        \end{array}\right]` ；
+    #.  于是，我们就将矩阵从
+        :math:`[ \begin{array}{c|c} \boldsymbol{A} & \boldsymbol{I} \end{array}]` 变为
+        :math:`[ \begin{array}{c|c} \boldsymbol{I} & \boldsymbol{A}^{-1} \end{array}]` 。
+
+高斯-若尔当法的本质是使用消元矩阵 :math:`\boldsymbol{E}` ，
+对 :math:`\boldsymbol{A}` 进行操作，
+:math:`\boldsymbol{E} [ \begin{array}{c|c} \boldsymbol{A} & \boldsymbol{I} \end{array} ]` ，
+利用一步步消元有
+:math:`\boldsymbol{E}\boldsymbol{A}=\boldsymbol{I}` ，
+进而得到
+:math:`[ \begin{array}{c|c} \boldsymbol{I} & \boldsymbol{E} \end{array} ]` ，
+其实这个消元矩阵 :math:`\boldsymbol{E}` 就是 :math:`\boldsymbol{A}^{-1}` ，
+而高斯-若尔当法中的 :math:`\boldsymbol{I}` 只是负责记录消元的每一步操作，
+待消元完成，逆矩阵就自然出现了。
+
+第 04 集 :math:`\boldsymbol{A}` 的 :math:`\boldsymbol{L}\boldsymbol{U}` 分解
+================================================================================
+
+4.1 关于转置和取逆的一些性质
+--------------------------------------------------------------------------------
+
+-   :math:`(\boldsymbol{A}\boldsymbol{B})^T = \boldsymbol{B}^T\boldsymbol{A}^T`
+-   :math:`(\boldsymbol{A}\boldsymbol{B})^{-1} = \boldsymbol{B}^{-1}\boldsymbol{A}^{-1}`
+
+    .. math::
+
+        \boldsymbol{A}\boldsymbol{A}^{-1} = \boldsymbol{I} = \boldsymbol{A}^{-1}\boldsymbol{A}
+        
+        \Rightarrow \boldsymbol{A}(\boldsymbol{B}\boldsymbol{B}^{-1})\boldsymbol{A}^{-1} = \boldsymbol{I}
+        
+        \Rightarrow (\boldsymbol{A}\boldsymbol{B})(\boldsymbol{B}^{-1}\boldsymbol{A}^{-1}) = \boldsymbol{I}
+        
+        \Rightarrow (\boldsymbol{A}\boldsymbol{B})^{-1} = \boldsymbol{B}^{-1}\boldsymbol{A}^{-1}
+
+-   :math:`(\boldsymbol{A}^T)^{-1} = (\boldsymbol{A}^{-1})^T`
+
+    .. math::
+
+        (\boldsymbol{A} \boldsymbol{A}^{-1})^T = \boldsymbol{I}^T
+
+        \Rightarrow (\boldsymbol{A}^{-1})^T \boldsymbol{A}^T = \boldsymbol{I}
+
+        \Rightarrow (\boldsymbol{A}^T)^{-1} = (\boldsymbol{A}^{-1})^T
+
+
+4.2 :math:`\boldsymbol{L}\boldsymbol{U}` 分解
+--------------------------------------------------------------------------------
+
+很多线性代数问题最后都可以归结为矩阵分解问题，
+:math:`\boldsymbol{L}\boldsymbol{U}` 分解是最简单，最重要的一个。
+利用高斯消元，
+可以把一个矩阵 :math:`\boldsymbol{A}`
+分解为一个上三角矩阵( :math:`\boldsymbol{U}` )
+和一个下三角矩阵( :math:`\boldsymbol{L}` )，即
+:math:`\boldsymbol{A}=\boldsymbol{L}\boldsymbol{U}` ，简称
+:math:`\boldsymbol{L}\boldsymbol{U}` 分解。
+
+举个列子，对于一个 :math:`2 \times 2` 矩阵
+:math:`\boldsymbol{A}=\left[\begin{array}{cc}2&1\\8&7\end{array}\right]` ：
+
+    -   通过高斯消元可以得到一个上三角矩阵( :math:`\boldsymbol{U}` )：
+        
+        .. math::
+        
+            \begin{array}{ccc}
+            \boldsymbol{A} &  & \boldsymbol{U} \\
+            \left[\begin{array}{cc}2&1\\8&7\end{array}\right]
+            & \xrightarrow{\mbox{消元}} &
+            \left[\begin{array}{cc}2&1\\0&3\end{array}\right]
+            \end{array}
+
+        使用消元矩阵表示为：
+        
+        .. math::
+
+            \begin{array}{cccc}
+            \boldsymbol{E} & \boldsymbol{A} &  & \boldsymbol{U} \\
+            \left[\begin{array}{cc}1&0\\-4&1\end{array}\right]
+            &
+            \left[\begin{array}{cc}2&1\\8&7\end{array}\right]
+            &
+            =
+            &
+            \left[\begin{array}{cc}2&1\\0&3\end{array}\right]
+            \end{array}
+
+        即我们通过消元得到了
+        :math:`\boldsymbol{E}\boldsymbol{A}=\boldsymbol{U}` 。
+
+    -   要得到 :math:`\boldsymbol{A}=\boldsymbol{L}\boldsymbol{U}` ，
+        我们只需要在
+        :math:`\boldsymbol{E}\boldsymbol{A}=\boldsymbol{U}` 的基础上，
+        将等式两边同时乘以 :math:`\boldsymbol{E}^{-1}`
+        （即 :math:`\boldsymbol{E}^{-1}`` 就是 :math:`\boldsymbol{L}`）即可：
+        
+        我们使用前面提到的
+        :ref:`Gauss-Jordan <src/LinearAlgebra.MIT:3.3 Gauss-Jordan 法求矩阵的逆>`
+        来计算矩阵 :math:`\boldsymbol{E}` 的逆为
+        :math:`\boldsymbol{E}^{-1}
+        =\left[\begin{array}{cc}1&0\\4&1\end{array}\right]` ，
+        我们可以得到：
+        
+        .. math::
+
+            \begin{array}{cccc}
+            \boldsymbol{A}  & & \boldsymbol{L} & \boldsymbol{U} \\
+            \left[\begin{array}{cc}2&1\\8&7\end{array}\right]
+            &
+            =
+            &
+            \left[\begin{array}{cc}1&0\\4&1\end{array}\right]
+            &
+            \left[\begin{array}{cc}2&1\\0&3\end{array}\right]
+            \end{array}
+
+        这样就完成了一次 :math:`\boldsymbol{L}\boldsymbol{U}` 分解：
+        :math:`\boldsymbol{U}` 是上三角矩阵，主对角线是主元，
+        :math:`\boldsymbol{L}` 是下三角矩阵，主对角线上都是1。
+        有时候我们需要把主元单独拉出来组成一个对角矩阵，变成这样：
+        
+        .. math::
+
+            \begin{array}{ccccc}
+            \boldsymbol{A} & \mbox{ } & \boldsymbol{L} & \boldsymbol{D} & \boldsymbol{U}^\prime \\
+            \left[\begin{array}{cc} 2 & 1 \\ 8 & 7 \end{array}\right]
+            & = &
+            \left[\begin{array}{cc} 1 & 0 \\ 4 & 1 \end{array}\right]
+            &
+            \left[\begin{array}{cc} 2 & 0 \\ 0 & 3 \end{array}\right]
+            &
+            \left[\begin{array}{cc} 1 & \frac{1}{2} \\ 0 & 1 \end{array}\right]
+            \end{array}
+
+4.3 :math:`\boldsymbol{L}\boldsymbol{U}` 分解计算量估计
+--------------------------------------------------------------------------------
+
+将一个 :math:`n` 阶方阵 :math:`\boldsymbol{A}` 变换为
+:math:`\boldsymbol{L}\boldsymbol{U}` 需要的计算量估计：
+
+    #.  将 :math:`a_{11}` 作为主元，需要的运算量约为 :math:`n^2` ：
+
+        .. math::
+
+            \left[ \begin{array}{cccc}
+            a_{11} & a_{12} & \cdots & a_{1n} \\
+            a_{21} & a_{22} & \cdots & a_{2n} \\
+            \vdots & \vdots & \ddots & \vdots \\
+            a_{n1} & a_{n2} & \cdots & a_{nn}
+            \end{array} \right]
+            \xrightarrow{\mbox{消元}}
+            \left[ \begin{array}{cccc}
+            a_{11} & a_{12} & \cdots & a_{1n} \\
+            0 & a_{22} & \cdots & a_{2n} \\
+            0 & \vdots & \ddots & \vdots \\
+            0 & a_{n2} & \cdots & a_{nn}
+            \end{array} \right]
+
+    #.  以此类推，接下来每一步计算量约为
+        :math:`(n-1)^2` 、
+        :math:`(n-1)^2` 、
+        :math:`\cdots` 、
+        :math:`2^2` 、
+        :math:`1^2` ；
+    #.  则将 :math:`\boldsymbol{A}` 变换为 :math:`\boldsymbol{L}\boldsymbol{U}` 的总运算量应为
+        :math:`O(n^2+(n-1)^2+\cdots+2^2+1^2)` ，即 :math:`O(\frac{n^{3}}{3})` 。
+
+第 05 集 置换-转置-向量空间 :math:`\mathbb{R}`
+================================================================================
+
+5.1 置换矩阵（Permutation Matrix）
+--------------------------------------------------------------------------------
+
+-   :math:`\boldsymbol{P}` 为置换矩阵，则对任意可逆矩阵 :math:`\boldsymbol{A}` 有：
+    :math:`\boldsymbol{P}\boldsymbol{A} = \boldsymbol{L}\boldsymbol{U}`
+    （上一节说的
+    :math:`\boldsymbol{A} = \boldsymbol{L}\boldsymbol{U}`
+    实际上并不完整，没有考虑行交换的情况）。
+
+-   :math:`\boldsymbol{P}` 为置换矩阵，则
+    :math:`\boldsymbol{P}` 是 **正交矩阵** ，即有
+    :math:`\boldsymbol{P}^T \boldsymbol{P} = \boldsymbol{I}` ，
+    :math:`\boldsymbol{P}^T = \boldsymbol{P}^{-1}` 。
+
+-   :math:`n` 阶方阵的置换矩阵有
+    :math:`\left( \begin{array}{c} n \\ 1\end{array}\right) = n!` 个。
+
+    3阶方阵的置换矩阵有6个：
+
+    .. math::
+
+        \left[\begin{array}{ccc}
+        1 & 0 & 0 \\
+        0 & 1 & 0 \\
+        0 & 0 & 1
+        \end{array}\right]
+        \left[\begin{array}{ccc}
+        0 & 1 & 0 \\
+        1 & 0 & 0 \\
+        0 & 0 & 1
+        \end{array}\right]
+        \left[\begin{array}{ccc}
+        0 & 0 & 1 \\
+        0 & 1 & 0 \\
+        1 & 0 & 0
+        \end{array}\right]
+        \left[\begin{array}{ccc}
+        1 & 0 & 0 \\
+        0 & 0 & 1 \\
+        0 & 1 & 0
+        \end{array}\right]
+        \left[\begin{array}{ccc}
+        0 & 1 & 0 \\
+        0 & 0 & 1 \\
+        1 & 0 & 0
+        \end{array}\right]
+        \left[\begin{array}{ccc}
+        0 & 0 & 1 \\
+        1 & 0 & 0 \\
+        0 & 1 & 0
+        \end{array}\right]
+
+5.2 转置矩阵（Transpose Matrix）
+--------------------------------------------------------------------------------
+
+:math:`(\boldsymbol{A}^T)_{ij} = (\boldsymbol{A})_{ji}`
+
+5.3 对称矩阵（Symmetric Matrix）
+--------------------------------------------------------------------------------
+
+:math:`\boldsymbol{A}^T = \boldsymbol{A}`
+
+对任意矩阵 :math:`\boldsymbol{R}` 有
+:math:`\boldsymbol{R}^T \boldsymbol{R}` 为对称矩阵：
+
+    ..  math::
+
+        (\boldsymbol{R}^T \boldsymbol{R})^T
+        =
+        (\boldsymbol{R})^T (\boldsymbol{R}^T)^T
+        =
+        \boldsymbol{R}^T \boldsymbol{R}
+
+
+5.4 向量空间（Vector Space）和子空间（Subspaces）
+--------------------------------------------------------------------------------
+
+向量空间（又称为线性空间）要满足加法封闭和数乘封闭。
+即向量空间中任意向量的数乘、求和运算得到的向量也在该空间中。
+
+所有向量空间都必须包含零向量。
+
+设 :math:`\boldsymbol{W}` 是线性空间 :math:`\boldsymbol{V}` 的非空子集，
+则 :math:`\boldsymbol{W}` 是 :math:`\boldsymbol{V}` 的 **子空间** 的充要条件是：
+
+    #.  若 :math:`\alpha,\beta \in \boldsymbol{W}` ，则
+        :math:`\alpha + \beta \in \boldsymbol{W}` ；
+    #.  若 :math:`\alpha \in \boldsymbol{W} , k \in \boldsymbol{R}` ，则
+        :math:`k\alpha \in \boldsymbol{W}` 。
+
+第 06 集 列空间和零空间
+================================================================================
+
+-   对向量子空间 :math:`\boldsymbol{S}` 和 :math:`\boldsymbol{T}` ，
+    有 :math:`\boldsymbol{S} \bigcap \boldsymbol{S}` 也是向量子空间。
+
+-   对 :math:`m \times n` 矩阵 :math:`\boldsymbol{A}` ，
+    :math:`n \times 1` 矩阵 :math:`\boldsymbol{x}` ，
+    :math:`m \times 1` 矩阵 :math:`\boldsymbol{b}` ，
+    运算 :math:`\boldsymbol{A} \boldsymbol{x} = \boldsymbol{b}` ：
+    
+    .. math::
+
+        \left[ \begin{array}{ccccc}
+        a_{11} & a_{12} & \cdots & a_{1(n-1)} & a_{1n} \\
+        a_{21} & a_{22} & \cdots & a_{2(n-1)} & a_{2n} \\
+        \vdots & \vdots & \ddots & \vdots & \vdots \\
+        a_{m1} & a_{m2} & \cdots & a_{m(n-1)} & a_{mn}
+        \end{array} \right]
+        \cdot
+        \left[ \begin{array}{c}
+        x_1 \\
+        x_2 \\
+        \vdots \\
+        x_{n-1} \\
+        x_n
+        \end{array} \right]
+        =
+        \left[ \begin{array}{c}
+        b_1 \\
+        b_2 \\
+        \vdots \\
+        b_m
+        \end{array} \right]
+
+    -   由 :math:`\boldsymbol{A}` 的列向量生成的子空间为
+        :math:`\boldsymbol{A}` 的 **列空间** ，记作 :math:`C(\boldsymbol{A})` ；
+    -   :math:`\boldsymbol{A} \boldsymbol{x} = \boldsymbol{b}`
+        有非零解当且仅当
+        :math:`\boldsymbol{b}` 属于
+        :math:`\boldsymbol{A}` 的列空间；
+    -   :math:`\boldsymbol{A}` 的 **零空间（nullspace matrix）** 是
+        :math:`\boldsymbol{A} \boldsymbol{x} = 0` 中
+        :math:`\boldsymbol{x}` 的解组成的集合，记作 :math:`N(\boldsymbol{A})`。
+
+第 07 集 求解 :math:`\boldsymbol{A}\boldsymbol{x} = 0` : 主变量、特解
+================================================================================
+
+.. hint::
+
+    消元不会改变 :math:`\boldsymbol{A}\boldsymbol{x}=\boldsymbol{b}` 的解，
+    所以不会改变零空间！但是消元会改变列空间！
+
+举例：
+:math:`3 \times 4` 矩阵
+:math:`\boldsymbol{A}
+=
+\left[ \begin{array}{cccc}
+1 & 2 & 2 & 2 \\
+2 & 4 & 6 & 8 \\
+3 & 6 & 8 & 10
+\end{array}\right]` ，
+求 :math:`\boldsymbol{A} \boldsymbol{x} = 0` 的特解？
+
+#.  找出主变量（pivot variable）：
+
+    .. math::
+
+        \boldsymbol{A}
+        =
+        \left[ \begin{array}{cccc}
+        1 & 2 & 2 & 2 \\
+        2 & 4 & 6 & 8 \\
+        3 & 6 & 8 & 10
+        \end{array}\right]
+        \xrightarrow{\mbox{消元}}
+        \left[ \begin{array}{cccc}
+        \underline{1} & 2 & 2 & 2 \\
+        0 & 0 & \underline{2} & 4 \\
+        0 & 0 & 0 & 0
+        \end{array}\right]
+        =
+        \boldsymbol{U}
+
+    主变量（下划线元素）的个数为2，即矩阵
+    :math:`\boldsymbol{A}` 的 **秩（rank）** 为2，即
+    :math:`r = 2` 。
+
+    主变量所在的列为 **主列（pivot column）** ，
+    其余列为 **自由列（free column）** 。
+    自由列中的变量为 **自由变量（free variable）** ，
+    自由变量的个数为 :math:`n−r=4−2=2` 。
+
+#.  通常，给自由列变量赋值，去求主列变量的值。如：
+
+    -   令 :math:`x_2 = 1` ， :math:`x_4 = 0` 求得特解
+        :math:`\boldsymbol{x}
+        =
+        c_1
+        \left[ \begin{array}{c} -2 \\ 1 \\ 0 \\ 0 \end{array} \right]` ；
+    -   令 :math:`x_2 = 0` ， :math:`x_4 = 1` 求得特解
+        :math:`\boldsymbol{x}
+        =
+        c_2
+        \left[ \begin{array}{c} 2 \\ 0 \\ -2 \\ 1 \end{array} \right]` 。
+
+#.  该例还能进一步简化，
+    即将 :math:`\boldsymbol{U}` 矩阵化简为
+    :math:`\boldsymbol{R}` 矩阵（Reduced row echelon form），
+    即 **简化行阶梯形式** ：
+    
+    .. math::
+
+        \boldsymbol{U}
+        =
+        \left[ \begin{array}{cccc}
+        \underline{1} & 2 & 2 & 2 \\
+        0 & 0 & \underline{2} & 4 \\
+        0 & 0 & 0 & 0
+        \end{array}\right]
+        \xrightarrow{\mbox{化简}}
+        \left[ \begin{array}{cccc}
+        \underline{1} & 2 & 0 & -2 \\
+        0 & 0 & \underline{1} & 2 \\
+        0 & 0 & 0 & 0
+        \end{array}\right]
+        =
+        \boldsymbol{R}
+
+    在简化行阶梯形式中，主元上下的元素都是0。
+    
+    -   将 :math:`\boldsymbol{R}` 矩阵中的主变量放在一起，自由变量放在一起（列交换），
+        得到
+        :math:`\boldsymbol{R}
+        =
+        \left[ \begin{array}{cccc}
+        \underline{1} & 2 & 0 & -2 \\
+        0 & 0 & \underline{1} & 2 \\
+        0 & 0 & 0 & 0
+        \end{array}\right]
+        \xrightarrow{\mbox{列交换}}
+        \left[ \begin{array}{cc|cc}
+        1 & 0 & 2 & -2 \\
+        0 & 1 & 0 & 2 \\
+        \hline
+        0 & 0 & 0 & 0
+        \end{array}\right]
+        =
+        \left[ \begin{array}{cc}
+        \boldsymbol{I} & \boldsymbol{F} \\
+        0 & 0 \\
+        \end{array}\right]` ，
+        所有的
+        :math:`\boldsymbol{R}`
+        都可以写成
+        :math:`\boldsymbol{R}
+        =
+        \left[ \begin{array}{cc}
+        \boldsymbol{I} & \boldsymbol{F} \\
+        0 & 0 \\
+        \end{array}\right]` ，
+        其中 :math:`\boldsymbol{I}` 为单位矩阵，
+        :math:`\boldsymbol{F}` 为自由变量组成的矩阵。
+
+        这时，有所谓的"零空间矩阵"
+        :math:`\boldsymbol{N}
+        =
+        \left[ \begin{array}{c}
+        -\boldsymbol{F} \\
+        \boldsymbol{I}
+        \end{array} \right]` ，
+        :math:`\boldsymbol{N}` 中的每一列，都是一个特解。
+
+        在本例中
+        :math:`\boldsymbol{N}
+        =
+        \left[ \begin{array}{cc}
+        -2 & 2 \\
+        0 & -2 \\
+        1 & 0 \\
+        0 & 1
+        \end{array} \right]` ，与上面求得的 :math:`\boldsymbol{x}` 的两个特解一致。
+
+另一个例子，矩阵
+:math:`\boldsymbol{A}
+=
+\left[ \begin{array}{ccc}
+1 & 2 & 3 \\
+2 & 4 & 6 \\
+2 & 6 & 8 \\
+2 & 8 & 10
+\end{array} \right]
+\xrightarrow{\mbox{消元}}
+\left[ \begin{array}{ccc}
+1 & 2 & 3 \\
+0 & 2 & 2 \\
+0 & 0 & 0 \\
+0 & 0 & 0
+\end{array} \right]
+\xrightarrow{\mbox{化简}}
+\left[ \begin{array}{ccc}
+1 & 0 & 1 \\
+0 & 1 & 1 \\
+0 & 0 & 0 \\
+0 & 0 & 0
+\end{array} \right]
+=
+\boldsymbol{R}` ，矩阵的秩仍为 :math:`r=2` ，有2个主变量，1个自由变量。
+
+同上一例，取自由变量为 :math:`x_3=1` ，求得特解
+:math:`\boldsymbol{x} = c
+\left[ \begin{array}{c} -1 \\ -1 \\ 1 \end{array}\right]` 。
+
+第 08 集 求解 :math:`\boldsymbol{A}\boldsymbol{x} = b` : 可解性和解的结构
+================================================================================
+
+同上一讲，我们仍使用
+:math:`3 \times 4` 矩阵
+:math:`\boldsymbol{A}
+=
+\left[ \begin{array}{cccc}
+1 & 2 & 2 & 2 \\
+2 & 4 & 6 & 8 \\
+3 & 6 & 8 & 10
+\end{array}\right]`
+来展开讨论。
+
+这节来解决
+:math:`\boldsymbol{A}\boldsymbol{x}=\boldsymbol{b}` 的问题。
+
+8.1 可解性（Solvability conditions on b）
+--------------------------------------------------------------------------------
+
+写出增广矩阵：
+
+.. math::
+
+    [ \begin{array}{c|c} \boldsymbol{A} & \boldsymbol{b} \end{array} ]
+    =
+    \left[ \begin{array}{cccc|c}
+    1 & 2 & 2 & 2 & b_1 \\
+    2 & 4 & 6 & 8 & b_2 \\
+    3 & 6 & 8 & 10 & b_3
+    \end{array} \right]
+    \xrightarrow{\mbox{消元}}
+    \left[ \begin{array}{cccc|c}
+    1 & 2 & 2 & 2 & b_1 \\
+    0 & 0 & 2 & 4 & b_2 - 2b_1 \\
+    0 & 0 & 0 & 0 & b_3 - b_2 - b_1
+    \end{array} \right]
+
+若 :math:`\boldsymbol{A}\boldsymbol{x}=\boldsymbol{b}` 有解，那么有：
+
+    -   :math:`b_3 - b_2 - b_1 = 0`；
+    -   :math:`\boldsymbol{b}` 在 :math:`\boldsymbol{A}` 的列空间中。
+
+为了让 :math:`\boldsymbol{A}\boldsymbol{x}=\boldsymbol{b}` 有解，
+我们选取
+:math:`\boldsymbol{b}
+=
+\left[\begin{array}{c} 1 \\ 5 \\ 6 \end{array}\right]` 。
+
+8.2 特解（Particular solution）
+--------------------------------------------------------------------------------
+
+令所有自由变量取0，则可以求出特解。
+
+在本例中，即令
+:math:`x_2 = x_4 = 0` ，则有
+:math:`\left\{ \begin{eqnarray*}
+x1+2x_3 & = & 1 \\
+2x_3 & = & 3 \\
+\end{eqnarray*}\right.` ，
+解得
+:math:`\left\{ \begin{eqnarray*}
+x1 & = & -2 \\
+x_3 & = & \frac{3}{2} \\
+\end{eqnarray*}\right.` ，
+于是特解为
+:math:`\boldsymbol{x}_p
+=
+\left[ \begin{array}{c}
+-2 \\
+0 \\
+\frac{3}{2} \\
+0
+\end{array}\right]` 。
+
+
+8.3 完整解（Complete solution）
+--------------------------------------------------------------------------------
+
+:math:`\boldsymbol{A}\boldsymbol{x}=\boldsymbol{b}` 的完整解为其特解加上零空间解。
+
+从上一节中我们已经求得
+:math:`\boldsymbol{A}` 的零空间解为
+:math:`c_1
+\left[ \begin{array}{c} -2 \\ 1 \\ 0 \\ 0 \end{array}\right]
++
+c_2
+\left[ \begin{array}{c} 2 \\ 0 \\ -2 \\ 1 \end{array}\right]` 。
+
+所以
+:math:`\boldsymbol{A}\boldsymbol{x}=\boldsymbol{b}` 的完整解为
+:math:`\boldsymbol{x}_{complete}
+=
+\left[ \begin{array}{c}
+-2 \\
+0 \\
+\frac{3}{2} \\
+0
+\end{array}\right]
++
+c_1
+\left[ \begin{array}{c} -2 \\ 1 \\ 0 \\ 0 \end{array}\right]
++
+c_2
+\left[ \begin{array}{c} 2 \\ 0 \\ -2 \\ 1 \end{array}\right]` 。
+
+几何解释：
+
+    :math:`\boldsymbol{A}` 的零空间 :math:`N(\boldsymbol{A})` 是一个“平面”，
+    记作 :math:`plan_{N}` ；
+
+    :math:`\boldsymbol{A}\boldsymbol{x}=\boldsymbol{b}` 的特解是一个点，
+    记作 :math:`point_{S}` ；
+
+    :math:`\boldsymbol{A}\boldsymbol{x}=\boldsymbol{b}` 的完整解是过点
+    :math:`point_{S}` 且与“平面” :math:`plan_{N}` “平行” 的一个“平面”。
+
+8.4 秩（Rank）
+--------------------------------------------------------------------------------
+
+矩阵中主元的个数就是矩阵的 **秩（Rank）** ，通常记作 :math:`r` 。
+
+对于 :math:`m \times n` 矩阵 :math:`\boldsymbol{A}` ，有 :math:`r \leq (m,n)`: 。
+
+-   列满秩(Full column rank)
+
+    当 :math:`r = n` 时，我们称矩阵 :math:`\boldsymbol{A}` **列满秩** 。
+    
+    对应的 RREF 形式为：
+    :math:`\boldsymbol{R}
+    =\left[\begin{array}{c}\boldsymbol{I}\\0\end{array}\right]` 。
+    此时，:math:`\boldsymbol{A}` 的零空间 :math:`N(\boldsymbol{A})` 中只有一个
+    :math:`0` 向量。
+    
+    要使
+    :math:`\boldsymbol{A}\boldsymbol{x} = \boldsymbol{b}(\boldsymbol{b}\neq0)`
+    有非零解，:math:`\boldsymbol{b}` 必须在
+    :math:`\boldsymbol{A}` 的列空间 :math:`C(\boldsymbol{A})` 中。
+
+-   行满秩(Full row rank)
+
+    当 :math:`r = m` 时，我们称矩阵 :math:`\boldsymbol{A}` **行满秩** 。
+
+    对应的 RREF 形式为：
+    :math:`\boldsymbol{R}
+    =\left[\begin{array}{cc}\boldsymbol{I}&\boldsymbol{F}\end{array}\right]` 。
+    此时，:math:`\boldsymbol{A}` 的零空间 :math:`N(\boldsymbol{A})` 由
+    :math:`n-m` （有 :math:`n-m` 个自由变量）个零空间特解张成（线性组合）。
+
+    :math:`\boldsymbol{A}\boldsymbol{x} = \boldsymbol{b}(\boldsymbol{b}\neq0)`
+    有无数个（一个特解 + 零空间特解的线性组合）非零解。
+
+-   行列都满秩(Full row and column rank)
+
+    当 :math:`r = m = n` 时，我们称矩阵 :math:`\boldsymbol{A}` **行列满秩** 。
+
+    对应的 RREF 形式为：
+    :math:`\boldsymbol{R}=\boldsymbol{I}` 。
+    此时，:math:`\boldsymbol{A}` 的零空间 :math:`N(\boldsymbol{A})` 中只有一个
+    :math:`0` 向量。
+
+    :math:`\boldsymbol{A}\boldsymbol{x} = \boldsymbol{b}(\boldsymbol{b}\neq0)`
+    有唯一解。
+
+-   总结：
+
+    .. math::
+    
+        \begin{array}{c|c|c|c}
+        r=n<m & r=m<n & r=m=n & r<m,r<n \\
+        \boldsymbol{R}=\left[\begin{array}{c}\boldsymbol{I}\\0\end{array}\right]
+        &
+        \boldsymbol{R}=\left[\begin{array}{cc}\boldsymbol{I}&\boldsymbol{F}\end{array}\right]
+        &
+        \boldsymbol{R}=\boldsymbol{I}
+        &
+        \boldsymbol{R}=\left[\begin{array}{cc}\boldsymbol{I}&\boldsymbol{F}\\0&0\end{array}\right] \\
+        0\mbox{ }or\mbox{ }1\mbox{ }solution & \infty\mbox{ }solution & 1\mbox{ }solution & 0\mbox{ }or\mbox{ }\infty\mbox{ }solution
+        \end{array}
+
+第 09 集 线性相关性、基、维数
+================================================================================
+
+9.1 线性相关性
+--------------------------------------------------------------------------------
+
+:math:`\boldsymbol{A}` 是一个 :math:`m \times n` 矩阵，
+:math:`v_1` ， :math:`v_2` ， :math:`\ldots` ， :math:`v_n` 是其列向量。
+
+如果 :math:`\boldsymbol{A}` 的零空间 :math:`N(\boldsymbol{A})` 中仅有一个零向量，
+那么 :math:`\boldsymbol{A}` 的各列向量之间 **线性无关** ，
+:math:`rank(\boldsymbol{A}) = n` 。
+
+如果 :math:`\boldsymbol{A}` 的零空间中除了零向量还包含其它值
+（即存在非零向量 :math:`\boldsymbol{x}` 使得
+:math:`\boldsymbol{A}\boldsymbol{x} = 0` ），
+那么 :math:`\boldsymbol{A}` 的各列向量之间 **线性相关** ，
+:math:`rank(\boldsymbol{A}) < n` 。
+
+9.2 基（Basis）
+--------------------------------------------------------------------------------
+
+向量空间 :math:`\boldsymbol{S}` 中的一组 **基**
+:math:`v_1` ， :math:`v_2` ， :math:`\ldots` ， :math:`v_d`，具有两个性质：
+
+    #.  它们线性无关；
+    #.  它们可以生成 :math:`\boldsymbol{S}` 。
+
+9.3 向量空间的维数（Dimension）
+--------------------------------------------------------------------------------
+
+对于向量空间 :math:`\mathbb{R}^n` ，如果 :math:`n` 个向量组成的矩阵为可逆矩阵，则这
+:math:`n` 个向量为该空间的一组基，而数字 :math:`n` 就是该空间的 **维数** 。
+
+:math:`\boldsymbol{A}` 矩阵的列空间维数：
+
+.. math::
+
+    dimC(\boldsymbol{A}) = rank(\boldsymbol{A}) = \boldsymbol{A}\mbox{中主元列数}
+
+:math:`\boldsymbol{A}` 矩阵的零空间维数：
+
+.. math::
+
+    dimN(\boldsymbol{A}) = n-rank(\boldsymbol{A}) = \boldsymbol{A}\mbox{中自由列数}
+
+第 10 集 四个基本子空间
+================================================================================
+
+第 11 集 矩阵空间、秩 1 矩阵和小世界图
+================================================================================
+
+第 12 集 图和网络
+================================================================================
+
+第 13 集 复习一
+================================================================================
+
+第 14 集 正交向量与子空间
+================================================================================
+
+第 15 集 子空间投影
+================================================================================
+
+第 16 集 投影矩阵和最小二乘
+================================================================================
+
+第 17 集 正交矩阵和 Gram-Schmidt 正交化
+================================================================================
+
+第 18 集 行列式及其性质
+================================================================================
+
+第 19 集 行列式公式和代数余子式
+================================================================================
+
+第 20 集 克拉默法则、逆矩阵、体积
+================================================================================
+
+第 21 集 特征值和特征向量
+================================================================================
+
+第 22 集 对角化和 A 的幂
+================================================================================
+
+第 23 集 微分方程 exp(At)
+================================================================================
+
+第 24 集 马尔科夫矩阵、傅里叶级数
+================================================================================
+
+第 25 集 复习二
+================================================================================
+
+第 26 集 对称矩阵及正定性
+================================================================================
+
+第 27 集 复数矩阵和快速傅里叶变换
+================================================================================
+
+第 28 集 正定矩阵和最小值
+================================================================================
+
+第 29 集 相似矩阵和 Jordan 型
+================================================================================
+
+第 30 集 奇异值分解
+================================================================================
+
+第 31 集 线性变换集对应矩阵
+================================================================================
+
+第 32 集 基变换和图像压缩
+================================================================================
+
+第 33 集 单元检测三复习
+================================================================================
+
+第 34 集 左右逆和伪逆
+================================================================================
+
+第 35 集 期末复习
+================================================================================

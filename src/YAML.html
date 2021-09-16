@@ -1,0 +1,471 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>YAML &mdash; Cheatsheet 1.0.0 文档</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="sphinx" href="sphinx.html" />
+    <link rel="prev" title="Bash" href="Bash.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Cheatsheet
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="在文档中搜索" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="reStructuresText.html">reStructuresText</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cmd.html">cmd</a></li>
+<li class="toctree-l1"><a class="reference internal" href="WindowsTerminal.html">Windows Terminal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SSH.html">SSH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Bash.html">Bash</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">YAML</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">YAML 1.2 (3rd Edition)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">第 1 章 简介</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">第 2 章 概览</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#collections">2.1 集合（collections）</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#structures">2.2 结构体（Structures）</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scalars">2.3 标量（Scalars）</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tags">2.4 标记（Tags）</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">2.5 完整的例子</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">第 3 章 处理 YAML 信息</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sphinx.html">sphinx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Encoding.html">Charset and Encoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Graphviz.html">Graphviz - Graph Visualization Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="git.html">git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CMake.html">CMake</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C%2B%2B.html">C++</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Math.html">Math</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LinearAlgebra.MIT.html">Linear Algrbra - MIT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ImageProcessing.html">Image Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OpenCV.html">OpenCV</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OpenGL.html">OpenGL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GameEngine.html">GameEngine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ComputerGraphics.html">Computer Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DTD.html">DTD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="XSD.html">XSD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="WSDL.html">WSDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dotnet.html">dotnet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Python.html">Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manim.html">manim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NSIS.html">nullsoft scriptable install system 3.0.4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Algorithm.html">Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Vocabulary.html">Vocabulary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lua.html">Lua</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LaTeX.html">LaTeX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Ubuntu.html">Ubuntu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MEF.html">MEF in .NET Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="EMail.html">Relative Concepts of EMail</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FFmpeg.html">FFmpeg Tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MindFusion.html">MindFusion.Diagramming for WPF, V3.7</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DigitalSignalProcess.html">Digital Signal Process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="VisualStudio.html">Visual Studio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="VisualStudioCode.html">Visual Studio Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OpenSourceProjects.html">Open Source Projects</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Cheatsheet</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>YAML</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/src/YAML.rst.txt" rel="nofollow"> 查看页面源码</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="yaml">
+<h1>YAML<a class="headerlink" href="#yaml" title="永久链接至标题">¶</a></h1>
+<div class="section" id="id1">
+<h2><a class="reference external" href="https://yaml.org/spec/1.2/">YAML 1.2 (3rd Edition)</a><a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id2">
+<h3>第 1 章 简介<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h3>
+<p>数据结构有无数种，但它们都可以用三种基本原语充分表示:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>映射(散列/字典) – mappings (hashes/dictionaries)</p></li>
+<li><p>序列(数组/列表) – sequences (arrays/lists)</p></li>
+<li><p>标量(字符串/数字) – scalars (strings/numbers)</p></li>
+</ul>
+</div></blockquote>
+<p>YAML 中的数据类型：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>collections (mappings, sequences)</p></li>
+<li><p>scalars</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="id3">
+<h3>第 2 章 概览<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h3>
+<div class="section" id="collections">
+<h4>2.1 集合（collections）<a class="headerlink" href="#collections" title="永久链接至标题">¶</a></h4>
+<p>YAML 的集合块使用缩进来表示作用域范围，集合中的每一项在自己单独的一行上开始。
+每一个映射（mappings）项使用 “: ” 标记来表示键值对，
+每一个序列（sequences）项以 “- ” 开始。
+使用 <code class="docutils literal notranslate"><span class="pre">#</span></code> 符号注释。</p>
+<div class="literal-block-wrapper docutils container" id="id6">
+<div class="code-block-caption"><span class="caption-text">Mapping Scalars to Scalars(player statistics)</span><a class="headerlink" href="#id6" title="永久链接至代码">¶</a></div>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">hr</span><span class="p">:</span>  <span class="l l-Scalar l-Scalar-Plain">65</span>    <span class="c1"># Home runs</span>
+<span class="nt">avg</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.278</span> <span class="c1"># Batting average</span>
+<span class="nt">rbi</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">147</span>   <span class="c1"># Runs Batted In</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id7">
+<div class="code-block-caption"><span class="caption-text">Sequence of Scalars(ball players)</span><a class="headerlink" href="#id7" title="永久链接至代码">¶</a></div>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Mark McGwire</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Sammy Sosa</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Ken Griffey</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id8">
+<div class="code-block-caption"><span class="caption-text">Mapping Scalars to Sequences(ball clubs in each league)</span><a class="headerlink" href="#id8" title="永久链接至代码">¶</a></div>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">american</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Boston Red Sox</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Detroit Tigers</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">New York Yankees</span>
+<span class="nt">national</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">New York Mets</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Chicago Cubs</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Atlanta Braves</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id9">
+<div class="code-block-caption"><span class="caption-text">Sequence of Mappings(players’ statistics)</span><a class="headerlink" href="#id9" title="永久链接至代码">¶</a></div>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Mark McGwire</span>
+  <span class="nt">hr</span><span class="p">:</span>   <span class="l l-Scalar l-Scalar-Plain">65</span>
+  <span class="nt">avg</span><span class="p">:</span>  <span class="l l-Scalar l-Scalar-Plain">0.278</span>
+<span class="p p-Indicator">-</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Sammy Sosa</span>
+  <span class="nt">hr</span><span class="p">:</span>   <span class="l l-Scalar l-Scalar-Plain">63</span>
+  <span class="nt">avg</span><span class="p">:</span>  <span class="l l-Scalar l-Scalar-Plain">0.288</span>
+</pre></div>
+</div>
+</div>
+<p>YAML 也支持流式写法（flow styles），使用显式指示符而不是缩进来表示范围。
+流式序列语法为为方括号内逗号分隔的列表。
+以类似的方式，流式映射使用花括号。</p>
+<div class="literal-block-wrapper docutils container" id="id10">
+<div class="code-block-caption"><span class="caption-text">Sequence of Sequences</span><a class="headerlink" href="#id10" title="永久链接至代码">¶</a></div>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span><span class="nv">name</span>        <span class="p p-Indicator">,</span> <span class="nv">hr</span><span class="p p-Indicator">,</span> <span class="nv">avg</span>  <span class="p p-Indicator">]</span>
+<span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span><span class="nv">Mark McGwire</span><span class="p p-Indicator">,</span> <span class="nv">65</span><span class="p p-Indicator">,</span> <span class="nv">0.278</span><span class="p p-Indicator">]</span>
+<span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span><span class="nv">Sammy Sosa</span>  <span class="p p-Indicator">,</span> <span class="nv">63</span><span class="p p-Indicator">,</span> <span class="nv">0.288</span><span class="p p-Indicator">]</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id11">
+<div class="code-block-caption"><span class="caption-text">Mapping of Mappings</span><a class="headerlink" href="#id11" title="永久链接至代码">¶</a></div>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">Mark McGwire</span><span class="p">:</span> <span class="p p-Indicator">{</span><span class="nt">hr</span><span class="p">:</span> <span class="nv">65</span><span class="p p-Indicator">,</span><span class="nt"> avg</span><span class="p">:</span> <span class="nv">0.278</span><span class="p p-Indicator">}</span>
+<span class="nt">Sammy Sosa</span><span class="p">:</span> <span class="p p-Indicator">{</span>
+<span class="nt">    hr</span><span class="p">:</span> <span class="nv">63</span><span class="p p-Indicator">,</span>
+<span class="nt">    avg</span><span class="p">:</span> <span class="nv">0.288</span>
+  <span class="p p-Indicator">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="structures">
+<h4>2.2 结构体（Structures）<a class="headerlink" href="#structures" title="永久链接至标题">¶</a></h4>
+<p>重复的节点（对象）首先由锚点（用“&amp;”标记）标识，
+然后被命名为别名（使用“*”引用）。</p>
+<div class="literal-block-wrapper docutils container" id="id12">
+<div class="code-block-caption"><span class="caption-text">Single Document with Two Comments</span><a class="headerlink" href="#id12" title="永久链接至代码">¶</a></div>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span>
+<span class="nt">hr</span><span class="p">:</span> <span class="c1"># 1998 hr ranking</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Mark McGwire</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Sammy Sosa</span>
+<span class="nt">rbi</span><span class="p">:</span>
+  <span class="c1"># 1998 rbi ranking</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Sammy Sosa</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Ken Griffey</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id13">
+<div class="code-block-caption"><span class="caption-text">Node for “Sammy Sosa” appears twice in this document</span><a class="headerlink" href="#id13" title="永久链接至代码">¶</a></div>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span>
+<span class="nt">hr</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Mark McGwire</span>
+  <span class="c1"># Following node labeled SS</span>
+  <span class="p p-Indicator">-</span> <span class="nl">&amp;SS</span> <span class="l l-Scalar l-Scalar-Plain">Sammy Sosa</span>
+<span class="nt">rbi</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nv">*SS</span> <span class="c1"># Subsequent occurrence</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Ken Griffey</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="scalars">
+<h4>2.3 标量（Scalars）<a class="headerlink" href="#scalars" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="tags">
+<h4>2.4 标记（Tags）<a class="headerlink" href="#tags" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id4">
+<h4>2.5 完整的例子<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h4>
+<p>下面是两个完整的 YAML 示例。 一个是发票样本； 一个是示例日志文件。</p>
+<div class="literal-block-wrapper docutils container" id="id14">
+<div class="code-block-caption"><span class="caption-text">Invoice</span><a class="headerlink" href="#id14" title="永久链接至代码">¶</a></div>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span> <span class="kt">!&lt;tag:clarkevans.com,2002:invoice&gt;</span>
+<span class="nt">invoice</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">34843</span>
+<span class="nt">date   </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2001-01-23</span>
+<span class="nt">bill-to</span><span class="p">:</span> <span class="nl">&amp;id001</span>
+    <span class="nt">given  </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Chris</span>
+    <span class="nt">family </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Dumars</span>
+    <span class="nt">address</span><span class="p">:</span>
+        <span class="nt">lines</span><span class="p">:</span> <span class="p p-Indicator">|</span>
+            <span class="no">458 Walkman Dr.</span>
+            <span class="no">Suite #292</span>
+        <span class="nt">city    </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Royal Oak</span>
+        <span class="nt">state   </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">MI</span>
+        <span class="nt">postal  </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">48046</span>
+<span class="nt">ship-to</span><span class="p">:</span> <span class="nv">*id001</span>
+<span class="nt">product</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="nt">sku         </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">BL394D</span>
+      <span class="nt">quantity    </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">4</span>
+      <span class="nt">description </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Basketball</span>
+      <span class="nt">price       </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">450.00</span>
+    <span class="p p-Indicator">-</span> <span class="nt">sku         </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">BL4438H</span>
+      <span class="nt">quantity    </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
+      <span class="nt">description </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Super Hoop</span>
+      <span class="nt">price       </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2392.00</span>
+<span class="nt">tax  </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">251.42</span>
+<span class="nt">total</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">4443.52</span>
+<span class="nt">comments</span><span class="p">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">Late afternoon is best.</span>
+    <span class="l l-Scalar l-Scalar-Plain">Backup contact is Nancy</span>
+    <span class="l l-Scalar l-Scalar-Plain">Billsmer @ 338-4338.</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id15">
+<div class="code-block-caption"><span class="caption-text">Log File</span><a class="headerlink" href="#id15" title="永久链接至代码">¶</a></div>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span>
+<span class="nt">Time</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2001-11-23 15:01:42 -5</span>
+<span class="nt">User</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ed</span>
+<span class="nt">Warning</span><span class="p">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">This is an error message</span>
+  <span class="l l-Scalar l-Scalar-Plain">for the log file</span>
+<span class="nn">---</span>
+<span class="nt">Time</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2001-11-23 15:02:31 -5</span>
+<span class="nt">User</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ed</span>
+<span class="nt">Warning</span><span class="p">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">A slightly different error</span>
+  <span class="l l-Scalar l-Scalar-Plain">message.</span>
+<span class="nn">---</span>
+<span class="nt">Date</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2001-11-23 15:03:17 -5</span>
+<span class="nt">User</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ed</span>
+<span class="nt">Fatal</span><span class="p">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">Unknown variable &quot;bar&quot;</span>
+<span class="nt">Stack</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">file</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">TopClass.py</span>
+    <span class="nt">line</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">23</span>
+    <span class="nt">code</span><span class="p">:</span> <span class="p p-Indicator">|</span>
+      <span class="no">x = MoreObject(&quot;345\n&quot;)</span>
+  <span class="p p-Indicator">-</span> <span class="nt">file</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">MoreClass.py</span>
+    <span class="nt">line</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">58</span>
+    <span class="nt">code</span><span class="p">:</span> <span class="p p-Indicator">|-</span>
+      <span class="no">foo = bar</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id5">
+<h3>第 3 章 处理 YAML 信息<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h3>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="sphinx.html" class="btn btn-neutral float-right" title="sphinx" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="Bash.html" class="btn btn-neutral float-left" title="Bash" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; 版权所有 2021, horizonshd.
+
+    </p>
+  </div>
+    
+    
+    
+    利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

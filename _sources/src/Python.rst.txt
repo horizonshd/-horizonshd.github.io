@@ -3379,6 +3379,24 @@ for an example with lots of subplots.
 绘制文本
 ********************************************************************************
 
+``matplotlib.pyplot.text`` 可用于在任意位置添加文本，
+``matplotlib.pyplot.xlabel`` 、 ``matplotlib.pyplot.ylabel``
+和 ``matplotlib.pyplot.title`` 可用于在指定位置添加文本
+（有关更详细的示例，请参阅 `Text in Matplotlib Plots <https://matplotlib.org/stable/tutorials/text/text_intro.html>`_ ）。
+
+.. plot:: pyplots/matplot_014.py
+    :include-source:
+
+所有文本相关的函数都返回一个 ``matplotlib.text.Text`` 实例。 就像上面几行一样，
+您可以通过将关键字参数传递给函数或使用 ``matplotlib.pyplot.setp`` 函数来自定义属性：
+
+.. code-block :: python
+
+    t = plt.xlabel('my data', fontsize=14, color='red')
+
+这些属性在 `Text properties and layout <https://matplotlib.org/stable/tutorials/text/text_props.html>`_
+中有更详细的介绍。
+
 对数轴和其它非线性轴
 ********************************************************************************
 

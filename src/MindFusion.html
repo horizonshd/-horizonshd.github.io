@@ -96,6 +96,8 @@
 <li class="toctree-l1"><a class="reference internal" href="cmd.html">cmd</a></li>
 <li class="toctree-l1"><a class="reference internal" href="WindowsTerminal.html">Windows Terminal</a></li>
 <li class="toctree-l1"><a class="reference internal" href="SSH.html">SSH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Bash.html">Bash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="YAML.html">YAML</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sphinx.html">sphinx</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Encoding.html">Charset and Encoding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Graphviz.html">Graphviz - Graph Visualization Software</a></li>
@@ -103,10 +105,12 @@
 <li class="toctree-l1"><a class="reference internal" href="CMake.html">CMake</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C%2B%2B.html">C++</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Math.html">Math</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LinearAlgebra.MIT.html">Linear Algrbra - MIT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ImageProcessing.html">Image Processing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="OpenCV.html">OpenCV</a></li>
 <li class="toctree-l1"><a class="reference internal" href="OpenGL.html">OpenGL</a></li>
 <li class="toctree-l1"><a class="reference internal" href="GameEngine.html">GameEngine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ComputerGraphics.html">Computer Graphics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DTD.html">DTD</a></li>
 <li class="toctree-l1"><a class="reference internal" href="XSD.html">XSD</a></li>
 <li class="toctree-l1"><a class="reference internal" href="WSDL.html">WSDL</a></li>
@@ -146,27 +150,28 @@
 <li class="toctree-l4"><a class="reference internal" href="#id16">4.1 集成 WpfDiagram 到用户界面中</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id18">4.2 Diagram 结构</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id19">4.3 用户交互</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id20">4.4 位置和布局</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id21">4.5 撤销重做</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id22">4.6 序列化和输出</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id23">4.7 外观</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id21">4.4 位置和布局</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id22">4.5 撤销重做</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id23">4.6 序列化和输出</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id25">4.7 外观</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#initial-values-of-item-properties">4.8 Initial Values of Item Properties</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id24">4.9 杂项</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id26">4.9 杂项</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#id25">5. 教程</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id26">5.1 加载数据</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id27">5.2 加载层次结构类型的数据</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id28">5.3 创建一个自定义节点类型</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id29">5.4 自定义节点的集成</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id27">5. 教程</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id28">5.1 加载数据</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id29">5.2 加载层次结构类型的数据</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id30">5.3 创建一个自定义节点类型</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id31">5.4 自定义节点的集成</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id30">开发笔记</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id32">开发笔记</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="DigitalSignalProcess.html">Digital Signal Process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="VisualStudio.html">Visual Studio</a></li>
 <li class="toctree-l1"><a class="reference internal" href="VisualStudioCode.html">Visual Studio Code</a></li>
 <li class="toctree-l1"><a class="reference internal" href="OpenSourceProjects.html">Open Source Projects</a></li>
 </ul>
@@ -492,149 +497,932 @@ WpfDiagram 为您节省了数百小时的编码和调试工作。</p>
 </div>
 <div class="section" id="id18">
 <h4>4.2 Diagram 结构<a class="headerlink" href="#id18" title="永久链接至标题">¶</a></h4>
-<ol class="arabic simple">
+<ol class="arabic">
 <li><p>标准的 Item 类型</p>
-<ul class="simple">
-<li><p>Shape Nodes</p></li>
-<li><p>SVG Nodes</p></li>
-<li><p>Templated Nodes</p></li>
-<li><p>Table Nodes</p></li>
-<li><p>Container Nodes</p></li>
-<li><p>Free-form Nodes</p></li>
-<li><p>TreeView Nodes</p></li>
-<li><p>Visio Nodes</p></li>
-<li><p>Barcode Nodes</p></li>
-<li><p>Links</p></li>
+<p>WpfDiagram 中的图表元素（diagram elements）
+由 <code class="docutils literal notranslate"><span class="pre">DiagramNode</span></code> 和 <code class="docutils literal notranslate"><span class="pre">DiagramLink</span></code> 类的实例表示。
+通过组合和链接（combined and linked together），
+它们可以形成复杂的数据结构，例如流程或实体关系图、类层次结构、网络和图形（graphs）。
+它们的每个特性（rich features）都可以通过多种方法和属性进行自定义。
+WpfDiagram 还提供直观的（intuitive）用户界面，用于以交互方式绘制和编辑图表项目。</p>
+<ul>
+<li><p>形状节点（Shape Nodes）</p>
+<p>形状节点可以表示几何形状、流程图元素、网络图中的图标等。
+它们可以以不同的字体、大小和颜色显示图形和文本。
+有超过 100 个预定义的节点形状（node shapes），除此之外，
+WpfDiagram 还提供了一种定义自定义形状（shapes）的简单方法。
+可以使用绘制在节点上方的圆形选择手柄（selection handle）交互式地旋转形状节点，
+或使用 <code class="docutils literal notranslate"><span class="pre">RotationAngle</span></code> 属性以编程方式旋转形状节点。
+可以使用多种类型的自定义绘制（custom painting）方式
+进一步自定义 <code class="docutils literal notranslate"><span class="pre">ShapeNode</span></code> 的外观。</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>第一种类型使您可以完全控制绘制（painting）。</p></li>
+<li><p>第一种类型中您的绘制代码是在基本绘制基础之上执行的。</p></li>
+<li><p>第三个类型，节点执行标准的绘制，可以自定义其阴影的绘制。</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>SVG Nodes</p>
+<p>除了基础类 <code class="docutils literal notranslate"><span class="pre">ShapeNode</span></code> 提供的渲染之外，
+<code class="docutils literal notranslate"><span class="pre">SvgNode</span></code> 类还可以表示显示 SVG 绘图（drawings）的节点（nodes）。
+一个节点的 SVG 绘图在其关联的位图（bitmap） <code class="docutils literal notranslate"><span class="pre">Image</span></code> 之后渲染。
+设置基本类（base type）的 <code class="docutils literal notranslate"><span class="pre">Transparent</span></code> 属性
+以隐藏节点的 <code class="docutils literal notranslate"><span class="pre">Shape</span></code> 几何图形并仅绘制 SVG 图形（graphics）。
+应该在 <strong>SvgNode</strong> 内显示的 SVG 绘图是通过节点的 <code class="docutils literal notranslate"><span class="pre">Content</span></code> 属性指定的。
+SVG 图形（graphics）通过 <strong>SvgContent</strong> 对象加载并与节点关联，
+该对象应该被初始化然后分配给这个属性。</p>
+</li>
+<li><p>Templated Nodes</p>
+<p><code class="docutils literal notranslate"><span class="pre">TemplatedNode</span></code> 类表示其外观是通过 Xaml 数据模板设置的节点。
+此类主要用作自定义节点的基本类型，
+如 <a class="reference internal" href="#id30"><span class="std std-ref">教程三</span></a> 和
+<a class="reference internal" href="#id31"><span class="std std-ref">教程四</span></a> 所示。
+但是它不是抽象类，如果在 <code class="docutils literal notranslate"><span class="pre">DiagramItem</span></code> 中定义的文本相关属性足以满足您的需求，
+则可以直接使用它。
+此类节点的外观可以通过它们的 <code class="docutils literal notranslate"><span class="pre">Template</span></code> 属性
+或 <code class="docutils literal notranslate"><span class="pre">Diagram</span></code> 类的 <code class="docutils literal notranslate"><span class="pre">NodeTemplate</span></code> 属性进行设置。</p>
+</li>
+<li><p>Table Nodes</p>
+<p>表格（Tables）可用于表示数据库图中的表模式或类层次结构中的类。
+表格包含排列在网格中（arranged in a  grid）的单元格（cells），
+每个单元格都可以显示文本和/或图像。
+单元格可以跨越在 <code class="docutils literal notranslate"><span class="pre">RowSpan</span></code> 和 <code class="docutils literal notranslate"><span class="pre">ColumnSpan</span></code> 属性中设置的多个行和列。
+单元格、列和行可以通过多种方式自定义 —— 有一些属性
+可用于设置它们的缩进（extents）、样式、图像和文本对齐方式。
+可以通过编程方式更改表格的尺寸（dimensions）；
+插入、追加或删除行和列可以在您需要时以非常全面、直观的方式完成。
+表格还可以显示背景图像（background images）和图形（graphics）。
+支持的文件格式有 BMP、GIF、JPEG、ICO 和 WMF（同样适用于形状节点）。</p>
+</li>
+<li><p>容器节点（Container Nodes）</p>
+<p>一个 <code class="docutils literal notranslate"><span class="pre">ContainerNode</span></code> 可以包含其他图表节点（diagram nodes）。
+当容器移动时，包含的节点也会移动。
+容器可以折叠以隐藏包含的节点，然后展开以再次显示它们。
+容器内的节点可以链接到（be linked to）容器内部和外部的节点。
+当容器折叠时，连接到包含在容器内部节点的链接将会指向容器轮廓。
+容器可以一个嵌套另一个，深度不限。。</p>
+</li>
+<li><p>自由形式节点（Free-form Nodes）</p>
+<p>一个 <code class="docutils literal notranslate"><span class="pre">FreeFormNode</span></code> 节点从用户的鼠标或触摸输入中收集所有点（points），
+并将它们显示为节点的轮廓（node’s outline）。
+要让用户以交互方式绘制自由形式的节点，
+请将 <code class="docutils literal notranslate"><span class="pre">Behavior</span></code> 设置为 <code class="docutils literal notranslate"><span class="pre">DrawFreeForms</span></code> 。
+使用 <strong>FreeFormNode</strong> 的 <code class="docutils literal notranslate"><span class="pre">Points</span></code> 属性以编程方式获取或设置轮廓点。
+如果设置了 <code class="docutils literal notranslate"><span class="pre">Closed</span></code> 属性，则将节点绘制为封闭形状并填充其内部，
+否则将节点绘制为折线（poly-line）。
+如果用户绘制的第一个和最后一个点之间的距离小于 <code class="docutils literal notranslate"><span class="pre">AutoCloseDistance</span></code> ，
+则该节点将自动闭合。</p>
+</li>
+<li><p>TreeView Nodes</p>
+<p><code class="docutils literal notranslate"><span class="pre">TreeViewNode</span></code> 类表示可以显示分层数据的节点（nodes）。
+可以通过 <code class="docutils literal notranslate"><span class="pre">RootItems</span></code> 属性访问节点中显示的根项目（root items）。
+可以在返回的集合中添加和删除 items 。
+根项目可以有自己的子项目。
+有关更多信息，请参阅 <a class="reference external" href="https://www.mindfusion.eu/onlinehelp/wpfdiagram/T_MindFusion_Diagramming_Wpf_TreeViewItem.htm">TreeViewItem</a> 类。</p>
+</li>
+<li><p>Visio Nodes</p>
+<p>图表（diagram）可以以 Visio 2003 XML 模板（stencil ）格式（.vsx）
+显示模板文件（stencil file）中的形状（shapes）。
+要加载模板文件，请使用 <code class="docutils literal notranslate"><span class="pre">VisioStencil</span></code> 类的实例。
+形状（shapes）通过 <code class="docutils literal notranslate"><span class="pre">VisioNode</span></code> 对象显示在图表中。
+要将模板形状（stencil shape）与节点关联，
+请创建 <code class="docutils literal notranslate"><span class="pre">VisioContent</span></code> 类的实例并将其分配给节点的 <code class="docutils literal notranslate"><span class="pre">Content</span></code> 属性。
+请注意，随 Visio 安装的标准模板（stencils）的版权归 Microsoft 所有，
+您不应在应用程序中使用它们。
+此功能旨在让您使用公共领域的模板或已购买许可的商业剪贴画（commercial clipart）。</p>
+</li>
+<li><p>Barcode Nodes</p>
+<p><code class="docutils literal notranslate"><span class="pre">BarcodeNode</span></code> 类将 EAN、UPC、Code 128 或 QR 条码显示为节点的内容。
+就地编辑操作允许用户为一维代码输入新的数字代码或为二维码输入文本字符串。
+条码的格式（format）通过 <code class="docutils literal notranslate"><span class="pre">Format</span></code> 属性指定，编码数字（encoded number）或
+文本通过 <code class="docutils literal notranslate"><span class="pre">Content</span></code> 属性进行设置，
+一维条（1D bars）/二维模块（2D modules）的颜色通过 <code class="docutils literal notranslate"><span class="pre">BarColor</span></code> 设置。</p>
+</li>
+<li><p>链接（Links）</p>
+<p>链接用于表示图表（diagrams）中的各种类型的连接（connections）和关系（relations）。
+WpfDiagram 提供三种基本链接类型：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>由直线段（segments）组成的折线链接（ <code class="docutils literal notranslate"><span class="pre">Polyline</span></code> links）</p></li>
+<li><p>由贝塞尔（Bézier）或样条线段（spline segments）组成的曲线链接（ <strong>Curved</strong> links）</p></li>
+<li><p>由水平线段和垂直线段组成的级联链接（ <strong>Cascading</strong> links），
+它们的方向交替变化，因此每个线段都与其相邻线段正交。</p></li>
+</ul>
+</div></blockquote>
+<p>一个链接可以通过其两端连接到节点（node）。
+也可以有未连接到节点的链接 —— 它们的一端或两端未连接到节点。
+链接一些可自定义的属性包括：
+箭头（arrowheads）、 <code class="docutils literal notranslate"><span class="pre">Shape</span></code> 、颜色、文本、笔宽和样式、
+修改行为（modification behavior）和段数（number of segments）。</p>
+</li>
 </ul>
 </li>
 <li><p>自定义 Item 类型</p>
-<ul class="simple">
-<li><p>序列化</p></li>
-<li><p>剪贴板操作</p></li>
-<li><p>渲染</p></li>
-<li><p>用户交互</p></li>
+<p>您可以通过派生 <code class="docutils literal notranslate"><span class="pre">DiagramNode</span></code> 和 <code class="docutils literal notranslate"><span class="pre">DiagramLink</span></code> 类或其子类
+（例如 TableNode、ContainerNode 等）来创建自己的 item 类型。
+您可以向 diagram items 添加自定义数据字段，并实现自定义的可视化和交互功能。</p>
+<ul>
+<li><p>序列化</p>
+<p>如果您将自定义字段添加到您的 item 类，
+您可能希望在保存图表文件（diagram files）时保存它们的值，
+并在加载文件时恢复它们。
+要启用此功能，请重写 <code class="docutils literal notranslate"><span class="pre">DiagramItem</span></code> 类的 SaveTo* 和 LoadFrom* 方法，
+您可以使用 <strong>BinaryWriter</strong> 和 <strong>BinaryReader</strong> 对象来实现二进制序列化。
+对于 XML 格式的序列化，您必须实现 <code class="docutils literal notranslate"><span class="pre">SaveToXml</span></code> 和 <code class="docutils literal notranslate"><span class="pre">LoadFromXml</span></code> 方法。</p>
+</li>
+<li><p>剪贴板操作</p>
+<p>您必须实现 <code class="docutils literal notranslate"><span class="pre">Clone</span></code> 方法
+以使 <code class="docutils literal notranslate"><span class="pre">CopyToClipboard</span></code> 和 <code class="docutils literal notranslate"><span class="pre">PasteFromClipboard</span></code> 能在您的自定义 item 类型
+中使用。如果没有实现 <strong>Clone</strong> ，在粘贴时将会得到其基类的实例。
+当基类反序列化代码试图从派生类创建的数据流加载 item 的状态（state）时，
+可能会导致异常。如果您的类有任何自定义字段，
+它还必须实现 <code class="docutils literal notranslate"><span class="pre">SaveToXml</span></code> 和 <code class="docutils literal notranslate"><span class="pre">LoadFromXml</span></code> 方法以进行正确的序列化。</p>
+</li>
+<li><p>渲染</p>
+<p>如果您需要为您的 items 提供自定义渲染（rendering），请重写 <code class="docutils literal notranslate"><span class="pre">Draw</span></code> 方法。
+通过这种方式，您可以在 <strong>DrawingContext</strong> 上渲染您的 item。</p>
+</li>
+<li><p>用户交互</p>
+<p>要启用从自定义类绘制（drawing） items，
+请将图表视图（diagram view）的 <code class="docutils literal notranslate"><span class="pre">Behavior</span></code> 属性设置为 <strong>Custom</strong> ，
+并将 <code class="docutils literal notranslate"><span class="pre">CustomNodeType</span></code> 或 <code class="docutils literal notranslate"><span class="pre">CustomLinkType</span></code> 属性
+设置为与自定义 item 类对应的对象。
+如果需要更改 items 在初始创建时处理用户交互的方式，
+请实现 <code class="docutils literal notranslate"><span class="pre">StartCreate</span></code> 、 <code class="docutils literal notranslate"><span class="pre">UpdateCreate</span></code> 和 <code class="docutils literal notranslate"><span class="pre">CompleteCreate</span></code> 方法。
+为了更改项目在被修改时响应用户交互的方式，
+请实现 <code class="docutils literal notranslate"><span class="pre">StartModify</span></code> 、 <code class="docutils literal notranslate"><span class="pre">UpdateModify</span></code> 和 <code class="docutils literal notranslate"><span class="pre">CompleteModify</span></code> 方法。</p>
+</li>
 </ul>
 </li>
 <li><p>使用 WPF 控件作为节点</p>
-<ul class="simple">
-<li><p>交互式创建</p></li>
-<li><p>编程式创建</p></li>
+<p><code class="docutils literal notranslate"><span class="pre">DiagramNodeAdapter</span></code> 类允许您使用任何 WPF UIElement 对象
+作为图表节点（diagram node）。
+这允许您使用现成的或自定义的 WPF 控件来显示或编辑应用程序图表中表示的实体。
+WpfDiagram 节点中托管（hosted in diagrams）的控件可能是交互式的
+并带有嵌入式用户界面。
+例如，您可以使用日历、网格、富文本控件或 html 页面作为实体编辑器或查看器。
+您还可以创建自己的自定义控件并将其与 WpfDiagram 无缝集成；
+因此，您可以获得应用程序所需的高级实体关系图编辑器。</p>
+<ul>
+<li><p>交互式创建</p>
+<p>要让用户使用鼠标绘制 <strong>UIElement</strong> 对象，
+请将 <code class="docutils literal notranslate"><span class="pre">Behavior</span></code> 设置为 <strong>Custom</strong> 。
+要在宿主节点（host nodes）中创建的控件类型
+由 <code class="docutils literal notranslate"><span class="pre">Diagram</span></code> 的 <code class="docutils literal notranslate"><span class="pre">CustomNodeType</span></code> 属性指定。
+如果执行以下代码，用户绘制的每个节点都会托管（host）一个 <code class="docutils literal notranslate"><span class="pre">GridView</span></code> 实例，
+节点之间可以通过绘制链接来连接：</p>
+<div class="highlight-C# notranslate"><div class="highlight"><pre><span></span><span class="c1">// Draw datagrid nodes and allow connecting them with links</span>
+<span class="n">diagram</span><span class="p">.</span><span class="n">Behavior</span> <span class="p">=</span> <span class="n">Behavior</span><span class="p">.</span><span class="n">Custom</span><span class="p">;</span>
+
+<span class="c1">// Default type of hosted controls is GridView</span>
+<span class="n">diagram</span><span class="p">.</span><span class="n">CustomNodeType</span> <span class="p">=</span> <span class="k">typeof</span><span class="p">(</span><span class="n">GridView</span><span class="p">);</span>
+</pre></div>
+</div>
+</li>
+<li><p>编程式创建</p>
+<p>要以编程方式在图表（diagram）中显示 WPF UIElement 派生类的对象，
+请将该类的实例添加到图表的 <code class="docutils literal notranslate"><span class="pre">Nodes</span></code> 集合中。
+这会自动为 <strong>UIElement</strong> 对象创建一个 <code class="docutils literal notranslate"><span class="pre">DiagramNodeAdapter</span></code> 。
+您也可以显式实例化 <code class="docutils literal notranslate"><span class="pre">DiagramNodeAdapter</span></code> 并将其添加到 <strong>Nodes</strong> 。
+要获取与 <strong>UIElement</strong> 关联的 <strong>DiagramNodeAdapter</strong> ，
+请使用 <strong>DiagramItem</strong> 中相关的附加属性。</p>
+</li>
 </ul>
 </li>
 <li><p>创建和删除 Items</p>
-<ul class="simple">
-<li><p>编程式创建 Items</p></li>
-<li><p>绘制新的 Items</p></li>
-<li><p>删除 Items</p></li>
+<ul>
+<li><p>编程式创建 Items</p>
+<p>要向图表（diagram）添加新节点（node）或链接（link），
+请使用 <strong>new</strong> 运算符创建 item 类的实例，
+并将其添加到图表的 <code class="docutils literal notranslate"><span class="pre">Nodes</span></code> 或 <code class="docutils literal notranslate"><span class="pre">Links</span></code> 集合中。
+这与添加来自自定义类的 items 或来自 WpfDiagram 预定义类型的 items 的方式相同。</p>
+<p>图表的 <code class="docutils literal notranslate"><span class="pre">Factory</span></code> 对象的成员方法
+提供了一些创建预定义节点和链接类型实例的快捷方法：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">CreateShapeNode</span></code> 方法在指定位置创建一个 <code class="docutils literal notranslate"><span class="pre">ShapeNode</span></code> 。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CreateTableNode</span></code> 方法在指定位置创建一个 <code class="docutils literal notranslate"><span class="pre">TableNode</span></code> 。
+表格（tables）的 <code class="docutils literal notranslate"><span class="pre">AddRelation</span></code> 方法可以将它们自己与其它表格连接起来。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CreateContainerNode</span></code> 方法在指定位置创建一个 <code class="docutils literal notranslate"><span class="pre">ContainerNode</span></code>。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CreateDiagramLink</span></code> 方法有多个重载，
+允许连接相同类型或不同类型的两个节点（nodes）。</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>绘制新的 Items</p>
+<p>用户可以用鼠标绘制（draw）图表元素（diagram elements）。
+<code class="docutils literal notranslate"><span class="pre">Behavior</span></code> 属性指定当用户开始绘制时应该创建什么类型的元素。
+当用户开始绘制时，将创建一个 item 并引发初始化事件，
+让您在将 item 显示在屏幕上之前自定义 item 的外观。
+初始化事件包括 InitializeNode 、InitializeLink 等。
+在绘制 item 时，控件会引发诸如 <code class="docutils literal notranslate"><span class="pre">NodeCreating</span></code> 之类的验证事件，
+以让您验证操作并防止在特定位置创建 items 。
+当用户释放鼠标按钮时，item 将被添加到 <code class="docutils literal notranslate"><span class="pre">Nodes</span></code> 或 <code class="docutils literal notranslate"><span class="pre">Links</span></code> 集合中，
+并引发相关的事件，例如 <code class="docutils literal notranslate"><span class="pre">NodeCreated</span></code> 。</p>
+</li>
+<li><p>删除 Items</p>
+<p>调用 <code class="docutils literal notranslate"><span class="pre">Nodes</span></code> 或 <code class="docutils literal notranslate"><span class="pre">Links</span></code> 集合的 <code class="docutils literal notranslate"><span class="pre">Remove</span></code> 方法
+从图表（diagram）中删除一个 item 。
+<code class="docutils literal notranslate"><span class="pre">ClearAll</span></code> 方法通过删除所有 items 来清除图表中的内容。
+<code class="docutils literal notranslate"><span class="pre">BreakRelation</span></code> 方法提供了删除两个表格（tables）之间链接（link）的快捷方式。</p>
+</li>
 </ul>
 </li>
 <li><p>访问 Items</p>
-<ul class="simple">
-<li><p>选中的 Items</p></li>
-<li><p>查找 Items</p></li>
-<li><p>关系查询</p></li>
+<p>使用该组件时最常见的任务之一是遍历图表文档（diagram document）中的所有 items
+或浏览 items 之间的连接（connections） —— 从节点（node）到传入或传出链接（links），
+或从链接到其源节点（origin）和目标（destionation）节点。
+要枚举（enumerate）图表的 items ，
+请使用 <code class="docutils literal notranslate"><span class="pre">Items</span></code> 、 <code class="docutils literal notranslate"><span class="pre">Links</span></code> 或 <code class="docutils literal notranslate"><span class="pre">Nodes</span></code> 集合。
+一个链接所连接的节点（nodes）由其 <code class="docutils literal notranslate"><span class="pre">Destination</span></code> 和 <code class="docutils literal notranslate"><span class="pre">Origin</span></code> 属性引用。
+要访问连接到（connected to）节点的链接，
+请使用其 <code class="docutils literal notranslate"><span class="pre">IncomingLinks</span></code> 和 <code class="docutils literal notranslate"><span class="pre">OutgoingLinks</span></code> 集合。
+链接可以连接到表格的行（rows of a table），要查找此类链接，
+请使用表格的 <code class="docutils literal notranslate"><span class="pre">Rows</span></code> 集合以及 <strong>IncomingLinks</strong> 和 <strong>OutgoingLinks</strong> 集合。
+<code class="docutils literal notranslate"><span class="pre">Row</span></code> 类的 <code class="docutils literal notranslate"><span class="pre">RelatedOneToMany</span></code> 和 <code class="docutils literal notranslate"><span class="pre">RelatedManyToOne</span></code> 属性
+提供了访问实体关系图中关系另一端的快捷方式。</p>
+<ul>
+<li><p>选中的 Items</p>
+<p>如果仅选择一个 item ，则它将被视为 active item,
+并可使用 <code class="docutils literal notranslate"><span class="pre">ActiveItem</span></code> 属性进行获取。
+这个属性的类型是 <code class="docutils literal notranslate"><span class="pre">DiagramItem</span></code> ；
+您可以通过 .NET 反射获取所选 item 的实际类型。
+在同时按下 CTRL 键的情况下单击或拖动时，可以选择多个 items 。
+多选由 <code class="docutils literal notranslate"><span class="pre">Diagram</span></code> 类的 <code class="docutils literal notranslate"><span class="pre">Selection</span></code> 属性表示。
+<code class="docutils literal notranslate"><span class="pre">Selection</span></code> 对象提供集合以访问选定的 <code class="docutils literal notranslate"><span class="pre">Links</span></code> 和 <code class="docutils literal notranslate"><span class="pre">Nodes</span></code> 。</p>
+</li>
+<li><p>查找 Items</p>
+<p>您可以使用 <code class="docutils literal notranslate"><span class="pre">FindLink</span></code> 、 <code class="docutils literal notranslate"><span class="pre">FindNode</span></code> 、 <code class="docutils literal notranslate"><span class="pre">FindLinkById</span></code>
+和 <code class="docutils literal notranslate"><span class="pre">FindNodeById</span></code> 方法按 <strong>Tag</strong> 或 <code class="docutils literal notranslate"><span class="pre">Id</span></code> 搜索 diagram items 。
+Tag 和 id 对象通过调用 <strong>System.Object</strong> 类的 Equals 方法进行比较。
+因此，如果 tags 是值类型，则它们按值进行比较（即按位相等）。
+如果它们是引用类型，则使用它们的 <strong>Equals</strong> 方法。
+如果有多个相同 tag 的 items ，将返回第一个。
+如果不存在具有指定 tag 的 item，则将返回空引用（ <strong>null</strong> ）。
+也可以使用 <code class="docutils literal notranslate"><span class="pre">FindGroup</span></code> 方法根据 tag 搜索组（groups）。</p>
+</li>
+<li><p>关系查询</p>
+<p><code class="docutils literal notranslate"><span class="pre">Query</span></code> 方法通过跟踪节点（node）/链接（link）的连接（connections）和
+组（group）的父/子关系来遍历图（graph），以查找与当前项具有特定关系的 items 。
+该方法接收由选择器和可选谓词组成的字符串参数。
+查询分几个步骤执行。
+在每一步中，结果集都是根据当前选择器指定的关系从前一个结果集构建的。
+如果在选择器标识符之后指定谓词，则结果集将被过滤以仅包括谓词评估为真的 items 。</p>
+</li>
 </ul>
 </li>
 <li><p>附加（Attaching）、组合（Grouping） Items</p>
+<p>WpfDiagram 允许将节点（node）附加（attaching to）到另一个图表元素（diagram element），
+在两个 items 之间建立 从属-主 关系（subordinate - master relationship）。
+附加节点的最简单的方式是调用 <code class="docutils literal notranslate"><span class="pre">AttachTo</span></code> 方法。
+当主元素被移动或调整大小时，任何从属节点都会跟随它，
+因此两个 items 之间的初始距离保持不变。
+当用户移动主 item 时，以及使用方法或属性更改 item 位置时，都会发生这种情况。</p>
+<ul>
+<li><p>可能的使用场景</p>
 <ul class="simple">
-<li><p>可能的使用场景</p></li>
-<li><p>组合（Grouping）</p></li>
-<li><p>Unions</p></li>
-<li><p>附加（Attaching） Items 到 Group</p></li>
-<li><p>访问 Group 中的 Items</p></li>
-<li><p>销毁 Groups</p></li>
+<li><p>将一个透明的（ <code class="docutils literal notranslate"><span class="pre">Transparent</span></code> ）形状节点（shape node）
+附加到另一个 item 并设置其 <code class="docutils literal notranslate"><span class="pre">Text</span></code> ，
+这样就可以使形状节点充当分配给主 item 的附加标签（additional label）。</p></li>
+<li><p>将一个形状节点附加到另一个 item 上，并设置该节点的 <code class="docutils literal notranslate"><span class="pre">Image</span></code> ，
+使其作为显示在主 item 内部或附近的附加图标（additional icon）。</p></li>
+<li><p>将一个形状节点或表格（table）附加到另一个 item 上，
+并处理 <code class="docutils literal notranslate"><span class="pre">NodeClicked</span></code> 或类似事件，以对主 item 执行某些操作。
+这使得从属节点充当一个按钮或附加到主 item 的另一种类型的 UI 元素。
+对于更复杂的 UI 需求，可以使用附加的（attached） <code class="docutils literal notranslate"><span class="pre">DiagramNodeAdapter</span></code>
+并处理由它所托管的（host）控件引发的事件。</p></li>
+<li><p>在之前的所有情况下，可以为附加节点（attached nodes）设置 <code class="docutils literal notranslate"><span class="pre">Locked</span></code> 属性，
+这些节点仅用作修饰主 item 的装饰。
+这可以防止用户选择、修改或绘制指向从属 items 的链接（links）。</p></li>
+<li><p>将树分支中的子元素附加到分支根上，以便当用户移动树节点时，
+该节点的子元素与该节点同时移动。
+修改这样的分层组（hierarchical group）中的一个 item
+将使修改遍及所有从属 items 。</p></li>
 </ul>
 </li>
-<li><p>图层</p>
-<ul class="simple">
-<li><p>说明</p></li>
-<li><p>Layer list 控件</p></li>
+<li><p>组合（Hierarchical Grouping）</p>
+<p>一个附加项目单元（A unit of attached items）由 <code class="docutils literal notranslate"><span class="pre">Group</span></code> 类的一个实例表示。
+要创建一个组 ，实例化一个 <code class="docutils literal notranslate"><span class="pre">Group</span></code> 对象并将其添加到图表的 <code class="docutils literal notranslate"><span class="pre">Groups</span></code> 集合中，
+或者调用 <code class="docutils literal notranslate"><span class="pre">CreateGroup</span></code> 方法将主 item 作为参数传递。
+可以使用各种 <strong>Group</strong> 方法将 items 附加（attach）到组。
+节点（nodes）的 <code class="docutils literal notranslate"><span class="pre">AttachTo</span></code> 方法是创建组并向其附加一个 item 的快捷方式。</p>
+<p>一个组的每个成员都可以是另一个组的主项（master item），
+即一个项可以从属（subordinate）于一个组，同时又可以是另一个组的主项（master）。
+WpfDiagram 不会对以这种方式构建的组层次结构的深度和宽度施加任何限制。
+但是，不可能将一个项作为从属项放在多个组中，因为这样会使层次关系会变得不明确。</p>
+</li>
+<li><p>Unions</p>
+<p>可以创建这样的组，如果层次结构中的任何项被修改，所有其他项也会被更新。
+这可以通过将项放在依赖关系的循环链中来实现——即 item1 附加到 item2
+item2 附加到 item3 …… itemN 附加到 item1。
+如果这些项中的任何一项被修改，则更改将通过链传播，直到到达其发起者。</p>
+</li>
+<li><p>附加（Attaching） Items 到 Group</p>
+<p>链接（Links）不能附加到组，但可以是组的主项。
+如果一个组的主项是一个链接（link），则节点（nodes）可以附加到
+链接的控制点（control points）或段（segments）。
+有关详细信息，请参阅 <code class="docutils literal notranslate"><span class="pre">AttachToLinkPoint</span></code> 和 <code class="docutils literal notranslate"><span class="pre">AttachToLinkSegment</span></code> 方法。
+如果主项是一个节点（node），那么其他节点可以附加到它的任何角落，
+或者附加到指定为主节点边界矩形百分比的区域。
+查看 <code class="docutils literal notranslate"><span class="pre">AttachToCorner</span></code> 和 <code class="docutils literal notranslate"><span class="pre">AttachProportional</span></code> 了解详细信息。
+<code class="docutils literal notranslate"><span class="pre">DiagramNode</span></code> 类的 <strong>AttachTo</strong> 方法提供了创建 <code class="docutils literal notranslate"><span class="pre">Group</span></code> 实例
+和调用适当的 AttachTo* 方法的快捷方式。</p>
+</li>
+<li><p>访问 Group 中的 Items</p>
+<p>可以使用 <code class="docutils literal notranslate"><span class="pre">MainItem</span></code> 属性和 <code class="docutils literal notranslate"><span class="pre">AttachedNodes</span></code> 集合访问组中的成员。
+要获取项参与了哪些组，请使用其 <code class="docutils literal notranslate"><span class="pre">MasterGroup</span></code> 和 <code class="docutils literal notranslate"><span class="pre">SubordinateGroup</span></code> 属性。</p>
+</li>
+<li><p>销毁 Groups</p>
+<p>如果用户删除一个组的主项（master item），
+该组将自动销毁并引发 <code class="docutils literal notranslate"><span class="pre">GroupDestroyed</span></code> 事件。
+如果启用 <code class="docutils literal notranslate"><span class="pre">AutoDeleteItems</span></code> ，则组中的从属项也会被删除。
+如果 <code class="docutils literal notranslate"><span class="pre">AutoDeleteItems</span></code> 被禁用，则从属项将与它们的主项分离并保持完整。
+可以通过从图表的 <code class="docutils literal notranslate"><span class="pre">Groups</span></code> 集合中删除组来以编程方式销毁组。</p>
+</li>
+</ul>
+</li>
+<li><p>图层（Layers）</p>
+<ul>
+<li><p>说明</p>
+<p>Items 可以分配给图层（assigned to layers），图层可以作为一个组一起被
+隐藏、锁定或按 Z 轴顺序上下移动。
+<code class="docutils literal notranslate"><span class="pre">Layer</span></code> 对象提供 <code class="docutils literal notranslate"><span class="pre">Visible</span></code> 、 <code class="docutils literal notranslate"><span class="pre">Locked</span></code> 和 <code class="docutils literal notranslate"><span class="pre">ZIndex</span></code> 属性，
+这些属性将影响相应图层中的所有 items。
+图层还提供了可以显示在 <code class="docutils literal notranslate"><span class="pre">LayerListView</span></code> 控件中的 <code class="docutils literal notranslate"><span class="pre">Title</span></code> 属性。
+新绘制的 items 被添加到通过 <code class="docutils literal notranslate"><span class="pre">Diagram.ActiveLayer</span></code> 指定的图层。</p>
+<p>设置 item 的 <code class="docutils literal notranslate"><span class="pre">LayerIndex</span></code> 属性以将它们与 <code class="docutils literal notranslate"><span class="pre">Diagram.Layers</span></code> 集合中的
+图层相关联。如果 <code class="docutils literal notranslate"><span class="pre">LayerIndex</span></code> 的值为默认值 -1，
+则该 item 不与任何图层关联，
+其可见性仅取决于 item 自己的 <code class="docutils literal notranslate"><span class="pre">Visible</span></code> 属性。</p>
+</li>
+<li><p>Layer list 控件</p>
+<p><code class="docutils literal notranslate"><span class="pre">LayerListView</span></code> 控件提供用于处理 <code class="docutils literal notranslate"><span class="pre">Layer</span></code> 对象的用户界面。
+该控件显示一个指定图表的图层列表，显示它们的标题和每个图层中对象的概览图像，
+还允许编辑图层的 <code class="docutils literal notranslate"><span class="pre">Visible</span></code> 和 <code class="docutils literal notranslate"><span class="pre">Locked</span></code> 属性
+和设置 <strong>Diagram</strong> 的当前活动图层。
+单击 + 按钮可以将新图层添加到 <strong>Diagram</strong> 中，单击 - 按钮可以删除图层。</p>
+</li>
 </ul>
 </li>
 <li><p>树型分支的折叠展开</p>
-<ul class="simple">
-<li><p>显示展开/折叠按钮</p></li>
-<li><p>Defining Tree Direction</p></li>
-<li><p>递归地展开分支</p></li>
-<li><p>HtmlBuilder 的支持</p></li>
-<li><p>自定义展开/折叠功能</p></li>
+<p>如果图表（diagram）表示树结构，
+则可以折叠或展开从节点（from a node）开始的树分支（tree branch），
+以隐藏或显示层次结构详细信息（hierarchy details）。
+使用节点（node）的 <code class="docutils literal notranslate"><span class="pre">Collapse</span></code> 和 <code class="docutils literal notranslate"><span class="pre">Expand</span></code> 方法以编程方式执行此操作。
+要确定子树（subtree）是展开还是折叠，请检查其根（root）的 <code class="docutils literal notranslate"><span class="pre">Expanded</span></code> 属性。</p>
+<ul>
+<li><p>显示展开/折叠按钮</p>
+<p>如果节点（node）的 <code class="docutils literal notranslate"><span class="pre">Expandable</span></code> 属性设置为 <strong>true</strong> ，
+则该节点旁边会显示一个 [±] 按钮，以允许用户从该节点处折叠或展开树枝。
+可以通过图表的 <code class="docutils literal notranslate"><span class="pre">ExpandButtonPosition</span></code> 属性自定义按钮位置。
+默认情况下，按下该按钮会自动调用 <code class="docutils literal notranslate"><span class="pre">Collapse</span></code> 和 <code class="docutils literal notranslate"><span class="pre">Expand</span></code> 方法
+并引发 <code class="docutils literal notranslate"><span class="pre">TreeExpanded</span></code> 或 <code class="docutils literal notranslate"><span class="pre">TreeCollapsed</span></code> 事件。</p>
+</li>
+<li><p>Defining Tree Direction</p>
+<p>一个节点（node）可以通过传出和传入链接（outgoing and incoming links）
+连接到（connected to）其他节点。
+设置 <code class="docutils literal notranslate"><span class="pre">ExpandOnIncoming</span></code> 属性指定连接到节点的哪些项将被视为其后代（descendants）。
+如果 <strong>ExpandOnIncoming</strong> 为 <strong>false</strong> （默认值），
+则每个节点都将被视为其传出链接和附加到（attached to）它们的 items 的父节点。
+如果 <strong>ExpandOnIncoming</strong> 设置为 <strong>true</strong> ，则节点的传入链接被定义为其子节点。
+因此该属性指定了图表 items 之间的父子关系的方向以及折叠/展开的整体方向。</p>
+</li>
+<li><p>递归地展开分支</p>
+<p>使用 <code class="docutils literal notranslate"><span class="pre">RecursiveExpand</span></code> 属性指定展开时是显示从节点开始的整个树分支，
+还是仅显示第一级后代（descendants）。
+一个相关的属性是 <code class="docutils literal notranslate"><span class="pre">Group</span></code> 类的 <code class="docutils literal notranslate"><span class="pre">Expandable</span></code> 属性，
+它指定展开和折叠是否通过组成员传播。</p>
+</li>
+<li><p>HtmlBuilder 的支持</p>
+<p><code class="docutils literal notranslate"><span class="pre">HtmlBuilder</span></code> 类可以为显示在 <code class="docutils literal notranslate"><span class="pre">Expandable</span></code> 节点旁边的 [±] 按钮
+生成地图区域（map areas）。
+要启用它，请为 <code class="docutils literal notranslate"><span class="pre">ExpandBtnHyperLink</span></code> 属性分配一个 URL。
+该 URL 可以包含一些格式说明符（format specifiers），
+这些说明符会自动替换为节点的 <strong>Tag</strong> 或 <code class="docutils literal notranslate"><span class="pre">ZIndex</span></code> 属性的值。
+在服务器端，您可以识别被点击了 [±] 按钮的节点。</p>
+</li>
+<li><p>自定义展开/折叠功能</p>
+<p>通过使用 <code class="docutils literal notranslate"><span class="pre">ExpandButtonAction</span></code> 属性，您可以覆盖 [±] 按钮的标准功能。
+如果您需要实现自己的展开/折叠逻辑，请将此属性设置为 <code class="docutils literal notranslate"><span class="pre">RaiseEvents</span></code>
+并处理 <code class="docutils literal notranslate"><span class="pre">ExpandButtonClicked</span></code> 事件。</p>
+</li>
 </ul>
 </li>
-<li><p>多个 Diagram Pages</p></li>
+<li><p>多个 Diagram Pages</p>
+<p><code class="docutils literal notranslate"><span class="pre">DiagramDocument</span></code> 类表示由 <code class="docutils literal notranslate"><span class="pre">DiagramPage</span></code> 对象表示的
+一组图表页面或工作表（diagram pages or sheets）。
+新页面（pages）可以添加到文档（document）中，
+已有的页面可以通过 <code class="docutils literal notranslate"><span class="pre">Pages</span></code> 集合进行删除和重新排序。
+<strong>DiagramDocument</strong> 的 <code class="docutils literal notranslate"><span class="pre">SaveToXml</span></code> 方法将所有页面保存在一个文件中，
+相应的 <code class="docutils literal notranslate"><span class="pre">LoadFromXml</span></code> 方法则从文件中加载所有页面。
+<strong>DiagramDocument</strong> 还可以加载由 <code class="docutils literal notranslate"><span class="pre">Diagram</span></code> 的序列化方法创建的文件，
+并将它们显示在单个页面中。
+注意，相反的情况是不正确的：<strong>Diagram</strong> 不能直接加载 <strong>DiagramDocument</strong> 文件。</p>
+<p><strong>DiagramPage</strong> 派生自 <strong>Diagram</strong> 并且只添加了 <code class="docutils literal notranslate"><span class="pre">Title</span></code> 属性，
+因此任何处理 <strong>Diagram</strong> 对象的代码也可以与 <strong>DiagramPage</strong> 对象一起使用。
+图表文档（diagram document）转发其页面（pages）引发的每个事件，
+让您有机会对不同页面引发的事件使用相同的处理程序。
+如果页面应该实现不同的用户交互或验证逻辑，
+也可以将处理程序附加到（attach handlers to）
+由 <strong>DiagramPage</strong> 继承的 <strong>Diagram</strong> 中的事件。</p>
+<p><strong>DiagramDocument</strong> 可以导出到 PDF 和 Visio，
+并使用 <code class="docutils literal notranslate"><span class="pre">PdfExporter</span></code> 、 <code class="docutils literal notranslate"><span class="pre">VisioExporter</span></code> 和 <code class="docutils literal notranslate"><span class="pre">VisioImporter</span></code> 类中
+可用的新重载的方法从 Visio 导入。
+其他导出类目前不支持多页导出（multi-page export），
+但仍可通过它们的 Export(Diagram) 方法导出单个页面。</p>
+<p>可以将单个 <strong>DiagramPage</strong> 分配给 <code class="docutils literal notranslate"><span class="pre">DiagramView</span></code> 的 <code class="docutils literal notranslate"><span class="pre">Diagram</span></code> 属性，
+这样您就可以创建自己的用户界面，用于向用户显示页面列表（a list of pages）并选择当前页面。
+该软件包还包括一个 <code class="docutils literal notranslate"><span class="pre">TabbedDiagramView</span></code> ，
+它以选项卡式用户界面中显示文档的所有页面（all pages of a document），
+其中每个选项卡对应一个页面。
+活动选项卡中显示的页面由 <strong>TabbedDiagramView</strong> 的 <strong>CurrentPage</strong> 属性公开。
+活动页面可以通过激活其关联的选项卡以交互方式进行更改。
+可以通过选项卡托盘中的按钮在文档中添加和删除新页面，
+并且可以通过用鼠标拖动相关选项卡来重新排列页面。</p>
+</li>
 </ol>
 </div>
 <div class="section" id="id19">
 <h4>4.3 用户交互<a class="headerlink" href="#id19" title="永久链接至标题">¶</a></h4>
-<ol class="arabic simple">
+<ol class="arabic">
 <li><p>控制用户交互</p>
+<p>有多种方法可以控制用户对整个图表（diagram）或
+图表中单个项目（individual items）的操作。</p>
+<ul>
+<li><p>禁用交互</p>
+<p>通过将 <code class="docutils literal notranslate"><span class="pre">Diagram</span></code> 的 <strong>Enabled</strong> 属性设置为 <strong>false</strong> ，
+您可以使图表内容完全不可修改。
+因此，它只不过是一个静态图像，您可以用来向用户呈现一些数据。
+但是，图仍然可以通过编程方式进行修改。</p>
+</li>
+<li><p>指定如何解释用户的操作</p>
+<p><code class="docutils literal notranslate"><span class="pre">Behavior</span></code> 属性提供了几组预定义的规则，指定如何解释用户使用鼠标/键盘的输入。
+如果将 <strong>Behavior</strong> 设置为 <code class="docutils literal notranslate"><span class="pre">LinkShapes</span></code> ，
+则从文档中未被占用的点开始的鼠标拖动将被处理为 <code class="docutils literal notranslate"><span class="pre">ShapeNode</span></code> 创建请求，
+并在节点上拖动时创建链接（link）。
+请注意，在创建重叠（overlaying ）节点时，这种行为会导致一些额外的工作 —— 用户
+需要在空白区域绘制第二个节点，然后将其移到第一个节点上。
+如果您想避免这种情况，请使用 <strong>DrawShapes</strong> 行为（behavior）。
+如果设置为 <strong>LinkTables</strong> ，则在空白区域上拖动鼠标会创建一个表格，
+而在表格上拖动会创建一个链接。行为（behaviod）选项还包括
+<strong>DrawLinks</strong> 、 <strong>DrawTables</strong> 和 <strong>Modify</strong> 。</p>
+</li>
+<li><p>设置 diagram 的边界（Bounds）</p>
+<p>可以使用 <code class="docutils literal notranslate"><span class="pre">Bounds</span></code> 属性获取或设置文档大小。
+默认情况下，用户可以将 items 移动到图表边界（diagram bounds）之外。
+为防止出现这种情况，请启用 <code class="docutils literal notranslate"><span class="pre">RestrictItemsToBounds</span></code> 属性。
+它提供了三个选项来限制 item 的位置：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>他们可能根本不受限制。</p></li>
+<li><p>最严格的选项是将 item 完全保留在文档区域内。</p></li>
+<li><p>另一个选项允许 item 部分位于文档区域之外，但至少有一个小的可见部分在内部。</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Item 的约束（Constraints）</p>
+<p>通过 <code class="docutils literal notranslate"><span class="pre">Constraints</span></code> 和 <code class="docutils literal notranslate"><span class="pre">EnabledHandles</span></code> 属性设置对用户如何修改节点的限制。
+前者可用于约束移动方向、节点大小和纵横比。
+后者启用或禁用节点的特定操作句柄（handles）。
+这允许使节点不可移动、不可调整大小或仅在水平/垂直方向上调整大小。</p>
+<p>可以通过 <code class="docutils literal notranslate"><span class="pre">Locked</span></code> 属性锁定 item。
+锁定的 item 被排除在选择之外，用户无法选择、移动或修改它们。</p>
+</li>
+<li><p>控制链接（Links）如何连接到节点（Nodes）</p>
+<p><code class="docutils literal notranslate"><span class="pre">DiagramNode</span></code> 类的 <code class="docutils literal notranslate"><span class="pre">AllowIncomingLinks</span></code> 属性指定是否可以
+将传入（incoming）链接绘制到节点。
+<code class="docutils literal notranslate"><span class="pre">AllowOutgoingLinks</span></code> 属性指定是否允许绘制节点的传出（outgoing）链接。</p>
+<p>锚点（anchor points）定义当用户将链接（link）附加（attach）到节点（node）时
+链接的末端放置的位置。
+可以通过设置节点的 <code class="docutils literal notranslate"><span class="pre">AnchorPattern</span></code> 将锚点模板赋值给节点。
+<code class="docutils literal notranslate"><span class="pre">SnapToAnchor</span></code> 属性指定在创建或修改链接时链接末端是否与锚点对齐。</p>
+<p>链接被创建后，用户仍然可以将其端点移动到不同的位置，
+除非将 <code class="docutils literal notranslate"><span class="pre">LinkEndsMovable</span></code> 属性设置为 <strong>false</strong> 。
+这也可以通过 <code class="docutils literal notranslate"><span class="pre">AllowMoveEnd</span></code> 和 <code class="docutils literal notranslate"><span class="pre">AllowMoveStart</span></code> 属性
+在每个链接上进行控制。
+您可以使用 <code class="docutils literal notranslate"><span class="pre">LinkModifying</span></code> 事件动态验证链接端点的移动。</p>
+<p><code class="docutils literal notranslate"><span class="pre">AllowSelfLoops</span></code> 属性启用或禁用自反（reflexive）链接的绘制。
+默认情况下这是被允许的，但如果您认为它们对应用程序毫无意义，则可以禁用它们。
+<code class="docutils literal notranslate"><span class="pre">AllowLinksRepeat</span></code> 控制两个节点（nodes）是否可以在同一方向上多次连接。</p>
+</li>
+<li><p>In-place Text Editing</p>
+<p>节点（nodes）和表格的文本可以通过双击相应的 items 就地编辑（in-place）。
+要启用该功能，请将 <code class="docutils literal notranslate"><span class="pre">AllowInplaceEdit</span></code> 属性设置为 <strong>true</strong> 。
+对于表格，标题和单元格都可以通过这种方式进行编辑。
+处理 <code class="docutils literal notranslate"><span class="pre">CellTextEditing</span></code> 事件以启用/禁用每个单元格的就地编辑。
+根据正在编辑的 item 的类型，在编辑完成时触发以下事件之一：
+<code class="docutils literal notranslate"><span class="pre">NodeTextEdited</span></code> 、 <code class="docutils literal notranslate"><span class="pre">CellTextEdited</span></code> 。
+当用户在文本输入控件外单击时，将退出就地编辑模式。
+如果分别启用了 <code class="docutils literal notranslate"><span class="pre">InplaceEditAcceptOnEnter</span></code> 和 <code class="docutils literal notranslate"><span class="pre">InplaceEditCancelOnEsc</span></code> ，
+则按 ENTER 或 ESC 将退出就地编辑模式。</p>
+</li>
+<li><p>验证事件</p>
+<p>当用户尝试创建、删除或选择项目（item）时，会引发以下事件之一。
+要禁止该操作，请将相应事件中的 bool 类型的参数设置为 <strong>false</strong> ：</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 35%" />
+<col style="width: 65%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>事件</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>NodeCreating</p></td>
+<td><p>当用户绘制新节点（node）时引发。</p></td>
+</tr>
+<tr class="row-odd"><td><p>LinkCreating</p></td>
+<td><p>当用户绘制新链接（link）时引发。</p></td>
+</tr>
+<tr class="row-even"><td><p>NodeSelecting</p></td>
+<td><p>当用户试图选择节点时引发。</p></td>
+</tr>
+<tr class="row-odd"><td><p>LinkSelecting</p></td>
+<td><p>当用户试图选择链接时引发。</p></td>
+</tr>
+<tr class="row-even"><td><p>NodeDeleting</p></td>
+<td><p>当用户试图删除节点时引发。</p></td>
+</tr>
+<tr class="row-odd"><td><p>LinkDeleting</p></td>
+<td><p>当用户试图删除链接时引发。</p></td>
+</tr>
+<tr class="row-even"><td><p>NodeModifying</p></td>
+<td><p>在用户修改现有节点时引发。</p></td>
+</tr>
+<tr class="row-odd"><td><p>LinkModifying</p></td>
+<td><p>当用户修改现有链接时引发。</p></td>
+</tr>
+</tbody>
+</table>
+<p>有关可由用户操作触发的更多事件，请参阅文档的 <a class="reference external" href="https://www.mindfusion.eu/onlinehelp/wpfdiagram/T_MindFusion_Diagramming_Wpf_DiagramBase_Events.htm">事件</a> 部分。</p>
+</li>
+<li><p>杂项</p>
 <ul class="simple">
-<li><p>禁用交互</p></li>
-<li><p>指定如何解释用户的操作</p></li>
-<li><p>设置 diagram 的边界（Bounds）</p></li>
-<li><p>Item 的约束</p></li>
-<li><p>控制链接（Links）如何连接到节点（Nodes）</p></li>
-<li><p>In-place Text Editing</p></li>
-<li><p>验证事件</p></li>
-<li><p>杂项</p></li>
+<li><p>将 <code class="docutils literal notranslate"><span class="pre">SelectAfterCreate</span></code> 属性设置为 <strong>true</strong> 会自动选择每个新创建的 item，
+因此用户可以立即对其进行修改。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ModifierKeyActions</span></code> 属性允许为 CTRL、ALT 和 SHIFT 键分配不同的功能。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">AllowMultipleResize</span></code> 指定用户是否可以同时调整多个选定 items 的大小。</p></li>
 </ul>
 </li>
-<li><p>事件的处理</p></li>
+</ul>
+</li>
+<li><p>事件的处理</p>
+<p>大多数事件仅在响应用户操作时才引发。
+如果您需要在用户操作和 API 调用之后执行相同的代码，请将公共代码移动到一个方法中，
+并在相应的事件处理程序中以及在 API 方法或属性设置器调用之后调用该方法。
+一个值得注意的例外是 *Deleted 事件集，当以编程方式删除 items 时也会引发这些事件，
+因为在某些情况下删除 items 可能会删除与其相关的其他 items 。</p>
+<p>当用户开始使用鼠标绘制新 item 时，控件会引发一个初始化事件，
+让您可以设置 item 的外观属性。
+也就是说，对于一个节点（node），控件引发 <code class="docutils literal notranslate"><span class="pre">InitializeNode</span></code> 事件。</p>
+<p>当用户按住鼠标按钮并绘图时，将引发一个验证事件，
+允许您取消 item 的创建(例如， <code class="docutils literal notranslate"><span class="pre">NodeCreating</span></code> )。
+如果没有取消该操作，将引发一个创建事件，
+以让应用程序了解新项 item (例如 <code class="docutils literal notranslate"><span class="pre">NodeCreated</span></code> )。
+当用户修改 item 时，会引发事件，例如 <code class="docutils literal notranslate"><span class="pre">NodeModifying</span></code> 和 <code class="docutils literal notranslate"><span class="pre">NodeModified</span></code> 。
+在节点（nodes）或链接（links）引发的 *Modifying 或 *Creating 事件中
+调用 <strong>CancelDrag</strong> 方法可以取消对 item 的修改或创建。</p>
+<p>当用户按下 DEL 键时，会引发一个验证事件，
+让您确认是否删除一个 item（例如， <code class="docutils literal notranslate"><span class="pre">NodeDeleting</span></code> ），如果没有取消，
+则会引发一个 item 删除事件（例如， <code class="docutils literal notranslate"><span class="pre">NodeDeleted</span></code> ）。</p>
+<p>还有许多与用户可以在图表上执行的各种活动相关的其他事件。
+所有的事件都可以在这里找到： <a class="reference external" href="https://www.mindfusion.eu/onlinehelp/wpfdiagram/T_MindFusion_Diagramming_Wpf_DiagramBase_Events.htm">Diagram Events</a></p>
+</li>
 <li><p>单选、多选</p>
-<ul class="simple">
-<li><p>Items 的选取和编辑</p></li>
-<li><p>Active Item</p></li>
-<li><p>多选</p></li>
-<li><p>绘制选中套索（Lasso）</p></li>
-<li><p>外观</p></li>
-<li><p>枚举 Items</p></li>
-<li><p>自动选取</p></li>
+<ul>
+<li><p>Items 的选取和编辑</p>
+<p>为了移动或修改图表元素（diagram element），
+用户需要拖动其调整手柄（adjustment handles）。
+当 item 被选中时，调整手柄会出现在 item 的周围。
+可以拖动每个手柄以对 item 执行特定转换。
+可以通过 <code class="docutils literal notranslate"><span class="pre">HandlesStyle</span></code> 属性修改手柄的外观和行为。
+根据分配给 <code class="docutils literal notranslate"><span class="pre">ModificationStart</span></code> 的值，当鼠标指针悬停在 item 上时，
+这些手柄也可以自动出现。</p>
+</li>
+<li><p>Active Item</p>
+<p>如果仅选择了一个 diagram item，则它被视为是 “active” 的 item。
+多选择中的一个 item 也被视为是 “active” —— 通常是最后选择的那个 item 。
+在 active item 周围绘制了白色修改手柄，而多选中的其他 items 则带有灰色手柄。
+active item 可能是用户在编辑图表时最感兴趣的，
+您的程序可以根据此更新其状态和用户界面。
+使用 <code class="docutils literal notranslate"><span class="pre">Diagram</span></code> 类的 <code class="docutils literal notranslate"><span class="pre">ActiveItem</span></code> 属性可以访问到 active item 。</p>
+</li>
+<li><p>多选</p>
+<p>WpfDiagram 中图表项（diagram items）的选择由 <code class="docutils literal notranslate"><span class="pre">Selection</span></code> 类的一个实例表示。
+此类提供了以编程方式选择或取消选择 items 的方法，
+和可以指定选择的外观和行为方式（behaves）的属性。
+<code class="docutils literal notranslate"><span class="pre">Diagram</span></code> 类的一个属性（也称为 <code class="docutils literal notranslate"><span class="pre">Selection</span></code> ），
+暴露了当前文档中选择的 items 。
+可以选择多个 items ，从而同时移动。
+要以编程方式在多选中添加或删除 items ，
+请调用 <code class="docutils literal notranslate"><span class="pre">AddItem</span></code> 、 <code class="docutils literal notranslate"><span class="pre">Toggle</span></code> 和 <code class="docutils literal notranslate"><span class="pre">RemoveItem</span></code> 方法之一。
+<code class="docutils literal notranslate"><span class="pre">Clear</span></code> 方法取消选择所有 items ，
+<code class="docutils literal notranslate"><span class="pre">Change</span></code> 方法选择单个 item ，同时取消选择所有其他 items 。
+将 <code class="docutils literal notranslate"><span class="pre">AllowMultipleSelection</span></code> 设置为 <strong>false</strong> 将禁用多选。</p>
+</li>
+<li><p>绘制选中套索（Lasso）</p>
+<p>要选择多个 items ，用户必须在按住 CTRL 键的同时用鼠标左键绘制选择套索或矩形。
+为了启用自由形式套索模式（free-form lasso mode），
+请将 <code class="docutils literal notranslate"><span class="pre">FreeFormMode</span></code> 设置为 <strong>true</strong> 。
+<code class="docutils literal notranslate"><span class="pre">MiddleButtonActions</span></code> 和 <code class="docutils literal notranslate"><span class="pre">RightButtonActions</span></code> 属性
+允许您使用鼠标中键或右键来绘制选择套索。</p>
+</li>
+<li><p>外观</p>
+<p>多选的视觉样式由 <code class="docutils literal notranslate"><span class="pre">Selection</span></code> 类的 <code class="docutils literal notranslate"><span class="pre">Style</span></code> 属性定义。
+例如，选区可能被绘制为虚线矩形或半透明填充矩形。
+可以通过设置 selection 的 <code class="docutils literal notranslate"><span class="pre">Pen</span></code> 和 <code class="docutils literal notranslate"><span class="pre">Brush</span></code> 属性来更改选择矩形的颜色。
+与选择可视化相关的另一个属性是图表的 <code class="docutils literal notranslate"><span class="pre">SelectionOnTop</span></code> ，
+它指定所选 items 是必须根据其 Z 轴顺序绘制还是在未选择 items 的顶部进行绘制。</p>
+</li>
+<li><p>枚举 or 遍历（Enumerating）Items</p>
+<p><code class="docutils literal notranslate"><span class="pre">Selection</span></code> 类将所选的 items 公开为 .NET 集合。
+<code class="docutils literal notranslate"><span class="pre">Items</span></code> 集合引用所有选中的 items ，将它们作为 <code class="docutils literal notranslate"><span class="pre">DiagramItem</span></code> 实例进行解析。
+<code class="docutils literal notranslate"><span class="pre">Nodes</span></code> 和 <code class="docutils literal notranslate"><span class="pre">Links</span></code> 集合保留对相应类的选定 items 的引用。
+或者，您可以枚举图中的所有 items 并检查它们的 <code class="docutils literal notranslate"><span class="pre">Selected</span></code> 属性。</p>
+</li>
+<li><p>自动选取</p>
+<p>将 <code class="docutils literal notranslate"><span class="pre">SelectAfterCreate</span></code> 属性设置为 <strong>true</strong> 会自动选择每个新创建的 item ，
+因此用户可以立即对其进行修改。</p>
+</li>
 </ul>
 </li>
 <li><p>自动对齐</p>
-<ul class="simple">
-<li><p>对齐网格</p></li>
-<li><p>节点（nodes）对齐到节点（ nodes ）</p></li>
-<li><p>将链接吸附（snap）到附近的节点（nodes）</p></li>
+<p>以下特性帮助用户以交互方式对齐 items 。</p>
+<ul>
+<li><p>对齐网格</p>
+<p>当启用 <code class="docutils literal notranslate"><span class="pre">AlignToGrid</span></code> 时，项目将与网格对齐。
+更多信息可以在 <a class="reference external" href="https://www.mindfusion.eu/onlinehelp/wpfdiagram/CC_Alignment_Grid_0.htm">Alignment Grid</a>
+主题中找到。</p>
+</li>
+<li><p>节点（nodes）对齐到节点（ nodes ）</p>
+<p>如果启用 <code class="docutils literal notranslate"><span class="pre">AutoAlignNodes</span></code> ，
+当前正在绘制或调整大小的节点（node）将与另一个节点对齐，
+以便它们的一对垂直或水平边成为共线。
+要指定节点对齐的最大距离，请设置 <code class="docutils literal notranslate"><span class="pre">AutoAlignDistance</span></code> 属性。
+通过使用分配给 <code class="docutils literal notranslate"><span class="pre">AlignmentGuidePen</span></code> 的笔绘制对齐参考线，
+可以直观地指示这对对齐的节点。</p>
+</li>
+<li><p>将链接吸附（snap）到附近的节点（nodes）</p>
+<p>设置 <code class="docutils literal notranslate"><span class="pre">AutoSnapLinks</span></code> 后，当前绘制或修改的链接（links）可以
+自动捕捉（snap to）到最近节点的最近边界点（border point）。
+链接连接到附近节点的最大距离是通过 <code class="docutils literal notranslate"><span class="pre">AutoSnapDistance</span></code> 设置的。</p>
+</li>
 </ul>
 </li>
-<li><p>剪贴板操作</p></li>
+<li><p>剪贴板操作</p>
+<p>可以将单个 diagram item 或一组选中的 items 复制或剪切到 Windows 剪贴板。
+这是使用 <code class="docutils literal notranslate"><span class="pre">CopyToClipboard</span></code> 和 <code class="docutils literal notranslate"><span class="pre">CutToClipboard</span></code> 方法以编程方式完成的。
+要将剪贴板内容粘贴到当前 diagram 中，请调用 <code class="docutils literal notranslate"><span class="pre">PasteFromClipboard</span></code> 方法。</p>
+<p>WpfDiagram 不为剪贴板操作提供键盘接口。
+您可以将标准的 CTRL+C、CTRL+X 和 CTRL+V 快捷方式分配给菜单项，
+并通过调用相应的方法来处理它们。</p>
+</li>
 <li><p>滚动和缩放</p>
-<ul class="simple">
-<li><p>自动滚动</p></li>
-<li><p>Diagram 尺寸</p></li>
-<li><p>编程方式控制滚动</p></li>
-<li><p>滚动表格</p></li>
-<li><p>缩放</p></li>
-<li><p>套索（Lasso）缩放工具</p></li>
-<li><p>放大（Magnifying）</p></li>
-<li><p>平移</p></li>
+<p>为了使用滚动，您必须将 <code class="docutils literal notranslate"><span class="pre">Diagram</span></code> 控件放置在 <strong>ScrollViewer</strong> 、 <code class="docutils literal notranslate"><span class="pre">Ruler</span></code> 或
+<code class="docutils literal notranslate"><span class="pre">DiagramView</span></code> 中。</p>
+<ul>
+<li><p>自动滚动</p>
+<p><code class="docutils literal notranslate"><span class="pre">AutoScroll</span></code> 属性控制自动滚动。
+如果启用它并且用户在操作一个 item 时
+拖动 <code class="docutils literal notranslate"><span class="pre">Diagram</span></code> 边缘（edges）附近的调整手柄（adjustment handles），
+则控件将向鼠标位置滚动视口（viewport）。
+<code class="docutils literal notranslate"><span class="pre">ScrollZoneSize</span></code> 属性定义了
+触发自动滚动的视图边框附近区域（area near the view borders）的大小。</p>
+</li>
+<li><p>Diagram 尺寸</p>
+<p>图表（diagram）的尺寸是通过 <code class="docutils literal notranslate"><span class="pre">Bounds</span></code> 属性设置的。
+它的值是一个 <strong>Rect</strong> 实例，它指定了图表坐标系的原点（origin）和图表尺寸。</p>
+</li>
+<li><p>编程方式控制滚动</p>
+<p>为了以编程方式滚动文档内容（document content），
+您可以调用 <code class="docutils literal notranslate"><span class="pre">ScrollTo</span></code> 方法或设置 <code class="docutils literal notranslate"><span class="pre">ScrollX</span></code> 和 <code class="docutils literal notranslate"><span class="pre">ScrollY</span></code> 属性。
+后者还可用于在需要时访问当前滚动位置。
+<code class="docutils literal notranslate"><span class="pre">BringIntoView</span></code> 方法滚动视口（viewport）以确保
+可以在视图（view）中看到特定的 diagram item 。</p>
+</li>
+<li><p>滚动表格</p>
+<p>表格行也可以滚动。 如果 <code class="docutils literal notranslate"><span class="pre">Scrollable</span></code> 属性设置为 <strong>true</strong> ，
+则在表格的标题区域中会显示一个向上/向下滚动按钮。
+通过该按钮，用户可以滚动表格的行。
+滚动也可以使用 <code class="docutils literal notranslate"><span class="pre">CurrentScrollRow</span></code> 属性以编程方式完成。</p>
+</li>
+<li><p>缩放（Zooming）</p>
+<p>缩放由 <code class="docutils literal notranslate"><span class="pre">ZoomFactor</span></code> 属性、 <code class="docutils literal notranslate"><span class="pre">ZoomIn</span></code> 和 <code class="docutils literal notranslate"><span class="pre">ZoomOut</span></code> 方法控制。
+缩放系数（zoom factor）以百分比表示，100% 表示不缩放。
+高于 100% 使图表项目在屏幕上看起来更近和更大 - 放大（zoom in）。
+低于 100% 使项目在屏幕上看起来更远和更小 - 缩小（zoom out）。
+<code class="docutils literal notranslate"><span class="pre">ZoomIn</span></code> 方法将缩放系数增加 10%。
+<code class="docutils literal notranslate"><span class="pre">ZoomOut</span></code> 方法将缩放系数降低 10%。
+要缩放和滚动视图（view）以使图表内容适合控件的工作区（client area），
+请调用 <code class="docutils literal notranslate"><span class="pre">ZoomToFit</span></code> 。
+要缩放和滚动视图（view）以使其适合控件工作区中指定的矩形文档区域，
+请调用 <code class="docutils literal notranslate"><span class="pre">ZoomToRect</span></code> 。</p>
+</li>
+<li><p>套索（Lasso）缩放工具</p>
+<p>该控件支持多种使用套索工具进行缩放的方法：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>将 <code class="docutils literal notranslate"><span class="pre">Behavior</span></code> 属性设置为 <code class="docutils literal notranslate"><span class="pre">Zoom</span></code> 将会始终绘制缩放套索。</p></li>
+<li><p>为 <code class="docutils literal notranslate"><span class="pre">ModifierKeyActions</span></code> 中的一个键设置 <code class="docutils literal notranslate"><span class="pre">Zoom</span></code> 标志，
+让用户可以在按下相应的修饰键（modifier key）和鼠标左键的情况下
+绘制缩放套索。</p></li>
+<li><p>将 <code class="docutils literal notranslate"><span class="pre">Zoom</span></code> 值分配给 <code class="docutils literal notranslate"><span class="pre">RightButtonActions</span></code> 或
+<code class="docutils literal notranslate"><span class="pre">MiddleButtonActions</span></code> 属性以使用相应的鼠标按钮进行缩放。</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>放大（Magnifying）</p>
+<p><code class="docutils literal notranslate"><span class="pre">Diagram</span></code> 提供了通过放大镜工具（magnifier tool）放大（或缩小）图表部分的功能。
+通过将 <code class="docutils literal notranslate"><span class="pre">MagnifierEnabled</span></code> 设置为 <strong>true</strong> ，可以永久激活放大镜工具。
+或者，可以通过鼠标右键或按一个修饰键（modifier key）来在需要时进行放大，
+分别为 <code class="docutils literal notranslate"><span class="pre">RightButtonActions</span></code> 或 <code class="docutils literal notranslate"><span class="pre">ModifierKeyActions</span></code> 属性设置适当的值。</p>
+<p>放大系数可以通过 <code class="docutils literal notranslate"><span class="pre">MagnifierFactor</span></code> 属性指定。
+可以通过 <code class="docutils literal notranslate"><span class="pre">MagnifierWidth</span></code> 和 <code class="docutils literal notranslate"><span class="pre">MagnifierHeight</span></code> 属性设置工具的大小。</p>
+</li>
+<li><p>平移（Panning）</p>
+<p>按住 ALT 键同时按住鼠标左键拖动，可以平移图表视图（diagram view）。
+通过 <code class="docutils literal notranslate"><span class="pre">ModifierKeyActions</span></code> 可以设置另一个修饰键（modifier key）来进行平移。
+<code class="docutils literal notranslate"><span class="pre">MiddleButtonActions</span></code> 和 <code class="docutils literal notranslate"><span class="pre">RightButtonActions</span></code> 属性允许您
+使用鼠标中键或右键开始平移。
+WpfDiagram 在平移时显示 <code class="docutils literal notranslate"><span class="pre">PanCursor</span></code> 。</p>
+</li>
 </ul>
 </li>
-<li><p>Tooltips</p></li>
+<li><p>Tooltips</p>
+<p>Tool-tips 是当鼠标指针悬停在图表项目（diagram item）上一段时间时显示的简短文本消息。
+要启用 tool-tips，请将 <code class="docutils literal notranslate"><span class="pre">ShowToolTips</span></code> 属性设置为 <strong>true</strong> 。
+Tool-tips 出现之前的延迟由 <code class="docutils literal notranslate"><span class="pre">ToolTipDelay</span></code> 属性设置。</p>
+<p>可以为每个图表元素（diagram element）和整个文档（document）定义 tool-tips 。
+如果鼠标指针静止不动并且指向一个 item ，则显示该 item 的 tool-tips 。
+如果光标下没有任何 item，或者如果有一个 item 但没有为其定义任何 tool-tips 文本，
+则会显示 diagram 的 tool-tips 。
+分配给节点的锚点（anchor points）也提供一个 <code class="docutils literal notranslate"><span class="pre">ToolTip</span></code> 属性。</p>
+<p>Tool-tip 的文字也作为 items 对应的图片区域的 ALT 属性的值；
+有关更多信息，请参阅 <a class="reference external" href="https://www.mindfusion.eu/onlinehelp/wpfdiagram/T_MindFusion_Diagramming_Wpf_HtmlBuilder.htm">HtmlBuilder</a> 。</p>
+</li>
 <li><p>In-place Editing the Contents of Items</p>
-<ul class="simple">
-<li><p>标准的 in-place 编辑</p></li>
-<li><p>对自定义 Items 的 in-place 编辑</p></li>
+<ul>
+<li><p>标准的 in-place 编辑</p>
+<p>要激活 WpfDiagram 对象文本的标准就地编辑，
+请将 <code class="docutils literal notranslate"><span class="pre">AllowInplaceEdit</span></code> 属性设置为 <strong>true</strong> 。
+<code class="docutils literal notranslate"><span class="pre">AllowInplaceEdit</span></code> 允许通过双击就地编辑图表元素的内容。
+通过单击文本字段外的任意位置，可以接受（编辑后的内容）和退出就地编辑模式。</p>
+<p>如果您想更改接受/拒绝更改的方式，
+以下 <code class="docutils literal notranslate"><span class="pre">Diagram</span></code> 属性允许使用 ENTER 和 ESC 键执行该操作：
+<code class="docutils literal notranslate"><span class="pre">InplaceEditAcceptOnEnter</span></code> 和 <code class="docutils literal notranslate"><span class="pre">InplaceEditCancelOnEsc</span></code> 。
+当 <strong>InplaceEditAcceptOnEnter</strong> 设置为 <strong>true</strong> 时，
+按 ENTER 键会导致接受更改并退出就地编辑模式。
+如果 <strong>InplaceEditAcceptOnEnter</strong> 设置为 <strong>false</strong> ，
+则在就地编辑模式下按 ENTER 会在文本中插入新行。
+如果 <strong>InplaceEditCancelOnEsc</strong> 设置为 <strong>true</strong> ，
+则按 ESC 键执行拒绝更改并退出就地编辑模式。</p>
+<p>就地编辑可应用于以下属性：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>ShapeNode.Text</p></li>
+<li><p>DiagramLink.Text</p></li>
+<li><p>TableNode.Cell.Text</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">TableNode.Caption</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ContainerNode.Caption</span></code></p></li>
+</ul>
+</div></blockquote>
+<p>对于表格，标题和单元格都可以通过这种方式进行编辑。</p>
+<p>如果要启用/禁用特定表格单元格的就地编辑，请处理 <code class="docutils literal notranslate"><span class="pre">CellTextEditing</span></code> 事件。
+要启用/禁用节点（nodes）的就地编辑，请处理 <code class="docutils literal notranslate"><span class="pre">NodeTextEditing</span></code> 事件。
+对于 <code class="docutils literal notranslate"><span class="pre">DiagramLink</span></code> 对象，在就地编辑时会引发 <code class="docutils literal notranslate"><span class="pre">LinkTextEditing</span></code> 事件。
+这些验证事件可让您在必要时阻止用户编辑特定对象中的文本。</p>
+<p>节点（node）的就地编辑完成后，将引发 <code class="docutils literal notranslate"><span class="pre">NodeTextEdited</span></code> 事件。
+对于表格的单元格，可以处理 <code class="docutils literal notranslate"><span class="pre">CellTextEdited</span></code> 事件。
+当 <code class="docutils literal notranslate"><span class="pre">DiagramLink</span></code> 对象的就地编辑完成时引发 <code class="docutils literal notranslate"><span class="pre">LinkTextEdited</span></code> 事件。</p>
+<p>默认情况下，WpfDiagram 创建一个 <strong>TextBox</strong> 控件来让用户编辑 item 的文本。
+<code class="docutils literal notranslate"><span class="pre">EnterInplaceEditMode</span></code> 事件允许自定义该控件的属性，
+或将事件处理程序附加（attach）到该事件。
+<code class="docutils literal notranslate"><span class="pre">InplaceEditFont</span></code> 指定就地编辑文本框的字体。
+实际上，<strong>InplaceEditFont</strong> 被赋值给该文本框的 <strong>Font</strong> 属性</p>
+<p>离开就地编辑模式时，会引发 <code class="docutils literal notranslate"><span class="pre">LeaveInplaceEditMode</span></code> 事件。
+在关闭就地编辑控件的所有情况下都会引发此事件，例如，
+当用户接受或取消对 item 文本所做的更改时，或者当调用 <code class="docutils literal notranslate"><span class="pre">EndEdit</span></code> 方法时。</p>
+<p>要以编程方式进入就地编辑模式并让用户内联（inline）编辑 item 的文本，
+请调用 <strong>Diagram</strong> 的 <code class="docutils literal notranslate"><span class="pre">BeginEdit</span></code> 方法。 <strong>EndEdit</strong> 方法退出就地编辑模式。</p>
+</li>
+<li><p>对自定义 Items 的 in-place 编辑</p>
+<p><code class="docutils literal notranslate"><span class="pre">InplaceEditable</span></code> 接口允许为自定义的 item 实现标准的就地编辑。
+通过该接口的方法，您可以指定就地编辑文本框控件的位置，
+并将输入的文本复制到编辑项（edited item）的属性中。</p>
+<p><code class="docutils literal notranslate"><span class="pre">GetEditRect</span></code> 返回就地编辑框的目标矩形。
+<code class="docutils literal notranslate"><span class="pre">GetTextToEdit</span></code> 表示就地编辑框的初始内容。
+<code class="docutils literal notranslate"><span class="pre">SetEditedText</span></code> 在完成就地编辑后将编辑后的文本赋给对象。</p>
+</li>
 </ul>
 </li>
 </ol>
 </div>
-<div class="section" id="id20">
-<h4>4.4 位置和布局<a class="headerlink" href="#id20" title="永久链接至标题">¶</a></h4>
-<ol class="arabic simple">
+<div class="section" id="id21">
+<h4>4.4 位置和布局<a class="headerlink" href="#id21" title="永久链接至标题">¶</a></h4>
+<ol class="arabic">
 <li><p>Items 的布局 —— 位置、尺寸和 Z-顺序</p>
-<ul class="simple">
-<li><p>测量单位</p></li>
-<li><p>Nodes 的位置和尺寸</p></li>
-<li><p>链接控制点（Link Control Points）</p></li>
-<li><p>动态链接（Link Dynamic）</p></li>
-<li><p>交互式移动或调整尺寸</p></li>
-<li><p>控制 Z-顺序</p></li>
+<ul>
+<li><p>测量单位（Measure Unit）</p>
+<p><code class="docutils literal notranslate"><span class="pre">MeasureUnit</span></code> 属性指赋值给给 WpfDiagram 属性或作为参数传递给其方法的
+所有位置和尺寸相关值的度量单位。</p>
+</li>
+<li><p>Nodes 的位置和尺寸</p>
+<p>使用 <code class="docutils literal notranslate"><span class="pre">Bounds</span></code> 属性获取或更改节点（node）的位置和大小。
+要移动节点而不改变其尺寸，请调用 <code class="docutils literal notranslate"><span class="pre">Move</span></code> 方法。
+要仅更改节点的尺寸，请调用 <code class="docutils literal notranslate"><span class="pre">Resize</span></code> 方法。
+<code class="docutils literal notranslate"><span class="pre">ShapeNode.ResizeToFitImage</span></code> 和 <code class="docutils literal notranslate"><span class="pre">TableNode.ResizeToFitImage</span></code> 方法
+设置节点的尺寸以适应其图片的尺寸。</p>
+</li>
+<li><p>链接控制点（Link Control Points）</p>
+<p>链接（Links）有两个或多个控制点（control points），
+取决于它们的 <code class="docutils literal notranslate"><span class="pre">Shape</span></code> 和 <code class="docutils literal notranslate"><span class="pre">SegmentCount</span></code> 属性值。
+您可以通过链接的 <code class="docutils literal notranslate"><span class="pre">ControlPoints</span></code> 集合访问控制点。
+你必须在移动一个链接的控制点之后调用它的 <code class="docutils literal notranslate"><span class="pre">UpdateFromPoints</span></code> 方法，
+这是重新绘制链接和更新其内部状态变量所必须的。
+<code class="docutils literal notranslate"><span class="pre">Bounds</span></code> 属性是只读的。它返回能包围所有链接点的最小矩形。</p>
+</li>
+<li><p>动态链接（Link Dynamic）</p>
+<p>如果连接到链接（link）的节点（nodes）被移动或调整大小，
+可以启用链接的 <code class="docutils literal notranslate"><span class="pre">Dynamic</span></code> 属性，使链接自动重新计算其端点位置；
+调整端点位置后，重新使链接指向连接到的节点的中心。
+一个相关的属性是 <code class="docutils literal notranslate"><span class="pre">AutoSnapToNode</span></code> ，当用户移动链接末端时，
+可以启用该属性使链接端点与链接的源（origin）或目标（destination）节点的
+边界（border）对齐。</p>
+<p><code class="docutils literal notranslate"><span class="pre">RetainForm</span></code> 属性对于具有
+两个以上控制点（control points）的链接（links）很有用。
+如果一个链接所连接的节点（nodes）被移动，通常只更新该链接末端的段（segments），
+以便它们保持与各自节点的连接。在这种情况下，所有中间的控制点都保持在原来的位置。
+但是，如果启用了 <code class="docutils literal notranslate"><span class="pre">RetainForm</span></code> ，所有控制点将同时移动，以保持彼此的相对位置，
+从而保持链接的整体形式。</p>
+<p>链接有一个 <code class="docutils literal notranslate"><span class="pre">AutoRoute</span></code> 属性，可以启用或禁用链接的自动路由。
+路由链路（Routes links）通过在它们的起点（origin）和目的地（destionation）
+之间找到不跨越任何其他节点（nodes）的最短路径来避开其它节点。
+可以通过使用 <code class="docutils literal notranslate"><span class="pre">RoutingOptions</span></code> 公开的属性来调整链接路由算法。</p>
+</li>
+<li><p>交互式移动或调整尺寸</p>
+<p>应用程序的最终用户可以移动或调整图表元素（diagram elements）的尺寸。
+用户通过选择一个 item 并拖动它的任何一个调整手柄（adjustment handles）、
+内部点、任何边或选择框来实现这一点。
+节点（nodes）的 <code class="docutils literal notranslate"><span class="pre">HandlesStyle</span></code> 属性控制如何执行交互。
+此外，它还定义了所选 item 在屏幕上如何显示。
+<code class="docutils literal notranslate"><span class="pre">EnabledHandles</span></code> 可以让您禁用允许用户在节点上执行的特定操作，
+例如水平调整 item 的尺寸或移动它。
+如果以交互方式修改 item ，
+则会引发 <code class="docutils literal notranslate"><span class="pre">NodeModified</span></code> 或 <code class="docutils literal notranslate"><span class="pre">LinkModified</span></code> 事件，
+具体取决于 item 的类型。</p>
+</li>
+<li><p>控制 Z-顺序</p>
+<p>Z 轴顺序定义了项目在 Z 轴上的排序方式 - 以便一个看起来高于或低于另一个。
+<code class="docutils literal notranslate"><span class="pre">DiagramItem</span></code> 类的成员使您可以完全控制 Z 顺序。
+要将 item 向上或向下移动一级，请调用 <code class="docutils literal notranslate"><span class="pre">ZLevelUp</span></code> 或 <code class="docutils literal notranslate"><span class="pre">ZLevelDown</span></code> 方法。
+要将 item 移动到 Z 顺序的底部，请调用其 <code class="docutils literal notranslate"><span class="pre">ZBottom</span></code> 方法。
+要将 item 移动到所有其他 items 的前面，请调用其 <code class="docutils literal notranslate"><span class="pre">ZTop</span></code> 方法。
+您可以使用 <code class="docutils literal notranslate"><span class="pre">ZIndex</span></code> 属性来获取或设置 Z 轴顺序。</p>
+</li>
 </ul>
 </li>
-<li><p>对齐网格</p></li>
+<li><p>对齐网格</p>
+<p>WpfDiagram 提供了一个对齐网格来帮助用户更精确地放置 diagram items 。
+要启用网格，请将 <code class="docutils literal notranslate"><span class="pre">AlignToGrid</span></code> 属性设置为 true。
+如果在创建或修改 items 时网格处于启用状态，则 item 的控制点将与最近的网格点对齐。
+相邻网格点之间的距离由 <code class="docutils literal notranslate"><span class="pre">GridSizeX</span></code> 和 <code class="docutils literal notranslate"><span class="pre">GridSizeY</span></code> 属性设置。
+<code class="docutils literal notranslate"><span class="pre">GridOffsetX</span></code> 和 <code class="docutils literal notranslate"><span class="pre">GridOffsetY</span></code> 属性允许指定对齐网格中第一个点的
+水平和垂直偏移。</p>
+<p>用户创建或修改的 items 会自动与网格对齐。
+但是，如果 item 是以编程方式放置在图表中，
+则它们的坐标将设置为指定位置而不进行对齐。
+在这种情况下，如果必须将 items 准确放置在网格点上，
+请使用 <code class="docutils literal notranslate"><span class="pre">AlignPointToGrid</span></code> 方法。</p>
+<p>网格是否可见，取决于 <code class="docutils literal notranslate"><span class="pre">ShowGrid</span></code> 的值是 <strong>true</strong> 还是 <strong>false</strong> 。
+如果可见，则按照 <code class="docutils literal notranslate"><span class="pre">GridStyle</span></code> 属性指定的方式，
+将网格绘制为一个点矩阵或一系列交叉线。 <code class="docutils literal notranslate"><span class="pre">GridPen</span></code> 定义用于绘制对齐点或线的笔。</p>
+</li>
 <li><p>车道（Lanes）网格</p></li>
 <li><p>Diagram 的自动布局</p>
+<p>处理层次结构或更复杂实体关系数据的应用程序可能需要以一种美观和视觉上吸引人的方式
+将数据呈现给最终用户。</p>
+<p>这类应用程序将它们的数据存储为可能附加（attached）了附加（additional）信息
+的连接节点（connected nodes）的图（graph）。
+然而，节点（nodes）的位置和大小、坐标可能是不必要的和/或不可用的。
+WpfDiagram 提供了一种自动排列图表节点（nodes of diagram）的方法，
+在图表（diagram）的整体结构上应用有吸引力的布局。
+为了利用该功能，应用程序可以通过为其节点（nodes）分配通用坐标、实例化布局对象
+并调用布局的 <code class="docutils literal notranslate"><span class="pre">Arrange</span></code> 方法来创建图表。
+.NET 4.5 版本的 <code class="docutils literal notranslate"><span class="pre">diagramming.dll</span></code> 程序集提供了非阻塞的 <code class="docutils literal notranslate"><span class="pre">ArrangeAsync</span></code> 方法。
+通过将 items 的 <code class="docutils literal notranslate"><span class="pre">IgnoreLayout</span></code> 属性设置为 true，
+可以防止 <code class="docutils literal notranslate"><span class="pre">Arrange</span></code> 方法更改 individual items 的位置。</p>
+<p>实现自动布局算法的类位于 <code class="docutils literal notranslate"><span class="pre">MindFusion.Diagramming.Wpf.Layout</span></code> 命名空间中。
+以下部分列出了按其一般实现策略分类的可用算法：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>force-directed algorithms</p></li>
+<li><p>graph topology based algorithms</p></li>
+<li><p>semantics based algorithms</p></li>
+</ul>
+</div></blockquote>
 <ul class="simple">
 <li><p>Force-directed layout algorithms</p></li>
 <li><p>Topology based layout algorithms</p></li>
@@ -643,25 +1431,103 @@ WpfDiagram 为您节省了数百小时的编码和调试工作。</p>
 </ul>
 </li>
 <li><p>链接的路由</p>
-<ul class="simple">
-<li><p>设置链接的路由器</p></li>
-<li><p>自动式或显式路由</p></li>
-<li><p>调整（Tuning）路由算法</p></li>
+<p>路由链接（Routed links）通过找到不跨越任何其他节点的起点和目的地之间的最短路径
+来避开标记为障碍的节点。</p>
+<ul>
+<li><p>设置链接的路由器</p>
+<p>控件通过调用实现 <code class="docutils literal notranslate"><span class="pre">ILinkRouter</span></code> 接口的对象的方法
+来查找受附近节点修改影响的链接的路径。
+可以通过 <code class="docutils literal notranslate"><span class="pre">Diagram</span></code> 类的 <code class="docutils literal notranslate"><span class="pre">LinkRouter</span></code> 属性获取或设置此对象。
+WpfDiagram 提供了两个实现 <strong>ILinkRouter</strong> 的类 —— <code class="docutils literal notranslate"><span class="pre">GridRouter</span></code> 和
+<code class="docutils literal notranslate"><span class="pre">QuickRouter</span></code> 。
+默认情况下， <strong>LinkRouter</strong> 设置为 <strong>QuickRouter</strong> 的实例。</p>
+</li>
+<li><p>自动式或显式路由（Automatic or Explicit Routing）</p>
+<p>可以调用 <code class="docutils literal notranslate"><span class="pre">RouteAllLinks</span></code> 方法以不跨节点的方式 <strong>显式</strong> 重新排列链接。
+此外，链接（links）有一个 <code class="docutils literal notranslate"><span class="pre">AutoRoute</span></code> 属性，可以启用或禁用链接的自动路由；
+该属性是从图表的 <code class="docutils literal notranslate"><span class="pre">RouteLinks</span></code> 成员初始化的。
+<code class="docutils literal notranslate"><span class="pre">RoutingOptions</span></code> 类的 <code class="docutils literal notranslate"><span class="pre">TriggerRerouting</span></code> 成员指定
+何时必须自动重新路由链接。</p>
+</li>
+<li><p>调整（Tuning）路由算法</p>
+<p>当使用 <code class="docutils literal notranslate"><span class="pre">GridRouter</span></code> 时， <code class="docutils literal notranslate"><span class="pre">RoutingOptions</span></code> 类允许
+对路由算法的各个方面进行自定义。
+该算法对可能的路径进行评估，以找到成本最小的路径。
+<code class="docutils literal notranslate"><span class="pre">LengthCost</span></code> 、 <code class="docutils literal notranslate"><span class="pre">TurnCost</span></code> 、 <code class="docutils literal notranslate"><span class="pre">CrossingCost</span></code> 和
+<code class="docutils literal notranslate"><span class="pre">NodeVicinityCost</span></code> 的值被添加到路线的总成本中，
+并且对所选路径的形状有很大影响。
+<code class="docutils literal notranslate"><span class="pre">StartOrientation</span></code> 和 <code class="docutils literal notranslate"><span class="pre">EndOrientation</span></code> 属性指定
+路由链接（routed links）的第一段（segment）和最后一段的方向。</p>
+</li>
 </ul>
 </li>
 <li><p>锚点（Anchor points）和模版（Patterns）</p>
-<ul class="simple">
-<li><p>锚点</p></li>
-<li><p>锚点模板</p></li>
-<li><p>锚点模板和表格</p></li>
-<li><p>锚点和用户交互</p></li>
-<li><p>编程式设置锚点</p></li>
+<ul>
+<li><p>锚点</p>
+<p>对于每个节点（node），您可以定义连接到该节点时链接（links）
+必须停靠的一个或多个点（points）。这些点由 <code class="docutils literal notranslate"><span class="pre">AnchorPoint</span></code> 类的实例表示。
+锚点相对于节点边界矩形（bounding rectangle）的位置由 X 和 Y 属性指定。
+它们的值表示为节点宽度和高度的百分比，以适应移动和调整大小。
+锚点的最终位置由以下简单计算确定：</p>
+<div class="highlight-C# notranslate"><div class="highlight"><pre><span></span><span class="k">return</span> <span class="k">new</span> <span class="nf">PointF</span><span class="p">(</span>
+    <span class="n">nodeRect</span><span class="p">.</span><span class="n">X</span> <span class="p">+</span> <span class="n">nodeRect</span><span class="p">.</span><span class="n">Width</span> <span class="p">*</span> <span class="n">X</span> <span class="p">/</span> <span class="m">100</span><span class="p">,</span>
+    <span class="n">nodeRect</span><span class="p">.</span><span class="n">Y</span> <span class="p">+</span> <span class="n">nodeRect</span><span class="p">.</span><span class="n">Height</span> <span class="p">*</span> <span class="n">Y</span> <span class="p">/</span> <span class="m">100</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>点的位置也可以定义为距节点左上角的固定偏移量，
+让您可以定义不依赖于节点宽度或高度的锚点位置。
+这是通过 <code class="docutils literal notranslate"><span class="pre">XUnit</span></code> 和 <code class="docutils literal notranslate"><span class="pre">YUnit</span></code> 属性独立控制的 <cite>X</cite> 和 <cite>Y</cite> 坐标。</p>
+<p>您可以控制锚点是接受传入（incomming）链接还是传出（outgoing）链接，
+或者两者都接受。这是由 <code class="docutils literal notranslate"><span class="pre">AllowIncoming</span></code> 和 <code class="docutils literal notranslate"><span class="pre">AllowOutgoing</span></code> 属性完成的。
+当一个链接被绘制时，它的两端对齐到最近且相应类型（传入或传出）被允许的锚点。
+控制链接是否可以连接到锚点的另一种方法是处理 <code class="docutils literal notranslate"><span class="pre">ValidateAnchorPoint</span></code> 事件。</p>
+</li>
+<li><p>锚点模板（Patterns）</p>
+<p>一个 <code class="docutils literal notranslate"><span class="pre">AnchorPattern</span></code> 实例定义了一组要一起使用的锚点。
+创建锚点模板时，将一个 <code class="docutils literal notranslate"><span class="pre">AnchorPoint</span></code> 对象数组传递给其构造函数。
+<strong>AnchorPattern</strong> 类公开了几个预定义的模板（pattern）作为静态属性。
+可以将现有模板作为单个实体赋值给节点（nodes）的 <code class="docutils literal notranslate"><span class="pre">AnchorPattern</span></code> 属性。
+以下示例创建了一个包含四个锚点的模板：</p>
+<div class="highlight-C# notranslate"><div class="highlight"><pre><span></span><span class="n">apat1</span> <span class="p">=</span> <span class="k">new</span> <span class="n">AnchorPattern</span><span class="p">(</span><span class="k">new</span> <span class="n">AnchorPoint</span><span class="p">[]</span> <span class="p">{</span>
+    <span class="k">new</span> <span class="nf">AnchorPoint</span><span class="p">(</span><span class="m">50</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="k">true</span><span class="p">,</span> <span class="k">true</span><span class="p">),</span>
+    <span class="k">new</span> <span class="nf">AnchorPoint</span><span class="p">(</span><span class="m">100</span><span class="p">,</span> <span class="m">50</span><span class="p">,</span> <span class="k">true</span><span class="p">,</span> <span class="k">true</span><span class="p">),</span>
+    <span class="k">new</span> <span class="nf">AnchorPoint</span><span class="p">(</span><span class="m">50</span><span class="p">,</span> <span class="m">100</span><span class="p">,</span> <span class="k">true</span><span class="p">,</span> <span class="k">true</span><span class="p">),</span>
+    <span class="k">new</span> <span class="nf">AnchorPoint</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">50</span><span class="p">,</span> <span class="k">true</span><span class="p">,</span> <span class="k">true</span><span class="p">)});</span>
+</pre></div>
+</div>
+<p>这些点位于模板被赋值到的节点的边界矩形边的中间。
+所有四个点都接受传入和传出链接。</p>
+</li>
+<li><p>锚点模板和表格</p>
+<p>可以为表格的每一行分配一个不同的锚点模板。
+当链接连接到一行时，链接的相应端点与分赋值给该行的最近的 <code class="docutils literal notranslate"><span class="pre">AnchorPoint</span></code> 对齐。
+如果一行没有关联的适当类型（传入/传出）的锚点，
+则链接将连接到定义了此类锚点的最近行。
+如果表的任何行都没有关联的适当的锚点模板，
+则链接将连接到所指行左侧或右侧的中间。</p>
+</li>
+<li><p>锚点和用户交互</p>
+<p>默认情况下，链接仅在创建链接时附加（attached to）到锚点。
+之后，用户可以将链接的端点移动到节点（node）的任何部分。
+为确保即使在用户进行后续修改后链接始终保持附加到锚点，
+请将 <code class="docutils literal notranslate"><span class="pre">SnapToAnchor</span></code> 属性设置为 <code class="docutils literal notranslate"><span class="pre">CreateOrModify</span></code> 。
+您可以通过处理 <code class="docutils literal notranslate"><span class="pre">ValidateAnchorPoint</span></code> 事件来防止用户将特定链接附加到特定锚点。</p>
+</li>
+<li><p>编程式设置锚点</p>
+<p>您可以通过将链接的 <code class="docutils literal notranslate"><span class="pre">OriginAnchor</span></code> 和 <code class="docutils literal notranslate"><span class="pre">DestinationAnchor</span></code> 属性设置为
+相应节点（node）的 <code class="docutils literal notranslate"><span class="pre">AnchorPattern</span></code> 中点的索引，将链接连接到特定的锚点。
+<code class="docutils literal notranslate"><span class="pre">DiagramLink</span></code> 的 <code class="docutils literal notranslate"><span class="pre">ReassignAnchorPoints</span></code> 方法
+会自动选择彼此靠近的源（origin）节点和目标（destination）节点的锚点，
+从而使链接在节点之间走更短的路径。
+<code class="docutils literal notranslate"><span class="pre">DiagramNode</span></code> 的 <code class="docutils literal notranslate"><span class="pre">ReassignAnchorPoints</span></code> 方法
+设置连接到节点的每个链接的锚点，以便链接在可用锚点之间均匀分布。</p>
+</li>
 </ul>
 </li>
 </ol>
 </div>
-<div class="section" id="id21">
-<h4>4.5 撤销重做<a class="headerlink" href="#id21" title="永久链接至标题">¶</a></h4>
+<div class="section" id="id22">
+<h4>4.5 撤销重做<a class="headerlink" href="#id22" title="永久链接至标题">¶</a></h4>
 <ol class="arabic">
 <li><p>概述</p>
 <p>用户执行的交互操作和更改图表结构的编程命令都记录在历史队列中。
@@ -786,43 +1652,429 @@ WpfDiagram 为每个 Item 的创建创建一个撤销记录；
 该实例在 undo manager 中标记为 active composite。
 当有一个 active composite 时，所有执行的操作都会添加到其中。
 调用 active composite 的 <code class="docutils literal notranslate"><span class="pre">Execute</span></code> 方法停止继续向其中添加子命令，
-并将其作为可撤销的原子子操作保存在历史记录中。</p>
+并将其作为可撤销的原子操作保存在历史记录中。</p>
 <p>使用 undo manager 的 <code class="docutils literal notranslate"><span class="pre">Undo</span></code> 和 <code class="docutils literal notranslate"><span class="pre">Redo</span></code> 方法来撤消或重做操作。
 不要调用 <code class="docutils literal notranslate"><span class="pre">Command</span></code> 类的相应方法 —— 它们由 undo manager 在内部调用，
 此外当前历史记录的位置也会更新并重新绘制图表视图。</p>
 </li>
-<li><p>历史记录</p></li>
-<li><p>关于属性更改的撤销重做</p></li>
-<li><p>组合命令</p></li>
-<li><p>派生 Command 类</p></li>
-</ol>
+<li><p>历史记录</p>
+<p>撤消/重做历史记录由一个 <code class="docutils literal notranslate"><span class="pre">CommandHistory</span></code> 的实例表示。
+该实例由 <code class="docutils literal notranslate"><span class="pre">UndoManager</span></code> 创建，可以通过其 <code class="docutils literal notranslate"><span class="pre">History</span></code> 属性访问。</p>
+<p>Undo manager 在执行命令后将它们添加到历史记录中。
+如果历史队列已满，则在添加新命令记录时删除最旧的命令记录。
+使用 <strong>CommandHistory</strong> 的 <code class="docutils literal notranslate"><span class="pre">Capacity</span></code> 属性指定队列中可以保留多少操作记录。</p>
+<p>历史记录有一个当前命令指针，指示哪些是下一个要撤消或重做的命令。
+如果命令被撤消，历史队列中的当前指针将往后移动，并允许撤消更旧的操作。
+如果当前指针不在最后一条记录上，则可以再次重做任何较新的命令。
+每次撤消或重做操作时，都会分别触发 <code class="docutils literal notranslate"><span class="pre">ActionUndone</span></code> 或 <code class="docutils literal notranslate"><span class="pre">ActionRedone</span></code> 事件。</p>
+<p>要查询下一个要撤消或重做的命令，请使用 <code class="docutils literal notranslate"><span class="pre">NextUndo</span></code> 和 <code class="docutils literal notranslate"><span class="pre">NextRedo</span></code> 只读属性。
+它们返回队列中包含的由当前指针引用的 <code class="docutils literal notranslate"><span class="pre">Command</span></code> 实例。
+如果无法进一步撤消或重做，则属性返回 <strong>null</strong> 。
+您可以使用它们向用户指示要撤消/重做的下一个命令是什么。</p>
+<div class="highlight-C# notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">diagram</span><span class="p">.</span><span class="n">UndoManager</span><span class="p">.</span><span class="n">History</span><span class="p">.</span><span class="n">NextUndo</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// Everything has been undone</span>
+    <span class="n">miUndo</span><span class="p">.</span><span class="n">Enabled</span> <span class="p">=</span> <span class="k">false</span><span class="p">;</span>
+    <span class="n">miUndo</span><span class="p">.</span><span class="n">Text</span> <span class="p">=</span> <span class="s">&quot;Undo&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">else</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">diagram</span><span class="p">.</span><span class="n">UndoManager</span><span class="p">.</span><span class="n">History</span><span class="p">.</span><span class="n">NextUndo</span> <span class="k">is</span> <span class="n">AddItemCmd</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// The next action to undo is item-creation</span>
+        <span class="n">miUndo</span><span class="p">.</span><span class="n">Enabled</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span>
+        <span class="n">miUndo</span><span class="p">.</span><span class="n">Text</span> <span class="p">=</span> <span class="s">&quot;Undo Create&quot;</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
 </div>
-<div class="section" id="id22">
-<h4>4.6 序列化和输出<a class="headerlink" href="#id22" title="永久链接至标题">¶</a></h4>
-<ol class="arabic simple">
-<li><p>序列化 Diagram</p>
-<ul class="simple">
-<li><p>XML 序列化</p></li>
-<li><p>JSON 序列化</p></li>
-</ul>
+<p>要禁止用户撤消上一个命令，请通过调用 <code class="docutils literal notranslate"><span class="pre">Clear</span></code> 方法清除命令历史记录。
+可以通过处理 <code class="docutils literal notranslate"><span class="pre">ActionRecording</span></code> 事件来过滤一些命令，
+以便它们不会被记录在历史记录中。</p>
 </li>
-<li><p>导出 Diagram</p>
-<ul class="simple">
-<li><p>导出图片</p></li>
-<li><p>导出 PDF</p></li>
-<li><p>导出 SVG</p></li>
-<li><p>导出 WMF 图片</p></li>
-<li><p>导出 Visio</p></li>
-<li><p>导出 Excel</p></li>
-<li><p>导出 DXF</p></li>
-</ul>
+<li><p>关于属性更改的撤销重做</p>
+<p>不会自动记录对 Item 属性的更改以供以后撤消。
+要支持对属性更改的撤消，您必须显式创建 <code class="docutils literal notranslate"><span class="pre">ChangeItemCmd</span></code> 实例并将其添加到历史队列。</p>
+<p><strong>ChangeItemCmd</strong> 的构造函数需要一个 item 的引用作为参数，
+并保存 item 的初始状态以供以后通过调用 <code class="docutils literal notranslate"><span class="pre">Undo</span></code> 方法来恢复。
+在对 item 的属性进行一次或多次赋值后调用 <code class="docutils literal notranslate"><span class="pre">Execute</span></code> 方法。
+<strong>Execute</strong> E记录了后面调用 <code class="docutils literal notranslate"><span class="pre">Redo</span></code> 方法是要恢复的 item 的最终状态。
+这允许将对 item 的多个属性的更改保存在单条记录中，
+这些更改可以作为单个操作进行撤消或重做：</p>
+<div class="highlight-C# notranslate"><div class="highlight"><pre><span></span><span class="c1">// Save item state</span>
+<span class="n">ChangeItemCmd</span> <span class="n">propChange</span> <span class="p">=</span> <span class="k">new</span> <span class="n">ChangeItemCmd</span><span class="p">(</span><span class="n">diagram</span><span class="p">.</span><span class="n">Nodes</span><span class="p">[</span><span class="m">0</span><span class="p">],</span> <span class="s">&quot;Change&quot;</span><span class="p">);</span>
+
+<span class="c1">// Change properties</span>
+<span class="n">ShapeNode</span> <span class="n">shape</span> <span class="p">=</span> <span class="p">(</span><span class="n">ShapeNode</span><span class="p">)</span><span class="n">diagram</span><span class="p">.</span><span class="n">Nodes</span><span class="p">[</span><span class="m">0</span><span class="p">];</span>
+<span class="n">shape</span><span class="p">.</span><span class="n">Text</span> <span class="p">=</span> <span class="s">&quot;new text&quot;</span><span class="p">;</span>
+<span class="n">shape</span><span class="p">.</span><span class="n">Brush</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SolidBrush</span><span class="p">(</span><span class="n">Color</span><span class="p">.</span><span class="n">Blue</span><span class="p">);</span>
+<span class="n">shape</span><span class="p">.</span><span class="n">Shape</span> <span class="p">=</span> <span class="n">Shape</span><span class="p">.</span><span class="n">FromId</span><span class="p">(</span><span class="s">&quot;Ellipse&quot;</span><span class="p">);</span>
+
+<span class="c1">// Add to history</span>
+<span class="n">propChange</span><span class="p">.</span><span class="n">Execute</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>您可能需要将对多个 item 的更改作为一个原子操作。
+为此，请创建一个 <code class="docutils literal notranslate"><span class="pre">CompositeCmd</span></code> 的实例，
+并通过 <code class="docutils literal notranslate"><span class="pre">AddSubCmd</span></code> 方法将 <strong>ChangeItemCmd</strong> 命令添加到 composite 中：</p>
+<div class="highlight-C# notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">diagram</span><span class="p">.</span><span class="n">Selection</span><span class="p">.</span><span class="n">Nodes</span><span class="p">.</span><span class="n">Count</span> <span class="p">==</span> <span class="m">0</span><span class="p">)</span>
+    <span class="k">return</span><span class="p">;</span>
+
+<span class="c1">// Make all changes seem like a single operation by</span>
+<span class="c1">// putting them in composite Command</span>
+<span class="n">CompositeCmd</span> <span class="n">composite</span> <span class="p">=</span> <span class="k">new</span> <span class="n">CompositeCmd</span><span class="p">(</span><span class="n">diagram</span><span class="p">,</span> <span class="s">&quot;Change selection&quot;</span><span class="p">);</span>
+
+<span class="k">foreach</span> <span class="p">(</span><span class="n">DiagramNode</span> <span class="n">node</span> <span class="k">in</span> <span class="n">diagram</span><span class="p">.</span><span class="n">Selection</span><span class="p">.</span><span class="n">Nodes</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">ShapeNode</span> <span class="n">shape</span> <span class="p">=</span> <span class="n">node</span> <span class="k">as</span> <span class="n">ShapeNode</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">shape</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span>
+        <span class="k">continue</span><span class="p">;</span>
+
+    <span class="c1">// Save item state</span>
+    <span class="n">ChangeItemCmd</span> <span class="n">propChange</span> <span class="p">=</span> <span class="k">new</span> <span class="n">ChangeItemCmd</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="s">&quot;Change&quot;</span><span class="p">);</span>
+
+    <span class="c1">// Change properties</span>
+    <span class="n">shape</span><span class="p">.</span><span class="n">Text</span> <span class="p">=</span> <span class="s">&quot;new text&quot;</span><span class="p">;</span>
+    <span class="n">shape</span><span class="p">.</span><span class="n">Brush</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SolidBrush</span><span class="p">(</span><span class="n">Color</span><span class="p">.</span><span class="n">Blue</span><span class="p">);</span>
+
+    <span class="c1">// Add to the composite</span>
+    <span class="n">composite</span><span class="p">.</span><span class="n">AddSubCmd</span><span class="p">(</span><span class="n">propChange</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Store final state of all contained commands</span>
+<span class="n">composite</span><span class="p">.</span><span class="n">Execute</span><span class="p">();</span>
+</pre></div>
+</div>
 </li>
-<li><p>打印和打印预览</p></li>
+<li><p>组合（composite）命令</p>
+<p>有时您可能更希望将一组操作作为单个原子操作进行撤消和重做。
+WpfDiagram 提供了 <code class="docutils literal notranslate"><span class="pre">CompositeCmd</span></code> 类来解决这个问题。
+<strong>CompositeCmd</strong> 对象充当其他 <code class="docutils literal notranslate"><span class="pre">Command</span></code> 派生类对象的容器。
+当在组合命令上调用 <code class="docutils literal notranslate"><span class="pre">Undo</span></code> 或 <code class="docutils literal notranslate"><span class="pre">Redo</span></code> 时，
+它的所有子命令都将分别被撤消或重做。</p>
+<p>要将命令添加到复合命令中，调用 <code class="docutils literal notranslate"><span class="pre">AddSubCmd</span></code> 方法。
+调用 <code class="docutils literal notranslate"><span class="pre">Execute</span></code> 以执行组合中包含的所有子命令。
+子命令按照其被添加到容器的顺序执行或重做，并以相反的顺序撤消。</p>
+<p>通常 WpfDiagram 会隐式生成 <strong>Command</strong> 对象以响应用户操作或方法调用，
+并自动将它们记录在历史队列中。
+您无法直接访问这些命令，也无法通过 <strong>AddSubCmd</strong> 将它们添加到组合命令中。
+为了在这种情况下创建一个组合命令，
+undo manager 提供了活动组合命令（active composite）的概念。
+活动组合命令是通过调用 <code class="docutils literal notranslate"><span class="pre">UndoManager</span></code> 的 <code class="docutils literal notranslate"><span class="pre">StartComposite</span></code> 函数创建的。
+在此之后执行的每个操作都成为组合命令的一部分，而不是直接将其添加到命令历史记录中。
+调用当前组合命令的 <code class="docutils literal notranslate"><span class="pre">Execute</span></code> 方法完成它并将其保存在历史队列中。</p>
+<div class="highlight-C# notranslate"><div class="highlight"><pre><span></span><span class="c1">// Implicitly created undo records will be saved here</span>
+<span class="n">CompositeCmd</span> <span class="n">composite</span> <span class="p">=</span> <span class="n">diagram</span><span class="p">.</span><span class="n">UndoManager</span><span class="p">.</span><span class="n">StartComposite</span><span class="p">(</span><span class="s">&quot;Create group&quot;</span><span class="p">);</span>
+
+<span class="c1">// Call methods that create undo records</span>
+<span class="n">ShapeNode</span> <span class="n">node1</span> <span class="p">=</span> <span class="n">diagram</span><span class="p">.</span><span class="n">Factory</span><span class="p">.</span><span class="n">CreateShapeNode</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">30</span><span class="p">);</span>
+<span class="n">ShapeNode</span> <span class="n">node2</span> <span class="p">=</span> <span class="n">diagram</span><span class="p">.</span><span class="n">Factory</span><span class="p">.</span><span class="n">CreateShapeNode</span> <span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">15</span><span class="p">,</span> <span class="m">15</span><span class="p">);</span>
+<span class="n">Group</span> <span class="n">g</span> <span class="p">=</span> <span class="n">diagram</span><span class="p">.</span><span class="n">Factory</span><span class="p">.</span><span class="n">CreateGroup</span><span class="p">(</span><span class="n">node1</span><span class="p">);</span>
+<span class="n">g</span><span class="p">.</span><span class="n">AttachToCorner</span><span class="p">(</span><span class="n">node2</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span>
+
+<span class="c1">// This goes to the active composite too</span>
+<span class="n">ChangeItemCmd</span> <span class="n">change</span> <span class="p">=</span> <span class="k">new</span> <span class="n">ChangeItemCmd</span><span class="p">(</span><span class="n">node2</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">);</span>
+<span class="n">node2</span><span class="p">.</span><span class="n">Locked</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span>
+<span class="n">change</span><span class="p">.</span><span class="n">Execute</span><span class="p">();</span>
+
+<span class="c1">// Save the active composite in history</span>
+<span class="n">composite</span><span class="p">.</span><span class="n">Execute</span><span class="p">();</span>
+</pre></div>
+</div>
+</li>
+<li><p>派生 Command 类</p>
+<p>WpfDiagram 组件的 diagram 可能只是应用程序数据模型的一部分，
+应用程序可能已经为其原生数据实现了撤消/重做功能。
+要将 WpfDiagram 的撤消功能集成到应用程序的撤消机制中，
+请使用 <code class="docutils literal notranslate"><span class="pre">ActionRecorded</span></code> 事件。
+当该事件被触发时，在事件处理程序中将相应记录的包装器添加到应用程序的历史记录中。
+包装器可以调用 <code class="docutils literal notranslate"><span class="pre">UndoManager</span></code> 的 <code class="docutils literal notranslate"><span class="pre">Undo</span></code> 和 <code class="docutils literal notranslate"><span class="pre">Redo</span></code> 方法。
+在这种情况下，
+请确保 WpfDiagram 的命令历史记录的 <code class="docutils literal notranslate"><span class="pre">Capacity</span></code> 至少与您的应用程序的一样大。</p>
+<p>一个您不得不派生 Command 类的简单场景是：
+使用复杂对象作为 tags 或在 ControlNode 实例中嵌入控件。
+WpfDiagram 无法自动检测和处理对这些对象或控件进行更改的操作。
+要将此类操作集成到 diagram 的撤消历史记录中，
+您必须创建一个知道如何执行、撤消或重做该操作的 <strong>Command</strong> 实例。</p>
+<p><strong>Command</strong> 的派生类必须实现 <code class="docutils literal notranslate"><span class="pre">Execute</span></code> 、 <code class="docutils literal notranslate"><span class="pre">Undo</span></code>  和 <code class="docutils literal notranslate"><span class="pre">Redo</span></code> 方法。
+您的子类表示的操作必须通过调用 <strong>Diagram</strong> 的 <strong>ExecuteCommand</strong> 方法来执行。
+<strong>ExecuteCommand</strong> 在作为参数传递的命令上调用 <code class="docutils literal notranslate"><span class="pre">Execute</span></code> ，
+然后将该命令添加到历史记录中，
+该命令的 <strong>Undo</strong> 和 <strong>Redo</strong> 方法可以在稍后由 undo manager 多次调用。
+通常可以将 <strong>Redo</strong> 实现为对 <strong>Execute</strong> 的调用，
+但是如果 <strong>Execute</strong> 比较耗时，则可以将其结果状态保存在一个实例成员中，
+并通过 <strong>Redo</strong> 进行恢复。</p>
+<p>不要直接调用你的类的 <strong>Undo</strong> 和 <strong>Redo</strong> 方法，只需实现它们，
+它们会在必要时被 <strong>UndoManager</strong> 的 <strong>Undo</strong> 或 <strong>Redo</strong> 方法调用。</p>
+<p>下面的示例显示了 <strong>Command</strong> 派生类的简单实现：</p>
+<div class="highlight-C# notranslate"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">class</span> <span class="nc">PersonTag</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="kt">string</span> <span class="n">Name</span><span class="p">;</span>
+    <span class="k">public</span> <span class="kt">string</span> <span class="n">Address</span><span class="p">;</span>
+
+    <span class="c1">// And so on</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="k">class</span> <span class="nc">AddressChangeCmd</span> <span class="p">:</span> <span class="n">Command</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="nf">AddressChangeCmd</span><span class="p">(</span><span class="n">PersonTag</span> <span class="n">p</span><span class="p">,</span> <span class="kt">string</span> <span class="n">address</span><span class="p">)</span> <span class="p">:</span> <span class="k">base</span><span class="p">(</span><span class="s">&quot;Address change&quot;</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="n">p</span> <span class="p">=</span> <span class="n">p</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="n">oldAddress</span> <span class="p">=</span> <span class="n">p</span><span class="p">.</span><span class="n">Address</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="n">newAddress</span> <span class="p">=</span> <span class="n">address</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">Execute</span><span class="p">(</span><span class="kt">bool</span> <span class="n">undoEnabled</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">p</span><span class="p">.</span><span class="n">Address</span> <span class="p">=</span> <span class="n">newAddress</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">Undo</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">p</span><span class="p">.</span><span class="n">Address</span> <span class="p">=</span> <span class="n">oldAddress</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">Redo</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// Undo manager is enabled if Redo is called</span>
+        <span class="c1">// so pass true for the undoEnabled argument</span>
+        <span class="n">Execute</span><span class="p">(</span><span class="k">true</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">private</span> <span class="n">PersonTag</span> <span class="n">p</span><span class="p">;</span>
+    <span class="k">private</span> <span class="kt">string</span> <span class="n">oldAddress</span><span class="p">;</span>
+    <span class="k">private</span> <span class="kt">string</span> <span class="n">newAddress</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">...</span>
+
+<span class="c1">// Somewhere in later code</span>
+<span class="n">PersonTag</span> <span class="n">tag</span> <span class="p">=</span> <span class="p">(</span><span class="n">PersonTag</span><span class="p">)</span><span class="n">diagram</span><span class="p">.</span> <span class="n">ActiveItem</span><span class="p">.</span><span class="n">Tag</span><span class="p">;</span>
+<span class="n">AddressChangeCmd</span> <span class="n">cc</span> <span class="p">=</span> <span class="k">new</span> <span class="n">AddressChangeCmd</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="s">&quot;far far away&quot;</span><span class="p">);</span>
+<span class="n">diagram</span><span class="p">.</span><span class="n">ExecuteCommand</span><span class="p">(</span><span class="n">cc</span><span class="p">);</span>
+</pre></div>
+</div>
+</li>
 </ol>
 </div>
 <div class="section" id="id23">
-<h4>4.7 外观<a class="headerlink" href="#id23" title="永久链接至标题">¶</a></h4>
-<ol class="arabic simple">
+<h4>4.6 序列化和输出<a class="headerlink" href="#id23" title="永久链接至标题">¶</a></h4>
+<ol class="arabic">
+<li><p>序列化 Diagram</p>
+<ul>
+<li><p>XML 序列化</p>
+<p>可以将一个 diagram 保存为 XML 文档。
+调用 <code class="docutils literal notranslate"><span class="pre">Diagram</span></code> 类的 <code class="docutils literal notranslate"><span class="pre">SaveToXml</span></code> 方法即可。
+要将 diagram 从其 XML 表示中反序列化回来，请调用 <code class="docutils literal notranslate"><span class="pre">LoadFromXml</span></code> 方法。</p>
+<p>自定义的 item 类可以通过重写 <code class="docutils literal notranslate"><span class="pre">SaveToXml</span></code> 和 <code class="docutils literal notranslate"><span class="pre">LoadFromXml</span></code> 方法
+为其附加的属性实现 XML 序列化。
+此外，此类必须通过调用 <code class="docutils literal notranslate"><span class="pre">RegisterItemClass</span></code> 指定一个字符串
+以用作该类在 XML 文档中的标识符。</p>
+<p>The control raises <code class="docutils literal notranslate"><span class="pre">SerializeTag</span></code> and <code class="docutils literal notranslate"><span class="pre">DeserializeTag</span></code> to
+enable serialization of complex <a class="reference external" href="https://www.mindfusion.eu/onlinehelp/wpfdiagram/P_MindFusion_Diagramming_Wpf_DiagramItem_Id_0.htm">Id</a>
+and <strong>Tag</strong> objects without overriding the item classes.
+The <a class="reference external" href="https://www.mindfusion.eu/onlinehelp/wpfdiagram/P_MindFusion_Diagramming_Wpf_SerializeTagEventArgs_PropertyName_0.htm">PropertyName</a>
+event argument specifies which property is being serialized.</p>
+</li>
+<li><p>JSON 序列化</p>
+<p>要将 diagram 序列化为 JSON 字符串，请调用其 <code class="docutils literal notranslate"><span class="pre">SaveToJson</span></code> 方法。
+要将 diagram 从其 JSON 表示反序列化回来，调用 <code class="docutils literal notranslate"><span class="pre">LoadFromJson</span></code> 方法。
+<code class="docutils literal notranslate"><span class="pre">SaveToJsonFile</span></code> 方法将 JSON 字符串序列化为文件;
+<code class="docutils literal notranslate"><span class="pre">LoadFromJsonFile</span></code> 方法从文件加载 JSON 字符串。</p>
+<p>自定义 item 类可以通过重写 <code class="docutils literal notranslate"><span class="pre">SaveToJson</span></code> 和 <code class="docutils literal notranslate"><span class="pre">LoadFromJson</span></code> 方法
+为其附加的属性实现 JSON 序列化。
+必须通过调用 <code class="docutils literal notranslate"><span class="pre">RegisterItemClass</span></code> 方法并为 <em>clientClass</em> 参数
+提供字符串标识符来注册此类以进行序列化。</p>
+<p>The control raises <a class="reference external" href="https://www.mindfusion.eu/onlinehelp/wpfdiagram/E_MindFusion_Diagramming_Wpf_DiagramBase_JsonSerializeTag.htm">JsonSerializeTag</a>
+and <a class="reference external" href="https://www.mindfusion.eu/onlinehelp/wpfdiagram/E_MindFusion_Diagramming_Wpf_DiagramBase_JsonDeserializeTag.htm">JsonDeserializeTag</a>
+to enable serialization of complex <strong>Id</strong> and <strong>Tag</strong> objects
+without overriding the item classes.
+The <a class="reference external" href="https://www.mindfusion.eu/onlinehelp/wpfdiagram/P_MindFusion_Diagramming_Wpf_JsonSerializeTagEventArgs_PropertyName_0.htm">PropertyName</a>
+event argument specifies which property is being serialized.</p>
+<p>JSON 序列化由 <code class="docutils literal notranslate"><span class="pre">MindFusion.Json.Wpf</span></code> 命名空间中的类在内部处理。
+<code class="docutils literal notranslate"><span class="pre">JsonValue</span></code> 类表示一个属性值。
+属性名称和值存储在 <code class="docutils literal notranslate"><span class="pre">JsonObject</span></code> 字典类的实例中。
+<code class="docutils literal notranslate"><span class="pre">JsonContext</span></code> 类处理 <code class="docutils literal notranslate"><span class="pre">Diagram</span></code> 属性的序列化。
+<code class="docutils literal notranslate"><span class="pre">Serialize</span></code> 方法是 <code class="docutils literal notranslate"><span class="pre">Serializer</span></code> 类的 <code class="docutils literal notranslate"><span class="pre">Serialize</span></code> 方法的的包装器。
+它接受一个 <strong>JsonObject</strong> 并将其序列化为一个字符串。
+<code class="docutils literal notranslate"><span class="pre">Parse</span></code> 方法是 <code class="docutils literal notranslate"><span class="pre">Parser</span></code> 类的 <code class="docutils literal notranslate"><span class="pre">ReadJsonObject</span></code> 方法的包装器。
+它接受一个 JSON 格式的字符串并返回一个带有解析后数据的 <strong>JsonObject</strong> 。</p>
+</li>
+</ul>
+</li>
+<li><p>导出 Diagram</p>
+<ul>
+<li><p>导出图片</p>
+<p>您可以使用 <code class="docutils literal notranslate"><span class="pre">CreateImage</span></code> 方法创建一个代表当前图表的静态图像。
+该方法返回 <strong>BitmapSource</strong> 类的一个实例。
+以下示例展示了在点击菜单项后使用 <strong>SaveFileDialog</strong> 控件选择导出位置
+并输入图像文件的名称，然后导出图表到 Png 图像文件：</p>
+<div class="highlight-C# notranslate"><div class="highlight"><pre><span></span><span class="k">private</span> <span class="k">void</span> <span class="nf">OnExportImage</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">RoutedEventArgs</span> <span class="n">e</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// Configure save file dialog box</span>
+    <span class="kt">var</span> <span class="n">dlg</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SaveFileDialog</span>
+    <span class="p">{</span>
+        <span class="n">FileName</span> <span class="p">=</span> <span class="s">&quot;Diagram&quot;</span><span class="p">,</span>
+        <span class="n">DefaultExt</span> <span class="p">=</span> <span class="s">&quot;.png&quot;</span><span class="p">,</span>
+        <span class="n">Filter</span> <span class="p">=</span> <span class="s">&quot;Diagram Files (.png)|*.png&quot;</span>
+    <span class="p">};</span>
+
+    <span class="c1">// Show save file dialog box</span>
+    <span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="n">dlg</span><span class="p">.</span><span class="n">ShowDialog</span><span class="p">();</span>
+
+    <span class="c1">// Process save file dialog box results</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">result</span> <span class="p">==</span> <span class="k">true</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">var</span> <span class="n">encoder</span> <span class="p">=</span> <span class="k">new</span> <span class="n">PngBitmapEncoder</span><span class="p">();</span>
+        <span class="n">encoder</span><span class="p">.</span><span class="n">Frames</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">BitmapFrame</span><span class="p">.</span><span class="n">Create</span><span class="p">(</span><span class="n">diagram</span><span class="p">.</span><span class="n">CreateImage</span><span class="p">(</span><span class="m">100</span><span class="p">)));</span>
+
+        <span class="k">using</span> <span class="p">(</span><span class="kt">var</span> <span class="n">stream</span> <span class="p">=</span> <span class="k">new</span> <span class="n">FileStream</span><span class="p">(</span><span class="n">dlg</span><span class="p">.</span><span class="n">FileName</span><span class="p">,</span> <span class="n">FileMode</span><span class="p">.</span><span class="n">Create</span><span class="p">))</span>
+            <span class="n">encoder</span><span class="p">.</span><span class="n">Save</span><span class="p">(</span><span class="n">stream</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">MindFusion.Diagramming.Wpf.Export</span></code> 命名空间包含
+用于导出为 Dxf、Pdf、Svg 和 Visio 格式的类。</p>
+</li>
+<li><p>导出 PDF</p>
+<p>将 <em>MindFusion.Diagramming.Wpf.PdfExport.dll</em> 和 <em>MindFusion.Pdf.dll</em>
+程序集的引用添加到项目中。
+创建一个 <code class="docutils literal notranslate"><span class="pre">PdfExporter</span></code> 实例并调用其 <code class="docutils literal notranslate"><span class="pre">Export</span></code> 方法
+<code class="docutils literal notranslate"><span class="pre">Margins</span></code> 属性指定文档中所有页面的页边距。
+如果需要设置页面大小和方向，请使用 <code class="docutils literal notranslate"><span class="pre">PageSize</span></code> 和 <code class="docutils literal notranslate"><span class="pre">PageOrientation</span></code> 属性。
+<code class="docutils literal notranslate"><span class="pre">AutoScale</span></code> 属性允许缩放图表以适应一个或多个 PDF 页面。
+如果应该在 PDF 中显示不可见的 items，请使用 <code class="docutils literal notranslate"><span class="pre">InvisibleItems</span></code> 属性。
+以下示例显示了如何响应按下按钮事件并使用 <strong>SaveFileDialog</strong> 控件
+将图表导出到 Pdf 文件，其中选择了位置并输入了 Pdf 文件的名称：</p>
+<div class="highlight-C# notranslate"><div class="highlight"><pre><span></span><span class="k">private</span> <span class="k">void</span> <span class="nf">OnExportPdf</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">RoutedEventArgs</span> <span class="n">e</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// Configure save file dialog box</span>
+    <span class="kt">var</span> <span class="n">dlg</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SaveFileDialog</span>
+    <span class="p">{</span>
+        <span class="n">FileName</span> <span class="p">=</span> <span class="s">&quot;Diagram&quot;</span><span class="p">,</span>
+        <span class="n">DefaultExt</span> <span class="p">=</span> <span class="s">&quot;.pdf&quot;</span><span class="p">,</span>
+        <span class="n">Filter</span> <span class="p">=</span> <span class="s">&quot;Diagram Files (.pdf)|*.pdf&quot;</span>
+    <span class="p">};</span>
+
+    <span class="c1">// Show save file dialog box</span>
+    <span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="n">dlg</span><span class="p">.</span><span class="n">ShowDialog</span><span class="p">();</span>
+
+    <span class="c1">// Process save file dialog box results</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">result</span> <span class="p">==</span> <span class="k">true</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">PdfExporter</span> <span class="n">pdfex</span> <span class="p">=</span> <span class="k">new</span> <span class="n">PdfExporter</span><span class="p">();</span>
+        <span class="n">pdfex</span><span class="p">.</span><span class="n">PageSize</span> <span class="p">=</span> <span class="n">MindFusion</span><span class="p">.</span><span class="n">Pdf</span><span class="p">.</span><span class="n">PageSize</span><span class="p">.</span><span class="n">DiagramSize</span><span class="p">;</span>
+        <span class="n">pdfex</span><span class="p">.</span><span class="n">PageOrientation</span> <span class="p">=</span> <span class="n">MindFusion</span><span class="p">.</span><span class="n">Pdf</span><span class="p">.</span><span class="n">PageOrientation</span><span class="p">.</span><span class="n">Portrait</span><span class="p">;</span>
+        <span class="n">pdfex</span><span class="p">.</span><span class="n">Margins</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Thickness</span><span class="p">(</span><span class="m">48</span><span class="p">,</span> <span class="m">48</span><span class="p">,</span> <span class="m">48</span><span class="p">,</span> <span class="m">48</span><span class="p">);</span>
+
+        <span class="n">pdfex</span><span class="p">.</span><span class="n">Export</span><span class="p">(</span><span class="n">diagram</span><span class="p">,</span> <span class="n">dlg</span><span class="p">.</span><span class="n">FileName</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p>导出 SVG</p>
+<p>将 <em>MindFusion.Diagramming.Wpf.SvgExport.dll</em> 和 <em>MindFusion.Svg.dll</em>
+程序集的引用添加到您的项目中。
+创建一个 <code class="docutils literal notranslate"><span class="pre">SvgExporter</span></code> 实例并调用它的 <code class="docutils literal notranslate"><span class="pre">Export</span></code> 方法，
+传递一个 <code class="docutils literal notranslate"><span class="pre">Diagram</span></code> 对象和 .svg 文件的完整路径作为参数。
+要将 diagram items 显示的图像导出到外部（external）文件，
+请启用 <code class="docutils literal notranslate"><span class="pre">ExternalImages</span></code> 属性。</p>
+<div class="highlight-C# notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span> <span class="n">svgExp</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SvgExporter</span><span class="p">();</span>
+<span class="n">svgExp</span><span class="p">.</span><span class="n">ExternalImages</span> <span class="p">=</span> <span class="k">false</span><span class="p">;</span>
+<span class="n">svgExp</span><span class="p">.</span><span class="n">Export</span><span class="p">(</span><span class="n">diagram</span><span class="p">,</span> <span class="n">dlg</span><span class="p">.</span><span class="n">FileName</span><span class="p">);</span>
+</pre></div>
+</div>
+</li>
+<li><p>导出 WMF 图片</p>
+<p>向您的项目添加对 <em>MindFusion.Diagramming.Wpf.WmfExport.dll</em> 程序集的引用。
+创建 <code class="docutils literal notranslate"><span class="pre">WmfExporter</span></code> 实例并调用其 <code class="docutils literal notranslate"><span class="pre">Export</span></code> 方法，
+传递一个 <code class="docutils literal notranslate"><span class="pre">Diagram</span></code> 对象和 .wmf 文件的完整路径作为参数。</p>
+</li>
+<li><p>导出 Visio</p>
+<p>为了支持 Visio 格式的导出，
+请将 <em>MindFusion.Diagramming.Wpf.VisioExport.dll</em> 的引用添加到您的项目中。
+创建 <code class="docutils literal notranslate"><span class="pre">VisioExporter</span></code> 类的实例，并调用其 <code class="docutils literal notranslate"><span class="pre">Export</span></code> 方法，
+传递一个 <code class="docutils literal notranslate"><span class="pre">Diagram</span></code> 对象和文件的完整路径（*.vdx）作为参数。
+Visio 页面的 dimension 和 item size 的度量单位
+被设置为图表的 <code class="docutils literal notranslate"><span class="pre">MeasureUnit</span></code> 属性。</p>
+<p><code class="docutils literal notranslate"><span class="pre">ShapeNode</span></code> 对象被映射到与其最接近的 Visio 对象；
+<code class="docutils literal notranslate"><span class="pre">TableNode</span></code> 对象导出为 Visio shapes。
+<code class="docutils literal notranslate"><span class="pre">DiagramLink</span></code> 实例导出为类似样式的 Visio 连接（connectors）。
+此外，diagram items 的大部分属性，
+如文本、文本格式、填充和线条颜色和样式都保留了下来。</p>
+<p>导出器对象（exporter object）要求应用程序目录中存在 VisioExport.vxt 文件。
+此文件包含该组件用于生成 Visio 文档的 XML 模板数据。</p>
+<p>要从 WpfDiagram 组（groups）创建 Visio 组（groups），
+请启用 <code class="docutils literal notranslate"><span class="pre">CreateVisioGroups</span></code> 属性。
+如果应将包含图像的形状节点（shape node）导出为
+包含形状、图片和文本对象的 Visio 组，
+请使用默认设置为 true 的 <code class="docutils literal notranslate"><span class="pre">ExportImagesAsGroups</span></code> 属性。
+<code class="docutils literal notranslate"><span class="pre">ExportInvisibleItems</span></code> 允许导出不可见的 items 。
+如果 <code class="docutils literal notranslate"><span class="pre">TableNode</span></code> 对象应作为包含矩形形状 Visio 组导出，
+请启用 <code class="docutils literal notranslate"><span class="pre">ExportTablesAsGroups</span></code> 属性。</p>
+<p>下面的示例演示了如何将图表导出到 Visio 文件：</p>
+<div class="highlight-C# notranslate"><div class="highlight"><pre><span></span><span class="k">private</span> <span class="k">void</span> <span class="nf">OnExportVisio</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">RoutedEventArgs</span> <span class="n">e</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">var</span> <span class="n">dlg</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SaveFileDialog</span><span class="p">();</span>
+    <span class="n">dlg</span><span class="p">.</span><span class="n">Filter</span> <span class="p">=</span> <span class="s">&quot;Visio files (*.vdx)|*.vdx|All files|*.*||&quot;</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">dlg</span><span class="p">.</span><span class="n">ShowDialog</span><span class="p">(</span><span class="k">this</span><span class="p">)</span> <span class="p">==</span> <span class="k">true</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">var</span> <span class="n">visioExporter</span> <span class="p">=</span> <span class="k">new</span> <span class="n">VisioExporter</span><span class="p">();</span>
+        <span class="n">visioExporter</span><span class="p">.</span><span class="n">Export</span><span class="p">(</span><span class="n">diagram</span><span class="p">,</span> <span class="n">dlg</span><span class="p">.</span><span class="n">FileName</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p>导出 Excel</p>
+<p><em>MindFusion.Diagramming.Wpf.ExcelExport.dll</em> 程序集中的 <code class="docutils literal notranslate"><span class="pre">ExcelExporter</span></code>
+类将图表导出到 Excel Open XML 格式 (XLSX) 文件。
+图表导出为Excel AutoShapes图纸
+（Diagrams are exported as Excel AutoShapes drawings）。
+采用 <code class="docutils literal notranslate"><span class="pre">DiagramDocument</span></code> 参数的 <code class="docutils literal notranslate"><span class="pre">Export</span></code> 函数重载
+为文档中的每个 <code class="docutils literal notranslate"><span class="pre">DiagramPage</span></code> 创建一个工作表。
+<code class="docutils literal notranslate"><span class="pre">Export(Diagram)</span></code> 函数重载创建单个 Excel 工作表。</p>
+</li>
+<li><p>导出 DXF</p>
+<p>向您的项目添加对 <em>MindFusion.Diagramming.Wpf.DxfExport.dll</em> 的引用。
+创建一个 <code class="docutils literal notranslate"><span class="pre">DxfExporter</span></code> 实例并调用它的 <code class="docutils literal notranslate"><span class="pre">Export</span></code> 方法，
+指定一个 <code class="docutils literal notranslate"><span class="pre">Diagram</span></code> 对象和一个文件路径作为参数。
+光栅（raster）图像可以通过引用外部（external）图像文件在 DXF 中使用。
+要导出图表元素中显示的图像，请启用 <code class="docutils literal notranslate"><span class="pre">ExportImages</span></code> 属性。
+如果您的目标应用程序支持 multiple-line text DXF entity - MTEX​​T，
+请使用 <code class="docutils literal notranslate"><span class="pre">ExportTextAsMultiline</span></code> 属性。
+下面的示例展示了如何创建 <strong>DxfExporter</strong> 实例,
+并通过传递 <strong>Diagram</strong> 对象和在 <strong>SaveFileDialog</strong> 中输入的文件名作为参数
+执行 <strong>Export</strong> 方法来导出图表。</p>
+<div class="highlight-C# notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span> <span class="n">dxfExporter</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MindFusion</span><span class="p">.</span><span class="n">Diagramming</span><span class="p">.</span><span class="n">Wpf</span><span class="p">.</span><span class="n">Export</span><span class="p">.</span><span class="n">DxfExporter</span><span class="p">();</span>
+<span class="n">dxfExporter</span><span class="p">.</span><span class="n">Export</span><span class="p">(</span><span class="n">diagram</span><span class="p">,</span> <span class="n">dlg</span><span class="p">.</span><span class="n">FileName</span><span class="p">);</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p>打印和打印预览</p>
+<p>您可以使用标准 WPF 打印工具打印图表。
+<code class="docutils literal notranslate"><span class="pre">DocumentPaginator</span></code> 属性允许您打印多页的图表。
+以下示例显示了如何使用它：</p>
+<div class="highlight-C# notranslate"><div class="highlight"><pre><span></span><span class="n">PrintDialog</span> <span class="n">pd</span> <span class="p">=</span> <span class="k">new</span> <span class="n">PrintDialog</span><span class="p">();</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="n">pd</span><span class="p">.</span><span class="n">ShowDialog</span><span class="p">())</span>
+    <span class="n">pd</span><span class="p">.</span><span class="n">PrintDocument</span><span class="p">(</span><span class="n">diagram</span><span class="p">.</span><span class="n">DocumentPaginator</span><span class="p">,</span> <span class="s">&quot;my diagram&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>作为一种快捷方式，WpfDiagram 提供了 <code class="docutils literal notranslate"><span class="pre">Print</span></code> 和 <code class="docutils literal notranslate"><span class="pre">PrintPreview</span></code> 方法，
+它们在内部使用 <strong>DocumentPaginator</strong> 来打印图表内容，或预览打印时的效果。</p>
+</li>
+</ol>
+</div>
+<div class="section" id="id25">
+<h4>4.7 外观<a class="headerlink" href="#id25" title="永久链接至标题">¶</a></h4>
+<ol class="arabic">
 <li><p>样式和主题</p>
 <ul class="simple">
 <li><p>样式</p></li>
@@ -837,85 +2089,698 @@ WpfDiagram 为每个 Item 的创建创建一个撤销记录；
 <li><p>示例</p></li>
 </ul>
 </li>
-<li><p>修改 Diagram 的外观</p></li>
-</ol>
-<blockquote>
-<div><ul class="simple">
+<li><p>修改 Diagram 的外观</p>
+<p>您可以自定义大部分 WpfDiagram 的可视化效果。</p>
+<ul class="simple">
 <li><p>背景</p></li>
+</ul>
+<blockquote>
+<div><p>通过设置 <code class="docutils literal notranslate"><span class="pre">BackBrush</span></code> 属性，可以使用纯色、渐变、纹理或颜色图案（patterns）
+填充 diagram 的背景区域。
+背景主题也可以是由 <code class="docutils literal notranslate"><span class="pre">BackgroundImage</span></code> 属性设置的图像。
+图像可以是由 <code class="docutils literal notranslate"><span class="pre">.NET</span> <span class="pre">System.Drawing.Image</span></code> 支持的任何格式。
+景图像可以居中、对齐到控件或文档的角落、平铺或拉伸以覆盖绘图区域 ——
+取决于 <code class="docutils literal notranslate"><span class="pre">BackgroundImageAlign</span></code> 属性值。
+通过设置 <code class="docutils literal notranslate"><span class="pre">ExteriorBrush</span></code> 属性，
+可以使用一个独特的笔刷来绘制 <code class="docutils literal notranslate"><span class="pre">Bounds</span></code> 外的区域。</p>
+</div></blockquote>
+<ul class="simple">
 <li><p>阴影</p></li>
+</ul>
+<blockquote>
+<div><p>与 ActiveX 和 Windows Froms 版本的控件不同，WpfDiagram 不提供内置阴影渲染。
+相反，它依赖 WPF <strong>Effect</strong> 类来渲染阴影和其他视觉效果，例如模糊。
+要启用任何这些效果，
+请将 item 的 <code class="docutils literal notranslate"><span class="pre">Effect</span></code> 属性设置为 <strong>Effect</strong> 派生类的实例。</p>
+</div></blockquote>
+<ul class="simple">
 <li><p>选中效果</p></li>
+</ul>
+<blockquote>
+<div><p>可以通过 <code class="docutils literal notranslate"><span class="pre">ActiveItemHandlesStyle</span></code> 复合属性设置围绕 active item 绘制的
+选中手柄的样式。
+多选中的 items 使用 <code class="docutils literal notranslate"><span class="pre">SelectedItemHandlesStyle</span></code> 属性指定的样式
+绘制其选中手柄。
+当 <code class="docutils literal notranslate"><span class="pre">ShowDisabledHandles</span></code> 启用时（参考 <code class="docutils literal notranslate"><span class="pre">EnabledHandles</span></code> 属性），
+被禁用的操作手柄使用 <code class="docutils literal notranslate"><span class="pre">DisabledHandlesStyle</span></code> 指定的样式进行绘制。
+<code class="docutils literal notranslate"><span class="pre">Selection</span></code> 类的 <code class="docutils literal notranslate"><span class="pre">Style</span></code> 属性控制多选的显示方式。</p>
+</div></blockquote>
+<ul class="simple">
 <li><p>鼠标光标</p></li>
+</ul>
+<blockquote>
+<div><p>可以设置不同的鼠标光标图标来向用户提供上下文相关的反馈，
+提示他们是否可以创建/修改 diagram item 。</p>
+</div></blockquote>
+<ul class="simple">
 <li><p>网格设置</p></li>
 </ul>
+<blockquote>
+<div><p>如果 <code class="docutils literal notranslate"><span class="pre">ShowGrid</span></code> 设置为 <strong>true</strong> ，则会绘制对齐网格。
+<code class="docutils literal notranslate"><span class="pre">GridPen</span></code> 属性指定用于绘制网格点和线的笔。
+使用以下属性指定在不同情况下显示的光标：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">PointerCursor</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MoveCursor</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DisallowCursor</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DrawLinkCursor</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">AllowLinkCursor</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DisallowLinkCursor</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">HorizontalResizeCursor</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VerticalResizeCursor</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DiagonalResizeCursor</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CounterDiagonalResizeCursor</span></code></p></li>
+</ul>
 </div></blockquote>
-<ol class="arabic simple">
+<p>WpfDiagram 在平移 diagram view 时显示 <code class="docutils literal notranslate"><span class="pre">PanCursor</span></code> 属性指定的光标样式。
+如果您需要设置不依赖于当前上下文的光标，请设置 <code class="docutils literal notranslate"><span class="pre">OverrideCursor</span></code> 属性。</p>
+</div></blockquote>
+</li>
 <li><p>自定义 Item 的外观</p>
-<ul class="simple">
-<li><p>设计样式（Styling）</p></li>
-<li><p>Pen 的宽度和样式</p></li>
-<li><p>Diagram 元素的颜色</p></li>
-<li><p>文本</p></li>
-<li><p>图像</p></li>
-<li><p>效果（Effects）</p></li>
-<li><p>DiagramLink-specific Properties</p></li>
-<li><p>Rounded Links</p></li>
-<li><p>Link Crossings</p></li>
-<li><p>ShapeNode-specific Properties</p></li>
-<li><p>TableNode-specific Properties</p></li>
+<p>对于 WpfDiagram 每个 item，可以按照以下段落中的描述设置不同的视觉样式和属性。</p>
+<ul>
+<li><p>设计样式（Styling）</p>
+<p>可以使用 WPF 样式系统为 diagram items 设置样式。
+从 <strong>FrameworkElement</strong> 继承的 <strong>Style</strong> 属性
+可以设置为 <strong>System.Windows.Style</strong> 类的一个实例，
+该类设置 <code class="docutils literal notranslate"><span class="pre">Brush</span></code> 、 <code class="docutils literal notranslate"><span class="pre">Stroke*</span></code> 、 <code class="docutils literal notranslate"><span class="pre">Text*</span></code> 和 <code class="docutils literal notranslate"><span class="pre">Font*</span></code> 依赖项属性。
+如果没有显式地给某个 item 设置其样式属性，
+那么它可以使用应用程序或窗口资源字典中为某种类型定义的全局样式。
+例如，如果将此样式定义为窗口资源，则 <code class="docutils literal notranslate"><span class="pre">ShapeNodes</span></code> 将具有粗红色边框：</p>
+<div class="highlight-C# notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="n">Style</span> <span class="n">TargetType</span><span class="p">=</span><span class="s">&quot;diag:ShapeNode&quot;</span> <span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="n">Setter</span> <span class="n">Property</span><span class="p">=</span><span class="s">&quot;Stroke&quot;</span> <span class="n">Value</span><span class="p">=</span><span class="s">&quot;Red&quot;</span><span class="p">/&gt;</span>
+    <span class="p">&lt;</span><span class="n">Setter</span> <span class="n">Property</span><span class="p">=</span><span class="s">&quot;StrokeThickness&quot;</span> <span class="n">Value</span><span class="p">=</span><span class="s">&quot;5&quot;</span><span class="p">/&gt;</span>
+    <span class="p">&lt;</span><span class="n">Setter</span> <span class="n">Property</span><span class="p">=</span><span class="s">&quot;Brush&quot;</span> <span class="n">Value</span><span class="p">=</span><span class="s">&quot;LightYellow&quot;</span> <span class="p">/&gt;</span>
+<span class="p">&lt;/</span><span class="n">Style</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>由于样式设置器（setters）的优先级低于本地属性值，
+因此这种样式仅适用于通过无参数构造函数创建的 item 。
+从文件加载或通过 <code class="docutils literal notranslate"><span class="pre">DiagramItem(Diagram)</span></code> 构造函数创建的 items 的属性
+可能具有本地值，可以通过 <code class="docutils literal notranslate"><span class="pre">ClearStyleableProperties</span></code> 方法清除这些值
+以使用全局样式。</p>
+</li>
+<li><p>Pen 的宽度和样式</p>
+<p>节点（nodes）的边框和链接（links）的线条是使用笔绘制的，
+笔的颜色、宽度和样式可以通过 <code class="docutils literal notranslate"><span class="pre">Stroke</span></code> 、 <code class="docutils literal notranslate"><span class="pre">StrokeThickness</span></code>
+和 <code class="docutils literal notranslate"><span class="pre">StrokeDashStyle</span></code> 属性进行自定义。</p>
+</li>
+<li><p>Diagram 元素的颜色</p>
+<p>链接段（link segments）的颜色可以使用 <code class="docutils literal notranslate"><span class="pre">Stroke</span></code> 属性设置。
+<code class="docutils literal notranslate"><span class="pre">Brush</span></code> 属性指定如何填充封闭的箭头形状。
+节点（nodes）具有类似的用于自定义颜色的属性：
+节点边框的颜色通过 <code class="docutils literal notranslate"><span class="pre">Stroke</span></code> 属性指定；
+节点的内部的填充通过 <code class="docutils literal notranslate"><span class="pre">Brush</span></code> 属性指定。</p>
+</li>
+<li><p>文本</p>
+<p>Diagram items 可以有关联的文本，显示在它们的内部或之上。
+文本可以通过基础 <code class="docutils literal notranslate"><span class="pre">DiagramItem</span></code> 类的 <code class="docutils literal notranslate"><span class="pre">Text</span></code> 属性进行设置。
+<code class="docutils literal notranslate"><span class="pre">TextBrush</span></code> 指定用于绘制 diagram item 文本的笔刷。</p>
+<p>形状节点（shape nodes）的文本可以在一个多边形轮廓内进行布局和渲染；
+这取决于 <code class="docutils literal notranslate"><span class="pre">PolygonalTextLayout</span></code> 属性的值。
+要使节点（node）足够大以显示其文本而不进行剪裁，
+请调用 <code class="docutils literal notranslate"><span class="pre">ResizeToFitText</span></code> 方法。
+链接（links）的文本水平绘制在中间段（middle segment）上方，
+或按照 <code class="docutils literal notranslate"><span class="pre">TextStyle</span></code> 属性指定的方式旋转。</p>
+<p>所有 diagram items 都公开 <code class="docutils literal notranslate"><span class="pre">FontFamily</span></code> 、 <code class="docutils literal notranslate"><span class="pre">FontStyle</span></code>
+和 <code class="docutils literal notranslate"><span class="pre">FontSize</span></code> 属性，指定 diagram items 的文本的字体名称、样式和大小。
+文本通过 <code class="docutils literal notranslate"><span class="pre">TextAlignment</span></code> 、 <code class="docutils literal notranslate"><span class="pre">TextTrimming</span></code>
+和 <code class="docutils literal notranslate"><span class="pre">TextWrapping</span></code> 等属性进行格式化。</p>
+</li>
+<li><p>图像</p>
+<p>形状节点（Shape nodes）和表格可以在其中显示图像。
+使用 <code class="docutils literal notranslate"><span class="pre">ShapeNode.Image</span></code> 和 <code class="docutils literal notranslate"><span class="pre">TableNode.Image</span></code> 属性
+将图像加载到相应的 items 中。
+通过调用 <code class="docutils literal notranslate"><span class="pre">ResizeToFitImage</span></code> 方法，可以使一个节点与它所包含的图像大小相同。</p>
+<p>图像可以以不同的方式定位：
+它们可以平铺、拉伸或对齐到包含它们的容器节点的中心或边。
+使用 <code class="docutils literal notranslate"><span class="pre">ShapeNode.ImageAlign</span></code> 和 <code class="docutils literal notranslate"><span class="pre">TableNode.ImageAlign</span></code> 指定
+图像在相应节点内的放置方式。
+节点（node）内显示的图像根据该节点的形状（shape）进行剪裁。</p>
+<p>表格的单元格也可以设置 <code class="docutils literal notranslate"><span class="pre">Image</span></code> 和 <code class="docutils literal notranslate"><span class="pre">ImageAlign</span></code> 属性。
+例如，它可能用于显示数据库表的关键字段的图标。</p>
+</li>
+<li><p>效果（Effects）</p>
+<p>WPF着色器效果，例如阴影和模糊，
+可以通过 <strong>Effect</strong> 属性应用到 diagram items 。
+<strong>Effect</strong> 依赖属性是在 <code class="docutils literal notranslate"><span class="pre">DiagramItem</span></code> 的基类 <strong>UIElement</strong> 中定义的。</p>
+<div class="admonition note">
+<p class="admonition-title">注解</p>
+<p><code class="docutils literal notranslate"><span class="pre">Diagram</span></code> 类的 <code class="docutils literal notranslate"><span class="pre">DefaultEffect</span></code> 属性允许指定
+必须赋值给所有新 item 的 effect。</p>
+</div>
+</li>
+<li><p>DiagramLink-specific Properties</p>
+<p>链接段（link segments）的形状和方向由 <code class="docutils literal notranslate"><span class="pre">Shape</span></code> 属性指定；
+段（segments）的数量由 <code class="docutils literal notranslate"><span class="pre">SegmentCount</span></code> 属性指定。
+使用 <code class="docutils literal notranslate"><span class="pre">HeadShape</span></code> 和 <code class="docutils literal notranslate"><span class="pre">HeadShapeSize</span></code> 属性
+设置箭头形状（arrowhead shape）的样式和大小。
+在链接（links）原点（origin）显示的形状（shapes）
+由 <code class="docutils literal notranslate"><span class="pre">BaseShape</span></code> 和 <code class="docutils literal notranslate"><span class="pre">BaseShapeSize</span></code> 定义。
+形状可以显示在段的中间，有助于跟踪长链接的路径。
+它们由 <code class="docutils literal notranslate"><span class="pre">IntermediateShape</span></code> 和 <code class="docutils literal notranslate"><span class="pre">IntermediateShapeSize</span></code> 属性定义。
+箭头形状的线条是使用 <code class="docutils literal notranslate"><span class="pre">HeadPen</span></code> 笔绘制的。
+可以为链接调用自定义绘制代码，如在 <code class="docutils literal notranslate"><span class="pre">CustomDraw</span></code> 中设置的那样。</p>
+</li>
+<li><p>Rounded Links</p>
+<p>由直线段组成的链接（links），即 <code class="docutils literal notranslate"><span class="pre">Shape</span></code> 属性
+设置为折线（ <code class="docutils literal notranslate"><span class="pre">Polyline</span></code> ）或级联（ <strong>Cascading</strong> ）的链接，
+可以使用圆弧连接相邻的线段（segments）。</p>
+<p>要启用该功能，请将 <code class="docutils literal notranslate"><span class="pre">RoundedLinks</span></code> 设置为 <strong>true</strong> 。
+使用 <code class="docutils literal notranslate"><span class="pre">RoundedLinksRadius</span></code> 设置连接弧的半径。</p>
+</li>
+<li><p>Link Crossings</p>
+<p>根据 <code class="docutils literal notranslate"><span class="pre">LinkCrossings</span></code> 所指定的值，链接（links）与其路径（paths）相交的交点
+可以渲染为弧线或断开。链接的 Z-order 属性决定哪些链接跳过其他链接，
+或者哪些链接看起来被其他链接切断。
+如果 <strong>LinkCrossings</strong> 设置为 <code class="docutils literal notranslate"><span class="pre">Arcs</span></code> ，
+则 <strong>ZIndex</strong> 较高的链接会跳过 <strong>ZIndex</strong> 较低的链接。
+如果设置为 <strong>Cut</strong> ，较低 <strong>ZIndex</strong> 的链接将被较高 <strong>ZIndex</strong> 的链接切断。
+可以通过设置 <code class="docutils literal notranslate"><span class="pre">CrossingRadius</span></code> 属性设置圆弧和中断的半径。</p>
+</li>
+<li><p>ShapeNode-specific Properties</p>
+<p>节点的形状是使用其 <code class="docutils literal notranslate"><span class="pre">Shape</span></code> 属性定义的。
+形状模板（Shape templates）可以应用于形状节点（shape nodes），
+其方向为通过 <code class="docutils literal notranslate"><span class="pre">ShapeOrientation</span></code> 属性指定为 0/90/180/270 度。
+可能会为节点调用您自己的绘图代码，具体取决于 <code class="docutils literal notranslate"><span class="pre">CustomDraw</span></code> 属性的值。
+形状节点可以标记为 <code class="docutils literal notranslate"><span class="pre">Transparent</span></code> ，仅呈现其文本或图像。</p>
+</li>
+<li><p>TableNode-specific Properties</p>
+<p>表格的轮廓可以是矩形或圆角矩形，由 <code class="docutils literal notranslate"><span class="pre">Shape</span></code> 属性指定。
+表格单元格的边框可以以不同的方式呈现，具体取决于 <code class="docutils literal notranslate"><span class="pre">CellFrameStyle</span></code> 属性的值。
+表格标题区域使用 <code class="docutils literal notranslate"><span class="pre">CaptionBackBrush</span></code> 笔刷绘制。
+设置 <code class="docutils literal notranslate"><span class="pre">CustomDraw</span></code> 和 <code class="docutils literal notranslate"><span class="pre">CellCustomDraw</span></code> 属性，
+可以对表格及其单元格执行自定义绘制。</p>
+</li>
 </ul>
 </li>
 <li><p>用户自定义的节点形状和自定义绘制</p>
-<ul class="simple">
-<li><p>Shape Templates</p></li>
-<li><p>Dynamic Shapes</p></li>
-<li><p>Shape Libraries</p></li>
-<li><p>Custom Painting</p></li>
-<li><p>Combining Custom Shapes with Custom Drawing</p></li>
+<p>WpfDiagram items 的外观可以通过如下所述的几种方式进行自定义。</p>
+<ul>
+<li><p>形状模板（Shape Templates）</p>
+<p><code class="docutils literal notranslate"><span class="pre">Shape</span></code> 类提供了定义复杂节点形状（可以由直线、圆弧和贝塞尔曲线组成）的方法。
+一个形状模板必须总是包含一个轮廓，用于命中测试，剪切和寻找与其他 items 是否交叉。
+形状还可以包含装饰元素和文本区域的定义
+（Optionally shapes can contain decoration elements and text region definitions）。
+装饰是不参与命中测试和剪辑的视觉元素。
+文本区域是节点形状的一部分，用于布局和渲染节点的文本
+（Text regions are the parts of shapes in which node’s
+text is laid out and rendered）。</p>
+<p>WpfDiagram 提供了一组 87 个预定义好的形状模板，
+可以通过 <strong>Shape</strong> 类的 <code class="docutils literal notranslate"><span class="pre">Shapes</span></code> 集合属性或 <code class="docutils literal notranslate"><span class="pre">FromId</span></code> 方法访问这些模板。
+每个预定义的形状（shape）都有一个分配给它的字符串标识符。
+使用 <strong>FromId</strong> 方法查找具有指定 id 的形状。
+形状模板可以赋值给形状节点的 <code class="docutils literal notranslate"><span class="pre">Shape</span></code> 成员。</p>
+</li>
+<li><p>Dynamic Shapes</p>
+<p>通过 <code class="docutils literal notranslate"><span class="pre">ElementTemplate</span></code> 对象定义的形状（shapes）
+能够与节点（nodes）的大小成比例缩放。
+如果形状元素的缩放比例不一致，请调用 <code class="docutils literal notranslate"><span class="pre">Shape(formula)</span></code> 构造函数
+使用类似 Visio 的格式（formulas）来定义形状，这种格式考虑了节点的当前宽度和高度。
+<code class="docutils literal notranslate"><span class="pre">Shape</span></code> 类的另一个构造函数采用 <code class="docutils literal notranslate"><span class="pre">CreatePathDelegate</span></code> 类型的参数，
+该参数可用于通过 .NET 函数定义形状。</p>
+<p>可以通过将 <code class="docutils literal notranslate"><span class="pre">ShapeControlPoint</span></code> 对象
+添加到形状（shape）的 <code class="docutils literal notranslate"><span class="pre">ControlPoints</span></code> 集合来参数化公式形状（formula shape）。
+控制点（control point）位置作为参数传递给形状（shape）脚本，
+它们可以用于修改节点（node）的外观。
+例如，以下代码定义了一个圆角矩形形状，用户可以通过控制点修改其圆角半径。</p>
+<div class="highlight-C# notranslate"><div class="highlight"><pre><span></span><span class="c1">// a rounded rectangle shape, with an arc at each corner</span>
+<span class="kt">string</span> <span class="n">roundRect</span> <span class="p">=</span> <span class="s">@&quot;</span>
+<span class="s">    r = Min(Width / 2, radius.X);</span>
+<span class="s">    MoveTo(r, 0);</span>
+<span class="s">    LineTo(Width - r, 0);</span>
+<span class="s">    ArcTo(Width, r, false, true, r, r);</span>
+<span class="s">    LineTo(Width, Height - r);</span>
+<span class="s">    ArcTo(Width - r, Height, false, true, r, r);</span>
+<span class="s">    LineTo(r, Height);</span>
+<span class="s">    ArcTo(0, Height - r, false, true, r, r);</span>
+<span class="s">    LineTo(0, r);</span>
+<span class="s">    ArcTo(r, 0, false, true, r, r);</span>
+<span class="s">    &quot;</span><span class="p">;</span>
+
+<span class="kt">var</span> <span class="n">myRect</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Shape</span><span class="p">(</span><span class="n">roundRect</span><span class="p">,</span> <span class="s">&quot;MyRect&quot;</span><span class="p">);</span>
+
+<span class="c1">// add a control point for the &#39;radius&#39; parameter</span>
+<span class="n">myRect</span><span class="p">.</span><span class="n">ControlPoints</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="k">new</span> <span class="n">ShapeControlPoint</span><span class="p">(</span>
+    <span class="s">&quot;radius&quot;</span><span class="p">,</span> <span class="m">15</span><span class="p">,</span> <span class="m">5</span><span class="p">,</span> <span class="m">45</span><span class="p">,</span> <span class="n">UnitType</span><span class="p">.</span><span class="n">Fixed</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="n">UnitType</span><span class="p">.</span><span class="n">Fixed</span><span class="p">));</span>
+</pre></div>
+</div>
+</li>
+<li><p>Shape Libraries</p>
+<p>WpfDiagram 套件中包含的 ShapeDesigner 工具可让您绘制自定义形状（shapes）
+并将其存储在形状库中。
+可以使用 <code class="docutils literal notranslate"><span class="pre">ShapeLibrary</span></code> 类将库文件加载到您的应用程序中。
+从形状库加载的定义会自动添加到 <code class="docutils literal notranslate"><span class="pre">Shapes</span></code> 集合中，
+并且可以通过 <code class="docutils literal notranslate"><span class="pre">FromId</span></code> 方法访问，就像预定义形状一样。</p>
+</li>
+<li><p>Custom Painting</p>
+<p>另一种自定义 item 外观的方法是通过在每次绘制 item 时引发事件来实现，
+让您可以选择将自己的绘制代码附加到 WpfDiagram 的渲染引擎。
+使用 item 关联的 <strong>CustomDraw</strong> 属性在您的应用程序中启用该功能。</p>
+<p>WpfDiagram 为自定义绘图提供了多个选项。
+如果您选择 <code class="docutils literal notranslate"><span class="pre">Additional</span></code> 绘制模式，
+您的绘图代码将在执行标准的 item 绘图代码并呈现图像之后，但在呈现文本之前执行。
+此外，您收到的用于绘制的 <strong>DrawingContext</strong> 对象
+已经应用了一个与节点形状相对应的裁剪区域。
+如果使用 <code class="docutils literal notranslate"><span class="pre">Full</span></code> 绘图模式，
+则不会执行标准的 WpfDiagram 绘图代码 —— 只执行您的代码。
+<code class="docutils literal notranslate"><span class="pre">ShadowOnly</span></code> 模式对 item 执行的标准绘制，但将阴影的绘制留给您的代码。</p>
+<p>将您自己的绘图代码放在 <code class="docutils literal notranslate"><span class="pre">DrawNode</span></code> 、 <code class="docutils literal notranslate"><span class="pre">DrawCell</span></code> 和 <code class="docutils literal notranslate"><span class="pre">DrawLink</span></code> 事件
+的处理程序中。这些事件为每个需要重新绘制的自定义绘制（custom-drawn）的 item 触发。</p>
+</li>
+<li><p>Combining Custom Shapes with Custom Drawing</p>
+<p>最后，您可以同时结合使用用户自定义的形状（shapes）和 <code class="docutils literal notranslate"><span class="pre">Additional</span></code> 绘制模式。</p>
+</li>
 <li><p>Shape control points</p></li>
 </ul>
 </li>
 <li><p>文本属性和格式化</p>
-<ul class="simple">
-<li><p>Layout Text in Arbitrary Shapes</p></li>
-<li><p>Text Wrapping</p></li>
-<li><p>Text in Tables</p></li>
-<li><p>Styled Text</p></li>
-<li><p>Links’ Text</p></li>
-<li><p>Fonts</p></li>
+<p><code class="docutils literal notranslate"><span class="pre">ShapeNode</span></code> 节点可以在其轮廓（outlines）内显示文本。
+文本位置和对齐方式取决于 <code class="docutils literal notranslate"><span class="pre">TextAlignment</span></code> 、 <code class="docutils literal notranslate"><span class="pre">TextPadding</span></code> 、
+<code class="docutils literal notranslate"><span class="pre">TextWrapping</span></code> 和 <code class="docutils literal notranslate"><span class="pre">TextVerticalAlignment</span></code> 属性的值。
+文本是用 <code class="docutils literal notranslate"><span class="pre">TextBrush</span></code> 中设置的颜色绘制的。
+可以通过 <code class="docutils literal notranslate"><span class="pre">PolygonalTextLayout</span></code> 和 <code class="docutils literal notranslate"><span class="pre">EnableStyledText</span></code> 启用
+更有用的布局和格式化相关的属性。</p>
+<ul>
+<li><p>Layout Text in Arbitrary Shapes</p>
+<p><code class="docutils literal notranslate"><span class="pre">ShapeNode</span></code> 的实例可以具有各种形状（shapes），
+由其 <code class="docutils literal notranslate"><span class="pre">Shape</span></code> 和 <code class="docutils literal notranslate"><span class="pre">ShapeOrientation</span></code> 属性指定。
+要在非矩形形状（non-rectangular shapes）内布局文本，
+请启用 <code class="docutils literal notranslate"><span class="pre">PolygonalTextLayout</span></code> 。
+如果启用该功能，WpfDiagram 将使用一种格式算法（formatting algorithm），
+使文本的每一行正好符合多边形形状内的线条宽度（fits exactly each line
+of text within the width of a line inside a polygonal shape）。
+如果形状节点具有弯曲的轮廓（curved outlines），
+则格式化算法会将它们近似为折线（poly-lines）。</p>
+</li>
+<li><p>Text Wrapping</p>
+<p>如果没有足够的可用空间来容纳整行文本，
+WpfDiagram 会在文本到达节点边缘时将文本换行到新行。
+您可以通过将 <code class="docutils literal notranslate"><span class="pre">TextTrimming</span></code> 设置为 <strong>Word</strong> 来
+指定文本应仅在单词边界处（word boundaries）换行。
+默认情况下，如果没有足够的空间容纳整个单词，则将单词分成多个部分。</p>
+<p>如果您更喜欢使用自己的换行符（line-breaks），
+可以通过将 <code class="docutils literal notranslate"><span class="pre">TextWrapping</span></code> 设置为 <strong>None</strong> 来禁用自动文本换行。
+如果自动换行被禁用并且没有足够的空间来容纳整行，文本将在节点边界处被剪裁（clipped）。</p>
+</li>
+<li><p>Text in Tables</p>
+<p><code class="docutils literal notranslate"><span class="pre">TableNode</span></code> 可以在其标题区域和每个单元格内显示文本。
+<code class="docutils literal notranslate"><span class="pre">Caption</span></code> 中的文本是用 <code class="docutils literal notranslate"><span class="pre">TextBrush</span></code> 绘制的，
+并按照 <code class="docutils literal notranslate"><span class="pre">CaptionFormat</span></code> 的指定进行对齐。
+单元格中的文本使用它们自己的 <code class="docutils literal notranslate"><span class="pre">TextBrush</span></code> 绘制，
+并根据它们自己的 <code class="docutils literal notranslate"><span class="pre">TextFormat</span></code> 对齐。
+<code class="docutils literal notranslate"><span class="pre">EnableStyledText</span></code> 属性可以启用更多有用的格式化相关的属性。</p>
+</li>
+<li><p>Styled Text</p>
+<p>形状节点（shape nodes）的 <code class="docutils literal notranslate"><span class="pre">ShapeNode.EnableStyledText</span></code> 属性和
+表格的 <code class="docutils literal notranslate"><span class="pre">TableNode.EnableStyledText</span></code> 属性
+启用或禁用样式化文本呈现（styled text rendering）。
+样式化文本可以对其包含的字符应用各种属性。
+这些属性是通过在原始文本（raw text）中嵌入类似 HTML 的格式标签（tags）来指定的。
+仅当启用了 <code class="docutils literal notranslate"><span class="pre">PolygonalTextLayout</span></code> 时，形状节点才能显示样式化文本。
+使用 <code class="docutils literal notranslate"><span class="pre">DrawStyledText</span></code> 方法
+在自定义绘制项目（custom-drawn items）中显示样式化文本。</p>
+<p>下表列出了当前支持的样式标签：</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>标签（Tag）</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>&lt;i&gt;text&lt;/i&gt;</p></td>
+<td><p>显示斜体文本。</p></td>
+</tr>
+<tr class="row-odd"><td><p>&lt;b&gt;text&lt;/b&gt;</p></td>
+<td><p>显示粗体文本。</p></td>
+</tr>
+<tr class="row-even"><td><p>&lt;u&gt;text&lt;/u&gt;</p></td>
+<td><p>显示下划线文本。</p></td>
+</tr>
+<tr class="row-odd"><td><p>&lt;sub&gt;text&lt;/sub&gt;</p></td>
+<td><p>显示下标。</p></td>
+</tr>
+<tr class="row-even"><td><p>&lt;sup&gt;text&lt;/sup&gt;</p></td>
+<td><p>显示上标。</p></td>
+</tr>
+<tr class="row-odd"><td><p>&lt;color=#RRGGBB&gt;text&lt;/color&gt;</p></td>
+<td><p>更改文本的颜色。</p></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p>Links’ Text</p>
+<p><code class="docutils literal notranslate"><span class="pre">DiagramLink</span></code> 的文本使用 <code class="docutils literal notranslate"><span class="pre">TextBrush</span></code> 中指定的颜色绘制，
+并按 <code class="docutils literal notranslate"><span class="pre">TextStyle</span></code> 中的设置定位。</p>
+</li>
+<li><p>Fonts</p>
+<p>所有 items 都提供 <code class="docutils literal notranslate"><span class="pre">FontFamily</span></code> 、 <code class="docutils literal notranslate"><span class="pre">FontSize</span></code> 、 <code class="docutils literal notranslate"><span class="pre">FontStyle</span></code> 、
+<code class="docutils literal notranslate"><span class="pre">FontWeight</span></code> 和 <code class="docutils literal notranslate"><span class="pre">FontStretch</span></code> 属性，
+这些属性允许获取或设置用于呈现 item 文本的字体属性。</p>
+</li>
 </ul>
 </li>
 </ol>
 </div>
 <div class="section" id="initial-values-of-item-properties">
 <h4>4.8 Initial Values of Item Properties<a class="headerlink" href="#initial-values-of-item-properties" title="永久链接至标题">¶</a></h4>
+<blockquote>
+<div><p>由用户或以编程方式创建的每个新 item 都使用某种默认属性值进行初始化。</p>
+<p>如果使用 new 运算符创建 items 并将它们添加到 diagram 的 <code class="docutils literal notranslate"><span class="pre">Nodes</span></code> 或
+<code class="docutils literal notranslate"><span class="pre">Links</span></code> 集合中，您可以通过将一个 <code class="docutils literal notranslate"><span class="pre">Diagram</span></code> 实例的引用传递给相应的构造函数
+或将另一个 item 作为参数调用复制构造函数来初始化这些 items 。
+在前一种情况下，item 的属性是从 <strong>Diagram</strong> 定义的默认属性值初始化的。
+在后一种情况下，属性是从原型 item 中复制的。</p>
+<p>当用户绘制新 items 时，这些 items 是从 <strong>Diagram</strong> 属性初始化的，
+但您可以通过处理 <code class="docutils literal notranslate"><span class="pre">InitializeNode</span></code> 和 <code class="docutils literal notranslate"><span class="pre">InitializeLink</span></code> 事件来更改默认值。</p>
+<p>通过 diagram 对象的 <code class="docutils literal notranslate"><span class="pre">Factory</span></code> 对象创建的 items
+总是从 <strong>*Diagram</strong> 中定义的默认属性值初始化。</p>
+<p>下面列出了 item 属性以及初始化它们的相应常量或 <strong>Diagram</strong> 属性：</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 42%" />
+<col style="width: 58%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>DiagramItem 属性</p></th>
+<th class="head"><p>初始化为</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Brush</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ShapeBrush</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">TableBrush</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">LinkBrush</span></code></p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Font</p></td>
+<td><p>Font</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Locked</span></code></p></td>
+<td><p><strong>False</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>Pen</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ShapePen</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">TablePen</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">LinkPen</span></code></p>
+</td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Selected</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">SelectAfterCreate</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Tag</p></td>
+<td><p><strong>null</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>ToolTip</p></td>
+<td><p>(empty string)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Visible</span></code></p></td>
+<td><p><strong>true</strong></p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 42%" />
+<col style="width: 58%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>ShapeNode 属性</p></th>
+<th class="head"><p>初始化为</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CustomDraw</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ShapeCustomDraw</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">EnabledHandles</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">AdjustmentHandles.All</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Expandable</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">NodesExpandable</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">HandlesStyle</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ShapeHandlesStyle</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Image</span></code></p></td>
+<td><p><strong>null</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ImageAlign</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ImageAlign.Fit</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Text</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ShapeText</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>TextColor</p></td>
+<td><p>TextColor</p></td>
+</tr>
+<tr class="row-even"><td><p>TextFormat</p></td>
+<td><p>TextFormat</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Transparent</span></code></p></td>
+<td><p><strong>False</strong></p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 42%" />
+<col style="width: 58%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>ContainerNode 属性</p></th>
+<th class="head"><p>初始化为</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">AutoShrink</span></code></p></td>
+<td><p><strong>false</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Caption</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ContainerCaption</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CaptionBrush</span></code></p></td>
+<td><p><strong>Black</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>CaptionFormat</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">TextFormat</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CaptionHeight</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ContainerCaptionHeight</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Foldable</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ContainersFoldable</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Folded</span></code></p></td>
+<td><p><strong>false</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">HighlightPen</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ContainerHighlightPen</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Margin</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ContainerMargin</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MinimumSize</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ContainerMinimumSize</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 42%" />
+<col style="width: 58%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>TableNode 属性</p></th>
+<th class="head"><p>初始化为</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Caption</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">TableCaption</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">CaptionColor</span></code></p></td>
+<td><p>Color.FromArgb(0, 0, 0)</p></td>
+</tr>
+<tr class="row-even"><td><p>CaptionFormat</p></td>
+<td><p>Centered horizontal
+and vertical alignment</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">CellCustomDraw</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">CellCustomDraw</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CellFrameStyle</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">CellFrameStyle</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ColumnWidth</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">TableColumnWidth</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CustomDraw</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">TableCustomDraw</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">HandlesStyle</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">TableHandlesStyle</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Image</span></code></p></td>
+<td><p><strong>null</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ImageAlign</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ImageAlign.Fit</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ConnectionStyle</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">TableConnectionStyle</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">RowHeight</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">TableRowHeight</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Scrollable</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">TablesScrollable</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Shape</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">TableShape</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>TextColor</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">TextColor</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 49%" />
+<col style="width: 51%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>DiagramLink 属性</p></th>
+<th class="head"><p>初始化为</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">BaseShape</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">LinkBaseShape</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">BaseShapeSize</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">LinkBaseShapeSize</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">HeadShape</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">LinkHeadShape</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">HeadShapeSize</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">LinkHeadShapeSize</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">AutoRoute</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">RouteLinks</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">CascadeOrientation</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">LinkCascadeOrientation</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CustomDraw</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">LinkCustomDraw</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Dynamic</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">DynamicLinks</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">HeadPen</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">LinkPen</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">IntermediateShape</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">LinkIntermediateShape</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">IntermediateShapeSize</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">LinkIntermediateShapeSize</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">RetainForm</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">LinksRetainForm</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">SegmentCount</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">LinkSegments</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Shape</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">LinkShape</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Text</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">LinkText</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>TextColor</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">TextColor</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">TextStyle</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">LinkTextStyle</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
 </div>
-<div class="section" id="id24">
-<h4>4.9 杂项<a class="headerlink" href="#id24" title="永久链接至标题">¶</a></h4>
-<ol class="arabic simple">
-<li><p>Associate Custom Data with Items</p></li>
-<li><p>Inspecting Items Geometry</p></li>
-<li><p>Fluent API</p></li>
+<div class="section" id="id26">
+<h4>4.9 杂项<a class="headerlink" href="#id26" title="永久链接至标题">¶</a></h4>
+<ol class="arabic">
+<li><p>Associate Custom Data with Items</p>
+<p>通过设置图表元素（diagarm items）的 <strong>Tag</strong> 和 <code class="docutils literal notranslate"><span class="pre">Id</span></code> 属性，
+您可以将任何数据类型的自定义值与图表元素关联起来。
+如果关联数据是值类型或可序列化类型
+（标记为 <strong>[Serializable]</strong> 并实现 <strong>ISerializable</strong> 接口），
+则在保存或加载 diagram 时，它会与 diagram items 一起保存和加载。
+<code class="docutils literal notranslate"><span class="pre">FindNode</span></code> 、 <code class="docutils literal notranslate"><span class="pre">FindLink</span></code> 、 <code class="docutils literal notranslate"><span class="pre">FindNodeById</span></code> 和 <code class="docutils literal notranslate"><span class="pre">FindLinkById</span></code> 方法
+让您可以找到与特定值关联的图表元素。</p>
+</li>
+<li><p>Inspecting Items Geometry</p>
+<ul class="simple">
+<li><p>DiagramLink 的 <code class="docutils literal notranslate"><span class="pre">Intersects</span></code> 方法
+可让您测试链接（links）是否与其他链接或节点（nodes）相交。</p></li>
+<li><p>DiagramLink 类的 <code class="docutils literal notranslate"><span class="pre">Length</span></code> 方法返回链接的总长度。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ContainsPoint</span></code> 方法让您检查一个 item 是否包含指定的点。</p></li>
+</ul>
+</li>
+<li><p>Fluent API</p>
+<p><code class="docutils literal notranslate"><span class="pre">MindFusion.Diagramming.Wpf.Fluent</span></code> 和
+<code class="docutils literal notranslate"><span class="pre">MindFusion.Diagramming.Wpf.Layout.Fluent</span></code> 命名空间中的扩展方法
+允许您使用流畅的编程风格初始化对象：</p>
+<div class="highlight-C# notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="nn">MindFusion.Diagramming.Wpf.Fluent</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">MindFusion.Diagramming.Wpf.Layout.Fluent</span><span class="p">;</span>
+<span class="c1">//...</span>
+
+<span class="n">diagram</span><span class="p">.</span><span class="n">Factory</span>
+    <span class="p">.</span><span class="n">CreateShapeNode</span><span class="p">(</span><span class="m">20</span><span class="p">,</span> <span class="m">20</span><span class="p">,</span> <span class="m">60</span><span class="p">,</span> <span class="m">40</span><span class="p">)</span>
+        <span class="p">.</span><span class="n">Brush</span><span class="p">(</span><span class="n">Colors</span><span class="p">.</span><span class="n">LightGray</span><span class="p">)</span>
+        <span class="p">.</span><span class="n">Font</span><span class="p">(</span><span class="s">&quot;Arial&quot;</span><span class="p">,</span> <span class="m">12</span><span class="p">)</span>
+        <span class="p">.</span><span class="n">EnableStyledText</span><span class="p">(</span><span class="k">true</span><span class="p">)</span>
+        <span class="p">.</span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Task &lt;i&gt;1&lt;/i&gt;&quot;</span><span class="p">)</span>
+        <span class="p">.</span><span class="n">ToolTip</span><span class="p">(</span><span class="s">&quot;This is the task&quot;</span><span class="p">)</span>
+        <span class="p">.</span><span class="n">TextRotationAngle</span><span class="p">(</span><span class="m">15</span><span class="p">);</span>
+
+<span class="k">new</span> <span class="nf">TreeLayout</span><span class="p">()</span>
+   <span class="p">.</span><span class="n">LevelDistance</span><span class="p">(</span><span class="m">20</span><span class="p">)</span>
+   <span class="p">.</span><span class="n">NodeDistance</span><span class="p">(</span><span class="m">20</span><span class="p">)</span>
+   <span class="p">.</span><span class="n">LinkStyle</span><span class="p">(</span><span class="n">TreeLayoutLinkType</span><span class="p">.</span><span class="n">Cascading3</span><span class="p">)</span>
+   <span class="p">.</span><span class="n">Arrange</span><span class="p">(</span><span class="n">diagram</span><span class="p">);</span>
+</pre></div>
+</div>
+</li>
 </ol>
 </div>
 </div>
-<div class="section" id="id25">
-<h3>5. 教程<a class="headerlink" href="#id25" title="永久链接至标题">¶</a></h3>
-<div class="section" id="id26">
-<h4>5.1 加载数据<a class="headerlink" href="#id26" title="永久链接至标题">¶</a></h4>
-</div>
 <div class="section" id="id27">
-<h4>5.2 加载层次结构类型的数据<a class="headerlink" href="#id27" title="永久链接至标题">¶</a></h4>
-</div>
+<h3>5. 教程<a class="headerlink" href="#id27" title="永久链接至标题">¶</a></h3>
 <div class="section" id="id28">
-<h4>5.3 创建一个自定义节点类型<a class="headerlink" href="#id28" title="永久链接至标题">¶</a></h4>
+<h4>5.1 加载数据<a class="headerlink" href="#id28" title="永久链接至标题">¶</a></h4>
 </div>
 <div class="section" id="id29">
-<h4>5.4 自定义节点的集成<a class="headerlink" href="#id29" title="永久链接至标题">¶</a></h4>
-</div>
-</div>
+<h4>5.2 加载层次结构类型的数据<a class="headerlink" href="#id29" title="永久链接至标题">¶</a></h4>
 </div>
 <div class="section" id="id30">
-<h2>开发笔记<a class="headerlink" href="#id30" title="永久链接至标题">¶</a></h2>
+<h4>5.3 创建一个自定义节点类型<a class="headerlink" href="#id30" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id31">
+<h4>5.4 自定义节点的集成<a class="headerlink" href="#id31" title="永久链接至标题">¶</a></h4>
+</div>
+</div>
+</div>
+<div class="section" id="id32">
+<h2>开发笔记<a class="headerlink" href="#id32" title="永久链接至标题">¶</a></h2>
 </div>
 </div>
 

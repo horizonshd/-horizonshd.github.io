@@ -96,6 +96,8 @@
 <li class="toctree-l1"><a class="reference internal" href="cmd.html">cmd</a></li>
 <li class="toctree-l1"><a class="reference internal" href="WindowsTerminal.html">Windows Terminal</a></li>
 <li class="toctree-l1"><a class="reference internal" href="SSH.html">SSH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Bash.html">Bash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="YAML.html">YAML</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sphinx.html">sphinx</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Encoding.html">Charset and Encoding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Graphviz.html">Graphviz - Graph Visualization Software</a></li>
@@ -103,10 +105,12 @@
 <li class="toctree-l1"><a class="reference internal" href="CMake.html">CMake</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C%2B%2B.html">C++</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Math.html">Math</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LinearAlgebra.MIT.html">Linear Algrbra - MIT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ImageProcessing.html">Image Processing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="OpenCV.html">OpenCV</a></li>
 <li class="toctree-l1"><a class="reference internal" href="OpenGL.html">OpenGL</a></li>
 <li class="toctree-l1"><a class="reference internal" href="GameEngine.html">GameEngine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ComputerGraphics.html">Computer Graphics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DTD.html">DTD</a></li>
 <li class="toctree-l1"><a class="reference internal" href="XSD.html">XSD</a></li>
 <li class="toctree-l1"><a class="reference internal" href="WSDL.html">WSDL</a></li>
@@ -157,10 +161,98 @@
 <li class="toctree-l3"><a class="reference internal" href="#ffprobe-all">ffprobe-all</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#ffempeg">《FFempeg  从入门到精通》</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id22">第 1 章 FFmpeg 简介</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id23">第 2 章 FFmpeg 工具使用基础</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id24">2.1 ffmpeg 常用命令</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id25">2.2 ffprobe 常用命令</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id26">2.3 ffplay 常用命令</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id27">2.4 小结</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id28">第 3 章 FFmpeg 转封装</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#mp4">3.1 音视频文件转 MP4 格式</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flv">3.2 视频文件转 FLV</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#m3u8">3.3 视频文件转 M3U8</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id29">3.4 视频文件切片</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id30">3.5 音视频文件音视频流抽取</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id31">3.6 系统资源使用情况</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id32">3.7 小结</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id33">第 4 章 FFmpeg 转码</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ffmpeg-h-264-h-265">4.1 FFmpeg 软编码 H.264 与 H.265</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id34">4.2 FFmpeg 硬编解码</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ffmpeg-mp3">4.3 FFmpeg 输出 MP3</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ffmpeg-aac">4.4 FFmpeg 输出 AAC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id35">4.5 系统资源使用情况</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id36">4.6 小结</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id37">第 5 章 FFmpeg 流媒体</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ffmpeg-rtmp">5.1 FFmpeg 发布与录制 RTMP 流</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ffmpeg-rtsp">5.2 FFmpeg 录制 RTSP 流</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ffmpeg-http">5.3 FFmpeg 录制 HTTP 流</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ffmpeg-udp-tcp">5.4 FFmpeg 录制和发布 UDP/TCP 流</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id38">5.5 FFmpeg 多路推流</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ffmpeg-hds">5.6 FFmpeg 生成 HDS 流</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ffmpeg-dash">5.7 FFmpeg 生成 DASH 流</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id39">5.8 小结</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id40">第 6 章 FFmpeg 滤镜使用</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ffmpeg-filter">6.1 FFmpeg 滤镜 Filter 描述格式</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id41">6.2 FFmpeg 为视频加水印</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id42">6.3 FFmpeg 生成画中画</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id43">6.4 FFmpeg 视频多宫格处理</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id44">6.5 FFmpeg 音频流滤镜操作</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id45">6.6 FFmpeg 音频音量探测</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id46">6.7 FFmpeg 为视频加字幕</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id47">6.8 FFmpeg 视频抠图合并</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ffmpeg-3d">6.9 FFmpeg 3D 视频处理</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id48">6.10 FFmpeg 定时视频截图</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id49">6.11 FFmpeg 生成测试元数据</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id50">6.12 FFmpeg 对音视频倍速处理</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id51">6.13 小结</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id52">第 7 章 FFmpeg 采集设备</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ffmpeg-linux">7.1 FFmpeg 中 Linux 设备操作</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ffmpeg-os-x">7.2 FFmpeg 中 OS X 设备操作</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ffmpeg-windows">7.3 FFmpeg 中 Windows 设备操作</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id53">7.4 小结</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#ffmpeg-libavformat">第 8 章 FFmpeg 接口 libavformat 的使用</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id54">8.1 音视频流封装</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id55">8.2 音视频文件解封装</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id56">8.3 音视频文件转封装</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id57">8.4 视频截取</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#avio">8.5 avio 内存数据操作</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id58">8.6 小结</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#ffmpeg-libavcodec">第 9 章 FFmpeg 接口 libavcodec 的使用</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id59">9.1 FFmpeg 旧接口的使用</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id60">9.1 FFmpeg 新接口的使用</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id61">9.3 小结</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#ffmpeg-libavfilter">第 10 章 FFmpeg 接口 libavfilter 的使用</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#filtergraph-filter">10.1 filtergraph 和 filter 简述</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id62">10.2 FFmpeg 中预留的滤镜</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#avfilter">10.3 avfilter 流程图</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#logo">10.4 使用滤镜加 LOGO 操作</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id63">10.5 小结</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="MindFusion.html">MindFusion.Diagramming for WPF, V3.7</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DigitalSignalProcess.html">Digital Signal Process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="VisualStudio.html">Visual Studio</a></li>
 <li class="toctree-l1"><a class="reference internal" href="VisualStudioCode.html">Visual Studio Code</a></li>
 <li class="toctree-l1"><a class="reference internal" href="OpenSourceProjects.html">Open Source Projects</a></li>
 </ul>
@@ -343,8 +435,8 @@
 </ol>
 </div></blockquote>
 <p>参数太多的时候，为了便于查看，ffmpeg 命令可以写成多行：</p>
-<div class="literal-block-wrapper docutils container" id="id22">
-<div class="code-block-caption"><span class="caption-text">linux</span><a class="headerlink" href="#id22" title="永久链接至代码">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id64">
+<div class="code-block-caption"><span class="caption-text">linux</span><a class="headerlink" href="#id64" title="永久链接至代码">¶</a></div>
 <div class="highlight-batch notranslate"><div class="highlight"><pre><span></span>ffmpeg \
 [全局参数] \
 [输入文件参数] \
@@ -354,8 +446,8 @@
 </pre></div>
 </div>
 </div>
-<div class="literal-block-wrapper docutils container" id="id23">
-<div class="code-block-caption"><span class="caption-text">windows</span><a class="headerlink" href="#id23" title="永久链接至代码">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id65">
+<div class="code-block-caption"><span class="caption-text">windows</span><a class="headerlink" href="#id65" title="永久链接至代码">¶</a></div>
 <div class="highlight-batch notranslate"><div class="highlight"><pre><span></span>ffmpeg <span class="se">^</span>
 <span class="se">[</span>全局参数] <span class="se">^</span>
 <span class="se">[</span>输入文件参数] <span class="se">^</span>
@@ -592,6 +684,209 @@ output.mp4
 </div>
 <div class="section" id="ffprobe-all">
 <h3>ffprobe-all<a class="headerlink" href="#ffprobe-all" title="永久链接至标题">¶</a></h3>
+</div>
+</div>
+<div class="section" id="ffempeg">
+<h2>《FFempeg  从入门到精通》<a class="headerlink" href="#ffempeg" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id22">
+<h3>第 1 章 FFmpeg 简介<a class="headerlink" href="#id22" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="id23">
+<h3>第 2 章 FFmpeg 工具使用基础<a class="headerlink" href="#id23" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id24">
+<h4>2.1 ffmpeg 常用命令<a class="headerlink" href="#id24" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id25">
+<h4>2.2 ffprobe 常用命令<a class="headerlink" href="#id25" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id26">
+<h4>2.3 ffplay 常用命令<a class="headerlink" href="#id26" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id27">
+<h4>2.4 小结<a class="headerlink" href="#id27" title="永久链接至标题">¶</a></h4>
+</div>
+</div>
+<div class="section" id="id28">
+<h3>第 3 章 FFmpeg 转封装<a class="headerlink" href="#id28" title="永久链接至标题">¶</a></h3>
+<div class="section" id="mp4">
+<h4>3.1 音视频文件转 MP4 格式<a class="headerlink" href="#mp4" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="flv">
+<h4>3.2 视频文件转 FLV<a class="headerlink" href="#flv" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="m3u8">
+<h4>3.3 视频文件转 M3U8<a class="headerlink" href="#m3u8" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id29">
+<h4>3.4 视频文件切片<a class="headerlink" href="#id29" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id30">
+<h4>3.5 音视频文件音视频流抽取<a class="headerlink" href="#id30" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id31">
+<h4>3.6 系统资源使用情况<a class="headerlink" href="#id31" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id32">
+<h4>3.7 小结<a class="headerlink" href="#id32" title="永久链接至标题">¶</a></h4>
+</div>
+</div>
+<div class="section" id="id33">
+<h3>第 4 章 FFmpeg 转码<a class="headerlink" href="#id33" title="永久链接至标题">¶</a></h3>
+<div class="section" id="ffmpeg-h-264-h-265">
+<h4>4.1 FFmpeg 软编码 H.264 与 H.265<a class="headerlink" href="#ffmpeg-h-264-h-265" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id34">
+<h4>4.2 FFmpeg 硬编解码<a class="headerlink" href="#id34" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="ffmpeg-mp3">
+<h4>4.3 FFmpeg 输出 MP3<a class="headerlink" href="#ffmpeg-mp3" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="ffmpeg-aac">
+<h4>4.4 FFmpeg 输出 AAC<a class="headerlink" href="#ffmpeg-aac" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id35">
+<h4>4.5 系统资源使用情况<a class="headerlink" href="#id35" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id36">
+<h4>4.6 小结<a class="headerlink" href="#id36" title="永久链接至标题">¶</a></h4>
+</div>
+</div>
+<div class="section" id="id37">
+<h3>第 5 章 FFmpeg 流媒体<a class="headerlink" href="#id37" title="永久链接至标题">¶</a></h3>
+<div class="section" id="ffmpeg-rtmp">
+<h4>5.1 FFmpeg 发布与录制 RTMP 流<a class="headerlink" href="#ffmpeg-rtmp" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="ffmpeg-rtsp">
+<h4>5.2 FFmpeg 录制 RTSP 流<a class="headerlink" href="#ffmpeg-rtsp" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="ffmpeg-http">
+<h4>5.3 FFmpeg 录制 HTTP 流<a class="headerlink" href="#ffmpeg-http" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="ffmpeg-udp-tcp">
+<h4>5.4 FFmpeg 录制和发布 UDP/TCP 流<a class="headerlink" href="#ffmpeg-udp-tcp" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id38">
+<h4>5.5 FFmpeg 多路推流<a class="headerlink" href="#id38" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="ffmpeg-hds">
+<h4>5.6 FFmpeg 生成 HDS 流<a class="headerlink" href="#ffmpeg-hds" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="ffmpeg-dash">
+<h4>5.7 FFmpeg 生成 DASH 流<a class="headerlink" href="#ffmpeg-dash" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id39">
+<h4>5.8 小结<a class="headerlink" href="#id39" title="永久链接至标题">¶</a></h4>
+</div>
+</div>
+<div class="section" id="id40">
+<h3>第 6 章 FFmpeg 滤镜使用<a class="headerlink" href="#id40" title="永久链接至标题">¶</a></h3>
+<div class="section" id="ffmpeg-filter">
+<h4>6.1 FFmpeg 滤镜 Filter 描述格式<a class="headerlink" href="#ffmpeg-filter" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id41">
+<h4>6.2 FFmpeg 为视频加水印<a class="headerlink" href="#id41" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id42">
+<h4>6.3 FFmpeg 生成画中画<a class="headerlink" href="#id42" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id43">
+<h4>6.4 FFmpeg 视频多宫格处理<a class="headerlink" href="#id43" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id44">
+<h4>6.5 FFmpeg 音频流滤镜操作<a class="headerlink" href="#id44" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id45">
+<h4>6.6 FFmpeg 音频音量探测<a class="headerlink" href="#id45" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id46">
+<h4>6.7 FFmpeg 为视频加字幕<a class="headerlink" href="#id46" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id47">
+<h4>6.8 FFmpeg 视频抠图合并<a class="headerlink" href="#id47" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="ffmpeg-3d">
+<h4>6.9 FFmpeg 3D 视频处理<a class="headerlink" href="#ffmpeg-3d" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id48">
+<h4>6.10 FFmpeg 定时视频截图<a class="headerlink" href="#id48" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id49">
+<h4>6.11 FFmpeg 生成测试元数据<a class="headerlink" href="#id49" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id50">
+<h4>6.12 FFmpeg 对音视频倍速处理<a class="headerlink" href="#id50" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id51">
+<h4>6.13 小结<a class="headerlink" href="#id51" title="永久链接至标题">¶</a></h4>
+</div>
+</div>
+<div class="section" id="id52">
+<h3>第 7 章 FFmpeg 采集设备<a class="headerlink" href="#id52" title="永久链接至标题">¶</a></h3>
+<div class="section" id="ffmpeg-linux">
+<h4>7.1 FFmpeg 中 Linux 设备操作<a class="headerlink" href="#ffmpeg-linux" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="ffmpeg-os-x">
+<h4>7.2 FFmpeg 中 OS X 设备操作<a class="headerlink" href="#ffmpeg-os-x" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="ffmpeg-windows">
+<h4>7.3 FFmpeg 中 Windows 设备操作<a class="headerlink" href="#ffmpeg-windows" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id53">
+<h4>7.4 小结<a class="headerlink" href="#id53" title="永久链接至标题">¶</a></h4>
+</div>
+</div>
+<div class="section" id="ffmpeg-libavformat">
+<h3>第 8 章 FFmpeg 接口 libavformat 的使用<a class="headerlink" href="#ffmpeg-libavformat" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id54">
+<h4>8.1 音视频流封装<a class="headerlink" href="#id54" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id55">
+<h4>8.2 音视频文件解封装<a class="headerlink" href="#id55" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id56">
+<h4>8.3 音视频文件转封装<a class="headerlink" href="#id56" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id57">
+<h4>8.4 视频截取<a class="headerlink" href="#id57" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="avio">
+<h4>8.5 avio 内存数据操作<a class="headerlink" href="#avio" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id58">
+<h4>8.6 小结<a class="headerlink" href="#id58" title="永久链接至标题">¶</a></h4>
+</div>
+</div>
+<div class="section" id="ffmpeg-libavcodec">
+<h3>第 9 章 FFmpeg 接口 libavcodec 的使用<a class="headerlink" href="#ffmpeg-libavcodec" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id59">
+<h4>9.1 FFmpeg 旧接口的使用<a class="headerlink" href="#id59" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id60">
+<h4>9.1 FFmpeg 新接口的使用<a class="headerlink" href="#id60" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id61">
+<h4>9.3 小结<a class="headerlink" href="#id61" title="永久链接至标题">¶</a></h4>
+</div>
+</div>
+<div class="section" id="ffmpeg-libavfilter">
+<h3>第 10 章 FFmpeg 接口 libavfilter 的使用<a class="headerlink" href="#ffmpeg-libavfilter" title="永久链接至标题">¶</a></h3>
+<div class="section" id="filtergraph-filter">
+<h4>10.1 filtergraph 和 filter 简述<a class="headerlink" href="#filtergraph-filter" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id62">
+<h4>10.2 FFmpeg 中预留的滤镜<a class="headerlink" href="#id62" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="avfilter">
+<h4>10.3 avfilter 流程图<a class="headerlink" href="#avfilter" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="logo">
+<h4>10.4 使用滤镜加 LOGO 操作<a class="headerlink" href="#logo" title="永久链接至标题">¶</a></h4>
+</div>
+<div class="section" id="id63">
+<h4>10.5 小结<a class="headerlink" href="#id63" title="永久链接至标题">¶</a></h4>
+<p>ffmpeg -i INPUT -vf “split [main][temp]; [temp] crop=iw:ih/2:0:0, vflip [flip]; [main][flip] overlay=0:H/2” OUTPUT
+ffmpeg -i MoreShapes.mp4 -vf “split [main][temp]; [temp] crop=iw:ih/2:0:0, vflip [flip]; [main][flip] overlay=0:H/2” MoreShapes_output.mp4</p>
+</div>
 </div>
 </div>
 </div>

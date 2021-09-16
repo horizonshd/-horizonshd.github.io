@@ -96,6 +96,8 @@
 <li class="toctree-l1"><a class="reference internal" href="cmd.html">cmd</a></li>
 <li class="toctree-l1"><a class="reference internal" href="WindowsTerminal.html">Windows Terminal</a></li>
 <li class="toctree-l1"><a class="reference internal" href="SSH.html">SSH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Bash.html">Bash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="YAML.html">YAML</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sphinx.html">sphinx</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Encoding.html">Charset and Encoding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Graphviz.html">Graphviz - Graph Visualization Software</a></li>
@@ -103,10 +105,12 @@
 <li class="toctree-l1"><a class="reference internal" href="CMake.html">CMake</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C%2B%2B.html">C++</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Math.html">Math</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LinearAlgebra.MIT.html">Linear Algrbra - MIT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ImageProcessing.html">Image Processing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="OpenCV.html">OpenCV</a></li>
 <li class="toctree-l1"><a class="reference internal" href="OpenGL.html">OpenGL</a></li>
 <li class="toctree-l1"><a class="reference internal" href="GameEngine.html">GameEngine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ComputerGraphics.html">Computer Graphics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DTD.html">DTD</a></li>
 <li class="toctree-l1"><a class="reference internal" href="XSD.html">XSD</a></li>
 <li class="toctree-l1"><a class="reference internal" href="WSDL.html">WSDL</a></li>
@@ -255,6 +259,7 @@
 <li class="toctree-l1"><a class="reference internal" href="FFmpeg.html">FFmpeg Tool</a></li>
 <li class="toctree-l1"><a class="reference internal" href="MindFusion.html">MindFusion.Diagramming for WPF, V3.7</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DigitalSignalProcess.html">Digital Signal Process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="VisualStudio.html">Visual Studio</a></li>
 <li class="toctree-l1"><a class="reference internal" href="VisualStudioCode.html">Visual Studio Code</a></li>
 <li class="toctree-l1"><a class="reference internal" href="OpenSourceProjects.html">Open Source Projects</a></li>
 </ul>
@@ -4284,6 +4289,8 @@ for an example with lots of subplots.</p>
 当然，每个 Figure 可以包含任意多的 axes subplots :</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
+
+
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>                <span class="c1"># the first figure</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">211</span><span class="p">)</span>             <span class="c1"># the first subplot in the first figure</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
@@ -4313,6 +4320,40 @@ for an example with lots of subplots.</p>
 </div>
 <div class="section" id="id96">
 <h5>绘制文本<a class="headerlink" href="#id96" title="永久链接至标题">¶</a></h5>
+<p><code class="docutils literal notranslate"><span class="pre">matplotlib.pyplot.text</span></code> 可用于在任意位置添加文本，
+<code class="docutils literal notranslate"><span class="pre">matplotlib.pyplot.xlabel</span></code> 、 <code class="docutils literal notranslate"><span class="pre">matplotlib.pyplot.ylabel</span></code>
+和 <code class="docutils literal notranslate"><span class="pre">matplotlib.pyplot.title</span></code> 可用于在指定位置添加文本
+（有关更详细的示例，请参阅 <a class="reference external" href="https://matplotlib.org/stable/tutorials/text/text_intro.html">Text in Matplotlib Plots</a> ）。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">15</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">mu</span> <span class="o">+</span> <span class="n">sigma</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
+
+<span class="c1"># the histogram of the data</span>
+<span class="n">n</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">patches</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.75</span><span class="p">)</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Smarts&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Probability&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Histogram of IQ&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mf">.025</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;$\mu=100,\ \sigma=15$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="mi">40</span><span class="p">,</span> <span class="mi">160</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>(<a class="reference external" href="../pyplots/matplot_014.py">Source code</a>, <a class="reference external" href="../pyplots/matplot_014.png">png</a>, <a class="reference external" href="../pyplots/matplot_014.hires.png">hires.png</a>, <a class="reference external" href="../pyplots/matplot_014.pdf">pdf</a>)</p>
+<div class="figure align-default">
+<img alt="../_images/matplot_014.png" class="plot-directive" src="../_images/matplot_014.png" />
+</div>
+<p>所有文本相关的函数都返回一个 <code class="docutils literal notranslate"><span class="pre">matplotlib.text.Text</span></code> 实例。 就像上面几行一样，
+您可以通过将关键字参数传递给函数或使用 <code class="docutils literal notranslate"><span class="pre">matplotlib.pyplot.setp</span></code> 函数来自定义属性：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;my data&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>这些属性在 <a class="reference external" href="https://matplotlib.org/stable/tutorials/text/text_props.html">Text properties and layout</a>
+中有更详细的介绍。</p>
 </div>
 <div class="section" id="id97">
 <h5>对数轴和其它非线性轴<a class="headerlink" href="#id97" title="永久链接至标题">¶</a></h5>

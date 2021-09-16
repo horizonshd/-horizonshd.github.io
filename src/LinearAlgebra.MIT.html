@@ -1,0 +1,1817 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Linear Algrbra - MIT &mdash; Cheatsheet 1.0.0 文档</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="Image Processing" href="ImageProcessing.html" />
+    <link rel="prev" title="Math" href="Math.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Cheatsheet
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="在文档中搜索" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="reStructuresText.html">reStructuresText</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cmd.html">cmd</a></li>
+<li class="toctree-l1"><a class="reference internal" href="WindowsTerminal.html">Windows Terminal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SSH.html">SSH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Bash.html">Bash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="YAML.html">YAML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sphinx.html">sphinx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Encoding.html">Charset and Encoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Graphviz.html">Graphviz - Graph Visualization Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="git.html">git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CMake.html">CMake</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C%2B%2B.html">C++</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Math.html">Math</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Linear Algrbra - MIT</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">第 01 集 方程组的几何解释</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">第 02 集 矩阵消元</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#elimination">2.1 消元法(Elimination)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">2.2 消元矩阵</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">2.3 逆</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">第 03 集 乘法和逆矩阵</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id6">3.1 矩阵乘法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">3.2 矩阵的逆</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gauss-jordan">3.3 Gauss-Jordan 法求矩阵的逆</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#boldsymbol-a-boldsymbol-l-boldsymbol-u">第 04 集 <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> 的 <span class="math notranslate nohighlight">\(\boldsymbol{L}\boldsymbol{U}\)</span> 分解</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id8">4.1 关于转置和取逆的一些性质</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#boldsymbol-l-boldsymbol-u">4.2 <span class="math notranslate nohighlight">\(\boldsymbol{L}\boldsymbol{U}\)</span> 分解</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">4.3 <span class="math notranslate nohighlight">\(\boldsymbol{L}\boldsymbol{U}\)</span> 分解计算量估计</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#mathbb-r">第 05 集 置换-转置-向量空间 <span class="math notranslate nohighlight">\(\mathbb{R}\)</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#permutation-matrix">5.1 置换矩阵（Permutation Matrix）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#transpose-matrix">5.2 转置矩阵（Transpose Matrix）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#symmetric-matrix">5.3 对称矩阵（Symmetric Matrix）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vector-space-subspaces">5.4 向量空间（Vector Space）和子空间（Subspaces）</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id10">第 06 集 列空间和零空间</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#boldsymbol-a-boldsymbol-x-0">第 07 集 求解 <span class="math notranslate nohighlight">\(\boldsymbol{A}\boldsymbol{x} = 0\)</span> : 主变量、特解</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#boldsymbol-a-boldsymbol-x-b">第 08 集 求解 <span class="math notranslate nohighlight">\(\boldsymbol{A}\boldsymbol{x} = b\)</span> : 可解性和解的结构</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#solvability-conditions-on-b">8.1 可解性（Solvability conditions on b）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#particular-solution">8.2 特解（Particular solution）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#complete-solution">8.3 完整解（Complete solution）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rank">8.4 秩（Rank）</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id11">第 09 集 线性相关性、基、维数</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id12">9.1 线性相关性</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#basis">9.2 基（Basis）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dimension">9.3 向量空间的维数（Dimension）</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id13">第 10 集 四个基本子空间</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id14">第 11 集 矩阵空间、秩 1 矩阵和小世界图</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id15">第 12 集 图和网络</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id16">第 13 集 复习一</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id17">第 14 集 正交向量与子空间</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id18">第 15 集 子空间投影</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id19">第 16 集 投影矩阵和最小二乘</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#gram-schmidt">第 17 集 正交矩阵和 Gram-Schmidt 正交化</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id20">第 18 集 行列式及其性质</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id21">第 19 集 行列式公式和代数余子式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id22">第 20 集 克拉默法则、逆矩阵、体积</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id23">第 21 集 特征值和特征向量</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#a">第 22 集 对角化和 A 的幂</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#exp-at">第 23 集 微分方程 exp(At)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id24">第 24 集 马尔科夫矩阵、傅里叶级数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id25">第 25 集 复习二</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id26">第 26 集 对称矩阵及正定性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id27">第 27 集 复数矩阵和快速傅里叶变换</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id28">第 28 集 正定矩阵和最小值</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#jordan">第 29 集 相似矩阵和 Jordan 型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id29">第 30 集 奇异值分解</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id30">第 31 集 线性变换集对应矩阵</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id31">第 32 集 基变换和图像压缩</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id32">第 33 集 单元检测三复习</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id33">第 34 集 左右逆和伪逆</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id34">第 35 集 期末复习</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ImageProcessing.html">Image Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OpenCV.html">OpenCV</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OpenGL.html">OpenGL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GameEngine.html">GameEngine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ComputerGraphics.html">Computer Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DTD.html">DTD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="XSD.html">XSD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="WSDL.html">WSDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dotnet.html">dotnet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Python.html">Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manim.html">manim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NSIS.html">nullsoft scriptable install system 3.0.4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Algorithm.html">Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Vocabulary.html">Vocabulary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lua.html">Lua</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LaTeX.html">LaTeX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Ubuntu.html">Ubuntu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MEF.html">MEF in .NET Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="EMail.html">Relative Concepts of EMail</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FFmpeg.html">FFmpeg Tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MindFusion.html">MindFusion.Diagramming for WPF, V3.7</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DigitalSignalProcess.html">Digital Signal Process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="VisualStudio.html">Visual Studio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="VisualStudioCode.html">Visual Studio Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OpenSourceProjects.html">Open Source Projects</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Cheatsheet</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Linear Algrbra - MIT</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/src/LinearAlgebra.MIT.rst.txt" rel="nofollow"> 查看页面源码</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="linear-algrbra-mit">
+<h1>Linear Algrbra - MIT<a class="headerlink" href="#linear-algrbra-mit" title="永久链接至标题">¶</a></h1>
+<div class="section" id="id1">
+<h2>第 01 集 方程组的几何解释<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<p>我们从求解线性方程组来开始这门课，从一个普通的例子讲起：
+方程组有 2 个未知数，一共有 2 个方程，
+分别来看方程组的 <strong>行图像（Row Picture）</strong> 和 <strong>列图像（Column Picture）</strong> 。</p>
+<p>有方程组
+<span class="math notranslate nohighlight">\(\left\{ \begin{eqnarray*}
+2x &amp; - &amp; y &amp; = &amp; 0 \\
+-x &amp; + &amp; 2y &amp; = &amp; 3
+\end{eqnarray*} \right.\)</span> ，
+写作矩阵形式有
+<span class="math notranslate nohighlight">\(\left[ \begin{array}{cc}
+2 &amp; -1 \\
+-1 &amp; 2
+\end{array} \right]
+\left[ \begin{array}{c}
+x \\
+y
+\end{array} \right]
+=
+\left[ \begin{array}{c}
+0 \\
+3
+\end{array} \right]\)</span> ，
+通常我们把这里面的第一个矩阵称为系数矩阵 <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> ，
+将第二个矩阵称为向量 <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span> ，
+将第三个矩阵称为向量 <span class="math notranslate nohighlight">\(\boldsymbol{b}\)</span> ，
+于是线性方程组可以表示为 <span class="math notranslate nohighlight">\(\boldsymbol{A} \boldsymbol{x} = \boldsymbol{b}\)</span> 。</p>
+<p>我们先来看 Row Picture，即我们通常在直角坐标系中绘制的图像：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib.ticker</span> <span class="kn">import</span> <span class="n">MultipleLocator</span><span class="p">,</span> <span class="n">FormatStrFormatter</span>
+
+<span class="n">x1</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">y1</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+
+<span class="n">x2</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">y2</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">2.5</span><span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_locator</span><span class="p">(</span><span class="n">MultipleLocator</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_major_locator</span><span class="p">(</span><span class="n">MultipleLocator</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="c1"># ax.xaxis.set_minor_locator(MultipleLocator(0.5))</span>
+<span class="c1"># ax.yaxis.set_minor_locator(MultipleLocator(0.5))</span>
+
+<span class="c1"># ax.xaxis.grid(True, which=&#39;major&#39;, linestyle=&#39;-&#39;, linewidth=0.5, color=&#39;black&#39;)</span>
+<span class="c1"># ax.yaxis.grid(True, which=&#39;both&#39;, linestyle=&#39;--&#39;, linewidth=0.5, color=&#39;black&#39;)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># ax.axis(&#39;equal&#39;)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="n">y1</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;y1&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span><span class="n">y2</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;y2&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Row Picture&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>(<a class="reference external" href="../pyplots/linear_algebra_mit_001.py">Source code</a>, <a class="reference external" href="../pyplots/linear_algebra_mit_001.png">png</a>, <a class="reference external" href="../pyplots/linear_algebra_mit_001.hires.png">hires.png</a>, <a class="reference external" href="../pyplots/linear_algebra_mit_001.pdf">pdf</a>)</p>
+<div class="figure align-default">
+<img alt="../_images/linear_algebra_mit_001.png" class="plot-directive" src="../_images/linear_algebra_mit_001.png" />
+</div>
+<p>上图是我们都很熟悉的直角坐标系中两直线相交的情况，接下来我们按列观察方程组：
+<span class="math notranslate nohighlight">\(x
+\left[ \begin{array}{c}
+2 \\
+-1
+\end{array} \right]
++
+y
+\left[ \begin{array}{c}
+-1 \\
+2
+\end{array} \right]
+=
+\left[ \begin{array}{c}
+0 \\
+3
+\end{array} \right]\)</span>
+（我们把第一个列向量称为 <span class="math notranslate nohighlight">\(\boldsymbol{col_1}\)</span> ，
+第二个列向量称为 <span class="math notranslate nohighlight">\(\boldsymbol{col_2}\)</span>），
+可记为
+<span class="math notranslate nohighlight">\(x \boldsymbol{col_1} + y \boldsymbol{col_2} = \boldsymbol{b}\)</span> 。
+通过简单观察可知当 <span class="math notranslate nohighlight">\(x = 1\)</span> ， <span class="math notranslate nohighlight">\(y = 2\)</span> 时该式子成立。
+我们绘制出这里面出现的一些向量，即 Column Picture：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib.ticker</span> <span class="kn">import</span> <span class="n">MultipleLocator</span><span class="p">,</span> <span class="n">FormatStrFormatter</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+
+<span class="n">x1</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">y1</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+
+<span class="n">x2</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">y2</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">2.5</span><span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_locator</span><span class="p">(</span><span class="n">MultipleLocator</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_major_locator</span><span class="p">(</span><span class="n">MultipleLocator</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="c1"># ax.xaxis.set_minor_locator(MultipleLocator(0.5))</span>
+<span class="c1"># ax.yaxis.set_minor_locator(MultipleLocator(0.5))</span>
+
+<span class="c1"># ax.xaxis.grid(True, which=&#39;major&#39;, linestyle=&#39;-&#39;, linewidth=0.5, color=&#39;black&#39;)</span>
+<span class="c1"># ax.yaxis.grid(True, which=&#39;both&#39;, linestyle=&#39;--&#39;, linewidth=0.5, color=&#39;black&#39;)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="n">arrow_vector</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">arrow</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">head_width</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">head_length</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">length_includes_head</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">arrow_vector</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">)</span>
+<span class="n">arrow_vector</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;c&#39;</span><span class="p">)</span>
+<span class="n">arrow_vector</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">arrow_vector</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Column Picture&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>(<a class="reference external" href="../pyplots/linear_algebra_mit_002.py">Source code</a>, <a class="reference external" href="../pyplots/linear_algebra_mit_002.png">png</a>, <a class="reference external" href="../pyplots/linear_algebra_mit_002.hires.png">hires.png</a>, <a class="reference external" href="../pyplots/linear_algebra_mit_002.pdf">pdf</a>)</p>
+<div class="figure align-default">
+<img alt="../_images/linear_algebra_mit_002.png" class="plot-directive" src="../_images/linear_algebra_mit_002.png" />
+</div>
+<p>如图所示，绿色向量（ <span class="math notranslate nohighlight">\(\boldsymbol{col_1}\)</span> ）与蓝色向量（<span class="math notranslate nohighlight">\(2\boldsymbol{col_2}\)</span>）
+合成了红色向量（ <span class="math notranslate nohighlight">\(\boldsymbol{b}\)</span> ）。</p>
+<p>我们继续观察
+<span class="math notranslate nohighlight">\(x \boldsymbol{col_1} + y \boldsymbol{col_2} = \boldsymbol{b}\)</span> ，
+<span class="math notranslate nohighlight">\(\boldsymbol{col_1}\)</span> 和 <span class="math notranslate nohighlight">\(\boldsymbol{col_2}\)</span>
+的某种线性组合得到向量
+<span class="math notranslate nohighlight">\(\boldsymbol{b}\)</span> ，
+那么
+<span class="math notranslate nohighlight">\(\boldsymbol{col_1}\)</span> 和 <span class="math notranslate nohighlight">\(\boldsymbol{col_2}\)</span>
+的所有线性组合能够得到什么结果？它们将铺满整个平面。</p>
+<p>下面进入三个未知数的方程组：
+<span class="math notranslate nohighlight">\(\left\{ \begin{eqnarray*}
+2x &amp; - &amp; y &amp; \mbox{ } &amp; \mbox{ } &amp; = &amp; 0 \\
+-x &amp; + &amp; 2y &amp; - &amp; z &amp; = &amp; -1 \\
+\mbox{ } &amp; - &amp; 3y &amp; + &amp; 4z &amp; = &amp; 4
+\end{eqnarray*} \right.\)</span> ，
+写作矩阵形式：
+<span class="math notranslate nohighlight">\(\boldsymbol{A}
+=
+\left[ \begin{array}{ccc}
+2 &amp; -1 &amp; 0 \\
+-1 &amp; 2 &amp; -1 \\
+0 &amp; -3 &amp; 4
+\end{array} \right]\)</span> ，
+<span class="math notranslate nohighlight">\(\boldsymbol{b}
+=
+\left[ \begin{array}{c}
+0 \\
+-1 \\
+4
+\end{array} \right]\)</span> 。</p>
+<p>在三维直角坐标系中，每一个方程将确定一个平面，
+而例子中的三个平面会相交于一点，这个点就是方程组的解。</p>
+<p>同样的，我们再按列观察这个方程组：
+<span class="math notranslate nohighlight">\(x
+\left[ \begin{array}{c}
+2 \\
+-1 \\
+0
+\end{array} \right]
++
+y
+\left[ \begin{array}{c}
+-1 \\
+2 \\
+3
+\end{array} \right]
++
+z
+\left[ \begin{array}{c}
+0 \\
+-1 \\
+4
+\end{array} \right]
+=
+\left[ \begin{array}{c}
+0 \\
+-1 \\
+4
+\end{array} \right]\)</span> 。
+易知教授特意安排的例子中最后一个列向量恰巧等于等式右边的 <span class="math notranslate nohighlight">\(\boldsymbol{b}\)</span> 向量，
+所以我们需要的线性组合为
+<span class="math notranslate nohighlight">\(x = 0\)</span> ， <span class="math notranslate nohighlight">\(y = 0\)</span> ， <span class="math notranslate nohighlight">\(z = 1\)</span> 。</p>
+<p>我们并不能总是这么轻易的求出正确的线性组合，
+所以下一讲将介绍消元法 —— 一种线性方程组的系统性解法。</p>
+<p>现在，我们需要考虑，对于任意的 <span class="math notranslate nohighlight">\(\boldsymbol{b}\)</span> ，
+是否都能求解 <span class="math notranslate nohighlight">\(\boldsymbol{A} \boldsymbol{x} = \boldsymbol{b}\)</span> ？
+用列向量线性组合的观点阐述就是，列向量的线性组合能否覆盖整个三维向量空间？
+对上面这个例子，答案是肯定的，这个例子中的 <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> 是我们喜欢的矩阵类型，
+但是对另一些矩阵，答案是否定的。
+那么在什么情况下，三个向量的线性组合得不到 <span class="math notranslate nohighlight">\(\boldsymbol{b}\)</span> ？</p>
+<p>如果三个向量在同一个平面上，问题就出现了 —— 那么他们的线性组合也一定都在这个平面上。
+举个例子，比如 <span class="math notranslate nohighlight">\(\boldsymbol{col_3} = \boldsymbol{col_1} + \boldsymbol{col_2}\)</span> ，
+那么不管怎么组合，这三个向量的结果都逃不出这个平面。
+因此当 <span class="math notranslate nohighlight">\(\boldsymbol{b}\)</span> 在平面内，方程组有解；
+而当 <span class="math notranslate nohighlight">\(\boldsymbol{b}\)</span> 不在平面内，这三个列向量就无法构造出 <span class="math notranslate nohighlight">\(\boldsymbol{b}\)</span> 。
+在后面的课程中，我们会了解到这种情形称为 <strong>奇异</strong> 、 <strong>矩阵不可逆</strong> 。</p>
+<p>下面我们推广到九维空间，每个方程有九个未知数，共九个方程，
+此时已经无法从坐标图像中描述问题了，
+但是我们依然可以从求九维列向量线性组合的角度解决问题，
+仍然是上面的问题，是否总能得到 <span class="math notranslate nohighlight">\(\boldsymbol{b}\)</span> ？
+当然这仍取决于这九个向量，如果我们取一些并不相互独立的向量，则答案是否定的，
+比如取了九列但其实只相当于八列，有一列毫无贡献（这一列是前面列的某种线性组合），
+则会有一部分 <span class="math notranslate nohighlight">\(\boldsymbol{b}\)</span> 无法求得。</p>
+<p>接下来介绍方程的矩阵形式 <span class="math notranslate nohighlight">\(\boldsymbol{A} \boldsymbol{x} = \boldsymbol{b}\)</span> ，
+这是一种乘法运算，举个例子，取
+<span class="math notranslate nohighlight">\(\boldsymbol{A}
+=
+\left[ \begin{array}{cc}
+2 &amp; 5 \\
+1 &amp; 3
+\end{array} \right]\)</span> ，
+<span class="math notranslate nohighlight">\(\boldsymbol{x}
+=
+\left[ \begin{array}{c}
+1 \\
+2
+\end{array} \right]\)</span>
+来看如何计算：</p>
+<blockquote>
+<div><ul>
+<li><p>使用列向量线性组合的方式，一次计算一列：</p>
+<p><span class="math notranslate nohighlight">\(\left[ \begin{array}{cc}
+2 &amp; 5 \\
+1 &amp; 3
+\end{array} \right]
+\left[ \begin{array}{c}
+1 \\
+2
+\end{array} \right]
+=
+1
+\left[ \begin{array}{c}
+2 \\
+1
+\end{array} \right]
++
+2
+\left[ \begin{array}{c}
+5 \\
+3
+\end{array} \right]
+=
+\left[ \begin{array}{c}
+12 \\
+7
+\end{array} \right]\)</span></p>
+</li>
+<li><p>另一种方法，使用向量内积，矩阵的行向量点乘列向量
+<span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span> 的转置 <span class="math notranslate nohighlight">\(\boldsymbol{x}^T\)</span> ：</p>
+<p><span class="math notranslate nohighlight">\(\left[ \begin{array}{cc} 2 &amp; 5 \end{array} \right]
+\cdot
+\left[ \begin{array}{c}
+1 \\
+2
+\end{array} \right]^T
+=
+12\)</span> ，
+<span class="math notranslate nohighlight">\(\left[ \begin{array}{cc} 1 &amp; 3 \end{array} \right]
+\cdot
+\left[ \begin{array}{c}
+1 \\
+2
+\end{array} \right]^T
+=
+7\)</span></p>
+</li>
+</ul>
+</div></blockquote>
+<p>教授建议使用第一种方法，
+将 <span class="math notranslate nohighlight">\(\boldsymbol{A} \boldsymbol{x}\)</span> 看做对 <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> 中列向量的线性组合。</p>
+</div>
+<div class="section" id="id2">
+<h2>第 02 集 矩阵消元<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<div class="section" id="elimination">
+<h3>2.1 消元法(Elimination)<a class="headerlink" href="#elimination" title="永久链接至标题">¶</a></h3>
+<p>消元法，这个方法最早由高斯提出，也叫高斯消元法：是为了解线性方程组的。</p>
+<p>应用消元法求解的时候，通常会应用以下三种变换，并且每一种变换都不会改变方程组的解：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>交换方程组中任意两个方程的位置；</p></li>
+<li><p>用一个数乘某一个方程的左右两边；</p></li>
+<li><p>将一个方程的两边乘一个数然后加到另一个方程上。</p></li>
+</ul>
+</div></blockquote>
+<p>求解三元方程组
+<span class="math notranslate nohighlight">\(\left\{ \begin{eqnarray*}
+x &amp; + &amp; 2y &amp; + &amp; z &amp; = &amp; 2 \\
+3x &amp; + &amp; 8y &amp; + &amp; z &amp; = &amp; 12 \\
+\mbox{ } &amp; \mbox{ } &amp; 4y &amp; + &amp; z &amp; = &amp; 2
+\end{eqnarray*} \right.\)</span> ，
+对应的矩阵形式
+<span class="math notranslate nohighlight">\(\boldsymbol{A} \boldsymbol{x} = \boldsymbol{b}\)</span>
+为
+<span class="math notranslate nohighlight">\(\left[ \begin{array}{ccc}
+1 &amp; 2 &amp; 1 \\
+3 &amp; 8 &amp; 1 \\
+0 &amp; 4 &amp; 1
+\end{array} \right]
+\left[ \begin{array}{c}
+x \\
+y \\
+z
+\end{array} \right]
+=
+\left[ \begin{array}{c}
+2 \\
+12 \\
+2
+\end{array} \right]\)</span> 。</p>
+<p>按照消元法的思路：</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p>我们希望在第二个方程中消去 <span class="math notranslate nohighlight">\(x\)</span> 项，操作系数矩阵
+<span class="math notranslate nohighlight">\(\boldsymbol{A}
+=
+\left[ \begin{array}{ccc}
+\underline{1} &amp; 2 &amp; 1 \\
+3 &amp; 8 &amp; 1 \\
+0 &amp; 4 &amp; 1
+\end{array} \right]\)</span> ，
+下划线的元素为主元（pivot）：</p>
+<p><span class="math notranslate nohighlight">\(\left[ \begin{array}{ccc}
+\underline{1} &amp; 2 &amp; 1 \\
+3 &amp; 8 &amp; 1 \\
+0 &amp; 4 &amp; 1
+\end{array} \right]
+\xrightarrow{row_2 - 3row_1}
+\left[ \begin{array}{ccc}
+\underline{1} &amp; 2 &amp; 1 \\
+0 &amp; 2 &amp; -2 \\
+0 &amp; 4 &amp; 1
+\end{array} \right]\)</span></p>
+<p>这里我们先不管 <span class="math notranslate nohighlight">\(\boldsymbol{b}\)</span> 向量，
+等做完 <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> 的消元可以再做 <span class="math notranslate nohighlight">\(\boldsymbol{b}\)</span> 的消元。
+（这是MATLAB等工具经常使用的算法。）</p>
+</li>
+<li><p>我们希望在第三个方程中消去 <span class="math notranslate nohighlight">\(y\)</span> 项，
+现在第二行第一个非零元素成为了第二个主元：</p>
+<p><span class="math notranslate nohighlight">\(\left[ \begin{array}{ccc}
+\underline{1} &amp; 2 &amp; 1 \\
+0 &amp; \underline{2} &amp; -2 \\
+0 &amp; 4 &amp; 1
+\end{array} \right]
+\xrightarrow{row_3 - 2row_2}
+\left[ \begin{array}{ccc}
+\underline{1} &amp; 2 &amp; 1 \\
+0 &amp; \underline{2} &amp; -2 \\
+0 &amp; 0 &amp; \underline{5}
+\end{array} \right]\)</span></p>
+<p>注意到第三行消元过后仅剩一个非零元素，所以它就成为第三个主元。
+做到这里就算消元完成了。</p>
+<p>再来讨论一下消元失效的情形：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>首先，主元不能为零；</p></li>
+<li><p>其次，如果在消元时遇到主元位置为零，则需要交换行，使主元不为零；</p></li>
+<li><p>最后提一下，如果我们把第三个方程 <span class="math notranslate nohighlight">\(z\)</span> 前的系数成 <span class="math notranslate nohighlight">\(-4\)</span> ，
+会导致第二步消元时最后一行全部为零，则第三个主元就不存在了，
+至此消元不能继续进行了，这就是下一讲中涉及的 <strong>不可逆</strong> 情况。</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>接下来就该回代（back substitution）了，
+这时我们在 <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> 矩阵后面加上 <span class="math notranslate nohighlight">\(\boldsymbol{b}\)</span> 向量
+写成 <strong>增广矩阵（augmented matrix）</strong> 的形式（后文中简写为 RREF）：</p>
+<p><span class="math notranslate nohighlight">\([ \begin{array}{c|c} \boldsymbol{A} &amp; \boldsymbol{b} \end{array} ]
+=
+\left[ \begin{array}{ccc|c}
+1 &amp; 2 &amp; 1 &amp; 2 \\
+3 &amp; 8 &amp; 1 &amp; 12 \\
+0 &amp; 4 &amp; 1 &amp; 2
+\end{array} \right]
+\rightarrow
+\left[ \begin{array}{ccc|c}
+1 &amp; 2 &amp; 1 &amp; 2 \\
+0 &amp; 2 &amp; -2 &amp; 6 \\
+0 &amp; 4 &amp; 1 &amp; 2
+\end{array} \right]
+\rightarrow
+\left[ \begin{array}{ccc|c}
+1 &amp; 2 &amp; 1 &amp; 2 \\
+0 &amp; 2 &amp; -2 &amp; 6 \\
+0 &amp; 0 &amp; 5 &amp; -10
+\end{array} \right]\)</span></p>
+<p>不难看出，<span class="math notranslate nohighlight">\(z\)</span> 的解已经出现了，此时方程组变为
+<span class="math notranslate nohighlight">\(\left\{ \begin{eqnarray*}
+x &amp; + &amp; 2y &amp; + &amp; z &amp; = &amp; 2 \\
+\mbox{ } &amp; \mbox{ } &amp; 2y &amp; - &amp; 2z &amp; = &amp; 6 \\
+\mbox{ } &amp; \mbox{ } &amp; \mbox{ } &amp; \mbox{ } &amp; 5z &amp; = &amp; -10
+\end{eqnarray*} \right.\)</span> ，
+从第三个方程求出 <span class="math notranslate nohighlight">\(z = -2\)</span> ，
+代入第二个方程求出 <span class="math notranslate nohighlight">\(y = 1\)</span>，
+再代入第一个方程求出 <span class="math notranslate nohighlight">\(x = 2\)</span>。</p>
+</li>
+</ol>
+</div></blockquote>
+</div>
+<div class="section" id="id3">
+<h3>2.2 消元矩阵<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h3>
+<p>上一讲我们学习了矩阵乘以向量的方法，有三个列向量的矩阵乘以另一个向量，
+按列的线性组合可以写作
+<span class="math notranslate nohighlight">\(\left[ \begin{array}{ccc} v_1 &amp; v_2 &amp; v_3 \end{array} \right]
+\left[ \begin{array}{c} 3 \\ 4 \\ 5 \end{array} \right]
+= 3v_1 + 4v_2 + 5v_3\)</span> 。</p>
+<p>但现在我们希望用矩阵乘法表示行操作，则有
+<span class="math notranslate nohighlight">\(\left[ \begin{array}{ccc} 1 &amp; 2 &amp; 7 \end{array} \right]
+\left[ \begin{array}{c} row_1 \\ row_2 \\ row_3 \end{array} \right]
+= 1row_1 + 2row_2 + 7row_3\)</span> 。
+易看出这里是一个行向量从左边乘以矩阵，这个行向量按行操作矩阵的行向量，
+并将其合成为一个矩阵行向量的线性组合。</p>
+<p>介绍到这里，我们就可以将消元法所做的行操作写成向量乘以矩阵的形式了：</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p>消元法第一步操作为将第二行改成 <span class="math notranslate nohighlight">\(row_2 - 3row_1\)</span> ，其余两行不变，则有
+<span class="math notranslate nohighlight">\(\left[ \begin{array}{ccc}
+1 &amp; 0 &amp; 0 \\
+-3 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 1
+\end{array} \right]
+\left[ \begin{array}{ccc}
+1 &amp; 2 &amp; 1 \\
+3 &amp; 8 &amp; 1 \\
+0 &amp; 4 &amp; 1
+\end{array} \right]
+=
+\left[ \begin{array}{ccc}
+1 &amp; 2 &amp; 1 \\
+0 &amp; 2 &amp; -2 \\
+0 &amp; 4 &amp; 1
+\end{array} \right]\)</span> 。</p>
+<p>这个消元矩阵将第二行第一个元素变为零，我们将其记作 <span class="math notranslate nohighlight">\(\boldsymbol{E}_{21}\)</span> 。</p>
+<p>另外，如果三行都不变，消元矩阵就是 <strong>单位矩阵</strong>
+<span class="math notranslate nohighlight">\(\boldsymbol{I}
+=
+\left[ \begin{array}{ccc}
+1 &amp; 0 &amp; 0 \\
+0 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 1
+\end{array} \right]\)</span> ，
+<span class="math notranslate nohighlight">\(\boldsymbol{I}\)</span> 之于矩阵运算相当于 <span class="math notranslate nohighlight">\(1\)</span> 之于四则运算。</p>
+</li>
+<li><p>接下来就是求 <span class="math notranslate nohighlight">\(\boldsymbol{E}_{32}\)</span> 消元矩阵了，即将第三行第二个元素变为零，则
+<span class="math notranslate nohighlight">\(\left[ \begin{array}{ccc}
+1 &amp; 0 &amp; 0 \\
+0 &amp; 1 &amp; 0 \\
+0 &amp; -2 &amp; 1
+\end{array} \right]
+\left[ \begin{array}{ccc}
+1 &amp; 2 &amp; 1 \\
+0 &amp; 2 &amp; -2 \\
+0 &amp; 4 &amp; 1
+\end{array} \right]
+=
+\left[ \begin{array}{ccc}
+1 &amp; 2 &amp; 1 \\
+0 &amp; 2 &amp; -2 \\
+0 &amp; 0 &amp; 5
+\end{array} \right]\)</span> 。</p>
+<p>这就是消元所用的两个 <strong>初等矩阵（elementary matrix）</strong> 。</p>
+</li>
+<li><p>最后，我们将这两步综合起来，即
+<span class="math notranslate nohighlight">\(\boldsymbol{E}_{32}(\boldsymbol{E}_{21} \boldsymbol{A}) = \boldsymbol{U}\)</span> ，
+也就是说如果我们想从 <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> 矩阵
+直接得到 <span class="math notranslate nohighlight">\(\boldsymbol{U}\)</span> 矩阵的话，只需要
+<span class="math notranslate nohighlight">\(\boldsymbol{E}_{32}(\boldsymbol{E}_{21} \boldsymbol{A})\)</span> 即可。</p>
+<div class="admonition hint">
+<p class="admonition-title">提示</p>
+<p>矩阵乘法虽然不能随意变动相乘次序，但是可以变动括号位置，
+也就是满足结合律（associative law ，而结合律在矩阵运算中非常重要，
+很多定理的证明都需要巧妙的使用结合律。</p>
+</div>
+</li>
+</ol>
+</div></blockquote>
+<p>既然提到了消元用的初等矩阵，那我们再介绍常用的 <strong>置换矩阵（permutation matrix）</strong> ：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\left[ \begin{array}{cc}
+0 &amp; 1 \\
+1 &amp; 0
+\end{array} \right]
+\left[ \begin{array}{cc}
+a &amp; b \\
+c &amp; d
+\end{array} \right]
+=
+\left[ \begin{array}{cc}
+c &amp; d \\
+a &amp; b
+\end{array} \right]\)</span> ，置换矩阵将原矩阵的两行做了互换。</p></li>
+<li><p><span class="math notranslate nohighlight">\(\left[ \begin{array}{cc}
+a &amp; b \\
+c &amp; d
+\end{array} \right]
+\left[ \begin{array}{cc}
+0 &amp; 1 \\
+1 &amp; 0
+\end{array} \right]
+=
+\left[ \begin{array}{cc}
+c &amp; d \\
+a &amp; b
+\end{array} \right]\)</span> ，置换矩阵将原矩阵的两列做了互换。</p></li>
+</ul>
+</div></blockquote>
+<p>我们现在能够将 <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> 通过行变换写成 <span class="math notranslate nohighlight">\(\boldsymbol{U}\)</span> ，
+那么如何从 <span class="math notranslate nohighlight">\(\boldsymbol{U}\)</span> 再变回 <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> ，也就是求消元的逆运算。
+对某些“坏”矩阵，并没有 <strong>逆</strong> ，而本讲的例子都是“好”矩阵。</p>
+</div>
+<div class="section" id="id4">
+<h3>2.3 逆<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h3>
+<p>现在，我们以 <span class="math notranslate nohighlight">\(\boldsymbol{E}_{21}\)</span> 为例，什么矩阵可以撤销这次的行变换，即
+<span class="math notranslate nohighlight">\([?]
+\left[ \begin{array}{ccc}
+1 &amp; 0 &amp; 0 \\
+-3 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 1
+\end{array} \right]
+=
+\left[ \begin{array}{ccc}
+1 &amp; 0 &amp; 0 \\
+0 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 1
+\end{array} \right]\)</span> ？
+这次变换是从第二行中减去三倍的第一行，那么其逆变换就是给第二行加上三倍的第一行，
+所以逆矩阵就是
+<span class="math notranslate nohighlight">\(\left[ \begin{array}{ccc}
+1 &amp; 0 &amp; 0 \\
+3 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 1
+\end{array} \right]\)</span> 。</p>
+<p>我们把矩阵 <span class="math notranslate nohighlight">\(\boldsymbol{E}\)</span> 的逆记作 <span class="math notranslate nohighlight">\(\boldsymbol{E}^{-1}\)</span> ，所以有
+<span class="math notranslate nohighlight">\(\boldsymbol{E}^{-1} \boldsymbol{E} = \boldsymbol{I}\)</span>。</p>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>第 03 集 乘法和逆矩阵<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
+<p>上一讲大概介绍了矩阵乘法和逆矩阵，本讲就来做进一步说明。</p>
+<div class="section" id="id6">
+<h3>3.1 矩阵乘法<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h3>
+<ul>
+<li><p>行列内积</p>
+<p>有
+<span class="math notranslate nohighlight">\(m \times n\)</span> 矩阵 <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span>
+和
+<span class="math notranslate nohighlight">\(n \times p\)</span> 矩阵 <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span>
+（ <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> 的总行数必须与 <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> 的总列数相等），
+两矩阵相乘有
+<span class="math notranslate nohighlight">\(\boldsymbol{A} \boldsymbol{B} = \boldsymbol{C}\)</span> ，
+<span class="math notranslate nohighlight">\(\boldsymbol{C}\)</span> 是一个 <span class="math notranslate nohighlight">\(m \times p\)</span> 矩阵，
+对于 <span class="math notranslate nohighlight">\(\boldsymbol{C}\)</span> 矩阵中的第 <span class="math notranslate nohighlight">\(i\)</span> 行第 <span class="math notranslate nohighlight">\(j\)</span> 列元素
+<span class="math notranslate nohighlight">\(c_{ij}\)</span> ，有：</p>
+<div class="math notranslate nohighlight">
+\[c_{ij} = row_i \cdot column_j = \sum_{k=1}^{n} a_{ik}b_{kj}\]</div>
+<p>其中
+<span class="math notranslate nohighlight">\(a_{ik}\)</span> 是 <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> 矩阵的第 <span class="math notranslate nohighlight">\(i\)</span> 行第 <span class="math notranslate nohighlight">\(k\)</span> 列元素，
+<span class="math notranslate nohighlight">\(b_{kj}\)</span> 是 <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span> 矩阵的第 <span class="math notranslate nohighlight">\(k\)</span> 行第 <span class="math notranslate nohighlight">\(j\)</span> 列元素。</p>
+<p>可以看出
+<span class="math notranslate nohighlight">\(c_{ij}\)</span> 其实是
+<span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> 矩阵第 <span class="math notranslate nohighlight">\(i\)</span> 行点乘
+<span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> 矩阵第 <span class="math notranslate nohighlight">\(j\)</span> 列
+<span class="math notranslate nohighlight">\(\left[ \begin{array}{c}
+\vdots \\
+row_i \\
+\vdots
+\end{array} \right]
+\left[ \begin{array}{ccc}
+\cdots &amp; column_j &amp; \cdots
+\end{array} \right]
+=
+\left[ \begin{array}{ccc}
+\mbox{ } &amp; \vdots &amp; \mbox{ } \\
+\cdots &amp; c_{ij} &amp; \cdots \\
+\mbox{ } &amp; \vdots &amp; \mbox{ }
+\end{array} \right]\)</span> 。</p>
+</li>
+<li><p>整列相乘</p>
+<p>上一讲我们知道了如何计算矩阵乘以向量，而整列相乘就是使用这种线性组合的思想：</p>
+<p><span class="math notranslate nohighlight">\(\left[ \begin{array}{cccc}
+\boldsymbol{A}_{col1} &amp; \boldsymbol{A}_{col2} &amp; \cdots &amp; \boldsymbol{A}_{coln}
+\end{array} \right]
+\left[ \begin{array}{ccc}
+\cdots &amp; b_{1j} &amp; \cdots \\
+\cdots &amp; b_{2j} &amp; \cdots \\
+\cdots &amp; \vdots &amp; \cdots \\
+\cdots &amp; b_{nj} &amp; \cdots
+\end{array} \right]\)</span></p>
+<p><span class="math notranslate nohighlight">\(=
+\left[ \begin{array}{ccc}
+\cdots &amp; (b_{1j}\boldsymbol{A}_{col1} + b_{2j}\boldsymbol{A}_{col2} + \cdots + b_{nj}\boldsymbol{A}_{coln}) &amp; \cdots
+\end{array} \right]\)</span></p>
+<p>上面的运算为
+<span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span> 矩阵的第 <span class="math notranslate nohighlight">\(j\)</span> 个列向量右乘矩阵 <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> ，
+求得的结果就是 <span class="math notranslate nohighlight">\(\boldsymbol{C}\)</span> 矩阵的第 <span class="math notranslate nohighlight">\(j\)</span> 列，
+即 <span class="math notranslate nohighlight">\(\boldsymbol{C}\)</span> 矩阵的第 <span class="math notranslate nohighlight">\(j\)</span> 列是
+<span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> 矩阵的列向量以 <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span> 矩阵的第 <span class="math notranslate nohighlight">\(j\)</span> 列
+作为系数所求得的线性组合：
+<span class="math notranslate nohighlight">\(\boldsymbol{C}_{colj}
+=
+b_{1j}\boldsymbol{A}_{col1} + b_{2j}\boldsymbol{A}_{col2} + \cdots + b_{nj}\boldsymbol{A}_{coln}\)</span> 。</p>
+</li>
+<li><p>整行相乘</p>
+<p>类似的，也可以利用行向量线性组合的思想：</p>
+<p><span class="math notranslate nohighlight">\(\left[ \begin{array}{cccc}
+\vdots &amp; \vdots &amp; \vdots &amp; \vdots \\
+a_{i1} &amp; a_{i2} &amp; \cdots &amp; a_{in} \\
+\vdots &amp; \vdots &amp; \vdots &amp; \vdots
+\end{array} \right]
+\left[ \begin{array}{c}
+\boldsymbol{B}_{row1} \\
+\boldsymbol{B}_{row2} \\
+\vdots \\
+\boldsymbol{B}_{rown}
+\end{array} \right]\)</span></p>
+<p><span class="math notranslate nohighlight">\(=
+\left[ \begin{array}{c}
+\vdots \\
+(a_{i1}\boldsymbol{B}_{row1} + a_{i2}\boldsymbol{B}_{row2} + \cdots + a_{in}\boldsymbol{B}_{rown}) \\
+\vdots
+\end{array} \right]\)</span></p>
+<p>上面的运算为
+<span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> 的第 <span class="math notranslate nohighlight">\(i\)</span> 个行向量左乘矩阵 <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span> ，
+求得的结果就是 <span class="math notranslate nohighlight">\(\boldsymbol{C}\)</span> 矩阵的第 <span class="math notranslate nohighlight">\(i\)</span> 行，
+即 <span class="math notranslate nohighlight">\(\boldsymbol{C}\)</span> 矩阵的第 <span class="math notranslate nohighlight">\(i\)</span> 行是
+<span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span> 矩阵的行向量以 <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> 矩阵的第 <span class="math notranslate nohighlight">\(i\)</span> 行
+作为系数所求得的线性组合:
+<span class="math notranslate nohighlight">\(\boldsymbol{C}_{rowi}
+=
+a_{i1}\boldsymbol{B}_{row1} + a_{i2}\boldsymbol{B}_{row2} + \cdots + a_{in}\boldsymbol{B}_{rown}\)</span> 。</p>
+</li>
+<li><p>列乘以行</p>
+<p>用 <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> 矩阵的列乘以 <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span> 矩阵的行，
+得到的矩阵相加即可：</p>
+<p><span class="math notranslate nohighlight">\(\left[ \begin{array}{cccc}
+\boldsymbol{A}_{col1} &amp; \boldsymbol{A}_{col2} &amp; \cdots &amp; \boldsymbol{A}_{coln}
+\end{array} \right]
+\left[ \begin{array}{c}
+\boldsymbol{B}_{row1} \\
+\boldsymbol{B}_{row2} \\
+\vdots \\
+\boldsymbol{B}_{rown}
+\end{array} \right]\)</span></p>
+<p><span class="math notranslate nohighlight">\(=
+\boldsymbol{A}_{col1}\boldsymbol{B}_{row1} + \boldsymbol{A}_{col2}\boldsymbol{B}_{row2}
++ \cdots + \boldsymbol{A}_{coln}\boldsymbol{B}_{rown}\)</span> 。</p>
+<p>注意，
+<span class="math notranslate nohighlight">\(\boldsymbol{A}_{coli}\boldsymbol{B}_{rowi}\)</span> 是一个
+<span class="math notranslate nohighlight">\(m \times 1\)</span> 向量乘以一个 <span class="math notranslate nohighlight">\(1 \times p\)</span> 向量，
+其结果是一个 <span class="math notranslate nohighlight">\(m \times p\)</span> 矩阵，
+而所有的 <span class="math notranslate nohighlight">\(m \times p\)</span> 矩阵之和就是计算结果。</p>
+</li>
+<li><p>分块乘法</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\left[ \begin{array}{c|c}
+\boldsymbol{A}_1 &amp; \boldsymbol{A}_2 \\
+\hline
+\boldsymbol{A}_3 &amp; \boldsymbol{A}_4
+\end{array} \right]
+\left[ \begin{array}{c|c}
+\boldsymbol{B}_1 &amp; \boldsymbol{B}_2 \\
+\hline
+\boldsymbol{B}_3 &amp; \boldsymbol{B}_4
+\end{array} \right]
+=
+\left[ \begin{array}{c|c}
+\boldsymbol{A}_1 \boldsymbol{B}_1 + \boldsymbol{A}_2 \boldsymbol{B}_3 &amp; \boldsymbol{A}_1 \boldsymbol{B}_2 + \boldsymbol{A}_2 \boldsymbol{B}_4 \\
+\hline
+\boldsymbol{A}_3 \boldsymbol{B}_1 + \boldsymbol{A}_4 \boldsymbol{B}_3 &amp; \boldsymbol{A}_3 \boldsymbol{B}_2 + \boldsymbol{A}_4 \boldsymbol{B}_4
+\end{array} \right]\end{split}\]</div>
+<p>在分块合适的情况下，可以简化运算。</p>
+</li>
+</ul>
+</div>
+<div class="section" id="id7">
+<h3>3.2 矩阵的逆<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h3>
+<p>首先，并不是所有的 <strong>方阵</strong> 都有逆；而如果逆存在，则有
+<span class="math notranslate nohighlight">\(\boldsymbol{A}^{-1}\boldsymbol{A} = \boldsymbol{I} = \boldsymbol{A}\boldsymbol{A}^{-1}\)</span> 。</p>
+<div class="admonition hint">
+<p class="admonition-title">提示</p>
+<p>教授这里提前剧透，对于方阵，左逆和右逆是相等的；
+但是对于非方阵（长方形矩阵），其左逆不等于右逆。</p>
+</div>
+<p>对于这些有逆的矩阵，我们称其为 <strong>非奇异</strong> 的或 <strong>可逆</strong> 的。
+我们先来看看奇异（不可逆）矩阵：
+<span class="math notranslate nohighlight">\(\boldsymbol{A} = \left[ \begin{array}{cc}
+1 &amp; 2 \\
+3 &amp; 6
+\end{array} \right]\)</span>，
+在后面将要学习的行列式中，会发现这个矩阵的行列式为 <span class="math notranslate nohighlight">\(0\)</span> 。</p>
+<p>观察这个方阵，我们如果用另一个矩阵乘 <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> ，
+则得到的结果矩阵中的每一列应该都是
+<span class="math notranslate nohighlight">\(\left[ \begin{array}{c} 1 \\ 2 \end{array} \right]\)</span> 的倍数，
+所以我们不可能从
+<span class="math notranslate nohighlight">\(\boldsymbol{A}\boldsymbol{B}\)</span> 的乘积中得到单位矩阵 <span class="math notranslate nohighlight">\(\boldsymbol{I}\)</span> 。</p>
+<p>另一种判定方法，如果存在非零向量 <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span> 使得
+<span class="math notranslate nohighlight">\(\boldsymbol{A}\boldsymbol{x} = 0\)</span> ，
+则矩阵 <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> 不可逆。我们来用上面的矩阵为例：
+<span class="math notranslate nohighlight">\(\left[ \begin{array}{cc}
+1 &amp; 2 \\
+3 &amp; 6
+\end{array} \right]
+\left[ \begin{array}{c} 3 \\ -1 \end{array} \right]
+=
+\left[ \begin{array}{c} 0 \\ 0 \end{array} \right]\)</span></p>
+<p>证明：如果对于非零向量的 <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span> 仍有
+<span class="math notranslate nohighlight">\(\boldsymbol{A}\boldsymbol{x} = 0\)</span> ，
+且 <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> 有逆 <span class="math notranslate nohighlight">\(\boldsymbol{A}^{-1}\)</span> ，
+则 <span class="math notranslate nohighlight">\(\boldsymbol{A}^{-1}\boldsymbol{A}\boldsymbol{x} = 0\)</span> ，
+即 <span class="math notranslate nohighlight">\(\boldsymbol{x} = 0\)</span> ，与题设矛盾，得证。</p>
+<p>现在来看看什么矩阵有逆，设
+<span class="math notranslate nohighlight">\(\boldsymbol{A}
+=
+\left[ \begin{array}{cc}
+1 &amp; 3 \\
+2 &amp; 7
+\end{array} \right]\)</span> ，
+我们来求 <span class="math notranslate nohighlight">\(\boldsymbol{A}^{-1}\)</span> 。
+<span class="math notranslate nohighlight">\(\left[ \begin{array}{cc}
+1 &amp; 3 \\
+2 &amp; 7
+\end{array} \right]
+\left[ \begin{array}{cc}
+a &amp; b \\
+c &amp; d
+\end{array} \right]
+=
+\left[ \begin{array}{cc}
+1 &amp; 0 \\
+0 &amp; 1
+\end{array} \right]\)</span> ，
+使用列向量线性组合的思想，我们可以说
+<span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> 乘以 <span class="math notranslate nohighlight">\(\boldsymbol{A}^{-1}\)</span> 的第 <span class="math notranslate nohighlight">\(j\)</span> 列，
+能够得到 <span class="math notranslate nohighlight">\(\boldsymbol{I}\)</span> 的第 <span class="math notranslate nohighlight">\(j\)</span> 列，这时我会得到一个关于列的方程组：</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\left\{ \begin{eqnarray*}
+\left[\begin{array}{cc} 1 &amp; 3 \\ 2 &amp; 7 \end{array}\right] \left[\begin{array}{c} a \\ c \end{array}\right] &amp; = &amp; \left[\begin{array}{c} 1 \\ 0 \end{array}\right] \\
+\left[\begin{array}{cc} 1 &amp; 3 \\ 2 &amp; 7 \end{array}\right] \left[\begin{array}{c} b \\ d \end{array}\right] &amp; = &amp; \left[\begin{array}{c} 0 \\ 1 \end{array}\right]
+\end{eqnarray*} \right.\end{split}\]</div>
+</div>
+<div class="section" id="gauss-jordan">
+<h3>3.3 Gauss-Jordan 法求矩阵的逆<a class="headerlink" href="#gauss-jordan" title="永久链接至标题">¶</a></h3>
+<p>接下来介绍高斯-若尔当（Gauss-Jordan）方法，该方法可以一次处理所有的方程：</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>构造这样一个矩阵
+<span class="math notranslate nohighlight">\(\left[\begin{array}{cc|cc}
+1 &amp; 3 &amp; 1 &amp; 0 \\
+2 &amp; 7 &amp; 0 &amp; 1
+\end{array}\right]\)</span> ，
+接下来用消元法将左侧变为单位矩阵；</p></li>
+<li><p><span class="math notranslate nohighlight">\(\left[\begin{array}{cc|cc}
+1 &amp; 3 &amp; 1 &amp; 0 \\
+2 &amp; 7 &amp; 0 &amp; 1
+\end{array}\right]
+\xrightarrow{row_2 - 2row_1}
+\left[\begin{array}{cc|cc}
+1 &amp; 3 &amp; 1 &amp; 0 \\
+0 &amp; 1 &amp; -2 &amp; 1
+\end{array}\right]
+\xrightarrow{row_1 - 3row_2}
+\left[\begin{array}{cc|cc}
+1 &amp; 0 &amp; 7 &amp; -3 \\
+0 &amp; 1 &amp; -2 &amp; 1
+\end{array}\right]\)</span> ；</p></li>
+<li><p>于是，我们就将矩阵从
+<span class="math notranslate nohighlight">\([ \begin{array}{c|c} \boldsymbol{A} &amp; \boldsymbol{I} \end{array}]\)</span> 变为
+<span class="math notranslate nohighlight">\([ \begin{array}{c|c} \boldsymbol{I} &amp; \boldsymbol{A}^{-1} \end{array}]\)</span> 。</p></li>
+</ol>
+</div></blockquote>
+<p>高斯-若尔当法的本质是使用消元矩阵 <span class="math notranslate nohighlight">\(\boldsymbol{E}\)</span> ，
+对 <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> 进行操作，
+<span class="math notranslate nohighlight">\(\boldsymbol{E} [ \begin{array}{c|c} \boldsymbol{A} &amp; \boldsymbol{I} \end{array} ]\)</span> ，
+利用一步步消元有
+<span class="math notranslate nohighlight">\(\boldsymbol{E}\boldsymbol{A}=\boldsymbol{I}\)</span> ，
+进而得到
+<span class="math notranslate nohighlight">\([ \begin{array}{c|c} \boldsymbol{I} &amp; \boldsymbol{E} \end{array} ]\)</span> ，
+其实这个消元矩阵 <span class="math notranslate nohighlight">\(\boldsymbol{E}\)</span> 就是 <span class="math notranslate nohighlight">\(\boldsymbol{A}^{-1}\)</span> ，
+而高斯-若尔当法中的 <span class="math notranslate nohighlight">\(\boldsymbol{I}\)</span> 只是负责记录消元的每一步操作，
+待消元完成，逆矩阵就自然出现了。</p>
+</div>
+</div>
+<div class="section" id="boldsymbol-a-boldsymbol-l-boldsymbol-u">
+<h2>第 04 集 <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> 的 <span class="math notranslate nohighlight">\(\boldsymbol{L}\boldsymbol{U}\)</span> 分解<a class="headerlink" href="#boldsymbol-a-boldsymbol-l-boldsymbol-u" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id8">
+<h3>4.1 关于转置和取逆的一些性质<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h3>
+<ul>
+<li><p><span class="math notranslate nohighlight">\((\boldsymbol{A}\boldsymbol{B})^T = \boldsymbol{B}^T\boldsymbol{A}^T\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\((\boldsymbol{A}\boldsymbol{B})^{-1} = \boldsymbol{B}^{-1}\boldsymbol{A}^{-1}\)</span></p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\boldsymbol{A}\boldsymbol{A}^{-1} = \boldsymbol{I} = \boldsymbol{A}^{-1}\boldsymbol{A}\\\Rightarrow \boldsymbol{A}(\boldsymbol{B}\boldsymbol{B}^{-1})\boldsymbol{A}^{-1} = \boldsymbol{I}\\\Rightarrow (\boldsymbol{A}\boldsymbol{B})(\boldsymbol{B}^{-1}\boldsymbol{A}^{-1}) = \boldsymbol{I}\\\Rightarrow (\boldsymbol{A}\boldsymbol{B})^{-1} = \boldsymbol{B}^{-1}\boldsymbol{A}^{-1}\end{aligned}\end{align} \]</div>
+</li>
+<li><p><span class="math notranslate nohighlight">\((\boldsymbol{A}^T)^{-1} = (\boldsymbol{A}^{-1})^T\)</span></p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}(\boldsymbol{A} \boldsymbol{A}^{-1})^T = \boldsymbol{I}^T\\\Rightarrow (\boldsymbol{A}^{-1})^T \boldsymbol{A}^T = \boldsymbol{I}\\\Rightarrow (\boldsymbol{A}^T)^{-1} = (\boldsymbol{A}^{-1})^T\end{aligned}\end{align} \]</div>
+</li>
+</ul>
+</div>
+<div class="section" id="boldsymbol-l-boldsymbol-u">
+<h3>4.2 <span class="math notranslate nohighlight">\(\boldsymbol{L}\boldsymbol{U}\)</span> 分解<a class="headerlink" href="#boldsymbol-l-boldsymbol-u" title="永久链接至标题">¶</a></h3>
+<p>很多线性代数问题最后都可以归结为矩阵分解问题，
+<span class="math notranslate nohighlight">\(\boldsymbol{L}\boldsymbol{U}\)</span> 分解是最简单，最重要的一个。
+利用高斯消元，
+可以把一个矩阵 <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span>
+分解为一个上三角矩阵( <span class="math notranslate nohighlight">\(\boldsymbol{U}\)</span> )
+和一个下三角矩阵( <span class="math notranslate nohighlight">\(\boldsymbol{L}\)</span> )，即
+<span class="math notranslate nohighlight">\(\boldsymbol{A}=\boldsymbol{L}\boldsymbol{U}\)</span> ，简称
+<span class="math notranslate nohighlight">\(\boldsymbol{L}\boldsymbol{U}\)</span> 分解。</p>
+<p>举个列子，对于一个 <span class="math notranslate nohighlight">\(2 \times 2\)</span> 矩阵
+<span class="math notranslate nohighlight">\(\boldsymbol{A}=\left[\begin{array}{cc}2&amp;1\\8&amp;7\end{array}\right]\)</span> ：</p>
+<blockquote>
+<div><ul>
+<li><p>通过高斯消元可以得到一个上三角矩阵( <span class="math notranslate nohighlight">\(\boldsymbol{U}\)</span> )：</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{array}{ccc}
+\boldsymbol{A} &amp;  &amp; \boldsymbol{U} \\
+\left[\begin{array}{cc}2&amp;1\\8&amp;7\end{array}\right]
+&amp; \xrightarrow{\mbox{消元}} &amp;
+\left[\begin{array}{cc}2&amp;1\\0&amp;3\end{array}\right]
+\end{array}\end{split}\]</div>
+<p>使用消元矩阵表示为：</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{array}{cccc}
+\boldsymbol{E} &amp; \boldsymbol{A} &amp;  &amp; \boldsymbol{U} \\
+\left[\begin{array}{cc}1&amp;0\\-4&amp;1\end{array}\right]
+&amp;
+\left[\begin{array}{cc}2&amp;1\\8&amp;7\end{array}\right]
+&amp;
+=
+&amp;
+\left[\begin{array}{cc}2&amp;1\\0&amp;3\end{array}\right]
+\end{array}\end{split}\]</div>
+<p>即我们通过消元得到了
+<span class="math notranslate nohighlight">\(\boldsymbol{E}\boldsymbol{A}=\boldsymbol{U}\)</span> 。</p>
+</li>
+<li><p>要得到 <span class="math notranslate nohighlight">\(\boldsymbol{A}=\boldsymbol{L}\boldsymbol{U}\)</span> ，
+我们只需要在
+<span class="math notranslate nohighlight">\(\boldsymbol{E}\boldsymbol{A}=\boldsymbol{U}\)</span> 的基础上，
+将等式两边同时乘以 <span class="math notranslate nohighlight">\(\boldsymbol{E}^{-1}\)</span>
+（即 <span class="math notranslate nohighlight">\(\boldsymbol{E}^{-1}\)</span> 就是 <span class="math notranslate nohighlight">\(\boldsymbol{L}\)</span>）即可：</p>
+<p>我们使用前面提到的
+<a class="reference internal" href="#gauss-jordan"><span class="std std-ref">Gauss-Jordan</span></a>
+来计算矩阵 <span class="math notranslate nohighlight">\(\boldsymbol{E}\)</span> 的逆为
+<span class="math notranslate nohighlight">\(\boldsymbol{E}^{-1}
+=\left[\begin{array}{cc}1&amp;0\\4&amp;1\end{array}\right]\)</span> ，
+我们可以得到：</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{array}{cccc}
+\boldsymbol{A}  &amp; &amp; \boldsymbol{L} &amp; \boldsymbol{U} \\
+\left[\begin{array}{cc}2&amp;1\\8&amp;7\end{array}\right]
+&amp;
+=
+&amp;
+\left[\begin{array}{cc}1&amp;0\\4&amp;1\end{array}\right]
+&amp;
+\left[\begin{array}{cc}2&amp;1\\0&amp;3\end{array}\right]
+\end{array}\end{split}\]</div>
+<p>这样就完成了一次 <span class="math notranslate nohighlight">\(\boldsymbol{L}\boldsymbol{U}\)</span> 分解：
+<span class="math notranslate nohighlight">\(\boldsymbol{U}\)</span> 是上三角矩阵，主对角线是主元，
+<span class="math notranslate nohighlight">\(\boldsymbol{L}\)</span> 是下三角矩阵，主对角线上都是1。
+有时候我们需要把主元单独拉出来组成一个对角矩阵，变成这样：</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{array}{ccccc}
+\boldsymbol{A} &amp; \mbox{ } &amp; \boldsymbol{L} &amp; \boldsymbol{D} &amp; \boldsymbol{U}^\prime \\
+\left[\begin{array}{cc} 2 &amp; 1 \\ 8 &amp; 7 \end{array}\right]
+&amp; = &amp;
+\left[\begin{array}{cc} 1 &amp; 0 \\ 4 &amp; 1 \end{array}\right]
+&amp;
+\left[\begin{array}{cc} 2 &amp; 0 \\ 0 &amp; 3 \end{array}\right]
+&amp;
+\left[\begin{array}{cc} 1 &amp; \frac{1}{2} \\ 0 &amp; 1 \end{array}\right]
+\end{array}\end{split}\]</div>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="id9">
+<h3>4.3 <span class="math notranslate nohighlight">\(\boldsymbol{L}\boldsymbol{U}\)</span> 分解计算量估计<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h3>
+<p>将一个 <span class="math notranslate nohighlight">\(n\)</span> 阶方阵 <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> 变换为
+<span class="math notranslate nohighlight">\(\boldsymbol{L}\boldsymbol{U}\)</span> 需要的计算量估计：</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p>将 <span class="math notranslate nohighlight">\(a_{11}\)</span> 作为主元，需要的运算量约为 <span class="math notranslate nohighlight">\(n^2\)</span> ：</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\left[ \begin{array}{cccc}
+a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n} \\
+a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2n} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+a_{n1} &amp; a_{n2} &amp; \cdots &amp; a_{nn}
+\end{array} \right]
+\xrightarrow{\mbox{消元}}
+\left[ \begin{array}{cccc}
+a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n} \\
+0 &amp; a_{22} &amp; \cdots &amp; a_{2n} \\
+0 &amp; \vdots &amp; \ddots &amp; \vdots \\
+0 &amp; a_{n2} &amp; \cdots &amp; a_{nn}
+\end{array} \right]\end{split}\]</div>
+</li>
+<li><p>以此类推，接下来每一步计算量约为
+<span class="math notranslate nohighlight">\((n-1)^2\)</span> 、
+<span class="math notranslate nohighlight">\((n-1)^2\)</span> 、
+<span class="math notranslate nohighlight">\(\cdots\)</span> 、
+<span class="math notranslate nohighlight">\(2^2\)</span> 、
+<span class="math notranslate nohighlight">\(1^2\)</span> ；</p></li>
+<li><p>则将 <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> 变换为 <span class="math notranslate nohighlight">\(\boldsymbol{L}\boldsymbol{U}\)</span> 的总运算量应为
+<span class="math notranslate nohighlight">\(O(n^2+(n-1)^2+\cdots+2^2+1^2)\)</span> ，即 <span class="math notranslate nohighlight">\(O(\frac{n^{3}}{3})\)</span> 。</p></li>
+</ol>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="mathbb-r">
+<h2>第 05 集 置换-转置-向量空间 <span class="math notranslate nohighlight">\(\mathbb{R}\)</span><a class="headerlink" href="#mathbb-r" title="永久链接至标题">¶</a></h2>
+<div class="section" id="permutation-matrix">
+<h3>5.1 置换矩阵（Permutation Matrix）<a class="headerlink" href="#permutation-matrix" title="永久链接至标题">¶</a></h3>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(\boldsymbol{P}\)</span> 为置换矩阵，则对任意可逆矩阵 <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> 有：
+<span class="math notranslate nohighlight">\(\boldsymbol{P}\boldsymbol{A} = \boldsymbol{L}\boldsymbol{U}\)</span>
+（上一节说的
+<span class="math notranslate nohighlight">\(\boldsymbol{A} = \boldsymbol{L}\boldsymbol{U}\)</span>
+实际上并不完整，没有考虑行交换的情况）。</p></li>
+<li><p><span class="math notranslate nohighlight">\(\boldsymbol{P}\)</span> 为置换矩阵，则
+<span class="math notranslate nohighlight">\(\boldsymbol{P}\)</span> 是 <strong>正交矩阵</strong> ，即有
+<span class="math notranslate nohighlight">\(\boldsymbol{P}^T \boldsymbol{P} = \boldsymbol{I}\)</span> ，
+<span class="math notranslate nohighlight">\(\boldsymbol{P}^T = \boldsymbol{P}^{-1}\)</span> 。</p></li>
+<li><p><span class="math notranslate nohighlight">\(n\)</span> 阶方阵的置换矩阵有
+<span class="math notranslate nohighlight">\(\left( \begin{array}{c} n \\ 1\end{array}\right) = n!\)</span> 个。</p>
+<p>3阶方阵的置换矩阵有6个：</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\left[\begin{array}{ccc}
+1 &amp; 0 &amp; 0 \\
+0 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 1
+\end{array}\right]
+\left[\begin{array}{ccc}
+0 &amp; 1 &amp; 0 \\
+1 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 1
+\end{array}\right]
+\left[\begin{array}{ccc}
+0 &amp; 0 &amp; 1 \\
+0 &amp; 1 &amp; 0 \\
+1 &amp; 0 &amp; 0
+\end{array}\right]
+\left[\begin{array}{ccc}
+1 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 1 \\
+0 &amp; 1 &amp; 0
+\end{array}\right]
+\left[\begin{array}{ccc}
+0 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 1 \\
+1 &amp; 0 &amp; 0
+\end{array}\right]
+\left[\begin{array}{ccc}
+0 &amp; 0 &amp; 1 \\
+1 &amp; 0 &amp; 0 \\
+0 &amp; 1 &amp; 0
+\end{array}\right]\end{split}\]</div>
+</li>
+</ul>
+</div>
+<div class="section" id="transpose-matrix">
+<h3>5.2 转置矩阵（Transpose Matrix）<a class="headerlink" href="#transpose-matrix" title="永久链接至标题">¶</a></h3>
+<p><span class="math notranslate nohighlight">\((\boldsymbol{A}^T)_{ij} = (\boldsymbol{A})_{ji}\)</span></p>
+</div>
+<div class="section" id="symmetric-matrix">
+<h3>5.3 对称矩阵（Symmetric Matrix）<a class="headerlink" href="#symmetric-matrix" title="永久链接至标题">¶</a></h3>
+<p><span class="math notranslate nohighlight">\(\boldsymbol{A}^T = \boldsymbol{A}\)</span></p>
+<p>对任意矩阵 <span class="math notranslate nohighlight">\(\boldsymbol{R}\)</span> 有
+<span class="math notranslate nohighlight">\(\boldsymbol{R}^T \boldsymbol{R}\)</span> 为对称矩阵：</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[(\boldsymbol{R}^T \boldsymbol{R})^T
+=
+(\boldsymbol{R})^T (\boldsymbol{R}^T)^T
+=
+\boldsymbol{R}^T \boldsymbol{R}\]</div>
+</div></blockquote>
+</div>
+<div class="section" id="vector-space-subspaces">
+<h3>5.4 向量空间（Vector Space）和子空间（Subspaces）<a class="headerlink" href="#vector-space-subspaces" title="永久链接至标题">¶</a></h3>
+<p>向量空间（又称为线性空间）要满足加法封闭和数乘封闭。
+即向量空间中任意向量的数乘、求和运算得到的向量也在该空间中。</p>
+<p>所有向量空间都必须包含零向量。</p>
+<p>设 <span class="math notranslate nohighlight">\(\boldsymbol{W}\)</span> 是线性空间 <span class="math notranslate nohighlight">\(\boldsymbol{V}\)</span> 的非空子集，
+则 <span class="math notranslate nohighlight">\(\boldsymbol{W}\)</span> 是 <span class="math notranslate nohighlight">\(\boldsymbol{V}\)</span> 的 <strong>子空间</strong> 的充要条件是：</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>若 <span class="math notranslate nohighlight">\(\alpha,\beta \in \boldsymbol{W}\)</span> ，则
+<span class="math notranslate nohighlight">\(\alpha + \beta \in \boldsymbol{W}\)</span> ；</p></li>
+<li><p>若 <span class="math notranslate nohighlight">\(\alpha \in \boldsymbol{W} , k \in \boldsymbol{R}\)</span> ，则
+<span class="math notranslate nohighlight">\(k\alpha \in \boldsymbol{W}\)</span> 。</p></li>
+</ol>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="id10">
+<h2>第 06 集 列空间和零空间<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h2>
+<ul>
+<li><p>对向量子空间 <span class="math notranslate nohighlight">\(\boldsymbol{S}\)</span> 和 <span class="math notranslate nohighlight">\(\boldsymbol{T}\)</span> ，
+有 <span class="math notranslate nohighlight">\(\boldsymbol{S} \bigcap \boldsymbol{S}\)</span> 也是向量子空间。</p></li>
+<li><p>对 <span class="math notranslate nohighlight">\(m \times n\)</span> 矩阵 <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> ，
+<span class="math notranslate nohighlight">\(n \times 1\)</span> 矩阵 <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span> ，
+<span class="math notranslate nohighlight">\(m \times 1\)</span> 矩阵 <span class="math notranslate nohighlight">\(\boldsymbol{b}\)</span> ，
+运算 <span class="math notranslate nohighlight">\(\boldsymbol{A} \boldsymbol{x} = \boldsymbol{b}\)</span> ：</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\left[ \begin{array}{ccccc}
+a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1(n-1)} &amp; a_{1n} \\
+a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2(n-1)} &amp; a_{2n} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots &amp; \vdots \\
+a_{m1} &amp; a_{m2} &amp; \cdots &amp; a_{m(n-1)} &amp; a_{mn}
+\end{array} \right]
+\cdot
+\left[ \begin{array}{c}
+x_1 \\
+x_2 \\
+\vdots \\
+x_{n-1} \\
+x_n
+\end{array} \right]
+=
+\left[ \begin{array}{c}
+b_1 \\
+b_2 \\
+\vdots \\
+b_m
+\end{array} \right]\end{split}\]</div>
+<ul class="simple">
+<li><p>由 <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> 的列向量生成的子空间为
+<span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> 的 <strong>列空间</strong> ，记作 <span class="math notranslate nohighlight">\(C(\boldsymbol{A})\)</span> ；</p></li>
+<li><p><span class="math notranslate nohighlight">\(\boldsymbol{A} \boldsymbol{x} = \boldsymbol{b}\)</span>
+有非零解当且仅当
+<span class="math notranslate nohighlight">\(\boldsymbol{b}\)</span> 属于
+<span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> 的列空间；</p></li>
+<li><p><span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> 的 <strong>零空间（nullspace matrix）</strong> 是
+<span class="math notranslate nohighlight">\(\boldsymbol{A} \boldsymbol{x} = 0\)</span> 中
+<span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span> 的解组成的集合，记作 <span class="math notranslate nohighlight">\(N(\boldsymbol{A})\)</span>。</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="boldsymbol-a-boldsymbol-x-0">
+<h2>第 07 集 求解 <span class="math notranslate nohighlight">\(\boldsymbol{A}\boldsymbol{x} = 0\)</span> : 主变量、特解<a class="headerlink" href="#boldsymbol-a-boldsymbol-x-0" title="永久链接至标题">¶</a></h2>
+<div class="admonition hint">
+<p class="admonition-title">提示</p>
+<p>消元不会改变 <span class="math notranslate nohighlight">\(\boldsymbol{A}\boldsymbol{x}=\boldsymbol{b}\)</span> 的解，
+所以不会改变零空间！但是消元会改变列空间！</p>
+</div>
+<p>举例：
+<span class="math notranslate nohighlight">\(3 \times 4\)</span> 矩阵
+<span class="math notranslate nohighlight">\(\boldsymbol{A}
+=
+\left[ \begin{array}{cccc}
+1 &amp; 2 &amp; 2 &amp; 2 \\
+2 &amp; 4 &amp; 6 &amp; 8 \\
+3 &amp; 6 &amp; 8 &amp; 10
+\end{array}\right]\)</span> ，
+求 <span class="math notranslate nohighlight">\(\boldsymbol{A} \boldsymbol{x} = 0\)</span> 的特解？</p>
+<ol class="arabic">
+<li><p>找出主变量（pivot variable）：</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\boldsymbol{A}
+=
+\left[ \begin{array}{cccc}
+1 &amp; 2 &amp; 2 &amp; 2 \\
+2 &amp; 4 &amp; 6 &amp; 8 \\
+3 &amp; 6 &amp; 8 &amp; 10
+\end{array}\right]
+\xrightarrow{\mbox{消元}}
+\left[ \begin{array}{cccc}
+\underline{1} &amp; 2 &amp; 2 &amp; 2 \\
+0 &amp; 0 &amp; \underline{2} &amp; 4 \\
+0 &amp; 0 &amp; 0 &amp; 0
+\end{array}\right]
+=
+\boldsymbol{U}\end{split}\]</div>
+<p>主变量（下划线元素）的个数为2，即矩阵
+<span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> 的 <strong>秩（rank）</strong> 为2，即
+<span class="math notranslate nohighlight">\(r = 2\)</span> 。</p>
+<p>主变量所在的列为 <strong>主列（pivot column）</strong> ，
+其余列为 <strong>自由列（free column）</strong> 。
+自由列中的变量为 <strong>自由变量（free variable）</strong> ，
+自由变量的个数为 <span class="math notranslate nohighlight">\(n−r=4−2=2\)</span> 。</p>
+</li>
+<li><p>通常，给自由列变量赋值，去求主列变量的值。如：</p>
+<ul class="simple">
+<li><p>令 <span class="math notranslate nohighlight">\(x_2 = 1\)</span> ， <span class="math notranslate nohighlight">\(x_4 = 0\)</span> 求得特解
+<span class="math notranslate nohighlight">\(\boldsymbol{x}
+=
+c_1
+\left[ \begin{array}{c} -2 \\ 1 \\ 0 \\ 0 \end{array} \right]\)</span> ；</p></li>
+<li><p>令 <span class="math notranslate nohighlight">\(x_2 = 0\)</span> ， <span class="math notranslate nohighlight">\(x_4 = 1\)</span> 求得特解
+<span class="math notranslate nohighlight">\(\boldsymbol{x}
+=
+c_2
+\left[ \begin{array}{c} 2 \\ 0 \\ -2 \\ 1 \end{array} \right]\)</span> 。</p></li>
+</ul>
+</li>
+<li><p>该例还能进一步简化，
+即将 <span class="math notranslate nohighlight">\(\boldsymbol{U}\)</span> 矩阵化简为
+<span class="math notranslate nohighlight">\(\boldsymbol{R}\)</span> 矩阵（Reduced row echelon form），
+即 <strong>简化行阶梯形式</strong> ：</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\boldsymbol{U}
+=
+\left[ \begin{array}{cccc}
+\underline{1} &amp; 2 &amp; 2 &amp; 2 \\
+0 &amp; 0 &amp; \underline{2} &amp; 4 \\
+0 &amp; 0 &amp; 0 &amp; 0
+\end{array}\right]
+\xrightarrow{\mbox{化简}}
+\left[ \begin{array}{cccc}
+\underline{1} &amp; 2 &amp; 0 &amp; -2 \\
+0 &amp; 0 &amp; \underline{1} &amp; 2 \\
+0 &amp; 0 &amp; 0 &amp; 0
+\end{array}\right]
+=
+\boldsymbol{R}\end{split}\]</div>
+<p>在简化行阶梯形式中，主元上下的元素都是0。</p>
+<ul>
+<li><p>将 <span class="math notranslate nohighlight">\(\boldsymbol{R}\)</span> 矩阵中的主变量放在一起，自由变量放在一起（列交换），
+得到
+<span class="math notranslate nohighlight">\(\boldsymbol{R}
+=
+\left[ \begin{array}{cccc}
+\underline{1} &amp; 2 &amp; 0 &amp; -2 \\
+0 &amp; 0 &amp; \underline{1} &amp; 2 \\
+0 &amp; 0 &amp; 0 &amp; 0
+\end{array}\right]
+\xrightarrow{\mbox{列交换}}
+\left[ \begin{array}{cc|cc}
+1 &amp; 0 &amp; 2 &amp; -2 \\
+0 &amp; 1 &amp; 0 &amp; 2 \\
+\hline
+0 &amp; 0 &amp; 0 &amp; 0
+\end{array}\right]
+=
+\left[ \begin{array}{cc}
+\boldsymbol{I} &amp; \boldsymbol{F} \\
+0 &amp; 0 \\
+\end{array}\right]\)</span> ，
+所有的
+<span class="math notranslate nohighlight">\(\boldsymbol{R}\)</span>
+都可以写成
+<span class="math notranslate nohighlight">\(\boldsymbol{R}
+=
+\left[ \begin{array}{cc}
+\boldsymbol{I} &amp; \boldsymbol{F} \\
+0 &amp; 0 \\
+\end{array}\right]\)</span> ，
+其中 <span class="math notranslate nohighlight">\(\boldsymbol{I}\)</span> 为单位矩阵，
+<span class="math notranslate nohighlight">\(\boldsymbol{F}\)</span> 为自由变量组成的矩阵。</p>
+<p>这时，有所谓的”零空间矩阵”
+<span class="math notranslate nohighlight">\(\boldsymbol{N}
+=
+\left[ \begin{array}{c}
+-\boldsymbol{F} \\
+\boldsymbol{I}
+\end{array} \right]\)</span> ，
+<span class="math notranslate nohighlight">\(\boldsymbol{N}\)</span> 中的每一列，都是一个特解。</p>
+<p>在本例中
+<span class="math notranslate nohighlight">\(\boldsymbol{N}
+=
+\left[ \begin{array}{cc}
+-2 &amp; 2 \\
+0 &amp; -2 \\
+1 &amp; 0 \\
+0 &amp; 1
+\end{array} \right]\)</span> ，与上面求得的 <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span> 的两个特解一致。</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>另一个例子，矩阵
+<span class="math notranslate nohighlight">\(\boldsymbol{A}
+=
+\left[ \begin{array}{ccc}
+1 &amp; 2 &amp; 3 \\
+2 &amp; 4 &amp; 6 \\
+2 &amp; 6 &amp; 8 \\
+2 &amp; 8 &amp; 10
+\end{array} \right]
+\xrightarrow{\mbox{消元}}
+\left[ \begin{array}{ccc}
+1 &amp; 2 &amp; 3 \\
+0 &amp; 2 &amp; 2 \\
+0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0
+\end{array} \right]
+\xrightarrow{\mbox{化简}}
+\left[ \begin{array}{ccc}
+1 &amp; 0 &amp; 1 \\
+0 &amp; 1 &amp; 1 \\
+0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0
+\end{array} \right]
+=
+\boldsymbol{R}\)</span> ，矩阵的秩仍为 <span class="math notranslate nohighlight">\(r=2\)</span> ，有2个主变量，1个自由变量。</p>
+<p>同上一例，取自由变量为 <span class="math notranslate nohighlight">\(x_3=1\)</span> ，求得特解
+<span class="math notranslate nohighlight">\(\boldsymbol{x} = c
+\left[ \begin{array}{c} -1 \\ -1 \\ 1 \end{array}\right]\)</span> 。</p>
+</div>
+<div class="section" id="boldsymbol-a-boldsymbol-x-b">
+<h2>第 08 集 求解 <span class="math notranslate nohighlight">\(\boldsymbol{A}\boldsymbol{x} = b\)</span> : 可解性和解的结构<a class="headerlink" href="#boldsymbol-a-boldsymbol-x-b" title="永久链接至标题">¶</a></h2>
+<p>同上一讲，我们仍使用
+<span class="math notranslate nohighlight">\(3 \times 4\)</span> 矩阵
+<span class="math notranslate nohighlight">\(\boldsymbol{A}
+=
+\left[ \begin{array}{cccc}
+1 &amp; 2 &amp; 2 &amp; 2 \\
+2 &amp; 4 &amp; 6 &amp; 8 \\
+3 &amp; 6 &amp; 8 &amp; 10
+\end{array}\right]\)</span>
+来展开讨论。</p>
+<p>这节来解决
+<span class="math notranslate nohighlight">\(\boldsymbol{A}\boldsymbol{x}=\boldsymbol{b}\)</span> 的问题。</p>
+<div class="section" id="solvability-conditions-on-b">
+<h3>8.1 可解性（Solvability conditions on b）<a class="headerlink" href="#solvability-conditions-on-b" title="永久链接至标题">¶</a></h3>
+<p>写出增广矩阵：</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}[ \begin{array}{c|c} \boldsymbol{A} &amp; \boldsymbol{b} \end{array} ]
+=
+\left[ \begin{array}{cccc|c}
+1 &amp; 2 &amp; 2 &amp; 2 &amp; b_1 \\
+2 &amp; 4 &amp; 6 &amp; 8 &amp; b_2 \\
+3 &amp; 6 &amp; 8 &amp; 10 &amp; b_3
+\end{array} \right]
+\xrightarrow{\mbox{消元}}
+\left[ \begin{array}{cccc|c}
+1 &amp; 2 &amp; 2 &amp; 2 &amp; b_1 \\
+0 &amp; 0 &amp; 2 &amp; 4 &amp; b_2 - 2b_1 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; b_3 - b_2 - b_1
+\end{array} \right]\end{split}\]</div>
+<p>若 <span class="math notranslate nohighlight">\(\boldsymbol{A}\boldsymbol{x}=\boldsymbol{b}\)</span> 有解，那么有：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(b_3 - b_2 - b_1 = 0\)</span>；</p></li>
+<li><p><span class="math notranslate nohighlight">\(\boldsymbol{b}\)</span> 在 <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> 的列空间中。</p></li>
+</ul>
+</div></blockquote>
+<p>为了让 <span class="math notranslate nohighlight">\(\boldsymbol{A}\boldsymbol{x}=\boldsymbol{b}\)</span> 有解，
+我们选取
+<span class="math notranslate nohighlight">\(\boldsymbol{b}
+=
+\left[\begin{array}{c} 1 \\ 5 \\ 6 \end{array}\right]\)</span> 。</p>
+</div>
+<div class="section" id="particular-solution">
+<h3>8.2 特解（Particular solution）<a class="headerlink" href="#particular-solution" title="永久链接至标题">¶</a></h3>
+<p>令所有自由变量取0，则可以求出特解。</p>
+<p>在本例中，即令
+<span class="math notranslate nohighlight">\(x_2 = x_4 = 0\)</span> ，则有
+<span class="math notranslate nohighlight">\(\left\{ \begin{eqnarray*}
+x1+2x_3 &amp; = &amp; 1 \\
+2x_3 &amp; = &amp; 3 \\
+\end{eqnarray*}\right.\)</span> ，
+解得
+<span class="math notranslate nohighlight">\(\left\{ \begin{eqnarray*}
+x1 &amp; = &amp; -2 \\
+x_3 &amp; = &amp; \frac{3}{2} \\
+\end{eqnarray*}\right.\)</span> ，
+于是特解为
+<span class="math notranslate nohighlight">\(\boldsymbol{x}_p
+=
+\left[ \begin{array}{c}
+-2 \\
+0 \\
+\frac{3}{2} \\
+0
+\end{array}\right]\)</span> 。</p>
+</div>
+<div class="section" id="complete-solution">
+<h3>8.3 完整解（Complete solution）<a class="headerlink" href="#complete-solution" title="永久链接至标题">¶</a></h3>
+<p><span class="math notranslate nohighlight">\(\boldsymbol{A}\boldsymbol{x}=\boldsymbol{b}\)</span> 的完整解为其特解加上零空间解。</p>
+<p>从上一节中我们已经求得
+<span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> 的零空间解为
+<span class="math notranslate nohighlight">\(c_1
+\left[ \begin{array}{c} -2 \\ 1 \\ 0 \\ 0 \end{array}\right]
++
+c_2
+\left[ \begin{array}{c} 2 \\ 0 \\ -2 \\ 1 \end{array}\right]\)</span> 。</p>
+<p>所以
+<span class="math notranslate nohighlight">\(\boldsymbol{A}\boldsymbol{x}=\boldsymbol{b}\)</span> 的完整解为
+<span class="math notranslate nohighlight">\(\boldsymbol{x}_{complete}
+=
+\left[ \begin{array}{c}
+-2 \\
+0 \\
+\frac{3}{2} \\
+0
+\end{array}\right]
++
+c_1
+\left[ \begin{array}{c} -2 \\ 1 \\ 0 \\ 0 \end{array}\right]
++
+c_2
+\left[ \begin{array}{c} 2 \\ 0 \\ -2 \\ 1 \end{array}\right]\)</span> 。</p>
+<p>几何解释：</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> 的零空间 <span class="math notranslate nohighlight">\(N(\boldsymbol{A})\)</span> 是一个“平面”，
+记作 <span class="math notranslate nohighlight">\(plan_{N}\)</span> ；</p>
+<p><span class="math notranslate nohighlight">\(\boldsymbol{A}\boldsymbol{x}=\boldsymbol{b}\)</span> 的特解是一个点，
+记作 <span class="math notranslate nohighlight">\(point_{S}\)</span> ；</p>
+<p><span class="math notranslate nohighlight">\(\boldsymbol{A}\boldsymbol{x}=\boldsymbol{b}\)</span> 的完整解是过点
+<span class="math notranslate nohighlight">\(point_{S}\)</span> 且与“平面” <span class="math notranslate nohighlight">\(plan_{N}\)</span> “平行” 的一个“平面”。</p>
+</div></blockquote>
+</div>
+<div class="section" id="rank">
+<h3>8.4 秩（Rank）<a class="headerlink" href="#rank" title="永久链接至标题">¶</a></h3>
+<p>矩阵中主元的个数就是矩阵的 <strong>秩（Rank）</strong> ，通常记作 <span class="math notranslate nohighlight">\(r\)</span> 。</p>
+<p>对于 <span class="math notranslate nohighlight">\(m \times n\)</span> 矩阵 <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> ，有 <span class="math notranslate nohighlight">\(r \leq (m,n)\)</span>: 。</p>
+<ul>
+<li><p>列满秩(Full column rank)</p>
+<p>当 <span class="math notranslate nohighlight">\(r = n\)</span> 时，我们称矩阵 <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> <strong>列满秩</strong> 。</p>
+<p>对应的 RREF 形式为：
+<span class="math notranslate nohighlight">\(\boldsymbol{R}
+=\left[\begin{array}{c}\boldsymbol{I}\\0\end{array}\right]\)</span> 。
+此时，<span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> 的零空间 <span class="math notranslate nohighlight">\(N(\boldsymbol{A})\)</span> 中只有一个
+<span class="math notranslate nohighlight">\(0\)</span> 向量。</p>
+<p>要使
+<span class="math notranslate nohighlight">\(\boldsymbol{A}\boldsymbol{x} = \boldsymbol{b}(\boldsymbol{b}\neq0)\)</span>
+有非零解，<span class="math notranslate nohighlight">\(\boldsymbol{b}\)</span> 必须在
+<span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> 的列空间 <span class="math notranslate nohighlight">\(C(\boldsymbol{A})\)</span> 中。</p>
+</li>
+<li><p>行满秩(Full row rank)</p>
+<p>当 <span class="math notranslate nohighlight">\(r = m\)</span> 时，我们称矩阵 <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> <strong>行满秩</strong> 。</p>
+<p>对应的 RREF 形式为：
+<span class="math notranslate nohighlight">\(\boldsymbol{R}
+=\left[\begin{array}{cc}\boldsymbol{I}&amp;\boldsymbol{F}\end{array}\right]\)</span> 。
+此时，<span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> 的零空间 <span class="math notranslate nohighlight">\(N(\boldsymbol{A})\)</span> 由
+<span class="math notranslate nohighlight">\(n-m\)</span> （有 <span class="math notranslate nohighlight">\(n-m\)</span> 个自由变量）个零空间特解张成（线性组合）。</p>
+<p><span class="math notranslate nohighlight">\(\boldsymbol{A}\boldsymbol{x} = \boldsymbol{b}(\boldsymbol{b}\neq0)\)</span>
+有无数个（一个特解 + 零空间特解的线性组合）非零解。</p>
+</li>
+<li><p>行列都满秩(Full row and column rank)</p>
+<p>当 <span class="math notranslate nohighlight">\(r = m = n\)</span> 时，我们称矩阵 <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> <strong>行列满秩</strong> 。</p>
+<p>对应的 RREF 形式为：
+<span class="math notranslate nohighlight">\(\boldsymbol{R}=\boldsymbol{I}\)</span> 。
+此时，<span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> 的零空间 <span class="math notranslate nohighlight">\(N(\boldsymbol{A})\)</span> 中只有一个
+<span class="math notranslate nohighlight">\(0\)</span> 向量。</p>
+<p><span class="math notranslate nohighlight">\(\boldsymbol{A}\boldsymbol{x} = \boldsymbol{b}(\boldsymbol{b}\neq0)\)</span>
+有唯一解。</p>
+</li>
+<li><p>总结：</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{array}{c|c|c|c}
+r=n&lt;m &amp; r=m&lt;n &amp; r=m=n &amp; r&lt;m,r&lt;n \\
+\boldsymbol{R}=\left[\begin{array}{c}\boldsymbol{I}\\0\end{array}\right]
+&amp;
+\boldsymbol{R}=\left[\begin{array}{cc}\boldsymbol{I}&amp;\boldsymbol{F}\end{array}\right]
+&amp;
+\boldsymbol{R}=\boldsymbol{I}
+&amp;
+\boldsymbol{R}=\left[\begin{array}{cc}\boldsymbol{I}&amp;\boldsymbol{F}\\0&amp;0\end{array}\right] \\
+0\mbox{ }or\mbox{ }1\mbox{ }solution &amp; \infty\mbox{ }solution &amp; 1\mbox{ }solution &amp; 0\mbox{ }or\mbox{ }\infty\mbox{ }solution
+\end{array}\end{split}\]</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="id11">
+<h2>第 09 集 线性相关性、基、维数<a class="headerlink" href="#id11" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id12">
+<h3>9.1 线性相关性<a class="headerlink" href="#id12" title="永久链接至标题">¶</a></h3>
+<p><span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> 是一个 <span class="math notranslate nohighlight">\(m \times n\)</span> 矩阵，
+<span class="math notranslate nohighlight">\(v_1\)</span> ， <span class="math notranslate nohighlight">\(v_2\)</span> ， <span class="math notranslate nohighlight">\(\ldots\)</span> ， <span class="math notranslate nohighlight">\(v_n\)</span> 是其列向量。</p>
+<p>如果 <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> 的零空间 <span class="math notranslate nohighlight">\(N(\boldsymbol{A})\)</span> 中仅有一个零向量，
+那么 <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> 的各列向量之间 <strong>线性无关</strong> ，
+<span class="math notranslate nohighlight">\(rank(\boldsymbol{A}) = n\)</span> 。</p>
+<p>如果 <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> 的零空间中除了零向量还包含其它值
+（即存在非零向量 <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span> 使得
+<span class="math notranslate nohighlight">\(\boldsymbol{A}\boldsymbol{x} = 0\)</span> ），
+那么 <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> 的各列向量之间 <strong>线性相关</strong> ，
+<span class="math notranslate nohighlight">\(rank(\boldsymbol{A}) &lt; n\)</span> 。</p>
+</div>
+<div class="section" id="basis">
+<h3>9.2 基（Basis）<a class="headerlink" href="#basis" title="永久链接至标题">¶</a></h3>
+<p>向量空间 <span class="math notranslate nohighlight">\(\boldsymbol{S}\)</span> 中的一组 <strong>基</strong>
+<span class="math notranslate nohighlight">\(v_1\)</span> ， <span class="math notranslate nohighlight">\(v_2\)</span> ， <span class="math notranslate nohighlight">\(\ldots\)</span> ， <span class="math notranslate nohighlight">\(v_d\)</span>，具有两个性质：</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>它们线性无关；</p></li>
+<li><p>它们可以生成 <span class="math notranslate nohighlight">\(\boldsymbol{S}\)</span> 。</p></li>
+</ol>
+</div></blockquote>
+</div>
+<div class="section" id="dimension">
+<h3>9.3 向量空间的维数（Dimension）<a class="headerlink" href="#dimension" title="永久链接至标题">¶</a></h3>
+<p>对于向量空间 <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span> ，如果 <span class="math notranslate nohighlight">\(n\)</span> 个向量组成的矩阵为可逆矩阵，则这
+<span class="math notranslate nohighlight">\(n\)</span> 个向量为该空间的一组基，而数字 <span class="math notranslate nohighlight">\(n\)</span> 就是该空间的 <strong>维数</strong> 。</p>
+<p><span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> 矩阵的列空间维数：</p>
+<div class="math notranslate nohighlight">
+\[dimC(\boldsymbol{A}) = rank(\boldsymbol{A}) = \boldsymbol{A}\mbox{中主元列数}\]</div>
+<p><span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> 矩阵的零空间维数：</p>
+<div class="math notranslate nohighlight">
+\[dimN(\boldsymbol{A}) = n-rank(\boldsymbol{A}) = \boldsymbol{A}\mbox{中自由列数}\]</div>
+</div>
+</div>
+<div class="section" id="id13">
+<h2>第 10 集 四个基本子空间<a class="headerlink" href="#id13" title="永久链接至标题">¶</a></h2>
+</div>
+<div class="section" id="id14">
+<h2>第 11 集 矩阵空间、秩 1 矩阵和小世界图<a class="headerlink" href="#id14" title="永久链接至标题">¶</a></h2>
+</div>
+<div class="section" id="id15">
+<h2>第 12 集 图和网络<a class="headerlink" href="#id15" title="永久链接至标题">¶</a></h2>
+</div>
+<div class="section" id="id16">
+<h2>第 13 集 复习一<a class="headerlink" href="#id16" title="永久链接至标题">¶</a></h2>
+</div>
+<div class="section" id="id17">
+<h2>第 14 集 正交向量与子空间<a class="headerlink" href="#id17" title="永久链接至标题">¶</a></h2>
+</div>
+<div class="section" id="id18">
+<h2>第 15 集 子空间投影<a class="headerlink" href="#id18" title="永久链接至标题">¶</a></h2>
+</div>
+<div class="section" id="id19">
+<h2>第 16 集 投影矩阵和最小二乘<a class="headerlink" href="#id19" title="永久链接至标题">¶</a></h2>
+</div>
+<div class="section" id="gram-schmidt">
+<h2>第 17 集 正交矩阵和 Gram-Schmidt 正交化<a class="headerlink" href="#gram-schmidt" title="永久链接至标题">¶</a></h2>
+</div>
+<div class="section" id="id20">
+<h2>第 18 集 行列式及其性质<a class="headerlink" href="#id20" title="永久链接至标题">¶</a></h2>
+</div>
+<div class="section" id="id21">
+<h2>第 19 集 行列式公式和代数余子式<a class="headerlink" href="#id21" title="永久链接至标题">¶</a></h2>
+</div>
+<div class="section" id="id22">
+<h2>第 20 集 克拉默法则、逆矩阵、体积<a class="headerlink" href="#id22" title="永久链接至标题">¶</a></h2>
+</div>
+<div class="section" id="id23">
+<h2>第 21 集 特征值和特征向量<a class="headerlink" href="#id23" title="永久链接至标题">¶</a></h2>
+</div>
+<div class="section" id="a">
+<h2>第 22 集 对角化和 A 的幂<a class="headerlink" href="#a" title="永久链接至标题">¶</a></h2>
+</div>
+<div class="section" id="exp-at">
+<h2>第 23 集 微分方程 exp(At)<a class="headerlink" href="#exp-at" title="永久链接至标题">¶</a></h2>
+</div>
+<div class="section" id="id24">
+<h2>第 24 集 马尔科夫矩阵、傅里叶级数<a class="headerlink" href="#id24" title="永久链接至标题">¶</a></h2>
+</div>
+<div class="section" id="id25">
+<h2>第 25 集 复习二<a class="headerlink" href="#id25" title="永久链接至标题">¶</a></h2>
+</div>
+<div class="section" id="id26">
+<h2>第 26 集 对称矩阵及正定性<a class="headerlink" href="#id26" title="永久链接至标题">¶</a></h2>
+</div>
+<div class="section" id="id27">
+<h2>第 27 集 复数矩阵和快速傅里叶变换<a class="headerlink" href="#id27" title="永久链接至标题">¶</a></h2>
+</div>
+<div class="section" id="id28">
+<h2>第 28 集 正定矩阵和最小值<a class="headerlink" href="#id28" title="永久链接至标题">¶</a></h2>
+</div>
+<div class="section" id="jordan">
+<h2>第 29 集 相似矩阵和 Jordan 型<a class="headerlink" href="#jordan" title="永久链接至标题">¶</a></h2>
+</div>
+<div class="section" id="id29">
+<h2>第 30 集 奇异值分解<a class="headerlink" href="#id29" title="永久链接至标题">¶</a></h2>
+</div>
+<div class="section" id="id30">
+<h2>第 31 集 线性变换集对应矩阵<a class="headerlink" href="#id30" title="永久链接至标题">¶</a></h2>
+</div>
+<div class="section" id="id31">
+<h2>第 32 集 基变换和图像压缩<a class="headerlink" href="#id31" title="永久链接至标题">¶</a></h2>
+</div>
+<div class="section" id="id32">
+<h2>第 33 集 单元检测三复习<a class="headerlink" href="#id32" title="永久链接至标题">¶</a></h2>
+</div>
+<div class="section" id="id33">
+<h2>第 34 集 左右逆和伪逆<a class="headerlink" href="#id33" title="永久链接至标题">¶</a></h2>
+</div>
+<div class="section" id="id34">
+<h2>第 35 集 期末复习<a class="headerlink" href="#id34" title="永久链接至标题">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="ImageProcessing.html" class="btn btn-neutral float-right" title="Image Processing" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="Math.html" class="btn btn-neutral float-left" title="Math" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; 版权所有 2021, horizonshd.
+
+    </p>
+  </div>
+    
+    
+    
+    利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

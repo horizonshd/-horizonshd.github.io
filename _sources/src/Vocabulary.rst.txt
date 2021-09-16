@@ -21,11 +21,13 @@ sophisticated                adj.见多识广的；老练的；见过世面的�
 succinct                     简明的；言简意赅的
 Intended Audience            目标受众；目标读者；读者对象
 diligent                     孜孜不倦的；勤勉的；刻苦的
+tirelessly                   adv.不知疲倦地
 preface                      序言
 stunning                     极有魅力的；绝妙的；给人以深刻印象的；令人惊奇万分的
 feat                         功绩；武功；卓绝的手艺；武艺
 tedious                      冗长的；啰嗦的；单调乏味的；令人厌烦的
 concise                      简明的；简练的；简洁的；简略的
+succinctly                   adv.简洁地；简明地
 malformed                    畸形的
 adherence                    坚持；遵守；遵循
 portability                  可携带性；可移植性
@@ -118,6 +120,7 @@ prompt                       n.提示；提示符
                              adj.迅速；敏捷；准时；立即的
 
                              adv.准时地
+agile                        adj.敏捷的；灵活的；(思维)敏捷的；机智的
 novice                       n.新手；初学者；初学修士（或修女）；（修会等的）初学生
 newbie                       n.（尤指使用电脑的）新手
 avenue                       n.途径；〈美〉(南北向)街道；林荫路；道路
@@ -219,6 +222,7 @@ contrast                     n.对比；对照；反差；明显的差异
 baptize                      v.【基督】给…施行洗礼；给…命名；(精神上)洗涤；举行洗礼
 calibration                  n.校准；校正；定标；（温度计或其他仪表上的）刻度
 spectrum                     n.频谱；范围；领域；序列
+Frequency Spectrum           un.〔电子〕频谱
 underexpose                  v.使曝光不足              
 magnitude                    n.震级；巨大；重大；重要性；[振幅?]
 amplitude                    n.（声波、无线电波等的）振幅
@@ -233,10 +237,13 @@ mass-spring system           质点弹簧系统
 oscillate                    v.(摆似地)摆动；振动；【物】振荡；(意见等)动摇
 equilibrium                  n.平衡；均衡；均势；安宁
 equilibrium point            平衡点
+displacement                 n.移位；取代；排水量；替代
 sinusoid                     n.【数】正弦曲线
+sinusoidal                   adj.〔医〕血窦；〔机〕曲形；〔数〕正弦；正弦曲线的
 superposition                n.叠加
 interfere                    v.干涉；干预；介入
 akin                         adj.相似的；类似的
+immaterial                   adj.无关紧要；不重要；无形体的；非物质的
 synopsis                     n.提要
 subtitle                     n.副标题；（电影或电视上的）字幕；小标题
 
@@ -263,6 +270,109 @@ illustrator                  n.说明者；插图画家
 diagonal                     n.对角线；斜线
 
                              adj.斜线的；对角线的
+aesthetical                  adj.美的；美学的；审美的
+appealing                    adj.有吸引力的；有感染力的；令人感兴趣的；恳求的
+collinear                    adj.【数】共线的
+staple                       n.主食；订书钉；主要产品；主要成分
+
+                             v.装订
+
+                             adj.最重要的
+suffice                      v.足够；满足…的需要
+quadratic                    n.【数】二次方程式；二次项；【数】二次方程式论
+
+                             adj.平方的；二次方的
+incident                     adj.【法】附带的；入射的；易起的；附随的
+
+                             n.发生的事情（尤指不寻常的或讨厌的）；严重事件；（两国间的）摩擦
+jaggies                      锯齿；锯齿现象；锯齿状
+controversial                adj.引起争论的；有争议的
+diffuse                      v.弥漫；漫射；传播；散布
+
+                             adj.弥漫的；扩散的；漫射的；不清楚的
+modulate                     v.调节；调整；调节（嗓音的大小、强弱、高低等）；变调
+intrinsic                    adj.固有的；内在的；本身的
+attenuate                    adj.稀薄的；细的；减弱的；【植】渐尖的
+
+                             v.使减弱；使降低效力
+reflectance                  n.（光的）反射比
+albedo                       n.【物】反射率；【天】反照率
+refract                      vt.使(光波、声波等)折射；测定...的折射度
+
+                             vi.发生折射
+attenuation                  n.减弱；稀释；【物】衰减；变细
+steep                        n.陡坡；泡；悬崖；浸渍液
+
+                             v.泡；使专心一意；(雾,烟,光等)笼罩(山野,树木等)
+
+                             adj.陡的；陡峭的；突然的；急剧的
+pivotal                      adj.关键性的；核心的
+hollow                       n.孔；洞；凹陷处；坑洼处
+
+                             v.挖
+
+                             adj.中空的；空心的；凹陷的；沉闷回荡的
+
+                             adv.彻底
+shutter                      n.百叶窗；活动护窗；（照相机的）快门
+
+                             v.给…装上百叶窗；使关上百叶窗；装光闸于(照相机上)
+aperture                     n.缝隙；小孔；（尤指摄影机等的光圈）孔径
+stationary                   adj.不动的；静止的；固定的；不可移动的
+
+                             n.驻军；不动的人
+precise                      adj.准确的；确切的；精确的；明确的
+pseudo                       adj.伪
+pseudocode                   n.【计】伪码
+caveat                       n.警告；告诫
+
+                             网络:防止误解的说明；知会备忘；附加说明
+reasonably                   adv.相当；合理地；颇；大致
+consensus                    n.一致的意见；共识
+objective                    n.目标；目的；（望远镜或显微镜的）物镜
+
+                             adj.客观的；就事论事的；不带个人感情的；客观存在的
+compliance                   n.遵从；顺从；服从
+conformance                  n.遵从；恪守
+revision                     n.修订；修改；复习；温习
+prior                        adj.先前的；较早的；在前的；优先的
+
+                             n.（小隐修院）院长；（隐修院）会长
+
+                             adv.居先
+exclamation                  n.感叹；感叹词；感叹语
+
+                             网络:惊叹号；惊叹词；惊呼
+abbreviate                   v.缩写；简称；缩短；缩写为
+myriad                       n.无数；大量
+
+                             adj.无数的；众多方面的
+adequately                   adv.充分地；妥善；足够地；明确
+portable                     adj.便携式的；手提的；轻便的
+
+                             n.便携机；（尤指）手提电脑
+bulk                         n.大部分；主体；（大）体积；大（量）
+
+                             v.扩展；增大；堆积起来；形成大块
+intentional                  adj.故意的；有意的；存心的
+crucial                      adj.至关重要的；关键性的
+crude                        adj.粗略的；简略的；大概的；粗糙的
+
+                             n.原油；石油
+typesetting                  na.排字
+
+                             网络: 排版控件；打字；拣字
+customary                    adj.习俗的；习惯的；（某人）特有的
+
+                             n.风俗志
+dialect                      n.方言；语调；【语】语支；(某职业的)专业用语
+numerator                    n.（分数中的）分子
+denominator                  n.分母
+ellipsis                     n.（词在句子中的）省略；省略号
+integral                     adj.完全的；缺一不可的；【数】整的
+
+                             n.整体；【数】积分
+noteworthy                   adj.值得注意的；显著的；重要的
 =====================        ============================================================
 
 
